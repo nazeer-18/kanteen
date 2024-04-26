@@ -19,3 +19,16 @@
 .nav-body .wish{
     margin-right: 18px;
 }
+
+@media (max-width:400px){
+    .nav-body{
+        display: block;
+    }
+    .wish{
+        display: none;
+    }
+    .app-name{
+        margin-left: 50vw;
+        text-align: center!important;
+    }
+}
