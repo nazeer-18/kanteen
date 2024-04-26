@@ -1,8 +1,8 @@
 import React from 'react'
-import './Nav.css'
+import '../styles/Navbar.css'
 
 
-export default function Nav() {
+export default function Navbar() {
     return (
         <div className="nav-body">
             <div className="app-name">ASE CANTEEN</div>

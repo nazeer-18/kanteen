@@ -1,29 +1,26 @@
 import React from 'react'
-import './App.css'
-import loginImg from './images/Login-amico.svg'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
+import SignUpMail from './components/SignUpMail';
+import ForgotPwd from './components/ForgotPwd';
+import Verify from './components/Verify';
+import ResetPwd from './components/ResetPwd';
+import SignUpAcnt from './components/SignUpAcnt';
 
 export default function App() {
-  return (
-    <div>
-      <div className="login-container">
-        <div className="image-container">
-          <img src={loginImg} alt="login" width="380px"/>
-        </div>
-        <div className="login-form">
-            <div className='login'>LOGIN</div>
-            <div className="form">
-              <div className="form-group">
-                <label htmlFor="username"></label>
-                <input type="text" name="username" id="username" placeholder="Enter your username"/>
-              </div>
-              <div className="form-group">
-                <label htmlFor="password"></label>
-                <input type="password" name="password" id="password" placeholder="Enter your password"/>
-              </div>
-              <button type="submit" className='loginBtn'>Login</button>
-            </div>
-        </div>
-      </div>
-    </div>
-  )
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route exact path='/' element={<HomePage />}></Route>
+                <Route path='/signupmail' element={<SignUpMail/>}></Route>
+                <Route path='/verify' element={<Verify/>}></Route>
+                <Route path='/forgotpwd' element={<ForgotPwd/>}></Route>
+                <Route path='/resetpwd' element={<ResetPwd/>}></Route>
+                <Route path='/signupacnt' element={<SignUpAcnt/>}></Route>
+            </Routes>
+        </BrowserRouter>
+
+    )
 }
