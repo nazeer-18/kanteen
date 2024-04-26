@@ -1,0 +1,21 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav-body{
+    background-color: #bf0c45;
+    color: white; 
+    font-family:'petrona';
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 8px;
+}
+.nav-body .app-name{
+    margin-left: 18px;
+}
+.nav-body .wish{
+    margin-right: 18px;
+}
