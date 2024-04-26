@@ -5,40 +5,40 @@ import { Link } from 'react-router-dom'
 
 export default function HomePage() {
     return (
-        <div className='homepage'>
-            <div className="login-container">
-                <div className="image-container">
+        <div className='login-homepage'>
+            <div className="login-login-container">
+                <div className="login-image-container">
                     <img src={loginImg} alt="login" width="600px" />
                 </div>
-                <div className="login-form">
-                    <div className='logintxt'>LOGIN</div>
-                    <form className="form">
-                        <div className="form-group">
+                <div className="login-login-form">
+                    <div className='login-logintxt'>LOGIN</div>
+                    <form className="login-form">
+                        <div className="login-form-group">
                             <label htmlFor="username"></label>
                             <input type="text" name="username" id="username" placeholder="Enter your username" />
                         </div>
-                        <div className="form-group">
+                        <div className="login-form-group">
                             <label htmlFor="password"></label>
                             <input type="password" name="password" id="password" placeholder="Enter your password" />
                         </div>
                     </form>
-                    <div className="memory">
-                        <div className="rememberMe">
+                    <div className="login-memory">
+                        <div className="login-rememberMe">
                             <input type="checkbox" name="remember" id="remember" />
-                            <label className='rememberLabel' htmlFor="remember"> Remember me</label>
+                            <label className='login-rememberLabel' htmlFor="remember"> Remember me</label>
                         </div>
-                        <div className="forgotPwd">
-                            <Link className='forgotpwdtxt' to="forgotpwd">
+                        <div className="login-forgotPwd">
+                            <Link className='login-forgotpwdtxt' to="forgotpwd">
                                 <span >Forgot Password</span>
-                        
+
                             </Link>
                         </div>
                     </div>
-                    <div className="login">
-                        <button type="submit" className='loginBtn'>Login</button>
+                    <div className="login-login">
+                        <button type="submit" className='login-loginBtn'>Login</button>
                     </div>
-                    <div className="signup">
-                        Don't have an account? <Link to="/signupmail" className="signupBtn"><span >Sign up</span></Link>
+                    <div className="login-signup">
+                        Don't have an account? <Link to="/signupacnt" className="login-signupBtn"><span >Sign up</span></Link>
                     </div>
                 </div>
             </div>

@@ -2,12 +2,12 @@ body{
   margin: 0px;
   padding: 0px;
 }
-.homepage {
+.login-homepage {
   height: 95vh;
   margin: 0px auto;
 }
 
-.login-container{
+.login-login-container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -16,7 +16,7 @@ body{
   max-width: 85%;
   margin: 0px auto;
 }
-.image-container {
+.login-image-container {
   flex:1;      
   display: flex;    
   justify-content: center; 
@@ -31,14 +31,14 @@ body{
   margin-right: 2vw;
 }
 
-.image-container img {
+.login-image-container img {
   width: auto;
   max-width: 100%;    
   max-height: 100%;  
   object-fit: contain; 
 }
 
-.login-container .login-form{
+.login-login-container .login-login-form{
   padding: 10px;
   border-radius: 10px;
   width: 60%;
@@ -49,10 +49,10 @@ body{
   flex-direction: column;
   padding: 20px;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.login-1);
   margin: 5px;
 }
-.logintxt{
+.login-logintxt{
   text-align: center;
   margin-bottom: 10px;
   font-weight: bold;
@@ -60,7 +60,7 @@ body{
   font-family: 'petrona';
   font-size: 25px;
 }
-.form{
+.login-form{
   width: 100%;
   max-width: 600px;
   text-align: center;
@@ -68,7 +68,7 @@ body{
   padding: 20px;
   box-sizing: border-box;
 }
-.form-group{
+.login-form-group{
   width: 100%;
   font-size: large;
 }
@@ -88,7 +88,7 @@ input[type="text"]{
   margin-bottom: 25px;
 }
 
-.memory{
+.login-memory{
   width: 95%;
   display: flex;
   justify-content: space-between;
@@ -99,7 +99,7 @@ input[type="text"]{
   padding:0px 15px;
 }
 
-.forgotpwdtxt{
+.login-forgotpwdtxt{
   font-family: 'petrona';
   font-size: large;
   text-decoration: none;
@@ -107,7 +107,7 @@ input[type="text"]{
   font-weight:550;
 }
 
-.login{
+.login-login{
   width: 80%;
   padding: 10px;
   font-family: 'petrona';
@@ -118,7 +118,7 @@ input[type="text"]{
   margin-top: 10px;
 }
 
-.loginBtn{
+.login-loginBtn{
   width: 90%;
   margin: 10px;
   padding: 10px 20px;
@@ -130,7 +130,7 @@ input[type="text"]{
   font-size:18px;
   border-radius: 6px;
 }
-.signupBtn{
+.login-signupBtn{
   color: #bf0c45;
   font-family: 'petrona';
   font-weight: bold;
@@ -139,10 +139,10 @@ input[type="text"]{
 }
 
 @media (max-width:950px){
-  .login-container{
+  .login-login-container{
     max-width: 100%;
   }
-  .image-container{
+  .login-image-container{
     max-width:40%;
     padding: 0px;
     margin: 0px;
@@ -151,27 +151,27 @@ input[type="text"]{
 }
 
 @media (max-width:768px){
-  .login-form{
+  .login-login-form{
     padding: 0px;
     margin: 0px;
   }
 }
 
 @media (max-width:670px){
-  .image-container{
+  .login-image-container{
     display: none;
   }
-  .login-container{
+  .login-login-container{
     max-width: 100%;
   }
 }
 
 @media (max-width:400px){
-  .memory{
+  .login-memory{
     flex-direction: column;
     text-align: center;
   }
-  .rememberMe{
+  .login-rememberMe{
     margin-bottom: 10px;
   }
 }
