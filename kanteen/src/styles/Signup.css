@@ -1,0 +1,123 @@
+body{
+    margin: 0px;
+    padding: 0px;
+  }
+  .signupmail {
+    height: 95vh;
+    margin: 0px auto;
+  }
+  
+  .signup-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    height:90vh;
+    max-width: 85%;
+    margin: 0px auto;
+  }
+  .image-container {
+    flex:1;      
+    display: flex;    
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    margin: auto;  
+    max-width: 80%;      
+    height: 520px;       
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 75px;
+    margin-right: 2vw;
+  }
+  
+  .image-container img {
+    width: auto;
+    max-width: 100%;    
+    max-height: 100%;  
+    object-fit: contain; 
+  }
+  
+  .signup-form{
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+    font-family: 'petrona';
+    display: flex;
+    flex: 1;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.login-1);
+    margin: 5px;
+  }
+  .signup{
+    text-align: center;
+    margin-top: 200px;
+    font-weight: bold;
+    display: block;
+    font-family: 'petrona';
+    font-size: 25px;
+  }
+  .signup-form{
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin: 3px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+  }
+  .signup-form-group{
+    width: 100%;
+    font-size: large;
+  }
+  
+  .VerifyBtn{
+    width: 40%;
+    margin: 30px;
+    padding: 10px 20px;
+    background-color: #bf0c45;
+    font-family: 'petrona';
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size:18px;
+    border-radius: 6px;
+  }
+  .popup.content{
+    width: 30%;
+    border-radius: 75px;
+  }
+  
+  .popup input[type="text"] {
+    width: 100px; /* Adjust the width as needed */
+  }
+  
+  @media (max-width:950px){
+    .signup-container{
+      max-width: 100%;
+    }
+    .image-container{
+      max-width:40%;
+      padding: 0px;
+      margin: 0px;
+      border-radius: 0%;
+    }
+  }
+  @media (max-width:670px){
+    .image-container{
+      display: none;
+    }
+    .signup-container{
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width:768px){
+    .signup-form{
+      padding: 0px;
+      margin: 0px;
+    }
+  }
