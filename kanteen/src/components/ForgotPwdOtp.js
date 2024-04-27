@@ -23,6 +23,7 @@ export default function ForgotPwd() {
                     <p className='forgot-otprestxt'>Didn't receive a code(check Junk box)?<button type="submit" >Resend.</button> </p>
                     <div className="forgot-otp">
                         <button type="submit" className='forgot-otpBtn'>Verify</button>
+                        <Link to="/resetpwd" ><span >verified</span></Link>                       
                     </div>
                 </div>
                 </div>
