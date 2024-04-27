@@ -10,31 +10,75 @@ body{
     background-color: #eeecec;
     justify-content: center;
     align-items: center;
+    width: 90%;
+    margin: 0px auto;
 }
 
 .signupacnt-signuptxt{
     text-align: center;
-    margin-bottom: 10px;
     font-weight: bold;
     display: block;
     font-family: 'petrona';
     font-size: 25px;
 }
 
+.signupacnt-signup-form{
+    width: 50%;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.signupacnt-form-group input[type="text"],.signupacnt-form-group input[type="password"], .signupacnt-form-group input[type="tel"]{
+    width: 90%;
+    font-family: 'petrona';
+    font-size: large;
+    color: black;
+    border-radius: 5px;
+    border: 1px solid #bf0c45;
+    margin: 15px;
+    padding: 10px;
+}
+
+.signupacnt-preference-txt{
+    margin-bottom: 10px;
+    padding: 3px;
+    font-family: 'petrona';
+    font-size: 18px;
+}
+
+.signupacnt-food-preference {
+    width: 90%;
+    border-radius: 5px;
+    margin: 0px auto;
+    padding: 10px;
+    margin-top: 0px;
+}
+
+.signupacnt-food-choice{
+    display: flex;
+    justify-content: space-around;
+    margin: 7px auto;
+}
+
+.signupacnt-food-item input[type="radio"]{
+    margin: 4px 7px;
+    padding: 3px;
+}
+
 .signupacnt-createAcnt{
-    width: 80%;
+    width: 50%;
     padding: 10px;
     font-family: 'petrona';
     font-weight: bold;
     text-align: center;
     color: white;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-bottom: 7px;
 }
 
 .signupacnt-createAcntBtn{
-    width: 90%;
-    margin: 10px;
+    width: 85%;
+    margin: 0px auto;
     padding: 10px 20px;
     background-color: #bf0c45;
     font-family: 'petrona';
@@ -43,6 +87,15 @@ body{
     color: white;
     font-size:18px;
     border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.memoryb{
+    text-align: center;
+    display: inline-block;  
+    width: 45%;
+    padding: 3px;
+    margin: 0px auto;
 }
 
 .signupacnt-loginBtn{
@@ -51,4 +104,28 @@ body{
     font-weight: bold;
     font-size: large;
     text-decoration: none;
+}
+
+@media (max-width:600px){
+    .memoryb{
+        width: 75%;
+    }
+    .signupacnt-signup-form{
+        width: 75%;
+    }
+    .signupacnt-createAcnt{
+        width: 75%;
+    }
+}
+
+@media (max-width:400px){
+    .memoryb{
+        width: 95%;
+    }
+    .signupacnt-signup-form{
+        width: 95%;
+    }
+    .signupacnt-createAcnt{
+        width: 90%;
+    }
 }

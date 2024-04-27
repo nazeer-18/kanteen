@@ -73,7 +73,7 @@ body{
   font-size: large;
 }
 
-input[type="text"], input[type="password"]{
+.login-form-group input[type="text"],.login-form-group input[type="password"]{
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -84,7 +84,7 @@ input[type="text"], input[type="password"]{
   margin-top: 4px;
 }
 
-input[type="text"]{
+.login-form-group input[type="text"]{
   margin-bottom: 25px;
 }
 

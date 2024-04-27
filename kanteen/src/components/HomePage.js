@@ -1,7 +1,7 @@
-import React from 'react'
-import '../styles/HomePage.css'
-import loginImg from '../images/Login-amico.svg'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import '../styles/HomePage.css';
+import loginImg from '../images/Login-amico.svg';
+import { Link } from 'react-router-dom';
 
 export default function HomePage() {
     return (
@@ -15,11 +15,11 @@ export default function HomePage() {
                     <form className="login-form">
                         <div className="login-form-group">
                             <label htmlFor="username"></label>
-                            <input type="text" name="username" id="username" placeholder="Enter your username" />
+                            <input type="text" name="username" id="username" placeholder="Enter your username" required/>
                         </div>
                         <div className="login-form-group">
                             <label htmlFor="password"></label>
-                            <input type="password" name="password" id="password" placeholder="Enter your password" />
+                            <input type="password" name="password" id="password" placeholder="Enter your password" required/>
                         </div>
                     </form>
                     <div className="login-memory">
