@@ -38,7 +38,7 @@ export default function HomePage() {
                         <button type="submit" className='login-loginBtn'>Login</button>
                     </div>
                     <div className="login-signup">
-                        Don't have an account? <Link to="/signupacnt" className="login-signupBtn"><span >Sign up</span></Link>
+                        Don't have an account? <Link to="/signupmail" className="login-signupBtn"><span >Sign up</span></Link>
                     </div>
                 </div>
             </div>
