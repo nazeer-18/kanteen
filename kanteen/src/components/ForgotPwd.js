@@ -27,6 +27,7 @@ export default function ForgotPwd() {
                     <div className="forgotpwd-btn">
                         <button type="submit">Submit</button>
                     </div>
+                    <Link to="/forgotpwdotp" className="signupacnt-loginBtn"><span >emailEntered</span></Link>
                 </div>
             </div>
             <div className="forgotpwd-image-container">
