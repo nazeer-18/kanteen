@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/signupacnt.css';
+import '../styles/Signupacnt.css';
 import { Link } from 'react-router-dom';
 
 export default function SignUpAcnt() {
