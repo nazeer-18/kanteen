@@ -15,11 +15,11 @@ export default function HomePage() {
                     <form className="login-form">
                         <div className="login-form-group">
                             <label htmlFor="username"></label>
-                            <input type="text" name="username" id="username" placeholder="Enter your username" required/>
+                            <input type="text" name="username" id="username" placeholder="Enter your username" required />
                         </div>
                         <div className="login-form-group">
                             <label htmlFor="password"></label>
-                            <input type="password" name="password" id="password" placeholder="Enter your password" required/>
+                            <input type="password" name="password" id="password" placeholder="Enter your password" required />
                         </div>
                     </form>
                     <div className="login-memory">
