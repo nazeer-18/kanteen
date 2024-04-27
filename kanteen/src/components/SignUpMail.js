@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import '../styles/Signup.css';
+import React from 'react';
+import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-export default function Signup() {
+export default function SignupMail() {
     // const [email, setEmail] = useState('');
     // const [isChecked, setIsChecked] = useState(false);
     // const [error, setError] = useState('');
@@ -38,14 +37,11 @@ export default function Signup() {
                     <form className="signup-form">
                         <div className="signup-form-group">
                             <label htmlFor="email"></label>
-                            <input type="text" name="email" id="email" placeholder="Enter your email address"  />
+                            <input type="email" name="email" id="email" placeholder="Enter your email address"  />
                         </div>
                         <label>
                             <input
-                                type="checkbox"
-                                
-                                
-                            />
+                                type="checkbox"/>
                             {' '} I agree to the <span style={{ color: 'magenta' }}>Terms and conditions</span> and <span style={{ color: 'magenta' }}>Privacy Policy.</span>
                         </label>
                         
