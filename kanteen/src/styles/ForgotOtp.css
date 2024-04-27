@@ -1,0 +1,173 @@
+body{
+    margin: 0px;
+    padding: 0px;
+  }
+  .forgot-otp-homepage {
+    height: 95vh;
+    margin: 0px auto;
+  }
+  
+  .forgot-otp-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    height:90vh;
+    max-width: 85%;
+    margin: 0px auto;
+  }
+  .forgot-otp-container .forgot-otp-form-container{
+    padding-top: 16%;
+    padding-left: 3%;
+    padding-right: 10%;
+  }
+  .forgot-otp-container .forgot-otp-form-container .forgot-otp-back-container{
+    padding-left: 10px;
+    font-size:medium;
+    padding-top: 3%;
+    padding-bottom: 10px;
+  }
+  .forgot-otp-container .forgot-otp-form-container .forgot-otp-back-container .forgot-otp-backBtn{
+    text-decoration: none;
+    color: black;
+  }
+  .forgot-otp-container .forgot-otp-form-container .forgot-otp-back-container span{
+    size: 30%;
+    font-size: xx-large;
+    color: black;
+  }
+  
+  .forgot-otp-image-container {
+    flex:1;      
+    display: flex;    
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    margin: auto;      
+    background-color: #eeecec;
+    box-sizing: border-box;
+    border-radius: 75px;
+    margin-right: 2vw;
+  }
+  
+  .forgot-otp-image-container img {
+    width: auto;
+    max-width: 100%;    
+    max-height: 100%;  
+    object-fit: contain; 
+  }
+  
+  .forgot-otp-container .forgot-otp-form-container .forgot-otp-form .forgot-otptxt{
+    border-radius: 10px;
+    font-family: 'petrona';
+    padding-top: 7%;
+    }
+  .forgot-otpvertxt{
+    text-align: left;
+    font-weight: bold;
+    display: block;
+    font-family: 'petrona';
+    font-size: 35px;
+  }
+  .forgot-otpauthtxt{
+    margin-top: 13px;
+    margin-bottom: 13px;
+    text-align: left;
+    font-weight: light;
+    display:block;
+    color: rgba(0, 0, 0, 0.54);
+    font-family: 'petrona';
+    font-size: 15px;
+  }
+  .forgot-otprestxt{
+    margin-top: 15px;
+    margin-bottom: 13px;
+    text-align: left;
+    font-weight: light;
+    display:block;
+    color: rgba(0, 0, 0, 1);
+    font-size: 15px;
+  }
+  .forgot-otprestxt button{
+    border-style: hidden;
+    color: #bf0c45;
+    font-family: 'petrona';
+    font-size: 15px;
+  }
+  .forgot-otp-form{
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+    margin: 3px;
+    box-sizing: border-box;
+  }
+  .forgot-otp-form-group{
+    width: 100%;
+    font-size: large;
+  }
+  
+  .forgot-otp-form-group input[type="text"],.forgot-otp-form-group input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bf0c45;
+    font-size: large;
+    font-family: 'petrona';
+    box-sizing: border-box;
+    margin-top: 14px;
+    margin-bottom: 15px;
+  }
+  
+  
+  .forgot-otp{
+    width: 100%;
+    font-family: 'petrona';
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .forgot-otpBtn{
+    
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #bf0c45;
+    font-family: 'petrona';
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size:18px;
+    border-radius: 6px;
+  }
+
+  
+  @media (max-width:950px){
+    .forgot-otp-container{
+      max-width: 100%;
+    }
+    .forgot-otp-image-container{
+      max-width:40%;
+      padding: 0px;
+      margin: 0px;
+      border-radius: 0%;
+    }
+  }
+  
+  @media (max-width:768px){
+    .forgot-otp-form{
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+  
+  @media (max-width:670px){
+    .forgot-otp-image-container{
+      display: none;
+    }
+    .forgot-otp-container{
+      max-width: 100%;
+    }
+  }
+  
