@@ -17,7 +17,7 @@ body{
     margin: 0px auto;
   }
   .forgot-otp-container .forgot-otp-form-container{
-    padding-top: 16%;
+    padding-top: 12%;
     padding-left: 3%;
     padding-right: 10%;
   }
@@ -28,26 +28,27 @@ body{
     padding-bottom: 10px;
   }
   .forgot-otp-container .forgot-otp-form-container .forgot-otp-back-container .forgot-otp-backBtn{
+    font-family: 'petrona';
     text-decoration: none;
-    color: black;
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
   }
-  .forgot-otp-container .forgot-otp-form-container .forgot-otp-back-container span{
-    size: 30%;
-    font-size: xx-large;
-    color: black;
-  }
+  
   
   .forgot-otp-image-container {
     flex:1;      
-    display: flex;    
-    justify-content: center; 
-    align-items: center; 
-    padding: 20px; 
-    margin: auto;      
-    background-color: #eeecec;
-    box-sizing: border-box;
-    border-radius: 75px;
-    margin-right: 2vw;
+  display: flex;    
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+  margin: auto;  
+  max-width: 45%;      
+  height: 520px;       
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 75px;
+  
   }
   
   .forgot-otp-image-container img {
