@@ -25,6 +25,7 @@ body{
 .forgotpwd-forgot-group{
     margin: 0px auto;
     padding: 50px;
+    box-sizing: border-box;
 }
 .forgotpwd-back{
     margin-bottom: 15px;
@@ -52,7 +53,11 @@ body{
     margin: 0px auto;
     padding: 5px;
 }
-
+.forgotpwd-email{
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
 .forgotpwd-email-group input[type="email"]{
     width: 100%;
     padding: 15px;
@@ -63,18 +68,27 @@ body{
     font-size: 18px;
 }
 
+.forgotpwd-btn-container{
+    width: 85%;
+    padding: 8px 16px;
+    margin: 0px auto;
+    background-color: #bf0c45;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 9px;
+}
+
 .forgotpwd-btn{
-    width: 90%;
-    margin: 10px;
-    margin-top: 0px;
-    padding: 5px 15px;
+    width: 85%;
+    padding: 8px 16px;
+    margin: 0px auto;
     background-color: #bf0c45;
     font-family: 'petrona';
     cursor: pointer;
     text-align: center;
     color: white;
     font-size:18px;
-    border-radius: 9px;
+    border: none;
 }
 
 .forgotpwd-btn button{

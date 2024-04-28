@@ -71,6 +71,15 @@ body{
 .login-form-group{
   width: 100%;
   font-size: large;
+  position: relative;
+}
+
+.eye-display{
+  margin: 0px;
+  padding: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
 .login-form-group input[type="text"],.login-form-group input[type="password"]{
@@ -82,14 +91,14 @@ body{
   font-family: 'petrona';
   box-sizing: border-box;
   margin-top: 4px;
-}
-
-.login-form-group input[type="text"]{
   margin-bottom: 25px;
 }
 
+.login-pwd-group{
+  display: flex;
+}
+
 .login-memory{
-  width: 78%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,6 +106,10 @@ body{
   font-size: large;
   box-sizing: border-box;
   padding:0px 15px;
+}
+
+.login-rememberMe label{
+  margin-left: 3px;
 }
 
 .login-forgotpwdtxt{
@@ -108,7 +121,6 @@ body{
 }
 
 .login-login{
-  width: 80%;
   padding: 10px;
   font-family: 'petrona';
   font-weight: bold;
@@ -136,9 +148,10 @@ body{
   font-weight: bold;
   font-size: large;
   text-decoration: none;
+  margin-left: 5px;
 }
 
-@media (max-width:950px){
+@media (max-width:1080px){
   .login-login-container{
     max-width: 100%;
   }
@@ -151,7 +164,7 @@ body{
 }
 
 @media (max-width:768px){
-  .login-login-form{
+  .login-form{
     padding: 0px;
     margin: 0px;
   }

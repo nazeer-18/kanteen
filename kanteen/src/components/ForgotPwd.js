@@ -8,9 +8,11 @@ export default function ForgotPwd() {
         <div className="forgotpwd">
             <div className="forgotpwd-forgot-container">
                 <div className="forgotpwd-forgot-group">
-
                     <div className="forgotpwd-back">
-                        <Link className="forgotpwd-back-lnk" to="/">&lt; &nbsp;Back to login</Link>
+                        <Link
+                            className="forgotpwd-back-lnk" to="/">
+                            &lt; &nbsp;Back to login
+                        </Link>
                     </div>
                     <div className="forgotpwd-forgot-txt">
                         Forgot your password?
@@ -18,16 +20,31 @@ export default function ForgotPwd() {
                     <div className="forgotpwd-suggest">
                         Don't worry, happens to all of us. Enter your email below to reset your password.
                     </div>
-                    <form action="" className="forgotpwd-email">
+                    <form className="forgotpwd-email">
                         <div className="forgotpwd-email-group">
                             <label htmlFor="email"></label>
-                            <input type="email" name="email" id="email" placeholder="Enter your email " required/>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="Enter your email "
+                                required />
+                        </div>
+                        <div className="forgotpwd-btn-container">
+                            <button
+                                className="forgotpwd-btn"
+                                type="submit">
+                                Submit
+                            </button>
                         </div>
                     </form>
-                    <div className="forgotpwd-btn">
-                        <button type="submit">Submit</button>
-                    </div>
-                    <Link to="/forgotpwdotp" className="signupacnt-loginBtn"><span >emailEntered</span></Link>
+                    <Link
+                        to="/forgotpwdotp"
+                        className="signupacnt-loginBtn">
+                        <span>
+                            emailEntered
+                        </span>
+                    </Link>
                 </div>
             </div>
             <div className="forgotpwd-image-container">

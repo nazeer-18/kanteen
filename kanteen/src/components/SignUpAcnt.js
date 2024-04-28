@@ -6,7 +6,7 @@ export default function SignUpAcnt() {
     return (
         <div className="signupacnt">
             <div className="signupacnt-signuptxt">Sign up</div>
-            <form className="signupacnt-signup-form">
+            <form className="signupacnt-signup-form" legend="hel">
                 <div className="signupacnt-form-group">
                     <label htmlFor="username"></label>
                     <input type="text" name="username" id="username" placeholder="Enter your username" required />
@@ -40,10 +40,10 @@ export default function SignUpAcnt() {
                         </div>
                     </div>
                 </div>
+                <div className="signupacnt-createAcnt">
+                    <button type="submit" className='signupacnt-createAcntBtn'>Create Account</button>
+                </div>
             </form>
-            <div className="signupacnt-createAcnt">
-                <button type="submit" className='signupacnt-createAcntBtn'>Create Account</button>
-            </div>
             <div className="memoryb">
                 Already have an account? <Link to="/" className="signupacnt-loginBtn"><span >Login</span></Link>
             </div>

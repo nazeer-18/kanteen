@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
 import 'reactjs-popup/dist/index.css';
+import { Link } from 'react-router-dom';
 
 export default function SignupMail() {
     // const [email, setEmail] = useState('');
@@ -58,6 +59,7 @@ export default function SignupMail() {
                     </form>
                 </div>
             </div>
+            <Link to="/signupacnt"  className='VerifyBtn' ><b>signup acnt</b></Link>
         </div>
     )
 }

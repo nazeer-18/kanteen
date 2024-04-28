@@ -72,7 +72,7 @@ body{
     font-size: large;
   }
   
-  .reset-pwd-form-group input[type="password"]{
+  .reset-pwd-form-group input[type="password"],.reset-pwd-form-group input[type="text"]{
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -84,7 +84,16 @@ body{
     margin-bottom: 15px;
   }
   
-  
+  .reset-pwd-group{
+    position: relative;
+  }
+
+  .reset-pwd-eye{
+    position: absolute;
+    right: 12px;
+    top: 23px;
+  }
+
   .reset-pwd{
     width: 100%;
     font-family: 'petrona';
