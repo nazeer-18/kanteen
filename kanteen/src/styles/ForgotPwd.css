@@ -88,16 +88,17 @@ body{
 }
 
 .forgotpwd .forgotpwd-image-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e3e3e3;
-    padding: 20px;
-    width: 50%;
-    margin: 15px 0px;
-    height:90vh;
-    margin-right: 25px;
+    flex:1;      
+    display: flex;    
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    margin: auto;  
+    max-width: 45%;      
+    height: 520px;       
+    background-color: white;
     box-sizing: border-box;
+    border-radius: 75px;
 }
 
 .forgotpwd-image-container img{
