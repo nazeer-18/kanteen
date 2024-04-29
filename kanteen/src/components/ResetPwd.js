@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/ResetPwd.css';
-import resetImg from '../images/ResetPwd.svg';
+import resetImg from '../images/forgotpwd.svg';
 import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
