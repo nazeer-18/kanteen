@@ -41,8 +41,8 @@ export default function SignupMail() {
                                 onChange={handleEmailChange}
                                 value={email}
                                 id="email"
-                                style={{outline:"none"}}
-                                className={emailValid ? "valid-border" :email.length>0? "invalid-border":""}
+                                style={{ outline: "none" }}
+                                className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
                                 placeholder="Enter your email address"
                                 required />
                             {
@@ -51,7 +51,7 @@ export default function SignupMail() {
                             }
                             {
                                 !emailValid && email.length > 0 &&
-                                <FontAwesomeIcon className="validate-icon" icon={faCircleXmark} shake style={{color: "#ba1717",}} />
+                                <FontAwesomeIcon className="validate-icon" icon={faCircleXmark} shake style={{ color: "#ba1717", }} />
                             }
                         </div>
                         <div className="email-check-alert">
