@@ -8,21 +8,29 @@ import { FaRegEyeSlash } from "react-icons/fa";
 export default function ResetPwd() {
     const [showPwd, setShowPwd] = useState(false);
     const [showCnfPwd, setShowCnfPwd] = useState(false);
+    const [data,setData] = useState({
+        pwd:'',
+        cnfpwd:''
+    })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(data);
+    }
     return (
         <div className='reset-pwd-homepage'>
             <div className="reset-pwd-container">
                 <div className="reset-pwd-form-container">
 
                     <div className="reset-pwd-form">
-                        <div 
+                        <div
                             className='reset-pwdvertxt'>
                             Set new password
                         </div>
-                        <p 
+                        <p
                             className='reset-pwdauthtxt'>
                             Please set a new password for your account.
                         </p>
-                        <form className="reset-pwd-form">
+                        <form className="reset-pwd-form" onSubmit={handleSubmit}>
                             <div className="reset-pwd-form-group">
                                 <label
                                     htmlFor="newPassword">
@@ -31,6 +39,8 @@ export default function ResetPwd() {
                                     <input
                                         type={showPwd ? "text" : "password"}
                                         name="reset-pwd" id="reset-pwd"
+                                        value={data.pwd}
+                                        onChange = {(e)=>setData({...data,pwd:e.target.value})}
                                         placeholder="Enter new password"
                                         required />
                                     <span
@@ -52,6 +62,8 @@ export default function ResetPwd() {
                                         type={showCnfPwd ? "text" : "password"}
                                         name="reset-pwd"
                                         id="cnf-reset-pwd"
+                                        value={data.cnfpwd}
+                                        onChange = {(e)=>setData({...data,cnfpwd:e.target.value})}
                                         placeholder="Re-enter password"
                                         required />
                                     <span
@@ -70,21 +82,20 @@ export default function ResetPwd() {
                                     className='reset-pwdBtn'>
                                     Set new password
                                 </button>
+                            </div>
+                        </form>
                                 <Link
                                     to="/" >
                                     <span >
                                         On success , get back to login
                                     </span>
                                 </Link>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div className="reset-pwd-image-container">
-                    <img 
-                        src={resetImg} 
-                        alt="otp" 
-                        width="600px" />
+                    <img
+                        src={resetImg}
+                        alt="otp" />
                 </div>
             </div>
         </div>

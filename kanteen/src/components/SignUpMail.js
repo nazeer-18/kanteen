@@ -19,6 +19,12 @@ export default function SignupMail() {
         SetEmail(value);
         SetEmailValid(validateEmail(value.toLowerCase()));
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(email);
+    }
+
     return (
         <div className='signupmail'>
             <div className="signup-container">
@@ -30,7 +36,7 @@ export default function SignupMail() {
                 </div>
                 <div className="signup-form">
                     <div className='signup'>SIGNUP</div>
-                    <form className="signup-form">
+                    <form className="signup-form" onSubmit={handleSubmit}>
                         <div className="signup-form-group">
                             <label
                                 htmlFor="email">
@@ -51,7 +57,13 @@ export default function SignupMail() {
                             }
                             {
                                 !emailValid && email.length > 0 &&
-                                <FontAwesomeIcon className="validate-icon" icon={faCircleXmark} shake style={{ color: "#ba1717", }} />
+                                <FontAwesomeIcon
+                                    className="validate-icon"
+                                    icon={faCircleXmark}
+                                    shake
+                                    onClick={() => SetEmail('')}
+                                    style={{ color: "#ba1717", }}
+                                />
                             }
                         </div>
                         <div className="email-check-alert">

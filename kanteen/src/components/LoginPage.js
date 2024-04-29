@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import '../styles/HomePage.css';
+import '../styles/LoginPage.css';
 import loginImg from '../images/Login-amico.svg';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-export default function HomePage() {
+export default function LoginPage() {
     const [showPwd, setShowPwd] = useState(false);
     const [checked, SetChecked] = useState(false);
+    const [data, setData] = useState({
+        userName: '',
+        pwd: ''
+    })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(data);
+    };
     return (
         <div className='login-homepage'>
             <div className="login-login-container">
@@ -21,7 +29,7 @@ export default function HomePage() {
                     <div className='login-logintxt'>
                         LOGIN
                     </div>
-                    <form className="login-form">
+                    <form className="login-form" onSubmit={handleSubmit} >
                         <div className="login-form-group login-first-input">
                             <label
                                 htmlFor="username">
@@ -31,6 +39,8 @@ export default function HomePage() {
                                 name="username"
                                 id="username"
                                 placeholder="Enter your username or mobile number"
+                                onChange={(e) => setData({ ...data, userName: e.target.value })}
+                                value={data.userName}
                                 required />
                         </div>
                         <div className="login-form-group">
@@ -43,6 +53,8 @@ export default function HomePage() {
                                     name="password"
                                     id="password"
                                     placeholder="Enter your password"
+                                    onChange={(e) => setData({ ...data, pwd: e.target.value })}
+                                    value={data.pwd}
                                     required />
                                 <span
                                     className="eye-display"
@@ -57,11 +69,11 @@ export default function HomePage() {
                         <div className="login-memory">
                             <div className="login-rememberMe">
                                 <input
-                                    title={checked?"unMark":"Mark"}
+                                    title={checked ? "unMark" : "Mark"}
                                     type="checkbox"
                                     name="remember"
                                     checked={checked}
-                                    onChange={()=>SetChecked(!checked)}
+                                    onChange={() => SetChecked(!checked)}
                                     id="remember" />
                                 <label
                                     className='login-rememberLabel'
