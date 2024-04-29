@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/ForgotOtp.css';
-import forgotImg from '../images/ForgotOtp.svg';
+import forgotImg from '../images/forgot-pwd.svg';
 import { Link } from 'react-router-dom';
 
 export default function ForgotPwd() {

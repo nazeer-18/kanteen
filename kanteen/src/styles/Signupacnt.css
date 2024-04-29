@@ -29,16 +29,28 @@ body{
 }
 
 .signupacnt-form-group input[type="text"],.signupacnt-form-group input[type="password"], .signupacnt-form-group input[type="tel"]{
-    width: 90%;
-    font-family: 'petrona';
-    font-size: large;
-    color: black;
+    width: 100%;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #bf0c45;
-    margin: 15px;
-    padding: 10px;
+    font-size: large;
+    font-family: 'petrona';
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-bottom: 25px;
 }
-
+.eyedisplay{
+    margin: 0px;
+    padding: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+ 
+.signupact-pwd-group{
+    display: flex;
+    position: relative;
+}
 .signupacnt-preference-txt{
     margin-bottom: 10px;
     padding: 3px;

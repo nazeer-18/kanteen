@@ -74,13 +74,7 @@ body{
   position: relative;
 }
 
-.eye-display{
-  margin: 0px;
-  padding: 10px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
+
 
 .login-form-group input[type="text"],.login-form-group input[type="password"]{
   width: 100%;
@@ -93,7 +87,13 @@ body{
   margin-top: 4px;
   margin-bottom: 25px;
 }
-
+.eye-display{
+  margin: 0px;
+  padding: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
 .login-pwd-group{
   display: flex;
 }

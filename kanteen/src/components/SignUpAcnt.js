@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Signupacnt.css';
+import { FaEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 export default function SignUpAcnt() {
+    const [showPwd, setShowPwd] = useState(false);
+    const [conPwd, setconPwd] = useState(false);
     return (
         <div className="signupacnt">
             <div className="signupacnt-signuptxt">Sign up</div>
@@ -17,11 +21,41 @@ export default function SignUpAcnt() {
                 </div>
                 <div className="signupacnt-form-group">
                     <label htmlFor="pwd"></label>
-                    <input type="password" name="pwd" id="pwd" placeholder="Enter your password" required />
+                    <div className='signupact-pwd-group'>
+                    <input
+                                    type={showPwd ? "text" : "password"}
+                                    name="password"
+                                    id="password"
+                                    placeholder="Enter your password"
+                                    required />
+                                <span
+                                    className="eyedisplay"
+                                    onClick={() => setShowPwd((prev) => !prev)}>
+                                    {showPwd
+                                        ? (<FaRegEyeSlash title="hide" />)
+                                        : (<FaEye title="show" />)
+                                    }
+                                </span>
+                    </div>
                 </div>
                 <div className="signupacnt-form-group">
                     <label htmFor="cpwd"></label>
-                    <input type="password" name="cpwd" id="cpwd" placeholder="Confirm your password" required />
+                    <div className='signupact-pwd-group'>
+                    <input
+                                    type={conPwd ? "text" : "password"}
+                                    name="cpwd"
+                                    id="cpwd"
+                                    placeholder="Confirm your password"
+                                    required />
+                                <span
+                                    className="eyedisplay"
+                                    onClick={() => setconPwd((prev) => !prev)}>
+                                    {conPwd
+                                        ? (<FaRegEyeSlash title="hide" />)
+                                        : (<FaEye title="show" />)
+                                    }
+                                </span>
+                    </div>
                 </div>
                 <div className="signupacnt-form-group signupacnt-food-preference">
                     <span className='signupacnt-preference-txt'>Select your food preference</span> <br />
