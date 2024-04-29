@@ -140,7 +140,7 @@ body{
   text-align: center;
   color: white;
   font-size:18px;
-  border-radius: 6px;
+  border-radius: 30px;
 }
 .login-signupBtn{
   color: #bf0c45;
@@ -149,6 +149,9 @@ body{
   font-size: large;
   text-decoration: none;
   margin-left: 5px;
+}
+.login-signup{
+  font-size: large;
 }
 
 @media (max-width:1080px){

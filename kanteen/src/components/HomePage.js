@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function HomePage() {
     const [showPwd, setShowPwd] = useState(false);
+    const [checked, SetChecked] = useState(false);
     return (
         <div className='login-homepage'>
             <div className="login-login-container">
@@ -29,7 +30,7 @@ export default function HomePage() {
                                 type="text"
                                 name="username"
                                 id="username"
-                                placeholder="Enter your username"
+                                placeholder="Enter your username or mobile number"
                                 required />
                         </div>
                         <div className="login-form-group">
@@ -56,9 +57,11 @@ export default function HomePage() {
                         <div className="login-memory">
                             <div className="login-rememberMe">
                                 <input
-                                    title="Tick this"
+                                    title={checked?"unMark":"Mark"}
                                     type="checkbox"
                                     name="remember"
+                                    checked={checked}
+                                    onChange={()=>SetChecked(!checked)}
                                     id="remember" />
                                 <label
                                     className='login-rememberLabel'
