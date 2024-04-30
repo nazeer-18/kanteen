@@ -39,11 +39,21 @@ export default function SignupMail() {
                 setTimeout(() => {
                     navigate('/signupacnt')
                 }, 2000);
+            }else{
+                let emailInput = document.getElementById('email');
+                emailInput.innerText = '';
             }
         }catch(error){
             console.error(error);
             setMessage(error.response.data.message)
             setSuccess(error.response.data.success);
+            setTimeout(()=>{
+                setClicked(false);
+                SetEmail('');
+                SetEmailValid(false);
+            },2000) 
+            let emailInput = document.getElementById('email');
+            emailInput.innerText = '';
         }
     }
 
