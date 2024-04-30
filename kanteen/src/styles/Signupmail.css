@@ -105,10 +105,11 @@ body{
     border-radius: 37px;
     padding: 10px;
     margin-top:8px;
+    text-align: center;
 }
 
 .signupmail-mail-response{
-  color: rgb(255 0 0);
+    color: rgb(255 0 0);
     font-size: larger;
     font-weight: 600;
     padding: 8px;
@@ -120,6 +121,7 @@ body{
 .signupmail-verifyBtn{
   width: 90%;
   margin: 18px auto;
+  text-align: center;
 }
 .VerifyBtn{
     width: 90%;
@@ -127,7 +129,6 @@ body{
     background-color: #bf0c45;
     font-family: 'petrona';
     cursor: pointer;
-    text-align: center;
     color: white;
     font-size:18px;
     border-radius: 30px;

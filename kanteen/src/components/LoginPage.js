@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/LoginPage.css';
 import loginImg from '../images/Login-amico.svg';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import userService from '../services/userService';
 
 export default function LoginPage() {
     const [showPwd, setShowPwd] = useState(false);
@@ -12,9 +14,31 @@ export default function LoginPage() {
         userName: '',
         pwd: ''
     })
-    const handleSubmit = (e) => {
+    const [message, setMessage] = useState('');
+    const [sucess, setSucess] = useState(false);
+    const [clicked, setClicked] = useState(false);
+    const [loginValid, setLoginValid] = useState(false);
+    let navigate = useNavigate();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data);
+        setClicked(true);
+        try{
+            const response = await userService.login(data.userName,data.pwd);
+            setMessage(response.data.message)
+            setSucess(response.data.success)
+            if(response.data.success){
+                setLoginValid(true);
+                setTimeout(() => {
+                    navigate('/home')
+                }, 2000);
+            }
+            else{
+                setLoginValid(false);
+            }
+        }catch(err){
+            setMessage(err.response.data.message)
+            setSucess(err.response.data.success)
+        }
     };
     return (
         <div className='login-homepage'>
@@ -38,12 +62,12 @@ export default function LoginPage() {
                                 type="text"
                                 name="username"
                                 id="username"
-                                placeholder="Enter your username or mobile number"
+                                placeholder="Enter your mobile number or email address"
                                 onChange={(e) => setData({ ...data, userName: e.target.value })}
                                 value={data.userName}
                                 required />
                         </div>
-                        <div className="login-form-group">
+                        <div className="login-form-group login-second-input">
                             <label
                                 htmlFor="password">
                             </label>
@@ -53,6 +77,7 @@ export default function LoginPage() {
                                     name="password"
                                     id="password"
                                     placeholder="Enter your password"
+                                    className="login-second-input"
                                     onChange={(e) => setData({ ...data, pwd: e.target.value })}
                                     value={data.pwd}
                                     required />
@@ -66,6 +91,14 @@ export default function LoginPage() {
                                 </span>
                             </div>
                         </div>
+                        {clicked &&
+                            <div className="login-response">
+                                <span
+                                    style={{ color: sucess ? "#139a72" : "#ba1717" }}>
+                                    {message}
+                                </span>
+                            </div>
+                        }
                         <div className="login-memory">
                             <div className="login-rememberMe">
                                 <input

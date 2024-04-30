@@ -30,117 +30,115 @@ export default function SignupMail() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setClicked(true);
-        try{
+        try {
             const response = await userService.checkMail(email);
-            console.log(response);
             setMessage(response.data.message);
             setSuccess(response.data.success);
-            if(response.data.success){
+            if (response.data.success) {
                 setTimeout(() => {
                     navigate('/signupacnt')
                 }, 2000);
-            }else{
+            } else {
                 let emailInput = document.getElementById('email');
                 emailInput.innerText = '';
             }
-        }catch(error){
-            console.error(error);
+        } catch (error) {
             setMessage(error.response.data.message)
             setSuccess(error.response.data.success);
-            setTimeout(()=>{
+            setTimeout(() => {
                 setClicked(false);
                 SetEmail('');
                 SetEmailValid(false);
-            },2000) 
+            }, 3500)
             let emailInput = document.getElementById('email');
             emailInput.innerText = '';
         }
     }
 
     return (
-            <div className="signupmail-container">
-                <div className="signupmail-image-container">
-                    <img
-                        src={signupImg}
-                        alt="login"
-                        width="600px" />
-                </div>
-                <div className="signupmail-form-container">
-                    <div className='signupmail-signup-txt'>SIGNUP</div>
-                    <form className="signupmail-form"  onSubmit={handleSubmit}>
-                        <div className="signupmail-form-group">
-                            <label
-                                htmlFor="email">
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                onChange={handleEmailChange}
-                                value={email}
-                                id="email"
-                                style={{ outline: "none" }}
-                                className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
-                                placeholder="Enter your email address"
-                                required />
-                            {
-                                emailValid &&
-                                <FontAwesomeIcon className="validate-icon" icon={faCircleCheck} beat style={{ color: "#139a72", }} />
-                            }
-                            {
-                                !emailValid && email.length > 0 &&
-                                <FontAwesomeIcon
-                                    className="validate-icon"
-                                    icon={faCircleXmark}
-                                    shake
-                                    onClick={() => SetEmail('')}
-                                    style={{ color: "#ba1717", }}
-                                />
-                            }
-                        </div>
-                        {
-                            !emailValid && email.length > 0 && 
-                            <div className="signupmail-email-check-alert">
-                                !! Enter a valid Amrita email address
-                            </div>
-                        }
-                        {   clicked &&
-                            <div className="signupmail-mail-response">
-                                <span
-                                    style={{ color: success ? "#139a72" : "#ba1717" }}>
-                                    {message}
-                                </span>
-                            </div>
-                        }
-                        <div className="signupmail-terms">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={checked}
-                                    onChange={() => SetChecked(!checked)}
-                                    required
-                                    title={checked ? "unMark" : "Mark"} />
-                                <span>
-                                    I agree to the
-                                </span>
-                                <span className="text-amrita">
-                                    Terms and conditions
-                                </span>
-                                and
-                                <span className="text-amrita">
-                                    Privacy Policy.
-                                </span>
-                            </label>
-                        </div>
-                        <div className="signupmail-verifyBtn">
-                            <button
-                                type="submit"
-                                disabled={!emailValid && email.length !== 0}
-                                className='VerifyBtn' >
-                                Verify
-                            </button>
-                        </div>
-                    </form>
-                </div>
+        <div className="signupmail-container">
+            <div className="signupmail-image-container">
+                <img
+                    src={signupImg}
+                    alt="login"
+                    width="600px" />
             </div>
+            <div className="signupmail-form-container">
+                <div className='signupmail-signup-txt'>SIGNUP</div>
+                <form className="signupmail-form" onSubmit={handleSubmit}>
+                    <div className="signupmail-form-group">
+                        <label
+                            htmlFor="email">
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            onChange={handleEmailChange}
+                            value={email}
+                            id="email"
+                            style={{ outline: "none" }}
+                            className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
+                            placeholder="Enter your email address"
+                            required />
+                        {
+                            emailValid &&
+                            <FontAwesomeIcon className="validate-icon" icon={faCircleCheck} beat style={{ color: "#139a72", }} />
+                        }
+                        {
+                            !emailValid && email.length > 0 &&
+                            <FontAwesomeIcon
+                                className="validate-icon"
+                                icon={faCircleXmark}
+                                shake
+                                onClick={() => SetEmail('')}
+                                style={{ color: "#ba1717", }}
+                            />
+                        }
+                    </div>
+                    {
+                        !emailValid && email.length > 0 &&
+                        <div className="signupmail-email-check-alert">
+                            !! Enter a valid Amrita email address
+                        </div>
+                    }
+                    {clicked &&
+                        <div className="signupmail-mail-response">
+                            <span
+                                style={{ color: success ? "#139a72" : "#ba1717" }}>
+                                {message}
+                            </span>
+                        </div>
+                    }
+                    <div className="signupmail-terms">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() => SetChecked(!checked)}
+                                required
+                                title={checked ? "unMark" : "Mark"} />
+                            <span>
+                                I agree to the
+                            </span>
+                            <span className="text-amrita">
+                                Terms and conditions
+                            </span>
+                            and
+                            <span className="text-amrita">
+                                Privacy Policy.
+                            </span>
+                        </label>
+                    </div>
+                    <div className="signupmail-verifyBtn">
+                        <button
+                            type="submit"
+                            disabled={!emailValid && email.length !== 0}
+                            className='VerifyBtn' >
+                            Verify
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     )
 }

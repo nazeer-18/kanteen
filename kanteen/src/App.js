@@ -8,6 +8,7 @@ import ForgotPwdOtp from './components/ForgotPwdOtp';
 import Verify from './components/Verify';
 import ResetPwd from './components/ResetPwd';
 import SignUpAcnt from './components/SignUpAcnt';
+import HomePage from './components/HomePage';
 
 export default function App() {
     return (
@@ -21,6 +22,7 @@ export default function App() {
                 <Route path='/forgotpwdotp' element={<ForgotPwdOtp />}></Route>
                 <Route path='/resetpwd' element={<ResetPwd />}></Route>
                 <Route path='/signupacnt' element={<SignUpAcnt />}></Route>
+                <Route path='/home' element={<HomePage />}></Route>
             </Routes>
         </BrowserRouter>
 

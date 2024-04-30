@@ -3,15 +3,28 @@ const authRouter = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-
-authRouter.get('/', (req, res) => {
-    res.send("hello")
-})
-
 //Login route
-authRouter.post('/login', (req, res) => {
+authRouter.post('/login', async (req, res) => {
+    try {
+        const { userId, password } = req.body;
+        const user = await User.findOne({
+            $or: [{ emailId: userId }, { mobileNumber: userId }]
+        })
+        if (!user) {
+            return res.status(404).send({ message: "The credentials provided do not match our records. Please verify your details and try again.", success: false })
+        }
 
-    res.send("login")
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(401).send({ message: "Invalid Credentials", success: false })
+        }
+
+        res.status(200).send({ message: "Login Successful!..Redirecting to home page..", success: true })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).send("Internal Server Error")
+    }
 })
 
 //Register route

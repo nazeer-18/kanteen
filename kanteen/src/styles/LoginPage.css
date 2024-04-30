@@ -74,8 +74,6 @@ body{
   position: relative;
 }
 
-
-
 .login-form-group input[type="text"],.login-form-group input[type="password"]{
   width: 100%;
   padding: 10px;
@@ -87,6 +85,10 @@ body{
   margin-top: 4px;
   margin-bottom: 25px;
 }
+
+.login-second-input input[type="text"],.login-second-input input[type="password"]{
+  margin-bottom:7px;
+}
 .eye-display{
   margin: 0px;
   padding: 10px;
@@ -96,6 +98,17 @@ body{
 }
 .login-pwd-group{
   display: flex;
+  margin-bottom: 5px;
+}
+
+.login-response{
+  color: rgb(255 0 0);
+  font-size: larger;
+  font-weight: 600;
+  padding: 8px;
+  background-color: #d4d9dcb5;
+  border-radius: 37px;
+  margin-bottom: 10px;
 }
 
 .login-memory{
@@ -127,7 +140,6 @@ body{
   text-align: center;
   color: white;
   border-radius: 5px;
-  margin-top: 10px;
 }
 
 .login-loginBtn{
