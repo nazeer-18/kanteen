@@ -14,8 +14,12 @@ connectDB().then(() => {
         console.log(`server is listening on port ${port}`)
     })
 }).catch(err => {
+    console.log(err)
     console.error("DB connection failed")
 })
 
 const authRouter = require('./routes/auth')
 app.use('/api/auth', authRouter)
+
+const verifyRouter = require('./routes/verify')
+app.use('/api/verify', verifyRouter)

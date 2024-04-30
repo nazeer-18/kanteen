@@ -4,9 +4,9 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 
-// authRouter.get('/', (req, res) => {
-//     res.send("hello")
-// })
+authRouter.get('/', (req, res) => {
+    res.send("hello")
+})
 
 //Login route
 authRouter.post('/login', (req, res) => {

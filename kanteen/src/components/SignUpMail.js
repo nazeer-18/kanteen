@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import userService from '../services/userService';
 
 export default function SignupMail() {
     const [checked, SetChecked] = useState(false);
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [clicked, setClicked] = useState(false);
+    let navigate = useNavigate();
     const validateEmail = (email) => {
         const regex = /@ch\.amrita\.edu$|@ch\.students\.amrita\.edu$/;
         return regex.test(email);
@@ -18,26 +24,41 @@ export default function SignupMail() {
         const { value } = e.target;
         SetEmail(value);
         SetEmailValid(validateEmail(value.toLowerCase()));
+        setClicked(false);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
+        setClicked(true);
+        try{
+            const response = await userService.checkMail(email);
+            console.log(response);
+            setMessage(response.data.message);
+            setSuccess(response.data.success);
+            if(response.data.success){
+                setTimeout(() => {
+                    navigate('/signupacnt')
+                }, 2000);
+            }
+        }catch(error){
+            console.error(error);
+            setMessage(error.response.data.message)
+            setSuccess(error.response.data.success);
+        }
     }
 
     return (
-        <div className='signupmail'>
-            <div className="signup-container">
-                <div className="image-container">
+            <div className="signupmail-container">
+                <div className="signupmail-image-container">
                     <img
                         src={signupImg}
                         alt="login"
                         width="600px" />
                 </div>
-                <div className="signup-form">
-                    <div className='signup'>SIGNUP</div>
-                    <form className="signup-form" onSubmit={handleSubmit}>
-                        <div className="signup-form-group">
+                <div className="signupmail-form-container">
+                    <div className='signupmail-signup-txt'>SIGNUP</div>
+                    <form className="signupmail-form"  onSubmit={handleSubmit}>
+                        <div className="signupmail-form-group">
                             <label
                                 htmlFor="email">
                             </label>
@@ -66,9 +87,20 @@ export default function SignupMail() {
                                 />
                             }
                         </div>
-                        <div className="email-check-alert">
-                            {!emailValid && email.length > 0 && <span>!! Enter a valid Amrita email address</span>}
-                        </div>
+                        {
+                            !emailValid && email.length > 0 && 
+                            <div className="signupmail-email-check-alert">
+                                !! Enter a valid Amrita email address
+                            </div>
+                        }
+                        {   clicked &&
+                            <div className="signupmail-mail-response">
+                                <span
+                                    style={{ color: success ? "#139a72" : "#ba1717" }}>
+                                    {message}
+                                </span>
+                            </div>
+                        }
                         <div className="signupmail-terms">
                             <label>
                                 <input
@@ -89,7 +121,7 @@ export default function SignupMail() {
                                 </span>
                             </label>
                         </div>
-                        <div className="signupMail-verifyBtn">
+                        <div className="signupmail-verifyBtn">
                             <button
                                 type="submit"
                                 disabled={!emailValid && email.length !== 0}
@@ -100,13 +132,5 @@ export default function SignupMail() {
                     </form>
                 </div>
             </div>
-            <Link
-                to="/signupacnt"
-                className='VerifyBtn' >
-                <b>
-                    signup acnt
-                </b>
-            </Link>
-        </div>
     )
 }
