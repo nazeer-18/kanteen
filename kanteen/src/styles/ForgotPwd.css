@@ -52,26 +52,37 @@ body{
 .forgotpwd-email-group{
     margin: 0px auto;
     padding: 5px;
+    position: relative;
 }
 .forgotpwd-email{
     margin: 10px;
     padding: 10px;
     box-sizing: border-box;
+
 }
 .forgotpwd-email-group input[type="email"]{
     width: 100%;
     padding: 15px;
-    margin-bottom: 25px;
+    /* margin-bottom: 20px; */
     border-radius: 5px;
     border: 1px solid #bf0c45;
     font-family: 'petrona';
     font-size: 18px;
 }
-
+.validateicon{
+    
+    position: absolute;
+    top: 14px;
+    right: 1px;
+    font-size: 35px;
+    font-weight: 900;
+    cursor: pointer;
+  }
 .forgotpwd-btn-container{
     width: 85%;
     padding: 8px 16px;
     margin: 0px auto;
+    margin-top: 15px;
     background-color: #bf0c45;
     cursor: pointer;
     text-align: center;
