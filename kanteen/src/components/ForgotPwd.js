@@ -35,7 +35,7 @@ export default function ForgotPwd() {
                     <div className="forgotpwd-suggest">
                         Don't worry, happens to all of us. Enter your email below to reset your password.
                     </div>
-                    <form className="forgotpwd-email" onSubmit={handleSubmit}>
+                    <form className="forgotpwd-email">
                         <div className="forgotpwd-email-group">
                         <label
                                 htmlFor="email">
@@ -62,7 +62,7 @@ export default function ForgotPwd() {
                                     shake
                                     onClick={() => SetEmail('')}
                                     style={{ color: "#ba1717", }}
-                                />
+                                />
                             }
                         </div>
                         <div className="email-check-alert">
