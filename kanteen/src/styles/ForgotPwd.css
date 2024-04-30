@@ -75,7 +75,7 @@ body{
     background-color: #bf0c45;
     cursor: pointer;
     text-align: center;
-    border-radius: 9px;
+    border-radius: 30px;
 }
 
 .forgotpwd-btn{
@@ -163,7 +163,7 @@ body{
     }
 }
 
-@media (max-width:630px){
+@media (max-width:640px){
     .forgotpwd .forgotpwd-image-container{
         display: none;
     }

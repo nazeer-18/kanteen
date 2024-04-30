@@ -81,7 +81,6 @@ body{
     font-size: 15px;
   }
   .forgot-otprestxt{
-    margin-top: 15px;
     margin-bottom: 13px;
     text-align: left;
     font-weight: light;
@@ -131,8 +130,8 @@ body{
   }
   
   .forgot-otpBtn{
-    
-    width: 100%;
+    width: 85%;
+    margin: 0px auto;
     padding: 10px 15px;
     background-color: #bf0c45;
     font-family: 'petrona';
@@ -140,7 +139,7 @@ body{
     text-align: center;
     color: white;
     font-size:18px;
-    border-radius: 6px;
+    border-radius: 30px;
   }
 
   
