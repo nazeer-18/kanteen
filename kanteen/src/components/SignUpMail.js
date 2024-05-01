@@ -11,6 +11,7 @@ export default function SignupMail() {
     const [checked, SetChecked] = useState(false);
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
+    const [usedEmail, SetUsedEmail] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [clicked, setClicked] = useState(false);
@@ -78,8 +79,8 @@ export default function SignupMail() {
             setSuccess(false);
             setTimeout(() => {
                 setClicked(false);
-                SetEmail('');
                 SetEmailValid(false);
+                if(error.response.status==409) SetUsedEmail(true);
             }, 3500)
             let emailInput = document.getElementById('email');
             emailInput.innerText = '';
@@ -127,9 +128,15 @@ export default function SignupMail() {
                         }
                     </div>
                     {
-                        !emailValid && email.length > 0 &&
+                        !emailValid && email.length > 0 && !usedEmail &&
                         <div className="signupmail-email-check-alert">
                             !! Enter a valid Amrita email address
+                        </div>
+                    }
+                    {
+                        !emailValid && email.length > 0 && usedEmail &&
+                        <div className="signupmail-email-check-alert">
+                            !! This Amrita email address is already used
                         </div>
                     }
                     {clicked &&
@@ -164,6 +171,7 @@ export default function SignupMail() {
                         <button
                             type="submit"
                             disabled={!emailValid && email.length !== 0}
+                            style={{ backgroundColor: !emailValid && email.length !== 0 ? '#BF0C4569' : '#bf0c45' }}
                             className='VerifyBtn' >
                             Verify
                         </button>

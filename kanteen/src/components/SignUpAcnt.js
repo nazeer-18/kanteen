@@ -95,55 +95,6 @@ export default function SignUpAcnt() {
                         </span>
                     </div>
                 </div>
-                <div className="signupacnt-form-group signupacnt-food-preference">
-                    <span
-                        className='signupacnt-preference-txt'>
-                        Select your food preference
-                    </span>
-                    <br />
-
-                    <div className="signupacnt-food-choice">
-                        <div className="signupacnt-food-item">
-                            <input
-                                type="radio"
-                                name="food"
-                                id="veg"
-                                required
-                                onChange={(e) => setData({ ...data, food: e.target.value })}
-                                value="veg" />
-                            <label
-                                htmlFor='food'>
-                                Veg
-                            </label>
-                        </div>
-                        <div className="signupacnt-food-item">
-                            <input
-                                type="radio"
-                                name="food"
-                                id="nonveg"
-                                required
-                                onChange={(e) => setData({ ...data, food: e.target.value })}
-                                value="nonveg" />
-                            <label
-                                htmlFor="food">
-                                Non Veg
-                            </label>
-                        </div>
-                        <div className="signupacnt-food-item">
-                            <input
-                                type="radio"
-                                name="food"
-                                id="any"
-                                required
-                                onChange={(e) => setData({ ...data, food: e.target.value })}
-                                value="any" />
-                            <label
-                                htmlFor="food">
-                                Any
-                            </label>
-                        </div>
-                    </div>
-                </div>
                 <div className="signupacnt-createAcnt">
                     <button
                         type="submit"

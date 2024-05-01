@@ -52,34 +52,6 @@ body{
     display: flex;
     position: relative;
 }
-.signupacnt-preference-txt{
-    margin-top:2px;
-    margin-bottom: 10px;
-    padding: 3px;
-    padding-top: 0px;
-    font-family: 'petrona';
-    font-size: 18px;
-}
-
-.signupacnt-food-preference {
-    width: 90%;
-    border-radius: 5px;
-    margin: 0px auto;
-    padding: 10px;
-    padding-top: 0px;
-    margin-top: 0px;
-}
-
-.signupacnt-food-choice{
-    display: flex;
-    justify-content: space-around;
-    margin: 7px auto;
-}
-
-.signupacnt-food-item input[type="radio"]{
-    margin: 4px 7px;
-    padding: 3px;
-}
 
 .signupacnt-createAcnt{
     width: 90%;
