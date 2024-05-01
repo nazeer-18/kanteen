@@ -3,6 +3,11 @@ const authRouter = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
+authRouter.get('/', (req, res) => {
+    res.send("Auth route")
+}
+)
+
 //Login route
 authRouter.post('/login', async (req, res) => {
     try {
