@@ -48,7 +48,6 @@ export default function SignupMail() {
             setSuccess(error.response.data.success);
             setTimeout(() => {
                 setClicked(false);
-                SetEmail('');
                 SetEmailValid(false);
                 if(error.response.status==409) SetUsedEmail(true);
             }, 3500)
