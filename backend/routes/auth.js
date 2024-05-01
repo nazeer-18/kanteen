@@ -35,7 +35,7 @@ authRouter.post('/login', async (req, res) => {
 //Register route
 authRouter.post('/signup', async (req, res) => {
     try {
-        const { email, name, pwd, mobileNum, foodpref } = req.body;
+        const { email, name, pwd, mobileNum } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPwd = await bcrypt.hash(pwd, salt);
 
@@ -44,7 +44,6 @@ authRouter.post('/signup', async (req, res) => {
             name: name,
             mobileNumber: mobileNum,
             password: hashedPwd,
-            foodPreference: foodpref
         })
 
         await user.save();
