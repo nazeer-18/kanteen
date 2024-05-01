@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
@@ -26,6 +25,38 @@ export default function SignupMail() {
         SetEmailValid(validateEmail(value.toLowerCase()));
         setClicked(false);
     }
+    const [websocket, setWebsocket] = useState(null);
+    useEffect(() => {
+        return () => {
+            if (websocket) {
+                websocket.close();
+            }
+        };
+    }, [websocket]);
+    const initWebSocket = () => {
+        let socket = new WebSocket(`ws://localhost:8080/?emailId=${encodeURIComponent(email)}`);
+        socket.onopen = () => {
+            console.log('WebSocket connection established from client');
+        };
+        socket.onmessage = async (event) => {
+            const data = JSON.parse(event.data);
+            console.log('WebSocket message received:', data.message);
+            socket.send("client received", data.message)
+            setMessage(data.message);
+            setSuccess(data.success);
+            if (data.type === 'verified') {
+                await new Promise(resolve => setTimeout(resolve, 2500));
+                navigate('/signupacnt', { state: { email: email } });
+            }
+        }
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+        socket.onclose = (event) => {
+            console.log('WebSocket connection closed', event.code, event.reason);
+        };
+        setWebsocket(socket);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,17 +65,17 @@ export default function SignupMail() {
             const response = await userService.checkMail(email);
             setMessage(response.data.message);
             setSuccess(response.data.success);
+            await new Promise(resolve => setTimeout(resolve, 2500));
             if (response.data.success) {
-                setTimeout(() => {
-                    navigate('/signupacnt')
-                }, 2000);
-            } else {
+                initWebSocket();
+            }
+            else {
                 let emailInput = document.getElementById('email');
                 emailInput.innerText = '';
             }
         } catch (error) {
-            setMessage(error.response.data.message)
-            setSuccess(error.response.data.success);
+            setMessage(error.response.data.message);
+            setSuccess(false);
             setTimeout(() => {
                 setClicked(false);
                 SetEmail('');

@@ -26,7 +26,6 @@ body{
 
 .signupmail-image-container { 
     background-color: white;
-    border-radius: 75px;
 }
   
 .signupmail-image-container img {
@@ -115,6 +114,7 @@ body{
     padding: 8px;
     background-color: #d4d9dcb5;
     border-radius: 37px;
+    text-align: center;
     margin: 5px;
 }
 

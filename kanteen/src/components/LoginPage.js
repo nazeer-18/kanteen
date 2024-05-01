@@ -15,8 +15,9 @@ export default function LoginPage() {
         pwd: ''
     })
     const [message, setMessage] = useState('');
-    const [sucess, setSucess] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [clicked, setClicked] = useState(false);
+    //eslint-disable-next-line
     const [loginValid, setLoginValid] = useState(false);
     let navigate = useNavigate();
     const handleSubmit = async (e) => {
@@ -25,7 +26,7 @@ export default function LoginPage() {
         try{
             const response = await userService.login(data.userName,data.pwd);
             setMessage(response.data.message)
-            setSucess(response.data.success)
+            setSuccess(response.data.success)
             if(response.data.success){
                 setLoginValid(true);
                 setTimeout(() => {
@@ -37,7 +38,7 @@ export default function LoginPage() {
             }
         }catch(err){
             setMessage(err.response.data.message)
-            setSucess(err.response.data.success)
+            setSuccess(err.response.data.success)
         }
     };
     return (
@@ -94,7 +95,7 @@ export default function LoginPage() {
                         {clicked &&
                             <div className="login-response">
                                 <span
-                                    style={{ color: sucess ? "#139a72" : "#ba1717" }}>
+                                    style={{ color: success ? "#139a72" : "#ba1717" }}>
                                     {message}
                                 </span>
                             </div>
