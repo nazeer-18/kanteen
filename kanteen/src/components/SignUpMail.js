@@ -140,6 +140,7 @@ export default function SignupMail() {
                         <button
                             type="submit"
                             disabled={!emailValid && email.length !== 0}
+                            style={{ backgroundColor: !emailValid && email.length !== 0 ? '#BF0C4569' : '#bf0c45' }}
                             className='VerifyBtn' >
                             Verify
                         </button>
