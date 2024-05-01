@@ -12,6 +12,6 @@ class userService {
         return axios.post(serverUrl + '/api/auth/login', { userId, password })
     }
 }
-
+//eslint-disable-next-line
 export default new userService();
 
