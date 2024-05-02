@@ -26,7 +26,7 @@ export default function LoginPage() {
         e.preventDefault();
         setClicked(true);
         try{
-            const response = await userService.login(data.userName,data.pwd);
+            const response = await userService.login(data.userName.toLowerCase(),data.pwd);
             setMessage(response.data.message)
             setSuccess(response.data.success)
             if(response.data.success){

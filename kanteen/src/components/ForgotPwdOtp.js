@@ -1,15 +1,30 @@
 import React,{useState} from 'react'
+import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
 
 export default function ForgotPwd() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const state = location.state || {};
+    console.log(state.otp);
+    const [message,setMessage] = useState('');
     const [data,setData] = useState({
         otp:''
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
+        if(data.otp == state.otp){
+            setMessage('otp verified successfully redirecting to reset password page');
+            setTimeout(() => {
+                setMessage('');
+                navigate('/resetpwd');
+            }, 1500);
+        }else{
+            setMessage('Oops! OTP not matched. Please try again.');
+            console.log('otp not matched');
+        }
     }
     return (
         <div className='forgot-otp-homepage'>
@@ -38,11 +53,14 @@ export default function ForgotPwd() {
 
                                 </label>
                                 <input
-                                    type="password"
+                                    type="text"
                                     name="forgot-otp"
                                     id="forgot-otp"
                                     value= {data.otp}
-                                    onChange ={(e)=>setData({otp:e.target.value})}
+                                    onChange ={(e)=>{
+                                        setData({otp:e.target.value});
+                                        setMessage('');
+                                    }}
                                     placeholder="Enter your otp"
                                     required />
                             </div>
@@ -53,19 +71,15 @@ export default function ForgotPwd() {
                                     type="submit" >
                                     Resend.
                                 </button>
-                            </p>
+                            </p>{
+                                message
+                            }
                             <div className="forgot-otp">
                                 <button
                                     type="submit"
                                     className='forgot-otpBtn'>
                                     Verify
                                 </button>
-                                <Link
-                                    to="/resetpwd" >
-                                    <span >
-                                        verified
-                                    </span>
-                                </Link>
                             </div>
                         </form>
                     </div>

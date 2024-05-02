@@ -25,11 +25,13 @@ authRouter.post('/login', async (req, res) => {
             return res.status(401).send({ message: "Invalid Credentials", success: false })
         }
 
-        res.status(200).send({ message: "Login Successful!..Redirecting to home page..", success: true ,details:{
-            emailId: user.emailId,
-            mobileNumber: user.mobileNumber,
-            name: user.name,
-        }})
+        res.status(200).send({
+            message: "Login Successful!..Redirecting to home page..", success: true, details: {
+                emailId: user.emailId,
+                mobileNumber: user.mobileNumber,
+                name: user.name,
+            }
+        })
 
     } catch (err) {
         console.error(err)
@@ -41,6 +43,7 @@ authRouter.post('/login', async (req, res) => {
 authRouter.post('/signup', async (req, res) => {
     try {
         const { emailId, name, mobileNumber, password } = req.body;
+        console.log(emailId, name, mobileNumber, password)
         const user = await User.findOne({
             $or: [{ emailId: emailId }, { mobileNumber: mobileNumber }]
         })

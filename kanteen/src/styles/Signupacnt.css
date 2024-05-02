@@ -3,19 +3,6 @@ body{
     padding: 0px;
 }
 
-.Error-message{
-    
-    color: rgb(255 0 0);
-    margin: 18px auto;
-    font-weight: bold;
-    font-size: large;
-    border-radius: 37px;
-    padding: 10px;
-    margin-top:8px;
-    text-align: center;
-    margin-bottom: auto;
-    
-}
 .signupacnt{
     display: flex;
     flex-direction: column;
@@ -58,13 +45,15 @@ body{
 }
 
 .signupanct-hidden-texts{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    color: rgb(255 0 0);
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: auto;
     padding: 5px;
     border-radius: 5px;
     font-family: 'petrona';
     margin-top: -8px;
+    text-align: center;
 }
 
 .signupanct-hidden-texts ul{
@@ -96,6 +85,7 @@ body{
     color: rgba(255, 0, 0, 0.866);
     padding-left: 10px;
     margin-bottom: 7px;
+    text-align: left;
 }
 
 .signupact-pwd-group{

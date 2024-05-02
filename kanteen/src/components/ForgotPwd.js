@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import '../styles/ForgotPwd.css';
 import forgotImg from '../images/forgotpwd.svg';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import userService from '../services/userService';
 
 export default function ForgotPwd() {
+    const navigate = useNavigate();
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(false);
     const validateEmail = (email) => {
         const regex = /@ch\.amrita\.edu$|@ch\.students\.amrita\.edu$/;
         return regex.test(email);
@@ -18,8 +23,35 @@ export default function ForgotPwd() {
         SetEmail(value);
         SetEmailValid(validateEmail(value.toLowerCase()));
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
+        if(!emailValid){
+            setMessage("Enter a valid Amrita email address");
+            setSuccess(false);
+            return;
+        }
+        try{
+            const response = await userService.verifyForgotMail(email);
+            setMessage(response.data.message);
+            setSuccess(response.data.success);
+            const otp = response.data.otp;
+            console.log(otp);
+            setTimeout(() => {
+                setMessage('');
+                navigate(`/forgotpwdotp`, { state: { email, otp } });
+            }, 3500);
+        }catch(err){
+            if(err.response.status===500){
+                setMessage("Internal Server Error");
+                setSuccess(false);
+            }
+            setMessage(err.response.data.message)
+            setSuccess(false);
+            setTimeout(() => {
+                setMessage('');
+            }, 2500);
+        }
+
     }
     return (
         <div className="forgotpwd">
@@ -73,21 +105,23 @@ export default function ForgotPwd() {
                                 !! Enter a valid Amrita email address
                         </div>
                         }
+                        {
+                            message.length > 0 &&
+                            <div className="forgotpwd-email-check-alert" style={success?{color:"green"}
+                        :{color:"red"}}>
+                                {message}
+                            </div>
+                        }
                         <div className="forgotpwd-btn-container">
                             <button
                                 className="forgotpwd-btn"
+                                value="submit"
+                                onSubmit={handleSubmit}
                                 type="submit">
                                 Submit
                             </button>
                         </div>
                     </form>
-                    <Link
-                        to="/forgotpwdotp"
-                        className="signupacnt-loginBtn">
-                        <span>
-                            emailEntered
-                        </span>
-                    </Link>
                 </div>
             </div>
             <div className="forgotpwd-image-container">
