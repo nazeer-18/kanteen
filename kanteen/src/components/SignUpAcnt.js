@@ -69,14 +69,16 @@ export default function SignUpAcnt(props) {
         console.log("mob",mobileValid)
         console.log("pwd", pwdValid ,"pw=",data.pwd, "cnf=",data.cnfPwd, data.pwd === data.cnfPwd ,"em", emailIdValid)
         if (user.emailId === '' || user.emailId === null || user.emailId === undefined) {
-            setValidAll('Please Register with a valid email id first.');
+            setValidAll(
+            <div className='Error-message'>'Please Register with a valid email id first'</div>
+           );
             setTimeout(() => {
                 Navigate('/signupmail')
             }, 2500)
             return;
         }
         if (!allValid) {
-            setValidAll('Please fill all the fields correctly');
+            setValidAll(<div className='Error-message'>'Please fill all the fields correctly'</div>);
             setTimeout(() => {
                 setValidAll('');
             }, 3000);
@@ -254,9 +256,9 @@ export default function SignUpAcnt(props) {
                     </button>
                 </div>
                 <div className="signupanct-hidden-texts">
-                    <div className="signupacnt-check-text">
+                    
                         {validAll}
-                    </div>
+                    
                 </div>
 
             </form>
