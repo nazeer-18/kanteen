@@ -53,7 +53,7 @@ verifyUser.post('/forgot-mail', async (req, res) => {
         }
         else {
             let otp = Math.floor(100000 + Math.random() * 900000);
-            sendOtpVerificationMail(emailId, otp);
+            sendOtpVerificationMail(emailId, otp,existingUser.name);
             res.status(200).json({ message: "Otp sent sucessfully, Redirecting to confirmation page..", success: true, otp: otp });
         }
     } catch (err) {

@@ -41,9 +41,10 @@ export default function ForgotPwd() {
                 navigate(`/forgotpwdotp`, { state: { email, otp } });
             }, 3500);
         }catch(err){
-            if(err.response.status===500){
-                setMessage("Internal Server Error");
+            if(!err.response){
+                setMessage("Internal Server Error, Please try again later !");
                 setSuccess(false);
+                return;
             }
             setMessage(err.response.data.message)
             setSuccess(false);

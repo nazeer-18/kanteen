@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 const serverUrl = process.env.SERVER_URL;
 
-const sendOtpVerificationMail = (emailId,otp) => {
+const sendOtpVerificationMail = (emailId,otp,name) => {
         const mailContent = {
         from: process.env.ADMIN_MAIL,
         to: emailId,
@@ -21,7 +21,7 @@ const sendOtpVerificationMail = (emailId,otp) => {
         <div style="background: url('https://dt19wmazj2dns.cloudfront.net/wp-content/uploads/2019/06/Banner-1384-chennai.jpg') no-repeat center center / cover; background-color: #bf0c45; padding: 50px; text-align: center; color: white; height: 400px; display: flex; align-items: center; justify-content: center;">
         <div style="max-width: 1000px; width: 100%; margin: 0 auto; background: rgba(0, 0, 0, 0.7); padding: 50px; box-sizing: border-box;">
             <p style="font-size: 16px; line-height: 1.5; font-family: 'Petrona', serif;">
-                Hi user,<br><br>
+                Hi <strong>${name.toUpperCase()}</strong>,<br><br>
             <h2>Here is your Otp to reset your password</h2>
             </p>
             <h1>${otp}</h1>
