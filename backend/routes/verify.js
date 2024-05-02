@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const verifyUser = express.Router()
 const User = require('../models/User')
-const sendVerificationMail = require('../authenticators/MailVerificator')
+const userConnections = require('../utils')
 
 verifyUser.post('/mail', async (req, res) => {
     try {
@@ -20,17 +20,23 @@ verifyUser.post('/mail', async (req, res) => {
     }
 })
 
-verifyUser.post('/verify-mail', async (req, res) => {
+verifyUser.get('/verify-mail', async (req, res) => {
     try {
-        const userEmail = req.body.emailId;
-        if (!userEmail) {
-            return res.status(400).send({ message: "Email Address is required", success: false })
+        const { token,emailId } = req.query;
+        if (!token) {
+            return res.status(400).send({ message: "Token is required", success: false })
         }
-        sendVerificationMail(userEmail);
-        const decoded = jwt.verify(token, process.env.VERIFICATION_SECRET);
-        res.status(200).send({ message: "Verification successful", success: true, email: decoded.email })
+        if(userConnections[emailId] && userConnections[emailId].token === token){
+            userConnections[emailId].verified = true;
+            userConnections[emailId].ws.send(JSON.stringify({message:"Email Verified",success:true,type:"verified"}));
+            res.status(200).send({ message: "Email Verified, Redirecting to registeration page..", success: true })
+        }
+        else{
+            res.status(400).send({ message: "Token Invalid", success: false })
+        }
     } catch (error) {
-        res.status(400).send({ message: "Token Invalid", success: false })
+        console.log(error);
+        res.status(400).send({ message: "Error in verifying email", success: false })
     }
 })
 

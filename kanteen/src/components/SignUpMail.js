@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function SignupMail() {
     const [checked, SetChecked] = useState(false);
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
+    const [usedEmail, SetUsedEmail] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const { setUser } = useUser();
     let navigate = useNavigate();
     const validateEmail = (email) => {
         const regex = /@ch\.amrita\.edu$|@ch\.students\.amrita\.edu$/;
@@ -26,6 +28,44 @@ export default function SignupMail() {
         SetEmailValid(validateEmail(value.toLowerCase()));
         setClicked(false);
     }
+    const [websocket, setWebsocket] = useState(null);
+    useEffect(() => {
+        return () => {
+            if (websocket) {
+                websocket.close();
+            }
+        };
+    }, [websocket]);
+    const initWebSocket = () => {
+        let socket = new WebSocket(`ws://localhost:8080/?emailId=${encodeURIComponent(email)}`);
+        socket.onopen = () => {
+            console.log('WebSocket connection established from client');
+        };
+        socket.onmessage = async (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('WebSocket message received:', data.message);
+                socket.send("client received", data.message)
+                setMessage(data.message);
+                setSuccess(data.success);
+                if (data.type === 'verified') {
+                    setUser({ emailId: email })
+                    await new Promise(resolve => setTimeout(resolve, 2500));
+                    navigate('/signupacnt');
+                }
+            } catch (error) {
+                console.error('WebSocket error:', error);
+                setMessage(error.message);
+            }
+        }
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+        socket.onclose = (event) => {
+            console.log('WebSocket connection closed', event.code, event.reason);
+        };
+        setWebsocket(socket);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,24 +74,27 @@ export default function SignupMail() {
             const response = await userService.checkMail(email);
             setMessage(response.data.message);
             setSuccess(response.data.success);
+            await new Promise(resolve => setTimeout(resolve, 2500));
             if (response.data.success) {
-                setTimeout(() => {
-                    navigate('/signupacnt')
-                }, 2000);
-            } else {
+                setUser({ emailId: email });
+                initWebSocket();
+            }
+            else {
                 let emailInput = document.getElementById('email');
                 emailInput.innerText = '';
             }
         } catch (error) {
-            setMessage(error.response.data.message)
-            setSuccess(error.response.data.success);
+            if (!error.response) {
+                setMessage("unable to connect to server");
+                setSuccess(false);
+                return;
+            }
+            SetUsedEmail(true);
+            setMessage(error.response.data.message);
             setTimeout(() => {
-                setClicked(false);
                 SetEmail('');
-                SetEmailValid(false);
+                setClicked(false);
             }, 3500)
-            let emailInput = document.getElementById('email');
-            emailInput.innerText = '';
         }
     }
 
@@ -96,9 +139,15 @@ export default function SignupMail() {
                         }
                     </div>
                     {
-                        !emailValid && email.length > 0 &&
+                        !emailValid && email.length > 0 && !usedEmail &&
                         <div className="signupmail-email-check-alert">
                             !! Enter a valid Amrita email address
+                        </div>
+                    }
+                    {
+                        !emailValid && email.length > 0 && usedEmail &&
+                        <div className="signupmail-email-check-alert">
+                            !! This Amrita email address is already used
                         </div>
                     }
                     {clicked &&
@@ -133,6 +182,7 @@ export default function SignupMail() {
                         <button
                             type="submit"
                             disabled={!emailValid && email.length !== 0}
+                            style={{ backgroundColor: !emailValid && email.length !== 0 ? '#BF0C4569' : '#bf0c45' }}
                             className='VerifyBtn' >
                             Verify
                         </button>

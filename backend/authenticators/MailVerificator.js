@@ -12,9 +12,8 @@ const transporter = nodemailer.createTransport({
 
 const serverUrl = process.env.SERVER_URL;
 
-const sendVerificationMail = (emailId) => {
-    const verificationToken = jwt.sign({ email: emailId }, process.env.VERIFICATION_SECRET, { expiresIn: '1h' });
-    const verificationLink = `${serverUrl}/api/auth/verify-mail/?token=${verificationToken}`;
+const sendVerificationMail = (emailId,token) => {
+    const verificationLink = `${serverUrl}/api/verify/verify-mail/?token=${token}&emailId=${emailId}`;
 
     const mailContent = {
         from: process.env.ADMIN_MAIL,
@@ -47,7 +46,6 @@ const sendVerificationMail = (emailId) => {
     transporter.sendMail(mailContent, (error, info) => {
         if (error) {
             console.log('Error occurred while sending mail');
-            console.log(process.env.ADMIN_MAIL, process.env.MAIL_PASSWORD);
             console.log(error);
         } else {
             console.log('Email sent: ' + info.response);

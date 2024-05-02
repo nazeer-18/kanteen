@@ -7,7 +7,6 @@ import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 export default function ForgotPwd() {
-    const [checked, SetChecked] = useState(false);
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
     const validateEmail = (email) => {
@@ -18,6 +17,9 @@ export default function ForgotPwd() {
         const { value } = e.target;
         SetEmail(value);
         SetEmailValid(validateEmail(value.toLowerCase()));
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault();
     }
     return (
         <div className="forgotpwd">
@@ -35,7 +37,7 @@ export default function ForgotPwd() {
                     <div className="forgotpwd-suggest">
                         Don't worry, happens to all of us. Enter your email below to reset your password.
                     </div>
-                    <form className="forgotpwd-email">
+                    <form className="forgotpwd-email" onSubmit={handleSubmit}>
                         <div className="forgotpwd-email-group">
                         <label
                                 htmlFor="email">
@@ -62,7 +64,7 @@ export default function ForgotPwd() {
                                     shake
                                     onClick={() => SetEmail('')}
                                     style={{ color: "#ba1717", }}
-                                />
+                                />
                             }
                         </div>
                         <div className="email-check-alert">

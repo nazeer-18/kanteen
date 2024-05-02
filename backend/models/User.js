@@ -20,10 +20,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    foodPreference: {
-        type: String,
-        required: true
-    },
     Date: {
         type: Date,
         default: Date.now

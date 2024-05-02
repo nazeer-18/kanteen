@@ -12,7 +12,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
     "install": "^0.13.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.0",
     "react-fontawesome": "^1.7.1",
@@ -22,7 +25,8 @@
     "react-scripts": "5.0.1",
     "reactjs-popup": "^2.0.6",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.91.0"
+    "webpack": "^5.91.0",
+    "ws": "^8.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
