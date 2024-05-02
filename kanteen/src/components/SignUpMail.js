@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function SignupMail() {
     const [checked, SetChecked] = useState(false);
@@ -15,6 +16,7 @@ export default function SignupMail() {
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const { setUser } = useUser();
     let navigate = useNavigate();
     const validateEmail = (email) => {
         const regex = /@ch\.amrita\.edu$|@ch\.students\.amrita\.edu$/;
@@ -40,14 +42,20 @@ export default function SignupMail() {
             console.log('WebSocket connection established from client');
         };
         socket.onmessage = async (event) => {
-            const data = JSON.parse(event.data);
-            console.log('WebSocket message received:', data.message);
-            socket.send("client received", data.message)
-            setMessage(data.message);
-            setSuccess(data.success);
-            if (data.type === 'verified') {
-                await new Promise(resolve => setTimeout(resolve, 2500));
-                navigate('/signupacnt', { state: { email: email } });
+            try {
+                const data = JSON.parse(event.data);
+                console.log('WebSocket message received:', data.message);
+                socket.send("client received", data.message)
+                setMessage(data.message);
+                setSuccess(data.success);
+                if (data.type === 'verified') {
+                    setUser({ emailId: email })
+                    await new Promise(resolve => setTimeout(resolve, 2500));
+                    navigate('/signupacnt');
+                }
+            } catch (error) {
+                console.error('WebSocket error:', error);
+                setMessage(error.message);
             }
         }
         socket.onerror = (error) => {
@@ -68,6 +76,7 @@ export default function SignupMail() {
             setSuccess(response.data.success);
             await new Promise(resolve => setTimeout(resolve, 2500));
             if (response.data.success) {
+                setUser({ emailId: email });
                 initWebSocket();
             }
             else {
@@ -75,15 +84,17 @@ export default function SignupMail() {
                 emailInput.innerText = '';
             }
         } catch (error) {
+            if (!error.response) {
+                setMessage("unable to connect to server");
+                setSuccess(false);
+                return;
+            }
+            SetUsedEmail(true);
             setMessage(error.response.data.message);
-            setSuccess(false);
             setTimeout(() => {
+                SetEmail('');
                 setClicked(false);
-                SetEmailValid(false);
-                if(error.response.status==409) SetUsedEmail(true);
             }, 3500)
-            let emailInput = document.getElementById('email');
-            emailInput.innerText = '';
         }
     }
 

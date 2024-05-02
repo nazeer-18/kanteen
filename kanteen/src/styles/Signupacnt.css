@@ -5,13 +5,16 @@ body{
 
 .signupacnt{
     display: flex;
-    height: 95vh;
     flex-direction: column;
     background-color: #eeecec;
     justify-content: center;
     align-items: center;
-    width: 90%;
-    margin: 0px auto;
+    /* width: 55%; */
+    min-width:380px;
+    max-width:780px;
+    text-align: center;
+    margin: 5% auto;
+    border-radius: 49px;
 }
 
 .signupacnt-signuptxt{
@@ -20,11 +23,12 @@ body{
     display: block;
     font-family: 'petrona';
     font-size: 25px;
+    padding: 10px;
 }
 
 .signupacnt-signup-form{
-    width: 50%;
-    padding: 20px;
+    width: 75%;
+    padding: 12px;
     padding-bottom: 0px;
 }
 
@@ -37,7 +41,35 @@ body{
     font-family: 'petrona';
     box-sizing: border-box;
     margin-top: 4px;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
+}
+
+.signupanct-hidden-texts{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'petrona';
+    margin-top: -8px;
+}
+
+.signupanct-hidden-texts ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    padding: 1px;
+    margin: 1px;
+    font-size: large;
+}
+.signupacnt-check-text{
+    font-size: 18px;
+    font-family: 'petrona';
+    color: #bf0c45;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 .eyedisplay{
@@ -55,13 +87,14 @@ body{
 
 .signupacnt-createAcnt{
     width: 90%;
-    padding: 10px;
+    padding: 3px 10px 0px;
     font-family: 'petrona';
     font-weight: bold;
     text-align: center;
     color: white;
     border-radius: 30px;
     margin-bottom: 7px;
+    padding-top: 3px;
 }
 
 .signupacnt-createAcntBtn{
@@ -84,6 +117,7 @@ body{
     width: 45%;
     padding: 3px;
     margin: 0px auto;
+    margin-bottom: 12px;
 }
 
 .signupacnt-loginBtn{
@@ -96,22 +130,17 @@ body{
 
 @media (max-width:600px){
     .memoryb{
-        width: 75%;
-    }
-    .signupacnt-signup-form{
-        width: 75%;
-    }
-    .signupacnt-createAcnt{
-        width: 75%;
-    }
-}
-
-@media (max-width:400px){
-    .memoryb{
         width: 95%;
+    }
+    .signupacnt{
+        width:100%;
+        border-radius: 0px;
+        margin: 0px;
     }
     .signupacnt-signup-form{
         width: 95%;
+        padding: 0;
+        border-radius: 0px;
     }
     .signupacnt-createAcnt{
         width: 90%;

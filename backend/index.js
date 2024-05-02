@@ -25,7 +25,7 @@ wss.on('connection', (ws, req) => {
     const token = jwt.sign({ emailId: emailId }, process.env.VERIFICATION_SECRET, { expiresIn: '1h' });
     sendVerificationMail(emailId, token);
     ws.send(JSON.stringify({ message: "Verification mail sent successfully", success: true }));
-    if(!userConnections[emailId]) userConnections[emailId] = {ws,verified:false,token:''}
+    if (!userConnections[emailId]) userConnections[emailId] = { ws, verified: false, token: '' }
     userConnections[emailId].token = token;
     ws.on('close', () => {
         delete userConnections[emailId];
