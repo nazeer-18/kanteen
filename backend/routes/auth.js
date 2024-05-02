@@ -25,7 +25,11 @@ authRouter.post('/login', async (req, res) => {
             return res.status(401).send({ message: "Invalid Credentials", success: false })
         }
 
-        res.status(200).send({ message: "Login Successful!..Redirecting to home page..", success: true })
+        res.status(200).send({ message: "Login Successful!..Redirecting to home page..", success: true ,details:{
+            emailId: user.emailId,
+            mobileNumber: user.mobileNumber,
+            name: user.name,
+        }})
 
     } catch (err) {
         console.error(err)
