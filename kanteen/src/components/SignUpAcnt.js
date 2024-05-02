@@ -315,7 +315,7 @@ export default function SignUpAcnt(props) {
                         <div className="signupacnt-check-text">
                             {validAll}
                         </div>
-                    </div>
+                </div>
 
                 </form>
                 <div className="memoryb">

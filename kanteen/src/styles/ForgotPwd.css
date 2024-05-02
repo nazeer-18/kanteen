@@ -3,6 +3,7 @@ body{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'petrona';
 }
 .forgotpwd{
     display: flex;
@@ -40,13 +41,15 @@ body{
 
 .forgotpwd-forgot-txt{
     font-weight: 500;
-    font-size: 35px;
+    font-size: 30px;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .forgotpwd-suggest{
-    color:#171717;
-    margin-bottom: 25px;
+    color:#4f4c4c;
+    margin-bottom: 15px;
+    font-size: 18px;
 }
 
 .forgotpwd-email-group{
@@ -61,7 +64,7 @@ body{
 
 }
 .forgotpwd-email-group input[type="email"]{
-    width: 100%;
+    width: 90%;
     padding: 15px;
     /* margin-bottom: 20px; */
     border-radius: 5px;
@@ -73,20 +76,21 @@ body{
     
     position: absolute;
     top: 14px;
-    right: 1px;
+    right: 25px;
     font-size: 35px;
     font-weight: 900;
     cursor: pointer;
-  }
+}
 .forgotpwd-btn-container{
-    width: 85%;
+    width:70%;
     padding: 8px 16px;
     margin: 0px auto;
     margin-top: 15px;
+    margin-left: 40px;
     background-color: #bf0c45;
     cursor: pointer;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 25px;
 }
 
 .forgotpwd-btn{
@@ -132,7 +136,17 @@ body{
     max-height: 100%;
     object-fit: cover;
 }
-
+.forgotpwd-email-check-alert{
+    color: rgb(255 0 0);
+    font-size: larger;
+    font-weight: 600;
+    background-color: #d4d9dcb5;
+    border-radius: 37px;
+    padding: 10px;
+    margin-top:8px;
+    text-align: center;
+    
+}
 @media (max-width:1350px){
     .forgotpwd-forgot-group {
         padding: 20px;
