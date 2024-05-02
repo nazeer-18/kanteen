@@ -6,8 +6,10 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
+import {useUser} from '../contexts/userContext';
 
 export default function LoginPage() {
+    const {setUser} = useUser();
     const [showPwd, setShowPwd] = useState(false);
     const [checked, SetChecked] = useState(false);
     const [data, setData] = useState({
@@ -29,6 +31,12 @@ export default function LoginPage() {
             setSuccess(response.data.success)
             if(response.data.success){
                 setLoginValid(true);
+                setUser({
+                    emailId: response.data.details.emailId,
+                    mobileNumber: response.data.details.mobileNumber,
+                    name: response.data.details.name,
+                    password: data.pwd
+                });
                 setTimeout(() => {
                     navigate('/home')
                 }, 2000);
@@ -37,6 +45,11 @@ export default function LoginPage() {
                 setLoginValid(false);
             }
         }catch(err){
+            if(!err.response){
+                setMessage("Server Error")
+                setSuccess(false)
+                return;
+            }
             setMessage(err.response.data.message)
             setSuccess(err.response.data.success)
         }

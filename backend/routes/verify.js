@@ -22,16 +22,16 @@ verifyUser.post('/mail', async (req, res) => {
 
 verifyUser.get('/verify-mail', async (req, res) => {
     try {
-        const { token,emailId } = req.query;
+        const { token, emailId } = req.query;
         if (!token) {
             return res.status(400).send({ message: "Token is required", success: false })
         }
-        if(userConnections[emailId] && userConnections[emailId].token === token){
+        if (userConnections[emailId] && userConnections[emailId].token === token) {
             userConnections[emailId].verified = true;
-            userConnections[emailId].ws.send(JSON.stringify({message:"Email Verified",success:true,type:"verified"}));
+            userConnections[emailId].ws.send(JSON.stringify({ message: "Email Verified", success: true, type: "verified" }));
             res.status(200).send({ message: "Email Verified, Redirecting to registeration page..", success: true })
         }
-        else{
+        else {
             res.status(400).send({ message: "Token Invalid", success: false })
         }
     } catch (error) {
