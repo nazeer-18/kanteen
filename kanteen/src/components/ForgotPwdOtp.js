@@ -15,7 +15,7 @@ export default function ForgotPwd() {
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(data.otp == state.otp){
+        if(data.otp === state.otp.toString()){
             setMessage('otp verified successfully redirecting to reset password page');
             setTimeout(() => {
                 setMessage('');
