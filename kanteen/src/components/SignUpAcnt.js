@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
+import userService from '../services/userService';
 
 export default function SignUpAcnt(props) {
     const { user } = useUser();
@@ -78,11 +79,8 @@ export default function SignUpAcnt(props) {
                 setValidUserName(0);
             setData({ ...data, usrname: value });
         }
-        const handleSubmit = (e) => {
+        const handleSubmit = async (e) => {
             e.preventDefault();
-            console.log("all ", allValid);
-            console.log("mob", mobileValid)
-            console.log("pwd", pwdValid, "pw=", data.pwd, "cnf=", data.cnfPwd, data.pwd === data.cnfPwd, "em", emailIdValid)
             if (user.emailId === '' || user.emailId === null || user.emailId === undefined) {
                 setValidAll('Please Register with a valid email id first.');
                 setTimeout(() => {
@@ -98,8 +96,29 @@ export default function SignUpAcnt(props) {
                 return;
             }
             if (allValid) {
-                alert('Account created successfully');
-                Navigate('/login');
+                user.password=data.pwd;
+                user.mobileNumber=data.mobile;
+                try{
+                    const response = await userService.register(data.usrname, user.emailId, data.mobile, data.pwd);
+                    if(response.status === 201){
+                        setValidAll('Account Created Successfully');
+                        setTimeout(() => {
+                            Navigate('/home');
+                        },2500);
+                    }else{
+                        if(response.message){
+                            setValidAll(response.message);
+                            setTimeout(() => {
+                                setValidAll('');
+                            }, 3000);
+                        }
+                    }
+                }catch(err){
+                    setValidAll('Internal Server Error');
+                    setTimeout(() => {
+                        setValidAll('');
+                    }, 3000);
+                }
             }
         }
         return (

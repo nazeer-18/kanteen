@@ -11,6 +11,10 @@ class userService {
     login(userId, password) {
         return axios.post(serverUrl + '/api/auth/login', { userId, password })
     }
+    //register a new user
+    register(emailId, name, mobileNumber, password) {
+        return axios.post(serverUrl + '/api/auth/signup', { emailId, name, mobileNumber, password })
+    }
 }
 //eslint-disable-next-line
 export default new userService();
