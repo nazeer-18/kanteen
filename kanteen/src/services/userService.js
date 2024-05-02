@@ -9,6 +9,7 @@ class userService {
     login(userId, password ) {
         return axios.post(serverUrl + '/api/auth/login', { userId, password })
     }
+    
 }
 
 export default new userService();
