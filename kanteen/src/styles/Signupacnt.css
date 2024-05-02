@@ -77,7 +77,12 @@ body{
     padding: 10px;
     position: absolute;
     right: 5px;
-    top: 5px;
+    top: 15px;
+}
+.signupacnt-form-group .userNameWarning{
+    color: rgba(255, 0, 0, 0.866);
+    padding-left: 10px;
+    margin-bottom: 7px;
 }
 
 .signupact-pwd-group{
