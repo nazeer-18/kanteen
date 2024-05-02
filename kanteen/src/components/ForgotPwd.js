@@ -70,7 +70,7 @@ export default function ForgotPwd() {
                         {
                             !emailValid && email.length > 0 && 
                         <div className="forgotpwd-email-check-alert">
-                                 !! Enter a valid Amrita email address
+                                !! Enter a valid Amrita email address
                         </div>
                         }
                         <div className="forgotpwd-btn-container">
