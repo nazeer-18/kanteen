@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 export default function ForgotPwd() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [limit,setLimit] = useState(3);
     const state = location.state || {};
     console.log(state.otp);
     const [message,setMessage] = useState('');
@@ -22,7 +23,15 @@ export default function ForgotPwd() {
                 navigate('/resetpwd');
             }, 1500);
         }else{
-            setMessage('Oops! OTP not matched. Please try again.');
+            setMessage('Oops! OTP not matched. Please try again.You have '+limit+' attempts left');
+            setLimit(limit-1);
+            if(limit === 0){
+                setMessage('You have exceeded the limit. Please try again later');
+                setTimeout(() => {
+                    setMessage('');
+                    navigate('/forgotpwd');
+                }, 1500);
+            }
             console.log('otp not matched');
         }
     }
@@ -46,6 +55,14 @@ export default function ForgotPwd() {
                             className='forgot-otpauthtxt'>
                             An authentication code has been sent to your email.
                         </p>
+                        <p
+                                className='forgot-otprestxt'>
+                                Didn't receive a code(check Junk box)?
+                                <button
+                                    type="submit" >
+                                    Resend.
+                                </button>
+                            </p>
                         <form className="forgot-otp-form" onSubmit={handleSubmit}   >
                             <div className="forgot-otp-form-group">
                                 <label
@@ -64,14 +81,7 @@ export default function ForgotPwd() {
                                     placeholder="Enter your otp"
                                     required />
                             </div>
-                            <p
-                                className='forgot-otprestxt'>
-                                Didn't receive a code(check Junk box)?
-                                <button
-                                    type="submit" >
-                                    Resend.
-                                </button>
-                            </p>{
+                            {
                                 message
                             }
                             <div className="forgot-otp">
