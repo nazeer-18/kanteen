@@ -76,7 +76,6 @@ export default function SignupMail() {
             setSuccess(response.data.success);
             await new Promise(resolve => setTimeout(resolve, 2500));
             if (response.data.success) {
-                setUser({ emailId: email.toLowerCase() });
                 initWebSocket();
             }
             else {

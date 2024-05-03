@@ -7,10 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
-    const navigate = useNavigate();
+    const {user, setUser} = useUser();
     const [email, SetEmail] = useState('');
+    const navigate = useNavigate();
     const [emailValid, SetEmailValid] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
@@ -35,9 +37,12 @@ export default function ForgotPwd() {
             setMessage(response.data.message);
             setSuccess(response.data.success);
             const otp = response.data.otp;
-            // console.log(otp);
             setTimeout(() => {
                 setMessage('');
+                setUser({
+                    ...user,
+                    emailId: email.toLowerCase()
+                })
                 navigate(`/forgotpwdotp`, { state: { email, otp } });
             }, 3500);
         }catch(err){
@@ -52,7 +57,6 @@ export default function ForgotPwd() {
                 setMessage('');
             }, 2500);
         }
-
     }
     return (
         <div className="forgotpwd">

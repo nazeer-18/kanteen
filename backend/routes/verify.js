@@ -4,6 +4,7 @@ const verifyUser = express.Router()
 const User = require('../models/User')
 const userConnections = require('../utils')
 const sendOtpVerificationMail = require('../authenticators/OtpVerification')
+const bcrypt = require('bcrypt');
 
 verifyUser.post('/mail', async (req, res) => {
     try {
@@ -57,6 +58,24 @@ verifyUser.post('/forgot-mail', async (req, res) => {
             res.status(200).json({ message: "Otp sent sucessfully, Redirecting to confirmation page..", success: true, otp: otp });
         }
     } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+verifyUser.put('/update-password', async (req, res) => {
+    try{
+        let {emailId,password} = req.body;
+        emailId = emailId.toLowerCase();
+        const salt = await bcrypt.genSalt(10);
+        const Hashedpassword = await bcrypt.hash(password, salt);
+        const user = await User.findOneAndUpdate({
+            emailId: emailId
+        },{
+            password:Hashedpassword
+        });
+        res.status(200).send({message:"Password Updated Successfully, Please login again with new password..",success:true});
+    }catch(err){
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
