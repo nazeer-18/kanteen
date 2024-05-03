@@ -16,13 +16,13 @@ export default function App() {
             <UserProvider>
             <Navbar />
             <Routes>
-                <Route exact path='/' element={<LoginPage />}></Route>
+                <Route path='/' element={<HomePage />}></Route>
+                <Route exact path='/login' element={<LoginPage />}></Route>
                 <Route path='/signupmail' element={<SignUpMail/>}></Route>
                 <Route path='/forgotpwd' element={<ForgotPwd />}></Route>
                 <Route path='/forgotpwdotp' element={<ForgotPwdOtp />}></Route>
                 <Route path='/resetpwd' element={<ResetPwd />}></Route>
                 <Route path='/signupacnt' element={<SignUpAcnt/>}></Route>
-                <Route path='/home' element={<HomePage />}></Route>
             </Routes>
             </UserProvider>
         </BrowserRouter>

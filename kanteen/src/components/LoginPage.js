@@ -38,7 +38,7 @@ export default function LoginPage() {
                     password: data.pwd
                 });
                 setTimeout(() => {
-                    navigate('/home')
+                    navigate('/')
                 }, 2000);
             }
             else{

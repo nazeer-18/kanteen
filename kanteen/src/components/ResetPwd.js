@@ -71,7 +71,7 @@ export default function ResetPwd() {
                         ...user,
                         password: data.pwd
                     })
-                    navigate('/');
+                    navigate('/login');
                 }
             }, 2500)
         } catch (err) {

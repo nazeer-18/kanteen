@@ -9,7 +9,6 @@ class userService {
     }
     //verify the email address and login
     login(userId, password) {
-        console.log(serverUrl)
         return axios.post(serverUrl + '/api/auth/login', { userId, password })
     }
     //register a new user

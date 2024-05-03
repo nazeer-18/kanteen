@@ -11,7 +11,7 @@ export default function ForgotPwd() {
     const navigate = useNavigate();
     useEffect(() => {
         if(user.emailId === 'na' || user.emailId === '' || user.emailId === undefined){
-        navigate('/');
+        navigate('/login');
         }
     }, [])
     const location = useLocation();
