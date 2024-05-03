@@ -23,6 +23,7 @@ class userService {
     updatePassword(emailId, password) {
         return axios.put(serverUrl + '/api/verify/update-password', { emailId, password })
     }
+    //resend otp mail
     resendotpmail(emailId){
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
     }
