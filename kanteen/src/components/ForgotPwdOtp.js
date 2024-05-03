@@ -1,15 +1,21 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
+import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
+    const {user} = useUser();
     const navigate = useNavigate();
+    useEffect(() => {
+        if(user.emailId === 'na' || user.emailId === '' || user.emailId === undefined){
+        navigate('/');
+        }
+    }, [])
     const location = useLocation();
     const [limit,setLimit] = useState(3);
     const state = location.state || {};
-    console.log(state.otp);
     const [message,setMessage] = useState('');
     const [data,setData] = useState({
         otp:''
@@ -32,7 +38,6 @@ export default function ForgotPwd() {
                     navigate('/forgotpwd');
                 }, 1500);
             }
-            console.log('otp not matched');
         }
     }
     return (

@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react';
+import React, { useState,useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../styles/ResetPwd.css';
 import resetImg from '../images/forgotpwd.svg';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function ResetPwd() {
+    const { user, setUser } = useUser();
+    const navigate = useNavigate();
+    useEffect(()=>{
+        if(user.emailId === 'na' || user.emailId === undefined || user.emailId === null){
+            navigate('/forgotpwd');
+        }
+    },[])
+
     const [showPwd, setShowPwd] = useState(false);
     const [showCnfPwd, setShowCnfPwd] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(true);
+    const [clicked, setClicked] = useState(false);
     const [data, setData] = useState({
         pwd: '',
         cnfpwd: ''
@@ -29,7 +42,7 @@ export default function ResetPwd() {
     }, [pwdCheck])
     const handlePasswordChange = (e) => {
         const password = e.target.value;
-        setData({...data,pwd:password})
+        setData({ ...data, pwd: password })
         setPwdCheck({
             pwdLength: password.length >= 8,
             pwdUppercase: password.match(/[A-Z]/),
@@ -38,9 +51,41 @@ export default function ResetPwd() {
             pwdSpecialChar: password.match(/[^A-Za-z0-9]/)
         })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data);
+        setClicked(true);
+        if (data.pwd !== data.cnfpwd) {
+            setMessage("Passwords do not match");
+            setSuccess(false);
+            return;
+        }
+        try {
+            console.log(user.emailId, data.pwd)
+            const response = await userService.updatePassword(user.emailId, data.pwd);
+            setMessage(response.data.message);
+            setSuccess(response.data.success);
+            setTimeout(() => {
+                setMessage('');
+                setClicked(false);
+                if (response.data.success) {
+                    setUser({
+                        ...user,
+                        password: data.pwd
+                    })
+                    console.log(user);
+                    navigate('/');
+                }
+            }, 2500)
+        } catch (err) {
+            if (!err.response) {
+                setMessage("Server is down, Please try again later");
+                setSuccess(false);
+                return;
+            }
+            setMessage(err.response.data.message);
+            setSuccess(false);
+
+        }
     }
     return (
         <div className='reset-pwd-homepage'>
@@ -135,7 +180,10 @@ export default function ResetPwd() {
                                         id="cnf-reset-pwd"
                                         value={data.cnfpwd}
                                         disabled={!pwdValid}
-                                        onChange={(e) => setData({ ...data, cnfpwd: e.target.value })}
+                                        onChange={(e) => setData(
+                                            { ...data, cnfpwd: e.target.value },
+                                            setMessage('')
+                                        )}
                                         placeholder="Re-enter password"
                                         required />
                                     <span
@@ -149,12 +197,12 @@ export default function ResetPwd() {
                                 </div>
                             </div>
                             <div className="signupanct-hidden-texts">
-                    {pwdValid && data.pwd !== data.cnfpwd && data.cnfpwd.length > 0 &&
-                        <div className="signupacnt-check-text">
-                            <span style={{ color: "red" }} >✖ </span> Passwords do not match
-                        </div>
-                    }
-                </div>
+                                {pwdValid && data.pwd !== data.cnfpwd && data.cnfpwd.length > 0 &&
+                                    <div className="signupacnt-check-text">
+                                        <span style={{ color: "red" }} >✖ </span> Passwords do not match
+                                    </div>
+                                }
+                            </div>
                             <div className="reset-pwd">
                                 <button
                                     type="submit"
@@ -163,6 +211,14 @@ export default function ResetPwd() {
                                 </button>
                             </div>
                         </form>
+                        {clicked &&
+                            <div className="login-response">
+                                <span
+                                    style={{ color: success ? "#139a72" : "#ba1717" }}>
+                                    {message}
+                                </span>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className="reset-pwd-image-container">
