@@ -3,25 +3,56 @@ import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
+import userService from '../services/userService';
 
 export default function ForgotPwd() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [success, setSuccess] = useState(false);
     const [limit,setLimit] = useState(3);
     const state = location.state || {};
-    console.log(state.otp);
+ 
     const [message,setMessage] = useState('');
     const [data,setData] = useState({
         otp:''
     })
-    const handleSubmit = (e) => {
+    
+const handleresend=async(e) =>{
+    
+    e.preventDefault();
+    try{
+        const response = await userService.resendotpmail(state.email);
+        console.log(response.data.message);
+        setMessage(response.data.message);
+        setSuccess(response.data.success);
+        const otp = response.data.otp;
+        state.otp = otp;
+        // console.log(otp);
+        
+    }catch(err){
+        if(!err.response){
+            setMessage("Internal Server Error, Please try again later !");
+            setSuccess(false);
+            return;
+        }
+        setMessage(err.response.data.message)
+        setSuccess(false);
+        setTimeout(() => {
+            setMessage('');
+        }, 2500);
+    }
+
+}    
+const handleSubmit = (e) => {
         e.preventDefault();
         if(data.otp === state.otp.toString()){
-            setMessage('otp verified successfully redirecting to reset password page');
+            setMessage('OTP verified successfully redirecting to reset password page');
+            setSuccess(true);
             setTimeout(() => {
                 setMessage('');
                 navigate('/resetpwd');
             }, 1500);
+            
         }else{
             setMessage('Oops! OTP not matched. Please try again.You have '+limit+' attempts left');
             setLimit(limit-1);
@@ -32,7 +63,7 @@ export default function ForgotPwd() {
                     navigate('/forgotpwd');
                 }, 1500);
             }
-            console.log('otp not matched');
+           
         }
     }
     return (
@@ -55,14 +86,7 @@ export default function ForgotPwd() {
                             className='forgot-otpauthtxt'>
                             An authentication code has been sent to your email.
                         </p>
-                        <p
-                                className='forgot-otprestxt'>
-                                Didn't receive a code(check Junk box)?
-                                <button
-                                    type="submit" >
-                                    Resend.
-                                </button>
-                            </p>
+                        
                         <form className="forgot-otp-form" onSubmit={handleSubmit}   >
                             <div className="forgot-otp-form-group">
                                 <label
@@ -81,9 +105,18 @@ export default function ForgotPwd() {
                                     placeholder="Enter your otp"
                                     required />
                             </div>
-                            {
-                                message
-                            }
+                            <div className='Message' style={success?{'color':'green'}:{'color':'red'}}>
+                                {message}
+                            </div>
+                            
+                            <p
+                                className='forgot-otprestxt'>
+                                Didn't receive a code(check Junk box)?
+                                <button
+                                    onClick={handleresend} >
+                                    Resend.
+                                </button>
+                            </p>
                             <div className="forgot-otp">
                                 <button
                                     type="submit"

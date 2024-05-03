@@ -35,7 +35,7 @@ export default function ForgotPwd() {
             setMessage(response.data.message);
             setSuccess(response.data.success);
             const otp = response.data.otp;
-            console.log(otp);
+            // console.log(otp);
             setTimeout(() => {
                 setMessage('');
                 navigate(`/forgotpwdotp`, { state: { email, otp } });

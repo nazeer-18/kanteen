@@ -19,6 +19,9 @@ class userService {
     verifyForgotMail(emailId) {
         return axios.post(serverUrl + '/api/verify/forgot-mail', { emailId })
     }
+    resendotpmail(emailId){
+        return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
+    }
 }
 //eslint-disable-next-line
 export default new userService();
