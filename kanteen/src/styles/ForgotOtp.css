@@ -82,7 +82,7 @@ body{
   }
   .forgot-otprestxt{
     margin-bottom: 13px;
-    text-align: left;
+    text-align: center;
     font-weight: light;
     display:block;
     color: rgba(0, 0, 0, 1);
@@ -93,6 +93,7 @@ body{
     color: #bf0c45;
     font-family: 'petrona';
     font-size: 15px;
+    cursor: pointer;
   }
   .forgot-otp-form{
     width: 100%;
@@ -117,7 +118,16 @@ body{
     margin-top: 14px;
     margin-bottom: 15px;
   }
-  
+  .Message{
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: auto;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'petrona';
+    margin-top: -8px;
+    text-align: center;
+  }
   
   .forgot-otp{
     width: 100%;

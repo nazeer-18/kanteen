@@ -23,6 +23,9 @@ class userService {
     updatePassword(emailId, password) {
         return axios.put(serverUrl + '/api/verify/update-password', { emailId, password })
     }
+    resendotpmail(emailId){
+        return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
+    }
 }
 //eslint-disable-next-line
 export default new userService();
