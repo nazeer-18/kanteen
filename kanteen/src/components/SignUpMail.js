@@ -9,6 +9,7 @@ import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
 
 export default function SignupMail() {
+    const wsServerUrl = process.env.REACT_APP_WEB_SOCKET_SERVER_URL || 'kanteen-server.onrender.com';
     const [checked, SetChecked] = useState(false);
     const [email, SetEmail] = useState('');
     const [emailValid, SetEmailValid] = useState(false);
@@ -37,7 +38,7 @@ export default function SignupMail() {
         };
     }, [websocket]);
     const initWebSocket = () => {
-        let socket = new WebSocket(`ws://localhost:8080/?emailId=${encodeURIComponent(email)}`);
+        let socket = new WebSocket(`wss://${wsServerUrl}/?emailId=${encodeURIComponent(email)}`);
         socket.onopen = () => {
             console.log('WebSocket connection established from client');
         };

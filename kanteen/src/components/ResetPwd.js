@@ -60,7 +60,6 @@ export default function ResetPwd() {
             return;
         }
         try {
-            console.log(user.emailId, data.pwd)
             const response = await userService.updatePassword(user.emailId, data.pwd);
             setMessage(response.data.message);
             setSuccess(response.data.success);
@@ -72,7 +71,6 @@ export default function ResetPwd() {
                         ...user,
                         password: data.pwd
                     })
-                    console.log(user);
                     navigate('/');
                 }
             }, 2500)

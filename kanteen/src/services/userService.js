@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverUrl = process.env.SERVER_URL || 'http://localhost:8080';
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 class userService {
     //whether a email is already registered or not
@@ -9,6 +9,7 @@ class userService {
     }
     //verify the email address and login
     login(userId, password) {
+        console.log(serverUrl)
         return axios.post(serverUrl + '/api/auth/login', { userId, password })
     }
     //register a new user
@@ -24,7 +25,7 @@ class userService {
         return axios.put(serverUrl + '/api/verify/update-password', { emailId, password })
     }
     //resend otp mail
-    resendotpmail(emailId){
+    resendotpmail(emailId) {
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
     }
 }
