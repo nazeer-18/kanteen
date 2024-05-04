@@ -8,8 +8,13 @@ import { useUser } from '../contexts/userContext';
 import userService from '../services/userService';
 
 export default function SignUpAcnt(props) {
-    const { user } = useUser();
-    const emailIdValid = !(user.emailId === '' || user.emailId === null || user.emailId === undefined);
+    const { user ,setUser} = useUser();
+    const navigate = useNavigate();
+    const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
+    useEffect(()=>{
+        if(!emailIdValid)
+        navigate('/signupmail');
+    },[])
     const [emailDisabled, setEmailDisabled] = useState('');
     const [mobileValid, setMobileValid] = useState(false);
     const [validUserName, setValidUserName] = useState(1);
@@ -81,13 +86,6 @@ export default function SignUpAcnt(props) {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (user.emailId === '' || user.emailId === null || user.emailId === undefined) {
-            setValidAll('Please enter a valid email id');
-            setTimeout(() => {
-                Navigate('/signupmail')
-            }, 2500)
-            return;
-        }
         if (!allValid) {
             setValidAll('Please fill all the fields correctly');
             setTimeout(() => {
@@ -103,6 +101,12 @@ export default function SignUpAcnt(props) {
                 const response = await userService.register(user.emailId, data.usrname, data.mobile, data.pwd);
                 if (response.status === 201) {
                     setValidAll('Account Created Successfully');
+                    setUser({
+                        emailId: user.emailId,
+                        name: data.usrname,
+                        mobileNumber: data.mobile,
+                        password: data.pwd
+                    })
                     setTimeout(() => {
                         Navigate('/home');
                     }, 2500);

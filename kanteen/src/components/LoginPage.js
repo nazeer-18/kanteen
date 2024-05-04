@@ -38,7 +38,7 @@ export default function LoginPage() {
                     password: data.pwd
                 });
                 setTimeout(() => {
-                    navigate('/home')
+                    navigate('/')
                 }, 2000);
             }
             else{
@@ -47,11 +47,17 @@ export default function LoginPage() {
         }catch(err){
             if(!err.response){
                 setMessage("Server Error")
+                setTimeout(() => {
+                    setMessage('')
+                }, 2000);
                 setSuccess(false)
                 return;
             }
             setMessage(err.response.data.message)
             setSuccess(err.response.data.success)
+            setTimeout(() => {
+                setMessage('')
+            }, 2000);
         }
     };
     return (

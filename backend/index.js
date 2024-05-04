@@ -13,6 +13,10 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
+setInterval(() => {
+    http.get(process.env.SERVER_URL);
+},300000);
+
 const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ noServer: true });

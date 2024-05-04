@@ -1,17 +1,23 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
+    const {user} = useUser();
     const navigate = useNavigate();
+    useEffect(() => {
+        if(user.emailId === 'na' || user.emailId === '' || user.emailId === undefined){
+        navigate('/login');
+        }
+    }, [])
     const location = useLocation();
     const [success, setSuccess] = useState(false);
     const [limit,setLimit] = useState(3);
     const state = location.state || {};
- 
     const [message,setMessage] = useState('');
     const [data,setData] = useState({
         otp:''
@@ -22,12 +28,10 @@ const handleresend=async(e) =>{
     e.preventDefault();
     try{
         const response = await userService.resendotpmail(state.email);
-        console.log(response.data.message);
         setMessage(response.data.message);
         setSuccess(response.data.success);
         const otp = response.data.otp;
         state.otp = otp;
-        // console.log(otp);
         
     }catch(err){
         if(!err.response){
@@ -63,7 +67,6 @@ const handleSubmit = (e) => {
                     navigate('/forgotpwd');
                 }, 1500);
             }
-           
         }
     }
     return (
