@@ -78,4 +78,19 @@ verifyUser.put('/update-password', async (req, res) => {
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
+});
+verifyUser.post('/resend-mail', async (req, res) => {
+    try {
+            let { emailId } = req.body;
+            emailId = emailId.toLowerCase();
+            const existingUser = await User.findOne({ emailId: emailId });
+            let otp = Math.floor(100000 + Math.random() * 900000);
+            sendOtpVerificationMail(emailId, otp,existingUser.name);
+            res.status(200).json({ message: "Otp sent sucessfully", success: true, otp: otp });
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 module.exports = verifyUser;
