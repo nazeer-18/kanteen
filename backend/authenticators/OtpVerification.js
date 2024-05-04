@@ -22,6 +22,9 @@ const sendOtpVerificationMail = (emailId,otp,name) => {
         <div style="max-width: 1000px; width: 100%; margin: 0 auto; background: rgba(0, 0, 0, 0.7); padding: 50px; box-sizing: border-box;">
             <p style="font-size: 16px; line-height: 1.5; font-family: 'Petrona', serif;">
                 Hi <strong>${name.toUpperCase()}</strong>,<br><br>
+                <p>We’ve received a request to reset the Kanteen Account password for the email address ${emailId}.</p> <br>
+
+                <p>To change your password,</p>
             <h2>Here is your Otp to reset your password</h2>
             </p>
             <h1>${otp}</h1>

@@ -137,7 +137,7 @@ export default function LoginPage() {
                             <div className="login-forgotPwd">
                                 <Link
                                     className='login-forgotpwdtxt'
-                                    to="forgotpwd">
+                                    exact to="/forgotpwd">
                                     <span>
                                         Forgot Password ?
                                     </span>
@@ -154,7 +154,7 @@ export default function LoginPage() {
                         </div>
                         <div className="login-signup">
                             Don't have an account?
-                            <Link to="/signupmail"
+                            <Link exact to="/signupmail"
                                 className="login-signupBtn">
                                 <span >
                                     Sign up

@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
                 <div className="forgot-otp-form-container">
                     <div className="forgot-otp-back-container">
                         <Link
-                            to="/forgotpwd"
+                            exact to="/forgotpwd"
                             className="forgot-otp-backBtn">
                             <span>
                                 &lt;
