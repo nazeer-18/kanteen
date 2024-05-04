@@ -62,7 +62,6 @@ verifyUser.post('/forgot-mail', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-
 verifyUser.put('/update-password', async (req, res) => {
     try{
         let {emailId,password} = req.body;
@@ -79,5 +78,4 @@ verifyUser.put('/update-password', async (req, res) => {
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
-});
 module.exports = verifyUser;
