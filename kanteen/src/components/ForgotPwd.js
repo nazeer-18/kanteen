@@ -64,7 +64,7 @@ export default function ForgotPwd() {
                 <div className="forgotpwd-forgot-group">
                     <div className="forgotpwd-back">
                         <Link
-                            className="forgotpwd-back-lnk" to="/">
+                            className="forgotpwd-back-lnk" exact to="/">
                             &lt; &nbsp;Back to login
                         </Link>
                     </div>
