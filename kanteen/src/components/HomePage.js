@@ -18,22 +18,14 @@ export default function HomePage() {
     }, [user.emailId])
     return (
         <div>
-
-            <div>
-                <h1>Welcome to , kanteen</h1>
+            <div className="homepage-container">
+                <div className="foodpage-slogan">
                 {
                     message.length > 0 ? <h2>{message}</h2> :
                         <div className="home-body">
-                            <h1>Hello {user.name}</h1> <br />
-                            userName: {user.name}<br />
-                            emailId : {user.emailId}<br />
-                            mobileNumber : {user.mobileNumber}<br />
+                            <h1>Hello <text-amrita>{user.name}</text-amrita> !!</h1> <br />
                         </div>
                 }
-            </div>
-
-            <div className="homepage-container">
-                <div className="foodpage-slogan">
                     <h1>
                         "Good <text-amrita>food</text-amrita> is all the sweeter when shared with good <text-amrita>friends.</text-amrita>"
                     </h1> <br />

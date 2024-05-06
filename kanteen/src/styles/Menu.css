@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'petrona';
+    background-color: #e5e5e5;
+}
+
+.orderpage-nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 7px;
+    color: #bf0c45;
+    align-items: center;
+    background-color: #dddddd;
+}
+/* 
+.orderpage-cart{
+} */
+
+.orderpage-search{
+    position: relative;
+    width: 20%;
+    min-width: 200px;
+    max-width: 240px;
+}
+
+.orderpage-search input[type="text"]{
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    font-family: 'petrona';
+    border-radius: 5px;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.orderpage-search input::placeholder{
+    color:#bf0c45;
+    font-family: 'petrona';
+}
+
+.orderpage-search-icon{
+    position: absolute;
+    top: 13px;
+    right: -5px;
+}

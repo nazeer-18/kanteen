@@ -2,10 +2,16 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'petrona';
-    background-color: #f8f9fa
+    background-color: #e5e5e5;
 }
 
-.foodpage-slogan text-amrita{
+.homepage-greeting{
+    margin-top: 10px;
+    margin-left: 5%;
+    padding: 10px;
+}
+
+text-amrita {
     font-weight: 700;
     color: #bf0c45;
 }
