@@ -10,20 +10,18 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 7px;
+    padding: 7px 12px;
     color: #bf0c45;
     align-items: center;
     background-color: #dddddd;
 }
-/* 
-.orderpage-cart{
-} */
 
 .orderpage-search{
     position: relative;
     width: 20%;
     min-width: 200px;
     max-width: 240px;
+    border-radius: 20px;
 }
 
 .orderpage-search input[type="text"]{
@@ -31,9 +29,8 @@ body{
     margin: 5px;
     width: 100%;
     font-family: 'petrona';
-    border-radius: 5px;
     border: 1px solid #6c757d;
-    border-radius: 5px;
+    border-radius: 30px;
     background-color: white;
 }
 
@@ -46,4 +43,13 @@ body{
     position: absolute;
     top: 13px;
     right: -5px;
+}
+
+.orderpage-menu-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 7px;
+    align-items: center;
+    background-color: #dddddd;
 }

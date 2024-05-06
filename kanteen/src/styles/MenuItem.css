@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.menuitem-container{
+    background-color:#f1ecec;
+    width: 162px;
+    height: 250px;
+    padding: 5px;
+    margin: 5px 6px;
+    border-radius: 8px;
+}
+
+.menuitem-container:hover{
+    background-color: #c9c9c9;
+}
+
+.menuitem-image{
+    text-align: center;
+}
+
+.menuitem-name{
+    text-align: center;
+
+}
+
+.menuitem-cart-btn{
+    text-align: center;
+}
+
+.menuitem-qty{
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.menuitem-price{
+    text-align: center;
+    color:#bf0c45;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.menuitem-cart-btn button{
+    color:white;
+    border:none;
+    background-color: #bf0c45;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}
