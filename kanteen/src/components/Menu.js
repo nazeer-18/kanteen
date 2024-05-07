@@ -19,7 +19,7 @@ export default function Menu() {
 
     return (
         <div>
-            <dv className="orderpage-nav">
+            <div className="orderpage-nav">
                 <div className="orderpage-cart">
                     <FontAwesomeIcon icon={faCartShopping} />
                 </div>
@@ -36,7 +36,7 @@ export default function Menu() {
                 <div className="orderpage-filter">
                     <FontAwesomeIcon icon={faFilter} />
                 </div>
-            </dv>
+            </div>
             <div className="orderpage-floating-menu">
 
             </div>
