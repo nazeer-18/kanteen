@@ -15,7 +15,7 @@ app.use(express.json())
 
 setInterval(() => {
     http.get(process.env.SERVER_URL);
-},300000);
+}, 300000);
 
 const server = http.createServer(app);
 
@@ -66,5 +66,8 @@ app.use('/api/auth', authRouter)
 
 const verifyRouter = require('./routes/verify')
 app.use('/api/verify', verifyRouter)
+
+const itemsRouter = require('./routes/items')
+app.use('/api/items', itemsRouter)
 
 module.exports = { userConnections }
