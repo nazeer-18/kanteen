@@ -27,6 +27,10 @@ class userService {
     resendotpmail(emailId) {
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
     }
+    //get all items in the menu
+    getMenuItems() {
+        return axios.get(serverUrl + '/api/items/fetchall')
+    }
 }
 //eslint-disable-next-line
 export default new userService();

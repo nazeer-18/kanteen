@@ -7,6 +7,18 @@ itemRouter.get('/', (req, res) => {
     res.send("Items route")
 })
 
+//Get all items
+itemRouter.get('/fetchall', async (req, res) => {
+    try {
+        const items = await Item.find();
+        res.status(200).json(items);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error")
+    }
+})
+
 //Add an item
 itemRouter.post('/add', async (req, res) => {
     const newItem = new Item({
