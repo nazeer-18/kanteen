@@ -12,16 +12,25 @@ export default function Menu() {
     const [tempItems, setTempItems] = useState([]);
     useEffect(() => {
         userService.getMenuItems().then((res) => {
-            setItems(res.data.map((item) => {
-                return <MenuItem key={item.id} name={item.name} price={item.price} quantity={item.quantity} image={item.image} type={item.type} category={item.category} />
-            }))
-            setTempItems(items);
+            const menuItems = res.data.map((item)=>(
+                <MenuItem
+                    key={item._id}
+                    name={item.name}
+                    price={item.price}
+                    quantity={item.quantity}
+                    image={item.image}
+                    type={item.type}
+                    category={item.category}
+                />
+        ));
+            setItems(menuItems);
+            setTempItems(menuItems);
         })
     },[])
 
     const searchHandler = (e) => {
         const str = e.target.value.toLowerCase();
-        const filteredItems = items.filter((item)=>{
+        const filteredItems = items.filter((item) => {
             return item.props.name.toLowerCase().startsWith(str)
         })
         console.log(filteredItems)
