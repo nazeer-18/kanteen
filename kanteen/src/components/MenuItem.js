@@ -22,7 +22,7 @@ export default function MenuItem(props) {
                 </div>
 
                 <div className="menuitem-price">
-                <FontAwesomeIcon icon={faIndianRupeeSign}/> {price}
+                    <FontAwesomeIcon icon={faIndianRupeeSign} /> {price}
                 </div>
 
                 <div className="menuitem-cart-btn">

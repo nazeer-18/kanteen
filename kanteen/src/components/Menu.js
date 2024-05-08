@@ -8,14 +8,25 @@ import MenuItem from './MenuItem';
 import userService from '../services/userService';
 
 export default function Menu() {
-    const [items, setItems] = React.useState([]);
+    const [items, setItems] = useState([]);
+    const [tempItems, setTempItems] = useState([]);
     useEffect(() => {
         userService.getMenuItems().then((res) => {
             setItems(res.data.map((item) => {
                 return <MenuItem key={item.id} name={item.name} price={item.price} quantity={item.quantity} image={item.image} type={item.type} category={item.category} />
             }))
+            setTempItems(items);
         })
-    })
+    },[])
+
+    const searchHandler = (e) => {
+        const str = e.target.value.toLowerCase();
+        const filteredItems = items.filter((item)=>{
+            return item.props.name.toLowerCase().startsWith(str)
+        })
+        console.log(filteredItems)
+        setTempItems(filteredItems)
+    }
 
     return (
         <div>
@@ -27,6 +38,7 @@ export default function Menu() {
                     <input
                         type="text"
                         name=""
+                        onChange={(e) => { searchHandler(e) }}
                         placeholder='Search any item here..'
                         id="" />
                     <span className="orderpage-search-icon">
@@ -42,7 +54,7 @@ export default function Menu() {
             </div>
 
             <div className="orderpage-menu-items">
-                {items}
+                {tempItems}
             </div>
         </div>
     )
