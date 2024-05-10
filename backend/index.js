@@ -11,7 +11,17 @@ const { URL } = require('url');
 
 const app = express();
 app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 app.use(express.json())
+
+setInterval(() => {
+    http.get(process.env.SERVER_URL);
+}, 300000);
 
 const server = http.createServer(app);
 
@@ -62,5 +72,8 @@ app.use('/api/auth', authRouter)
 
 const verifyRouter = require('./routes/verify')
 app.use('/api/verify', verifyRouter)
+
+const itemsRouter = require('./routes/items')
+app.use('/api/items', itemsRouter)
 
 module.exports = { userConnections }

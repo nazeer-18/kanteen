@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverUrl = process.env.SERVER_URL || 'http://localhost:8080';
+const serverUrl = process.env.REACT_APP_SERVER_URL || 'https://kanteen-server.onrender.com';
 
 class userService {
     //whether a email is already registered or not
@@ -24,8 +24,12 @@ class userService {
         return axios.put(serverUrl + '/api/verify/update-password', { emailId, password })
     }
     //resend otp mail
-    resendotpmail(emailId){
+    resendotpmail(emailId) {
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
+    }
+    //get all items in the menu
+    getMenuItems() {
+        return axios.get(serverUrl + '/api/items/fetchall')
     }
 }
 //eslint-disable-next-line

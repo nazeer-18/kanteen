@@ -11,14 +11,13 @@ export default function ForgotPwd() {
     const navigate = useNavigate();
     useEffect(() => {
         if(user.emailId === 'na' || user.emailId === '' || user.emailId === undefined){
-        navigate('/');
+        navigate('/login');
         }
     }, [])
     const location = useLocation();
     const [success, setSuccess] = useState(false);
     const [limit,setLimit] = useState(3);
     const state = location.state || {};
-    console.log(state.otp);
     const [message,setMessage] = useState('');
     const [data,setData] = useState({
         otp:''
@@ -29,12 +28,10 @@ const handleresend=async(e) =>{
     e.preventDefault();
     try{
         const response = await userService.resendotpmail(state.email);
-        console.log(response.data.message);
         setMessage(response.data.message);
         setSuccess(response.data.success);
         const otp = response.data.otp;
         state.otp = otp;
-        // console.log(otp);
         
     }catch(err){
         if(!err.response){
@@ -70,7 +67,6 @@ const handleSubmit = (e) => {
                     navigate('/forgotpwd');
                 }, 1500);
             }
-            console.log('otp not matched');
         }
     }
     return (
@@ -79,7 +75,7 @@ const handleSubmit = (e) => {
                 <div className="forgot-otp-form-container">
                     <div className="forgot-otp-back-container">
                         <Link
-                            to="/forgotpwd"
+                            exact to="/forgotpwd"
                             className="forgot-otp-backBtn">
                             <span>
                                 &lt;

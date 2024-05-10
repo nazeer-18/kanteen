@@ -8,6 +8,8 @@ import ForgotPwdOtp from './components/ForgotPwdOtp';
 import ResetPwd from './components/ResetPwd';
 import SignUpAcnt from './components/SignUpAcnt';
 import HomePage from './components/HomePage';
+import Menu from './components/Menu';
+import OrderHistory from './components/OrderHistory';
 import {UserProvider} from './contexts/userContext';
 
 export default function App() {
@@ -16,13 +18,15 @@ export default function App() {
             <UserProvider>
             <Navbar />
             <Routes>
-                <Route exact path='/' element={<LoginPage />}></Route>
+                <Route path='/' element={<HomePage />}></Route>
+                <Route exact path='/login' element={<LoginPage />}></Route>
                 <Route path='/signupmail' element={<SignUpMail/>}></Route>
                 <Route path='/forgotpwd' element={<ForgotPwd />}></Route>
                 <Route path='/forgotpwdotp' element={<ForgotPwdOtp />}></Route>
                 <Route path='/resetpwd' element={<ResetPwd />}></Route>
                 <Route path='/signupacnt' element={<SignUpAcnt/>}></Route>
-                <Route path='/home' element={<HomePage />}></Route>
+                <Route path='/menu' element={<Menu/>}></Route>
+                <Route path='/orderhistory' element={<OrderHistory/>}></Route>
             </Routes>
             </UserProvider>
         </BrowserRouter>

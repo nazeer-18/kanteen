@@ -328,7 +328,7 @@ export default function SignUpAcnt(props) {
             <div className="memoryb">
                 Already have an account ?
                 <Link
-                    to="/"
+                    exact to="/"
                     className="signupacnt-loginBtn">
                     <span style={{ margin: "2px", }}>
                         Login
