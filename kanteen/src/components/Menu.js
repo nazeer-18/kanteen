@@ -12,11 +12,22 @@ export default function Menu() {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     useEffect(() => {
-        userService.getMenuItems().then((res) => {
-            setItems(res.data);
-            setFilteredItems(res.data);
-        })
-    },[], setTimeout(() => { }, 1000));
+        const fetchItems = async () => {
+            try{
+                const res = await userService.getMenuItems();
+                setItems(res.data);
+                setFilteredItems(res.data);
+            }
+            catch(err){
+                console.error('Error fetching items',err);
+            }
+        }
+        fetchItems();
+        const interval = setInterval(() => {
+            fetchItems();
+        }, 2000);
+        return () => clearInterval(interval);
+    },[]);
 
     const searchHandler = (e) => {
         const str = e.target.value.toLowerCase();
