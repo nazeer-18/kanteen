@@ -11,12 +11,16 @@ import userService from '../services/userService';
 export default function Menu() {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
+    const [isInitiated,setIsInitiated] = useState(false);
     useEffect(() => {
         const fetchItems = async () => {
             try{
                 const res = await userService.getMenuItems();
                 setItems(res.data);
-                setFilteredItems(res.data);
+                if(!isInitiated){
+                    setFilteredItems(res.data);
+                    setIsInitiated(true);
+                }
             }
             catch(err){
                 console.error('Error fetching items',err);
@@ -27,8 +31,8 @@ export default function Menu() {
             fetchItems();
         }, 2000);
         return () => clearInterval(interval);
-    },[]);
-
+    },[isInitiated]);
+    
     const searchHandler = (e) => {
         const str = e.target.value.toLowerCase();
         const filtered = items.filter((item) => item.name.toLowerCase().includes(str));
