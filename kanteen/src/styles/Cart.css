@@ -1,0 +1,18 @@
+.cart-container{
+    width:75%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.cart-title{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #bf0c45;
+    text-align: center;
+}
+
+.cart-content{
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+}

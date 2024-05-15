@@ -11,10 +11,23 @@ body{
     margin: 5px 6px;
     border-radius: 8px;
     border: 1px solid #c9c9c9;
+    position: relative;
 }
 
 .menuitem-container:hover{
     background-color: #c9c9c9;
+}
+
+
+.menuitem-type{
+    position: absolute;
+    right:1px;
+    padding: 2px;
+}
+
+.menuitem-type img{
+    width: 20px;
+    height: 20px;
 }
 
 .menuitem-image{

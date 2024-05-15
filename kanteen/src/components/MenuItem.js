@@ -3,14 +3,26 @@ import '../styles/MenuItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import vegIcon from '../images/veg-icon.png';
+import nonVegIcon from '../images/non-veg-icon.png';
 
 export default function MenuItem(props) {
-    const { name, price, quantity, image, type, category } = props;
+    const {item}  = props;
+    const name = item.name;
+    const image = item.image;
+    const price = item.price;
+    const quantity = item.quantity;
+    const type = item.type;
+    const category = item.category;
+
     return (
         <div className={`${type} ${category}`}>
             <div className="menuitem-container">
+                <div className="menuitem-type">
+                    {type==="veg"?<img src={vegIcon} alt="veg"/>:<img src={nonVegIcon} alt="non-veg"/>}
+                </div>
                 <div className="menuitem-image">
-                    <img src={image} alt="food" style={{ width: "130px", height: "130px" }} />
+                    <img src={image} alt="food" style={{ width: "120px", height: "120px" }} />
                 </div>
 
                 <div className="menuitem-name">
@@ -26,7 +38,10 @@ export default function MenuItem(props) {
                 </div>
 
                 <div className="menuitem-cart-btn">
-                    <button>Add to Cart <FontAwesomeIcon icon={faCartShopping} /> </button>
+                    <button>
+                        Add to Cart 
+                        <FontAwesomeIcon icon={faCartShopping} /> 
+                    </button>
                 </div>
 
             </div>

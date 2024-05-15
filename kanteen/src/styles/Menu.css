@@ -46,20 +46,6 @@ body{
     right: -5px;
 }
 
-.orderpage-cart-display{
-    width:25%;
-    min-width: 250px;
-    position: absolute;
-    top: 0px;
-    left:0px;
-    display: none;
-    background-color: white;
-}
-
-.orderpage-cart-content{
-    padding: 10px;
-}
-
 .orderpage-menu-items{
     display: flex;
     flex-direction: row;
@@ -68,18 +54,4 @@ body{
     align-items: center;
     background-color: #dddddd;
     position: relative;
-}
-
-.orderpage-proceed-button-container{
-    text-align: center;
-}
-
-.orderpage-proceed-button{
-    padding: 10px 20px;
-    margin: 10px auto;
-    background-color: #bf0c45;
-    color: white;
-    border-radius: 14px;
-    font-family: 'petrona';
-    font-weight: bold;
 }
