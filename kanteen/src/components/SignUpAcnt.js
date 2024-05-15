@@ -108,7 +108,7 @@ export default function SignUpAcnt(props) {
                         password: data.pwd
                     })
                     setTimeout(() => {
-                        Navigate('/home');
+                        Navigate('/');
                     }, 2500);
                 } else {
                     if (response.message) {
