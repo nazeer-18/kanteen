@@ -7,7 +7,7 @@ import vegIcon from '../images/veg-icon.png';
 import nonVegIcon from '../images/non-veg-icon.png';
 
 export default function MenuItem(props) {
-    const {item}  = props;
+    const { item } = props;
     const name = item.name;
     const image = item.image;
     const price = item.price;
@@ -18,8 +18,17 @@ export default function MenuItem(props) {
     return (
         <div className={`${type} ${category}`}>
             <div className="menuitem-container">
+                {
+                    quantity === 0 &&
+                    <div className="menuitem-sold-cover"></div>
+                }
+                {quantity === 0 &&
+                    <div className="menuitem-sold-status">
+                        SOLD
+                    </div>
+                }
                 <div className="menuitem-type">
-                    {type==="veg"?<img src={vegIcon} alt="veg"/>:<img src={nonVegIcon} alt="non-veg"/>}
+                    {type === "veg" ? <img src={vegIcon} alt="veg" /> : <img src={nonVegIcon} alt="non-veg" />}
                 </div>
                 <div className="menuitem-image">
                     <img src={image} alt="food" style={{ width: "120px", height: "120px" }} />
@@ -30,7 +39,12 @@ export default function MenuItem(props) {
                 </div>
 
                 <div className="menuitem-qty">
-                    <p>Qty left : <strong>{quantity}</strong></p>
+                    <p>Qty left :  {
+                        quantity === 0 ?
+                            <strong style={{ color: "red" }}>{quantity}</strong> :
+                            <strong>{quantity}</strong>
+                    }
+                    </p>
                 </div>
 
                 <div className="menuitem-price">
@@ -38,9 +52,12 @@ export default function MenuItem(props) {
                 </div>
 
                 <div className="menuitem-cart-btn">
-                    <button>
-                        Add to Cart 
-                        <FontAwesomeIcon icon={faCartShopping} /> 
+                    <button
+                        disabled={quantity === 0}
+                        style={{ cursor: quantity === 0 ? "not-allowed" : "pointer", backgroundColor: quantity === 0 ? "grey" : "#bf0c45" }}
+                    >
+                        Add to Cart
+                        <FontAwesomeIcon icon={faCartShopping} />
                     </button>
                 </div>
 
