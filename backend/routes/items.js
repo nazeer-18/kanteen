@@ -2,12 +2,7 @@ const express = require('express')
 const itemRouter = express.Router();
 const Item = require('../models/Menu')
 
-//testing
-itemRouter.get('/', (req, res) => {
-    res.send("Items route")
-})
-
-//Get all items
+//Get all items from menu
 itemRouter.get('/fetchall', async (req, res) => {
     try {
         const items = await Item.find();
@@ -19,7 +14,7 @@ itemRouter.get('/fetchall', async (req, res) => {
     }
 })
 
-//Add an item
+//Add an item to menu => admin functionality
 itemRouter.post('/add', async (req, res) => {
     const newItem = new Item({
         id: req.body.id,
