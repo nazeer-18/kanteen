@@ -39,7 +39,7 @@ export default function Cart() {
                         <h2>Your cart is empty</h2> :
                         <div>
                             {cartItems.map((item) => {
-                                return <CartItem key={item._id} item={item.item} />
+                                return <CartItem key={item._id} item={item.item} quantity={item.quantity}/>
                             })}
                             <div className="cart-total">
                                 <h2>Total: {total}</h2>

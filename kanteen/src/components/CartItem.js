@@ -3,7 +3,7 @@ import '../styles/CartItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 export default function CartItem(props) {
-    const { item } = props;
+    const { item,quantity } = props;
     return (
         <div>
             <div className="cartitem-container">
@@ -27,7 +27,7 @@ export default function CartItem(props) {
 
                         <div className="cartitem-details cartitem-details2">
                             <div className="cartitem-qty">
-                                <p>Qty : <strong>{item.quantity}</strong> </p>
+                                <p>Qty : <strong>{quantity}</strong> </p>
                             </div>
                         </div>
                     </div>
