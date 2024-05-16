@@ -26,6 +26,7 @@ body{
     position: absolute;
     top: 0px;
     left: 0px;
+    z-index: 1;
 }
 
 .menuitem-sold-status{
@@ -43,6 +44,7 @@ body{
     white-space: nowrap;
     display: block;
     border-radius: 20px;
+    z-index: 2;
 }
 
 .menuitem-type{

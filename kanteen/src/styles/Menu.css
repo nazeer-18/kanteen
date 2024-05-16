@@ -59,6 +59,7 @@ body{
 .orderpage-cart-nav-label{
     cursor:pointer;
     margin-left: 3px;
+    padding: 2px;
     font-weight: bold;
 }
 
