@@ -47,7 +47,7 @@ export default function Menu() {
     return (
         <div>
             <div className="orderpage-nav">
-                <div className="orderpage-filter">
+                <div className="orderpage-filter" title="apply filters"> <span className="orderpage-cart-nav-label" style={{"color":"black"}}>FILTERS</span>
                     <FontAwesomeIcon icon={faFilter} />
                 </div>
                 <div className="orderpage-search">
@@ -60,7 +60,7 @@ export default function Menu() {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </span>
                 </div>
-                <div className="orderpage-cart" onClick={viewCart}>
+                <div className="orderpage-cart" title="View items in cart" onClick={viewCart}>  <span className="orderpage-cart-nav-label" style={{"color":"black"}}>CART</span>
                     <FontAwesomeIcon icon={faCartShopping} />
                 </div>
             </div>
