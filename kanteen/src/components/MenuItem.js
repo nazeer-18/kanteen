@@ -21,7 +21,8 @@ export default function MenuItem(props) {
         try{
             const itemId = item._id;
             const userId = user.emailId;
-            const response = await userService.addToCart(userId,itemId);
+            const quantity = 1;
+            const response = await userService.addToCart(userId,itemId,quantity);
             console.log(response.data);
         }catch(err){
             console.log(err);

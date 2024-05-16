@@ -33,7 +33,7 @@ class userService {
     }
     //add an item to cart
     addToCart(userId, itemId, quantity) {
-        return axios.post(serverUrl + '/api/cart/add', { userId, itemId })
+        return axios.post(serverUrl + '/api/cart/add', { userId, itemId,quantity })
     }
 }
 //eslint-disable-next-line
