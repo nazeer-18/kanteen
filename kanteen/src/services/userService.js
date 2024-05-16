@@ -31,6 +31,10 @@ class userService {
     getMenuItems() {
         return axios.get(serverUrl + '/api/items/fetchall')
     }
+    //add an item to cart
+    addToCart(userId, itemId, quantity) {
+        return axios.post(serverUrl + '/api/cart/add', { userId, itemId })
+    }
 }
 //eslint-disable-next-line
 export default new userService();
