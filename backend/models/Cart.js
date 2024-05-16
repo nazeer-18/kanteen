@@ -4,8 +4,9 @@ const Menu = require('./Menu');
 
 const cartSchema = new Schema({
     userId :{
-        type : Schema.Types.ObjectId,
-        ref : 'User'
+        type : String,
+        ref : 'User',
+        unique : true
     },
     items : [{
         item : {
