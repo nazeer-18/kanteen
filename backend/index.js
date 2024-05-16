@@ -76,4 +76,7 @@ app.use('/api/verify', verifyRouter)
 const itemsRouter = require('./routes/items')
 app.use('/api/items', itemsRouter)
 
+const cartRouter = require('./routes/cart')
+app.use('/api/cart', cartRouter)
+
 module.exports = { userConnections }

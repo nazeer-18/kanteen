@@ -55,16 +55,16 @@ authRouter.post('/signup', async (req, res) => {
             password: Hashedpassword,
         })
 
-        await newUser.save();
-        
+        const savedUser = await newUser.save();
+
         //Create a cart for the user
         const newCart = new Cart({
-            userId:newUser._id,
+            userId:savedUser._id,
             items:[]
         })
         await newCart.save();
 
-        res.status(201).json({ msg: "User Registered Successfully", success: true })
+        res.status(201).json({ msg: "User Registered Successfully", success: true})
 
     } catch (err) {
         console.error(err)
