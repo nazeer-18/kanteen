@@ -40,4 +40,26 @@ cartRouter.post('/add', async (req, res) => {
     }
 })
 
+//Remove an item from cart for a user
+cartRouter.post('/remove', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const itemId = req.body.itemId;
+        const cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            return res.status(404).send("Cart not found for the user");
+        }
+        const item = cart.items.find(item => item.item == itemId);
+        if (!item) {
+            return res.status(404).send("Item not found in cart");
+        }
+        cart.items = cart.items.filter(item => item.item != itemId);
+        await cart.calculateTotal();
+        res.status(200).send("Item removed from cart successfully");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = cartRouter;

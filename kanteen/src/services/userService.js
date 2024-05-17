@@ -39,6 +39,10 @@ class userService {
     fetchCartItems(userId) {
         return axios.post(serverUrl + '/api/cart/fetchall', { userId })
     }
+    //remove an item from cart
+    removeFromCart(userId, itemId) {
+        return axios.post(serverUrl + '/api/cart/remove', { userId, itemId })
+    }
 }
 //eslint-disable-next-line
 export default new userService();

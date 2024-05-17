@@ -2,8 +2,20 @@ import React from 'react';
 import '../styles/CartItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import { useUser } from '../contexts/userContext';
+import userService from '../services/userService';
+
 export default function CartItem(props) {
     const { item,quantity } = props;
+    const { user } = useUser();
+    const userId = user.emailId;
+    const removeItem = async () => {
+        try{
+            const res = await userService.removeFromCart(userId,item._id);
+        }catch(err){
+            console.error('Error removing item',err);
+        }
+    }
     return (
         <div>
             <div className="cartitem-container">
@@ -33,7 +45,10 @@ export default function CartItem(props) {
                     </div>
 
                     <div className="cartitem-remove-button">
-                        <button>Remove Item</button>
+                        <button
+                            onClick ={removeItem}
+                        >Remove Item
+                        </button>
                     </div>
 
                 </div>
