@@ -23,7 +23,6 @@ export default function MenuItem(props) {
             const userId = user.emailId;
             const quantity = 1;
             const response = await userService.addToCart(userId,itemId,quantity);
-            console.log(response.data);
         }catch(err){
             console.log(err);
         }
@@ -41,7 +40,11 @@ export default function MenuItem(props) {
                     </div>
                 }
                 <div className="menuitem-type">
-                    {type === "veg" ? <img src={vegIcon} alt="veg" /> : <img src={nonVegIcon} alt="non-veg" />}
+                    {
+                        type === "veg" ? <img src={vegIcon} alt="veg" /> : 
+                        type === "non-veg" ? <img src={nonVegIcon} alt="non-veg" />
+                        : null
+                    }
                 </div>
                 <div className="menuitem-image">
                     <img src={image} alt="food" style={{ width: "120px", height: "120px" }} />
@@ -71,7 +74,7 @@ export default function MenuItem(props) {
                         style={{ cursor: quantity === 0 ? "not-allowed" : "pointer", backgroundColor: quantity === 0 ? "grey" : "#bf0c45" }}
                     >
                         Add to Cart
-                        <FontAwesomeIcon icon={faCartShopping} />
+                        <FontAwesomeIcon icon={faCartShopping} style={{marginLeft:"3px"}} />
                     </button>
                 </div>
 

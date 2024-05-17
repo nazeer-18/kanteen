@@ -16,3 +16,9 @@
     padding: 10px;
     margin: 5px;
 }
+
+.cart-total{
+    text-align: right;
+    color:#bf0c45;
+    font-weight: bold;
+}

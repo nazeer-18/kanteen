@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
 
 export default function Cart() {
+    const navigate = useNavigate();
     const { user } = useUser();
     const userId = user.emailId;
+    useEffect(() => {
+        if (userId === 'na') {
+            navigate('/login');
+        }
+    }, userId)
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -39,7 +46,7 @@ export default function Cart() {
                         <h2>Your cart is empty</h2> :
                         <div>
                             {cartItems.map((item) => {
-                                return <CartItem key={item._id} item={item.item} quantity={item.quantity}/>
+                                return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
                             })}
                             <div className="cart-total">
                                 <h2>Total: {total}</h2>
