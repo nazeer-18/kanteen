@@ -16,7 +16,7 @@ export default function Cart() {
         if (userId === 'na') {
             navigate('/login');
         }
-    }, userId)
+    }, [userId])
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -41,26 +41,40 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <div className="cart-title">
-                <h1>Your Cart</h1>
-            </div>
             <div className="cart-content">
                 {
-                    cartItems.length === 0 ?
-                        <h2>Your cart is empty</h2> :
-                        <div>
-                            {cartItems.map((item) => {
-                                return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
-                            })}
-                            <div className="cart-total">
-                                Subtotal ({totalItems}items):  
-                                <FontAwesomeIcon icon={faIndianRupeeSign} />
-                                <span>
-                                    {total}
-                                </span>
+                    <div>
+
+                        <div className="cart-heading">
+
+                            <div className="cart-heading-desc">
+                                <h1>Your cart {cartItems.length===0 ? 'is empty' : ''} </h1>
                             </div>
+
+                            <div className="cart-heading-price">
+                                price
+                            </div>
+
                         </div>
+
+                        {cartItems.map((item) => {
+                            return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
+                        })}
+
+                    </div>
                 }
+                <div className="cart-total">
+                    Subtotal ({totalItems}items):
+                    {
+                        total > 0 &&
+                        <span>
+                            <FontAwesomeIcon icon={faIndianRupeeSign} />
+                            <span>
+                                {total}
+                            </span>
+                        </span>
+                    }
+                </div>
             </div>
         </div>
     )

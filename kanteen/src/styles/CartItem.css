@@ -41,6 +41,7 @@
     flex-direction: row;
     padding: 2px;
     margin: 2px;
+    align-items: baseline;
 }
 
 .cartitem-remove{

@@ -4,11 +4,23 @@
     padding: 10px;
 }
 
-.cart-title{
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #bf0c45;
-    text-align: center;
+.cart-heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+}
+
+.cart-heading-desc{
+    font-family: 'petrona';
+    padding-left: 10px;
+}
+
+.cart-heading-price{
+    padding: 3px;
+    color:black;
+    font-size: 1.1rem;
+    font-family: 'petrona';
 }
 
 .cart-content{
