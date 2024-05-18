@@ -1,7 +1,7 @@
 .cartitem-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-top: 1px solid #e0e0e0;
     padding: 5px;
     margin-bottom:13px;
@@ -30,6 +30,8 @@
 
 .cartitem-details-right{
     padding: 15px;
+    margin:auto 0px;
+    width: 50px;
 }
 
 .cartitem-name{
@@ -39,14 +41,18 @@
 .cartitem-membership{
     display: flex;
     flex-direction: row;
-    padding: 2px;
+    flex-wrap: wrap;
+    padding: 2px 8px;
     margin: 2px;
     align-items: baseline;
+    justify-content: center;
 }
 
 .cartitem-remove{
     text-align: center;
     width: 100px;
+    margin: 5px;
+    padding: 3px;
 }
 
 .cartitem-remove button{

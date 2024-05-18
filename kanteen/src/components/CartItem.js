@@ -21,7 +21,7 @@ export default function CartItem(props) {
             <div className="cartitem-container">
 
                 <div className="cartitem-image">
-                    <img src={item.image} alt="food" style={{ width: "75px", height: "75px" }} />
+                    <img src={item.image} alt="food" style={{ width: "100px", height: "100px" }} />
                 </div>
 
                 <div className="cartitem-details">
@@ -49,15 +49,16 @@ export default function CartItem(props) {
 
                     </div>
 
-                    <div className="cartitem-details-right">
+                </div>
 
-                        <div className="cartitem-price">
-                            <strong> <FontAwesomeIcon icon={faIndianRupeeSign} /> {item.price}</strong>
-                        </div>
+                <div className="cartitem-details-right">
 
+                    <div className="cartitem-price">
+                        <strong> <FontAwesomeIcon icon={faIndianRupeeSign} /> {item.price}</strong>
                     </div>
 
                 </div>
+
 
             </div>
 

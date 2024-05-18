@@ -1,14 +1,17 @@
 const express = require('express')
 const cartRouter = express.Router();
-const Cart = require('../models/Cart')
-
+const Cart = require('../models/Cart');
 //Get all items from cart for a user
 cartRouter.post('/fetchall', async (req, res) => {
     try {
         const userId = req.body.userId;
         const cart = await Cart.findOne({ userId: userId }).populate('items.item');
         if (!cart) {
-            return res.status(404).send("Cart not found for the user");
+            const newCart = new Cart({
+                userId: userId,
+                items: []
+            })
+            await newCart.save();
         }
         res.status(200).json({ message: "Cart fetched successfully", cart: cart});
     } catch (err) {
@@ -21,12 +24,15 @@ cartRouter.post('/fetchall', async (req, res) => {
 cartRouter.post('/add', async (req, res) => {
     try {
         const userId = req.body.userId;
-        const { itemId, quantity } = req.body;
+        let { itemId, quantity } = req.body;
+        if(!quantity) {
+            quantity = 1;
+        }
         const cart = await Cart.findOne({ userId: userId });
         if (!cart) {
             return res.status(404).send("Cart not found for the user");
         }
-        const item = cart.items.find(item => item.item == itemId);
+        const item = cart.items.find(item => item.item.toString() === itemId.toString());
         if (item) {
             item.quantity += parseInt(quantity);
         } else {
