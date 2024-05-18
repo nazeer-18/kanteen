@@ -23,6 +23,10 @@ const cartSchema = new Schema({
         type : Number,
         default : 0
     },
+    totalItems : {
+        type : Number,
+        default : 0
+    },
     Date : {
         type : Date,
         default : Date.now
@@ -36,7 +40,17 @@ cartSchema.methods.calculateTotal = async function () {
         total += menuItem.price * it.quantity;
     }
     this.total = total;
+    console.log(this.total);
     await this.save();
+}
+
+cartSchema.methods.calculateTotalItems = async function () {
+    let total = 0;
+    for(const it of this.items){
+        total += it.quantity;
+    }
+    this.totalItems = total;
+    await this.save();  
 }
 
 module.exports = mongoose.model('Cart', cartSchema)

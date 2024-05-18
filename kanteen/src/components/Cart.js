@@ -4,11 +4,14 @@ import '../styles/Cart.css';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 
 export default function Cart() {
     const navigate = useNavigate();
     const { user } = useUser();
     const userId = user.emailId;
+    const [totalItems, setTotalItems] = useState(0);
     useEffect(() => {
         if (userId === 'na') {
             navigate('/login');
@@ -22,6 +25,7 @@ export default function Cart() {
                 const res = await userService.fetchCartItems(userId);
                 const items = res.data.cart.items;
                 setTotal(res.data.cart.total);
+                setTotalItems(res.data.cart.totalItems);
                 setCartItems(items);
             } catch (err) {
                 console.error('Error fetching items', err);
@@ -49,7 +53,11 @@ export default function Cart() {
                                 return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
                             })}
                             <div className="cart-total">
-                                <h2>Total: {total}</h2>
+                                Subtotal ({totalItems}items):  
+                                <FontAwesomeIcon icon={faIndianRupeeSign} />
+                                <span>
+                                    {total}
+                                </span>
                             </div>
                         </div>
                 }

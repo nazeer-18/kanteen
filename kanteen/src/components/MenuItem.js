@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/MenuItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import { useUser } from '../contexts/userContext';
 
 export default function MenuItem(props) {
     const {user} = useUser();
-    const { item } = props;
+    const { item,setDisplayMessage,setMessage } = props;
     const name = item.name;
     const image = item.image;
     const price = item.price;
@@ -23,9 +23,16 @@ export default function MenuItem(props) {
             const userId = user.emailId;
             const quantity = 1;
             const response = await userService.addToCart(userId,itemId,quantity);
+            setDisplayMessage(true);
+            setMessage("Item added");
         }catch(err){
+            setDisplayMessage(true);
+            setMessage("unable to add item");
             console.log(err);
         }
+        setTimeout(()=>{
+            setDisplayMessage(false);
+        },1800);
     }
     return (
         <div className={`${type} ${category}`}>

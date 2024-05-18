@@ -5,6 +5,21 @@ body{
     background-color: #e5e5e5;
 }
 
+.orderpage-cart-msg{
+    color:white;
+    font-size: larger;
+    font-weight: 600;
+    padding: 8px;
+    background-color: black;
+    font-family: 'petrona';
+    border-radius: 37px;
+    margin-bottom: 10px;
+    position:fixed;
+    right:10px;
+    top:10px;
+    z-index: 5;
+}
+
 .orderpage-nav{
     display: flex;
     flex-direction: row;

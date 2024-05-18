@@ -11,19 +11,21 @@ import userService from '../services/userService';
 export default function Menu() {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
-    const [isInitiated,setIsInitiated] = useState(false);
+    const [isInitiated, setIsInitiated] = useState(false);
+    const [message, setMessage] = useState('');
+    const [displayMessage, setDisplayMessage] = useState(false);
     useEffect(() => {
         const fetchItems = async () => {
-            try{
+            try {
                 const res = await userService.getMenuItems();
                 setItems(res.data);
-                if(!isInitiated){
+                if (!isInitiated) {
                     setFilteredItems(res.data);
                     setIsInitiated(true);
                 }
             }
-            catch(err){
-                console.error('Error fetching items',err);
+            catch (err) {
+                console.error('Error fetching items', err);
             }
         }
         fetchItems();
@@ -31,8 +33,8 @@ export default function Menu() {
             fetchItems();
         }, 2000);
         return () => clearInterval(interval);
-    },[isInitiated]);
-    
+    }, [isInitiated]);
+
     const searchHandler = (e) => {
         const str = e.target.value.toLowerCase();
         const filtered = items.filter((item) => item.name.toLowerCase().includes(str));
@@ -47,7 +49,7 @@ export default function Menu() {
     return (
         <div>
             <div className="orderpage-nav">
-                <div className="orderpage-filter" title="apply filters"> <span className="orderpage-cart-nav-label" style={{"color":"black"}}>FILTERS</span>
+                <div className="orderpage-filter" title="apply filters"> <span className="orderpage-cart-nav-label" style={{ "color": "black" }}>FILTERS</span>
                     <FontAwesomeIcon icon={faFilter} />
                 </div>
                 <div className="orderpage-search">
@@ -60,7 +62,7 @@ export default function Menu() {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </span>
                 </div>
-                <div className="orderpage-cart" title="View items in cart" onClick={viewCart}>  <span className="orderpage-cart-nav-label" style={{"color":"black"}}>CART</span>
+                <div className="orderpage-cart" title="View items in cart" onClick={viewCart}>  <span className="orderpage-cart-nav-label" style={{ "color": "black" }}>CART</span>
                     <FontAwesomeIcon icon={faCartShopping} />
                 </div>
             </div>
@@ -68,10 +70,16 @@ export default function Menu() {
             </div>
             <div className="orderpage-menu-items">
                 {
+                    displayMessage &&
+                    <div className="orderpage-cart-msg">
+                        {message}
+                    </div>
+                }
+                {
                     filteredItems.length === 0 ?
-                        <h1 style={{margin:"auto"}}>No items found</h1> : (
+                        <h1 style={{ margin: "auto" }}>No items found</h1> : (
                             filteredItems.map((item) => (
-                                <MenuItem key={item._id} item={item} />
+                                <MenuItem key={item._id} item={item} setDisplayMessage={setDisplayMessage} setMessage={setMessage} />
                             ))
                         )
                 }
