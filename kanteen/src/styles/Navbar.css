@@ -4,6 +4,14 @@
     letter-spacing: 1.35px;
 }
 
+.responsive-nav{
+    display: none;
+}
+
+.responsive-nav-show{
+    display: block;
+}
+
 .nav-body{
     background-color: #bf0c45;
     color: white; 
@@ -11,25 +19,23 @@
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-weight: bold;
     padding: 8px;
 }
-.nav-body .app-name{
-    margin-left: 18px;
-}
+
 .nav-body .wish{
     margin-right: 18px;
 }
 
-@media (max-width:400px){
-    .nav-body{
-        display: block;
-    }
-    .wish{
-        display: none;
-    }
-    .app-name{
-        margin-left: 50vw;
-        text-align: center!important;
-    }
+.hide-nav{
+    display: none;
+}
+
+.hamburger button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
 }
