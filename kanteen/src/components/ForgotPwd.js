@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ForgotPwd.css';
 import forgotImg from '../images/forgotpwd.svg';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
-    const {user, setUser} = useUser();
+    const { user, setUser } = useUser();
     const [email, SetEmail] = useState('');
     const navigate = useNavigate();
     const [emailValid, SetEmailValid] = useState(false);
@@ -25,14 +25,14 @@ export default function ForgotPwd() {
         SetEmail(value);
         SetEmailValid(validateEmail(value.toLowerCase()));
     }
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!emailValid){
+        if (!emailValid) {
             setMessage("Enter a valid Amrita email address");
             setSuccess(false);
             return;
         }
-        try{
+        try {
             const response = await userService.verifyForgotMail(email);
             setMessage(response.data.message);
             setSuccess(response.data.success);
@@ -45,8 +45,8 @@ export default function ForgotPwd() {
                 })
                 navigate(`/forgotpwdotp`, { state: { email, otp } });
             }, 3500);
-        }catch(err){
-            if(!err.response){
+        } catch (err) {
+            if (!err.response) {
                 setMessage("Internal Server Error, Please try again later !");
                 setSuccess(false);
                 return;
@@ -64,7 +64,7 @@ export default function ForgotPwd() {
                 <div className="forgotpwd-forgot-group">
                     <div className="forgotpwd-back">
                         <Link
-                            className="forgotpwd-back-lnk" exact to="/">
+                            className="forgotpwd-back-lnk" exact="true" to="/">
                             &lt; &nbsp;Back to login
                         </Link>
                     </div>
@@ -76,7 +76,7 @@ export default function ForgotPwd() {
                     </div>
                     <form className="forgotpwd-email" onSubmit={handleSubmit}>
                         <div className="forgotpwd-email-group">
-                        <label
+                            <label
                                 htmlFor="email">
                             </label>
                             <input
@@ -85,8 +85,8 @@ export default function ForgotPwd() {
                                 onChange={handleEmailChange}
                                 value={email}
                                 id="email"
-                                style={{outline:"none"}}
-                                className={emailValid ? "valid-border" :email.length>0? "invalid-border":""}
+                                style={{ outline: "none" }}
+                                className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
                                 placeholder="Enter your email address"
                                 required />
                             {
@@ -105,15 +105,15 @@ export default function ForgotPwd() {
                             }
                         </div>
                         {
-                            !emailValid && email.length > 0 && 
-                        <div className="forgotpwd-email-check-alert">
+                            !emailValid && email.length > 0 &&
+                            <div className="forgotpwd-email-check-alert">
                                 !! Enter a valid Amrita email address
-                        </div>
+                            </div>
                         }
                         {
                             message.length > 0 &&
-                            <div className="forgotpwd-email-check-alert" style={success?{color:"green"}
-                        :{color:"red"}}>
+                            <div className="forgotpwd-email-check-alert" style={success ? { color: "green" }
+                                : { color: "red" }}>
                                 {message}
                             </div>
                         }

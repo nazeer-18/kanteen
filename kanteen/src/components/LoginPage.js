@@ -6,10 +6,10 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
-import {useUser} from '../contexts/userContext';
+import { useUser } from '../contexts/userContext';
 
 export default function LoginPage() {
-    const {setUser} = useUser();
+    const { setUser } = useUser();
     const [showPwd, setShowPwd] = useState(false);
     const [checked, SetChecked] = useState(false);
     const [data, setData] = useState({
@@ -25,11 +25,11 @@ export default function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setClicked(true);
-        try{
-            const response = await userService.login(data.userName.toLowerCase(),data.pwd);
+        try {
+            const response = await userService.login(data.userName.toLowerCase(), data.pwd);
             setMessage(response.data.message)
             setSuccess(response.data.success)
-            if(response.data.success){
+            if (response.data.success) {
                 setLoginValid(true);
                 setUser({
                     emailId: response.data.details.emailId,
@@ -41,11 +41,11 @@ export default function LoginPage() {
                     navigate('/')
                 }, 2000);
             }
-            else{
+            else {
                 setLoginValid(false);
             }
-        }catch(err){
-            if(!err.response){
+        } catch (err) {
+            if (!err.response) {
                 setMessage("Server Error")
                 setTimeout(() => {
                     setMessage('')
@@ -137,7 +137,7 @@ export default function LoginPage() {
                             <div className="login-forgotPwd">
                                 <Link
                                     className='login-forgotpwdtxt'
-                                    exact to="/forgotpwd">
+                                    exact="true" to="/forgotpwd">
                                     <span>
                                         Forgot Password ?
                                     </span>
@@ -154,7 +154,7 @@ export default function LoginPage() {
                         </div>
                         <div className="login-signup">
                             Don't have an account?
-                            <Link exact to="/signupmail"
+                            <Link exact="true" to="/signupmail"
                                 className="login-signupBtn">
                                 <span >
                                     Sign up

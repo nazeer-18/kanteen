@@ -20,12 +20,12 @@ export default function HomePage() {
         <div>
             <div className="homepage-container">
                 <div className="foodpage-slogan">
-                {
-                    message.length > 0 ? <h2>{message}</h2> :
-                        <div className="home-body">
-                            <h1>Hello <text-amrita>{user.name}</text-amrita> !!</h1> <br />
-                        </div>
-                }
+                    {
+                        message.length > 0 ? <h2>{message}</h2> :
+                            <div className="home-body">
+                                <h1>Hello <text-amrita>{user.name}</text-amrita> !!</h1> <br />
+                            </div>
+                    }
                     <h1>
                         "Good <text-amrita>food</text-amrita> is all the sweeter when shared with good <text-amrita>friends.</text-amrita>"
                     </h1> <br />
@@ -45,10 +45,10 @@ export default function HomePage() {
                 </div>
             </div>
             <div className="homepage-buttons">
-                <Link exact to="/menu">
+                <Link exact="true" to="/menu">
                     <button>Order Now </button>
                 </Link>
-                <Link exact to="/orderhistory">
+                <Link exact="true" to="/orderhistory">
                     <button>
                         Order History
                     </button>
