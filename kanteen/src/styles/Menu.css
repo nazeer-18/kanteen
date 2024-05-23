@@ -1,12 +1,76 @@
-body{
+body {
     margin: 0;
     padding: 0;
     font-family: 'petrona';
     background-color: #e5e5e5;
 }
 
-.orderpage-cart-msg{
-    color:white;
+.dropdown-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 410px;
+    z-index: 1000;
+    width: 160px;
+    border-radius: 4px;
+    padding: 10px;
+    color:black;
+}
+
+.dropdown-type, .dropdown-category {
+    margin-bottom: 10px;
+    
+}
+
+.dropdown-item {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #bf0c45;
+}
+
+.dropdown-content {
+    padding-left: 8px;
+}
+
+.dropdown-content label {
+    display: block;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.dropdown-content label input {
+    margin-right: 5px;
+}
+css
+.dropdown-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.dropdown-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #bf0c45;
+    font-size: 20px;
+}
+.dropdown-actions button {
+    padding: 5px 7px;
+    background-color: #bf0c45;
+    color: white;
+    border: none;
+    margin-right: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropdown-actions button:hover {
+    background-color: #a00c3b;
+}
+.orderpage-cart-msg {
+    color: white;
     font-size: larger;
     font-weight: 600;
     padding: 8px;
@@ -14,13 +78,13 @@ body{
     font-family: 'petrona';
     border-radius: 37px;
     margin-bottom: 10px;
-    position:fixed;
-    right:10px;
-    top:10px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
     z-index: 5;
 }
 
-.orderpage-nav{
+.orderpage-nav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -31,7 +95,7 @@ body{
     background-color: #dddddd;
 }
 
-.orderpage-search{
+.orderpage-search {
     position: relative;
     width: 20%;
     min-width: 200px;
@@ -39,7 +103,7 @@ body{
     border-radius: 20px;
 }
 
-.orderpage-search input[type="text"]{
+.orderpage-search input[type="text"] {
     padding: 10px;
     margin: 5px;
     width: 100%;
@@ -50,18 +114,18 @@ body{
     background-color: white;
 }
 
-.orderpage-search input::placeholder{
-    color:#bf0c45;
+.orderpage-search input::placeholder {
+    color: #bf0c45;
     font-family: 'petrona';
 }
 
-.orderpage-search-icon{
+.orderpage-search-icon {
     position: absolute;
     top: 13px;
     right: -5px;
 }
 
-.orderpage-menu-items{
+.orderpage-menu-items {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -71,15 +135,17 @@ body{
     position: relative;
 }
 
-.orderpage-cart-nav-label{
-    cursor:pointer;
+.orderpage-cart-nav-label {
+    cursor: pointer;
     margin-left: 3px;
     padding: 2px;
     font-weight: bold;
+    font-size: larger;
+    position: relative;
 }
 
-@media screen and (max-width: 600px){
-    .orderpage-cart-nav-label{
+@media screen and (max-width: 600px) {
+    .orderpage-cart-nav-label {
         display: none;
     }
 }

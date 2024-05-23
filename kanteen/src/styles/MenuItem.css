@@ -74,7 +74,9 @@ body{
     align-items: center;
     min-height:50px;
 }
-
+.item-added-message{
+    text-align: center;
+}
 .menuitem-cart-btn{
     text-align: center;
 }
