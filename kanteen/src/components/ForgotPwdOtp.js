@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import {useLocation,useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
@@ -7,60 +7,60 @@ import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
-    const {user} = useUser();
+    const { user } = useUser();
     const navigate = useNavigate();
     useEffect(() => {
-        if(user.emailId === 'na' || user.emailId === '' || user.emailId === undefined){
-        navigate('/login');
+        if (user.emailId === 'na' || user.emailId === '' || user.emailId === undefined) {
+            navigate('/login');
         }
     }, [])
     const location = useLocation();
     const [success, setSuccess] = useState(false);
-    const [limit,setLimit] = useState(3);
+    const [limit, setLimit] = useState(3);
     const state = location.state || {};
-    const [message,setMessage] = useState('');
-    const [data,setData] = useState({
-        otp:''
+    const [message, setMessage] = useState('');
+    const [data, setData] = useState({
+        otp: ''
     })
-    
-const handleresend=async(e) =>{
-    
-    e.preventDefault();
-    try{
-        const response = await userService.resendotpmail(state.email);
-        setMessage(response.data.message);
-        setSuccess(response.data.success);
-        const otp = response.data.otp;
-        state.otp = otp;
-        
-    }catch(err){
-        if(!err.response){
-            setMessage("Internal Server Error, Please try again later !");
-            setSuccess(false);
-            return;
-        }
-        setMessage(err.response.data.message)
-        setSuccess(false);
-        setTimeout(() => {
-            setMessage('');
-        }, 2500);
-    }
 
-}    
-const handleSubmit = (e) => {
+    const handleresend = async (e) => {
+
         e.preventDefault();
-        if(data.otp === state.otp.toString()){
+        try {
+            const response = await userService.resendotpmail(state.email);
+            setMessage(response.data.message);
+            setSuccess(response.data.success);
+            const otp = response.data.otp;
+            state.otp = otp;
+
+        } catch (err) {
+            if (!err.response) {
+                setMessage("Internal Server Error, Please try again later !");
+                setSuccess(false);
+                return;
+            }
+            setMessage(err.response.data.message)
+            setSuccess(false);
+            setTimeout(() => {
+                setMessage('');
+            }, 2500);
+        }
+
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (data.otp === state.otp.toString()) {
             setMessage('OTP verified successfully redirecting to reset password page');
             setSuccess(true);
             setTimeout(() => {
                 setMessage('');
                 navigate('/resetpwd');
             }, 1500);
-            
-        }else{
-            setMessage('Oops! OTP not matched. Please try again.You have '+limit+' attempts left');
-            setLimit(limit-1);
-            if(limit === 0){
+
+        } else {
+            setMessage('Oops! OTP not matched. Please try again.You have ' + limit + ' attempts left');
+            setLimit(limit - 1);
+            if (limit === 0) {
                 setMessage('You have exceeded the limit. Please try again later');
                 setTimeout(() => {
                     setMessage('');
@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
                 <div className="forgot-otp-form-container">
                     <div className="forgot-otp-back-container">
                         <Link
-                            exact to="/forgotpwd"
+                            exact="true" to="/forgotpwd"
                             className="forgot-otp-backBtn">
                             <span>
                                 &lt;
@@ -89,7 +89,7 @@ const handleSubmit = (e) => {
                             className='forgot-otpauthtxt'>
                             An authentication code has been sent to your email.
                         </p>
-                        
+
                         <form className="forgot-otp-form" onSubmit={handleSubmit}   >
                             <div className="forgot-otp-form-group">
                                 <label
@@ -100,18 +100,18 @@ const handleSubmit = (e) => {
                                     type="text"
                                     name="forgot-otp"
                                     id="forgot-otp"
-                                    value= {data.otp}
-                                    onChange ={(e)=>{
-                                        setData({otp:e.target.value});
+                                    value={data.otp}
+                                    onChange={(e) => {
+                                        setData({ otp: e.target.value });
                                         setMessage('');
                                     }}
                                     placeholder="Enter your otp"
                                     required />
                             </div>
-                            <div className='Message' style={success?{'color':'green'}:{'color':'red'}}>
+                            <div className='Message' style={success ? { 'color': 'green' } : { 'color': 'red' }}>
                                 {message}
                             </div>
-                            
+
                             <p
                                 className='forgot-otprestxt'>
                                 Didn't receive a code(check Junk box)?

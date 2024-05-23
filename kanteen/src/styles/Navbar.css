@@ -4,6 +4,14 @@
     letter-spacing: 1.35px;
 }
 
+.responsive-nav{
+    display: none;
+}
+
+.responsive-nav-show{
+    display: block;
+}
+
 .nav-body{
     background-color: #bf0c45;
     color: white; 
@@ -11,25 +19,74 @@
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-weight: bold;
     padding: 8px;
 }
-.nav-body .app-name{
-    margin-left: 18px;
-}
+
 .nav-body .wish{
     margin-right: 18px;
 }
 
-@media (max-width:400px){
-    .nav-body{
-        display: block;
-    }
-    .wish{
-        display: none;
-    }
-    .app-name{
-        margin-left: 50vw;
-        text-align: center!important;
-    }
+.hide-nav{
+    display: none;
+}
+
+
+.hamburger button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border:1px solid white;
+    border-radius: 4px;
+    padding: 3px;
+    padding-bottom: 0;
+}
+
+.sidenav{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    padding: 10px 6px;
+    color:white;
+    background-color:#c1bdbd;
+    z-index: 5;
+    border-radius:0px 25px 25px; 
+}
+
+.sidenav-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.sidenav-logo img{
+    width: 32px;
+    height: 32px;
+}
+
+.sidenav-link{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.sidenav-link a{
+    color:#bf0c45;
+    font-family: 'poppins';
+    font-size: 18px;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 500;
+    margin-left: 4px;
+    padding-left: 7px;
+}
+
+.show-nav{
+    display: block;
 }
