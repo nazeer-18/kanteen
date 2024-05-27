@@ -48,7 +48,14 @@ export default function Cart() {
                         <div className="cart-heading">
 
                             <div className="cart-heading-desc">
-                                <h1>Your cart {cartItems.length===0 ? 'is empty' : ''} </h1>
+                                <h1>
+                                    <span title="view menu" className="cart-arrow" onClick={()=>{
+                                        navigate('/menu');
+                                    }}>
+                                        &#x2190;
+                                    </span>
+                                    Your cart {cartItems.length === 0 ? 'is empty' : ''}
+                                </h1>
                             </div>
 
                             <div className="cart-heading-price">
@@ -64,7 +71,7 @@ export default function Cart() {
                     </div>
                 }
                 <div className="cart-total">
-                    Subtotal ({totalItems}items):
+                    Subtotal ({totalItems} items):
                     {
                         total > 0 &&
                         <span>
@@ -75,6 +82,13 @@ export default function Cart() {
                         </span>
                     }
                 </div>
+            </div>
+            <div className="cart-footer">
+                <button className="cart-footer-button" onClick={() => {
+                    navigate('/checkout');
+                }}>
+                    Proceed to order
+                </button>
             </div>
         </div>
     )

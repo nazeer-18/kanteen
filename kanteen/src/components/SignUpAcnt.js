@@ -8,13 +8,13 @@ import { useUser } from '../contexts/userContext';
 import userService from '../services/userService';
 
 export default function SignUpAcnt(props) {
-    const { user ,setUser} = useUser();
+    const { user, setUser } = useUser();
     const navigate = useNavigate();
     const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
-    useEffect(()=>{
-        if(!emailIdValid)
-        navigate('/signupmail');
-    },[])
+    useEffect(() => {
+        if (!emailIdValid)
+            navigate('/signupmail');
+    }, [])
     const [emailDisabled, setEmailDisabled] = useState('');
     const [mobileValid, setMobileValid] = useState(false);
     const [validUserName, setValidUserName] = useState(1);
@@ -336,7 +336,7 @@ export default function SignUpAcnt(props) {
             <div className="memoryb">
                 Already have an account ?
                 <Link
-                    exact to="/"
+                    exact="true" to="/"
                     className="signupacnt-loginBtn">
                     <span style={{ margin: "2px", }}>
                         Login
