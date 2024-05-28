@@ -214,6 +214,10 @@ export default function SignUpAcnt(props) {
                             type={showPwd ? "text" : "password"}
                             name="password"
                             id="password"
+                            style={{
+                                outline: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                border: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                            }}
                             placeholder="Enter your password"
                             value={data.pwd}
                             onChange={(e) => {
@@ -290,6 +294,10 @@ export default function SignUpAcnt(props) {
                             placeholder="Confirm your password"
                             value={data.cnfPwd}
                             disabled={!pwdValid}
+                            style={{
+                                outline: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                border: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                            }}
                             onChange={(e) => setData({ ...data, cnfPwd: e.target.value })}
                             required />
                         <span
