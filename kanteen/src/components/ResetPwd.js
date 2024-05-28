@@ -23,7 +23,7 @@ export default function ResetPwd() {
     const [clicked, setClicked] = useState(false);
     const [data, setData] = useState({
         pwd: '',
-        cnfpwd: ''
+        cnfPwd: ''
     })
     const [pwdValid, setPwdValid] = useState(false);
     const [pwdCheck, setPwdCheck] = useState({
@@ -54,7 +54,7 @@ export default function ResetPwd() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setClicked(true);
-        if (data.pwd !== data.cnfpwd) {
+        if (data.pwd !== data.cnfPwd) {
             setMessage("Passwords do not match");
             setSuccess(false);
             return;
@@ -109,6 +109,10 @@ export default function ResetPwd() {
                                         type={showPwd ? "text" : "password"}
                                         name="reset-pwd" id="reset-pwd"
                                         value={data.pwd}
+                                        style={{
+                                            outline: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                            border: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                        }}
                                         onChange={handlePasswordChange}
                                         placeholder="Enter new password"
                                         required />
@@ -176,10 +180,14 @@ export default function ResetPwd() {
                                         type={showCnfPwd ? "text" : "password"}
                                         name="reset-pwd"
                                         id="cnf-reset-pwd"
-                                        value={data.cnfpwd}
+                                        value={data.cnfPwd}
                                         disabled={!pwdValid}
+                                        style={{
+                                            outline: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                            border: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                        }}
                                         onChange={(e) => setData(
-                                            { ...data, cnfpwd: e.target.value },
+                                            { ...data, cnfPwd: e.target.value },
                                             setMessage('')
                                         )}
                                         placeholder="Re-enter password"
@@ -195,7 +203,7 @@ export default function ResetPwd() {
                                 </div>
                             </div>
                             <div className="signupanct-hidden-texts">
-                                {pwdValid && data.pwd !== data.cnfpwd && data.cnfpwd.length > 0 &&
+                                {pwdValid && data.pwd !== data.cnfPwd && data.cnfPwd.length > 0 &&
                                     <div className="signupacnt-check-text">
                                         <span style={{ color: "red" }} >✖ </span> Passwords do not match
                                     </div>
