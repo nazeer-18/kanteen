@@ -5,8 +5,32 @@ import { faCartShopping, faFilter, faMagnifyingGlass, faTimes } from '@fortaweso
 import '../styles/Menu.css';
 import MenuItem from './MenuItem';
 import userService from '../services/userService';
+import { useUser } from '../contexts/userContext';
 
 export default function Menu() {
+    const { user } = useUser();
+    const userId = user.emailId;
+    const [totalItems, setTotalItems] = useState(0);
+    // useEffect(() => {
+    //     if (userId === 'na') {
+    //         navigate('/login');
+    //     }
+    // }, [userId])
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const res = await userService.fetchCartItems(userId);
+                setTotalItems(res.data.cart.totalItems);
+            } catch (err) {
+                console.error('Error fetching items', err);
+            }
+        }
+        fetchItems();
+        const interval = setInterval(() => {
+            fetchItems();
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [])
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [isInitiated, setIsInitiated] = useState(false);
@@ -219,8 +243,14 @@ export default function Menu() {
                     </span>
                 </div>
                 <div className="orderpage-cart" title="View items in cart" onClick={viewCart}>
-                    <span className="orderpage-cart-nav-label" style={{ color: "black" }}>CART</span>
-                    <FontAwesomeIcon icon={faCartShopping} />
+                    <span className="orderpage-cart-nav-label" style={{ color: "black" }}>CART</span> 
+                    <span className="cart-holder">
+                        {
+                            totalItems > 0 &&
+                            <span className="cart-items-cnt">{totalItems}</span>
+                        }
+                        <FontAwesomeIcon icon={faCartShopping} />
+                    </span>
                 </div>
             </div>
             <div className="orderpage-floating-menu"></div>

@@ -42,7 +42,7 @@ body {
 .dropdown-content label input {
     margin-right: 5px;
 }
-css
+
 .dropdown-actions {
     display: flex;
     justify-content: space-between;
@@ -69,6 +69,11 @@ css
 .dropdown-actions button:hover {
     background-color: #a00c3b;
 }
+
+.orderpage-cart{
+    cursor: pointer;
+}
+
 .orderpage-cart-msg {
     color: white;
     font-size: larger;
@@ -142,6 +147,19 @@ css
     font-weight: bold;
     font-size: larger;
     position: relative;
+}
+
+.cart-holder{
+    position: relative;
+}
+
+.cart-items-cnt{
+    position: absolute;
+    border-radius: 50%;
+    font-size: 16px;
+    top: -15px;
+    left:5px;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
