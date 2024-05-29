@@ -30,7 +30,7 @@ export default function Menu() {
             fetchItems();
         }, 2000);
         return () => clearInterval(interval);
-    }, [])
+    }, [userId])
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [isInitiated, setIsInitiated] = useState(false);

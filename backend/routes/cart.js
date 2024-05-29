@@ -13,7 +13,7 @@ cartRouter.post('/fetchall', async (req, res) => {
             })
             await newCart.save();
         }
-        res.status(200).json({ message: "Cart fetched successfully", cart: cart});
+        res.status(200).json({ message: "Cart fetched successfully", cart: cart });
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
@@ -25,7 +25,7 @@ cartRouter.post('/add', async (req, res) => {
     try {
         const userId = req.body.userId;
         let { itemId, quantity } = req.body;
-        if(!quantity) {
+        if (!quantity) {
             quantity = 1;
         }
         const cart = await Cart.findOne({ userId: userId });
@@ -84,10 +84,10 @@ cartRouter.post('/update', async (req, res) => {
         }
         item.quantity = quantity;
         await cart.calculateTotal();
-        res.status(200).json({success: true, message: "Quantity updated successfully"});
+        res.status(200).json({ success: true, message: "Quantity updated successfully" });
     } catch (err) {
         console.error(err);
-        res.status(500).json({success: false, message: "Internal Server Error"})
+        res.status(500).json({ success: false, message: "Internal Server Error" })
     }
 });
 
