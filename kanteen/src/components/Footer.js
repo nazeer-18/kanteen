@@ -35,6 +35,14 @@ export default function OrderHistory() {
                 >
                     <span>Privacy Policy</span>
                 </Link>
+                |
+                <Link
+                    className="footer-link"
+                    exact="true"
+                    to="/cancellationandrefund"
+                >
+                    <span>Cancellation & Refund Policy</span>
+                </Link>
             </p>
         </div>    
     )
