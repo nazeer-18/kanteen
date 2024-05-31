@@ -1,4 +1,4 @@
-.tac-title{
+.car-title{
     display:flex;
     max-width:fit-content;
     margin: 3% auto 5% auto;
@@ -11,33 +11,34 @@
     text-underline-offset: 20px;
 }
 
-.tac-scrollable {
-    width: 80%;
-    height: 400px;
-    overflow-y: scroll;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 20px auto;
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+.car-desc-container{
+    margin:5% 5% 5% 5%;
 }
 
-.tac-update-text{
-    margin-left: 10%;
-    color: rgba(0, 0, 0, 0.772);
+.car-desc{
+    font-size:x-large;
+    margin-bottom: 3%;
 }
 
-.tac-backBtn{
+.car-desc-list{
+    margin-left: 2%;
+}
+.car-desc-list li{
+    font-size: large;
+    list-style-type:disc;
+    margin-bottom: 0.5%;
+}
+
+.car-backBtn{
     display:flex;
     max-width:fit-content;
-    margin: 3% auto 5% auto;
+    margin: 3% auto 1% auto;
     word-spacing:0px;
     font-weight:bold;
     text-decoration:none;
 }
 
-.tac-backBtn button{
+.car-backBtn button{
     background-color: #bf0c45e6;
     color: #fff; 
     padding: 15px 30px; 
@@ -48,8 +49,10 @@
 }
 
 @media (max-width:450px){
-    .tac-title{
-        font-size:30px;
+    .car-title{
+        font-size:20px;
+        margin-bottom: 15%;
+        margin-top: 5%;
     }
     .tac-scrollable {
         height: 600px;

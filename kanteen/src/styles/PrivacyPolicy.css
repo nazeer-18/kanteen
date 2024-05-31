@@ -21,8 +21,10 @@
     margin-bottom: 10px;
 }
 .pp-list {
-    list-style-type: disc;
     margin-left: 20px;
+}
+.pp-list li{
+    list-style-type: disc;
 }
 .pp-section {
     margin-bottom: 20px;
