@@ -47,3 +47,14 @@
     border-radius: 8px; 
     cursor: pointer; 
 }
+
+@media (max-width:450px){
+    .car-title{
+        font-size:20px;
+        margin-bottom: 15%;
+        margin-top: 5%;
+    }
+    .tac-scrollable {
+        height: 600px;
+    }
+  }

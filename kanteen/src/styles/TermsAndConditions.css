@@ -46,3 +46,12 @@
     border-radius: 8px; 
     cursor: pointer; 
 }
+
+@media (max-width:450px){
+    .tac-title{
+        font-size:30px;
+    }
+    .tac-scrollable {
+        height: 600px;
+    }
+  }
