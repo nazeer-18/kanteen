@@ -26,7 +26,7 @@ const menuSchema = new Schema({
         type: String,
         required: true
     },
-    category: { //beverages, starters, main course, desserts, stationery, snack items
+    category: { //beverages, starters, main course, desserts, stationery, snack items, tiffin
         type: String,
         required: true
     },

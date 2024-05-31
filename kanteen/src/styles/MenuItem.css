@@ -11,10 +11,51 @@ body{
     margin: 5px 6px;
     border-radius: 8px;
     border: 1px solid #c9c9c9;
+    position: relative;
 }
 
 .menuitem-container:hover{
     background-color: #c9c9c9;
+}
+
+.menuitem-sold-cover{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+.menuitem-sold-status{
+    display: block;
+    background-color: #bf0c45;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    margin: 50% 9px;
+    text-align: center;
+    position: absolute;
+    width: 80%;
+    height: 20px;
+    transform: translateY(-180%) rotate(-40deg);
+    white-space: nowrap;
+    display: block;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.menuitem-type{
+    position: absolute;
+    right:1px;
+    padding: 2px;
+}
+
+.menuitem-type img{
+    width: 20px;
+    height: 20px;
 }
 
 .menuitem-image{
@@ -33,7 +74,9 @@ body{
     align-items: center;
     min-height:50px;
 }
-
+.item-added-message{
+    text-align: center;
+}
 .menuitem-cart-btn{
     text-align: center;
 }

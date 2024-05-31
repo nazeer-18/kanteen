@@ -8,13 +8,14 @@ import { useUser } from '../contexts/userContext';
 import userService from '../services/userService';
 
 export default function SignUpAcnt(props) {
-    const { user ,setUser} = useUser();
+    const { user, setUser } = useUser();
     const navigate = useNavigate();
     const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
-    useEffect(()=>{
-        if(!emailIdValid)
-        navigate('/signupmail');
-    },[])
+    useEffect(() => {
+        if (!emailIdValid) {
+            navigate('/signupmail');
+        }
+    }, [emailIdValid, navigate])
     const [emailDisabled, setEmailDisabled] = useState('');
     const [mobileValid, setMobileValid] = useState(false);
     const [validUserName, setValidUserName] = useState(1);
@@ -108,7 +109,7 @@ export default function SignUpAcnt(props) {
                         password: data.pwd
                     })
                     setTimeout(() => {
-                        Navigate('/home');
+                        Navigate('/');
                     }, 2500);
                 } else {
                     if (response.message) {
@@ -214,6 +215,10 @@ export default function SignUpAcnt(props) {
                             type={showPwd ? "text" : "password"}
                             name="password"
                             id="password"
+                            style={{
+                                outline: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                border: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
+                            }}
                             placeholder="Enter your password"
                             value={data.pwd}
                             onChange={(e) => {
@@ -290,6 +295,10 @@ export default function SignUpAcnt(props) {
                             placeholder="Confirm your password"
                             value={data.cnfPwd}
                             disabled={!pwdValid}
+                            style={{
+                                outline: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                border: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
+                            }}
                             onChange={(e) => setData({ ...data, cnfPwd: e.target.value })}
                             required />
                         <span
@@ -328,7 +337,7 @@ export default function SignUpAcnt(props) {
             <div className="memoryb">
                 Already have an account ?
                 <Link
-                    exact to="/"
+                    exact="true" to="/"
                     className="signupacnt-loginBtn">
                     <span style={{ margin: "2px", }}>
                         Login

@@ -2,6 +2,7 @@ require('dotenv').config()
 const port = process.env.PORT || 8080;
 const express = require('express');
 const http = require('http');
+const https = require('https');
 const WebSocket = require('ws');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
@@ -10,18 +11,27 @@ const userConnections = require('./utils');
 const { URL } = require('url');
 
 const app = express();
+const allowedOrigins = ['http://localhost:3000','https://kanteen-ase.netlify.app']
 app.use(cors())
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    const origin = req.headers.origin;
+    if(allowedOrigins.includes(origin)){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
 app.use(express.json())
 
-setInterval(() => {
-    http.get(process.env.SERVER_URL);
-}, 300000);
+// Use the appropriate module for the protocol
+const keepAlive = () => {
+    const url = new URL(process.env.SERVER_URL);
+    const protocol = url.protocol === 'https:' ? https : http;
+    protocol.get(process.env.SERVER_URL);
+};
+
+setInterval(keepAlive, 300000);
 
 const server = http.createServer(app);
 
@@ -75,5 +85,8 @@ app.use('/api/verify', verifyRouter)
 
 const itemsRouter = require('./routes/items')
 app.use('/api/items', itemsRouter)
+
+const cartRouter = require('./routes/cart')
+app.use('/api/cart', cartRouter)
 
 module.exports = { userConnections }

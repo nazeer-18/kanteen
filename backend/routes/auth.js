@@ -2,11 +2,7 @@ const express = require('express');
 const authRouter = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-
-authRouter.get('/', (req, res) => {
-    res.send("Auth route")
-}
-)
+const Cart = require('../models/Cart');
 
 //Login route
 authRouter.post('/login', async (req, res) => {
@@ -59,7 +55,15 @@ authRouter.post('/signup', async (req, res) => {
             password: Hashedpassword,
         })
 
-        await newUser.save();
+        const savedUser = await newUser.save();
+
+        //Create a cart for the user
+        const newCart = new Cart({
+            userId: savedUser.emailId,
+            items: []
+        })
+        await newCart.save();
+
         res.status(201).json({ msg: "User Registered Successfully", success: true })
 
     } catch (err) {
