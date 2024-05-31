@@ -10,6 +10,15 @@ ul li{
     padding: 5px;
     margin-bottom:13px;
     text-align: center;
+    cursor: pointer;
+}
+
+.updating-cart{
+    background-color: #dfdfdfa8;
+}
+
+.cartitem-container:hover{
+    background-color: #dfdfdfa8;
 }
 
 .cartitem-image{
