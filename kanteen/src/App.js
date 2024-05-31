@@ -11,6 +11,10 @@ import HomePage from './components/HomePage';
 import Menu from './components/Menu';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
+import TermsAndConditions from './components/TermsAndConditions';
+import ContactUs from './components/ContactUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
+// import Footer from './Footer';
 import { UserProvider } from './contexts/userContext';
 
 export default function App() {
@@ -29,7 +33,11 @@ export default function App() {
                     <Route path='/menu' element={<Menu />}></Route>
                     <Route path='/orderhistory' element={<OrderHistory />}></Route>
                     <Route path='/cart' element={<Cart />}></Route>
+                    <Route path='/termsandconditions' element={<TermsAndConditions />}></Route>
+                    <Route path='/contactus' element={<ContactUs />}></Route>
+                    <Route path='/privacypolicy' element={<PrivacyPolicy />}></Route>
                 </Routes>
+                {/* <Footer /> */}
             </UserProvider>
         </BrowserRouter>
 

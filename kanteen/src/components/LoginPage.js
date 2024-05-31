@@ -7,6 +7,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
+import Footer from './Footer';
 
 export default function LoginPage() {
     const { setUser } = useUser();
@@ -164,6 +165,7 @@ export default function LoginPage() {
                     </form>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

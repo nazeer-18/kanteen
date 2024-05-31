@@ -1,0 +1,48 @@
+.tac-title{
+    display:flex;
+    max-width:fit-content;
+    margin: 3% auto 5% auto;
+    word-spacing:0px;
+    color:#bf0c45;
+    font-weight:bold;
+    font-size:50px;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.733);
+    text-underline-offset: 20px;
+}
+
+.tac-scrollable {
+    width: 80%;
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.tac-update-text{
+    margin-left: 10%;
+    color: rgba(0, 0, 0, 0.772);
+}
+
+.tac-backBtn{
+    display:flex;
+    max-width:fit-content;
+    margin: 3% auto 5% auto;
+    word-spacing:0px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.tac-backBtn button{
+    background-color: #bf0c45e6;
+    color: #fff; 
+    padding: 15px 30px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+}
