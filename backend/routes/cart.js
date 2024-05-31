@@ -13,7 +13,7 @@ cartRouter.post('/fetchall', async (req, res) => {
             })
             await newCart.save();
         }
-        res.status(200).json({ message: "Cart fetched successfully", cart: cart});
+        res.status(200).json({ message: "Cart fetched successfully", cart: cart });
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
@@ -25,7 +25,7 @@ cartRouter.post('/add', async (req, res) => {
     try {
         const userId = req.body.userId;
         let { itemId, quantity } = req.body;
-        if(!quantity) {
+        if (!quantity) {
             quantity = 1;
         }
         const cart = await Cart.findOne({ userId: userId });
@@ -65,6 +65,29 @@ cartRouter.post('/remove', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
+    }
+});
+
+//Update quantity of an item in cart for a user
+cartRouter.post('/update', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const itemId = req.body.itemId;
+        const quantity = req.body.quantity;
+        const cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            return res.status(404).send("Cart not found for the user");
+        }
+        const item = cart.items.find(item => item.item == itemId);
+        if (!item) {
+            return res.status(404).send("Item not found in cart");
+        }
+        item.quantity = quantity;
+        await cart.calculateTotal();
+        res.status(200).json({ success: true, message: "Quantity updated successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Internal Server Error" })
     }
 });
 

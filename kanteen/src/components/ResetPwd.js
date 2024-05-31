@@ -14,7 +14,7 @@ export default function ResetPwd() {
         if(user.emailId === 'na' || user.emailId === undefined || user.emailId === null){
             navigate('/forgotpwd');
         }
-    },[])
+    },[navigate,user.emailId])
 
     const [showPwd, setShowPwd] = useState(false);
     const [showCnfPwd, setShowCnfPwd] = useState(false);
@@ -110,8 +110,8 @@ export default function ResetPwd() {
                                         name="reset-pwd" id="reset-pwd"
                                         value={data.pwd}
                                         style={{
-                                            outline: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
-                                            border: data.pwd.length!=0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                            outline: data.pwd.length!==0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                            border: data.pwd.length!==0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
                                         }}
                                         onChange={handlePasswordChange}
                                         placeholder="Enter new password"
@@ -183,8 +183,8 @@ export default function ResetPwd() {
                                         value={data.cnfPwd}
                                         disabled={!pwdValid}
                                         style={{
-                                            outline: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
-                                            border: data.cnfPwd.length!=0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                            outline: data.cnfPwd.length!==0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
+                                            border: data.cnfPwd.length!==0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
                                         }}
                                         onChange={(e) => setData(
                                             { ...data, cnfPwd: e.target.value },

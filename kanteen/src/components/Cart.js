@@ -16,7 +16,7 @@ export default function Cart() {
         if (userId === 'na') {
             navigate('/login');
         }
-    }, [userId])
+    }, [userId,navigate])
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function Cart() {
             fetchItems();
         }, 2000);
         return () => clearInterval(interval);
-    }, [])
+    }, [userId])
 
 
     return (
@@ -49,7 +49,7 @@ export default function Cart() {
 
                             <div className="cart-heading-desc">
                                 <h1>
-                                    <span title="view menu" className="cart-arrow" onClick={()=>{
+                                    <span title="view menu" className="cart-arrow" onClick={() => {
                                         navigate('/menu');
                                     }}>
                                         &#x2190;
