@@ -140,9 +140,9 @@ export default function SignupMail() {
                     </div>
                     {
                         !emailValid && email.length > 0 && !usedEmail &&
-                        <div className="signupmail-email-check-alert">
+                        <span className="signupmail-email-check-alert">
                             !! Enter a valid Amrita email address
-                        </div>
+                        </span>
                     }
                     {
                         !emailValid && email.length > 0 && usedEmail &&
