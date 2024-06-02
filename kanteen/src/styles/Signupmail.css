@@ -108,6 +108,7 @@ a{
     border-radius: 37px;
     text-align: center;
     margin: 5px;
+    max-width: 45vw;
 }
 
 .signupmail-verifyBtn{
@@ -130,4 +131,13 @@ a{
   width: 94%;
   padding: 2px;
   margin: 10px auto;
+}
+
+@media(max-width:450px){
+  .validate-icon{
+    display: none !important;
+  }
+  .signupmail-form{
+    padding: 0px !important;  
+  }
 }
