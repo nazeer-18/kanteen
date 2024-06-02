@@ -43,7 +43,7 @@ export default function Cart() {
         try {
             const orderId = "test1"; //TODO: generate a random or sequential number everytime
             const orderAmount = total;
-            const customerId = user.emaiId;
+            const customerId = user.emailId;
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
             const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);

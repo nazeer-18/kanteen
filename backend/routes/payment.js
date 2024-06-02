@@ -25,7 +25,6 @@ paymentRouter.post('/checkout', async (req, res) => {
                 order_currency: 'INR'
             })
         };
-
         fetch(url, options)
             .then(res => res.json())
             .then(json => { return res.status(200).send(json); })

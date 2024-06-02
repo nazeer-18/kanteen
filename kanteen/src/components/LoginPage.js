@@ -82,7 +82,7 @@ export default function LoginPage() {
                                 type="text"
                                 name="username"
                                 id="username"
-                                placeholder="Enter your mobile number or email address"
+                                placeholder="Enter your mobile number or email Id"
                                 onChange={(e) => setData({ ...data, userName: e.target.value })}
                                 value={data.userName}
                                 required />
