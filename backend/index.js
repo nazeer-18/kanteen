@@ -89,4 +89,7 @@ app.use('/api/items', itemsRouter)
 const cartRouter = require('./routes/cart')
 app.use('/api/cart', cartRouter)
 
+const paymentRouter = require('./routes/payment')
+app.use('/api/payment', paymentRouter)
+
 module.exports = { userConnections }
