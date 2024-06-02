@@ -43,10 +43,10 @@ export default function Cart() {
         try {
             const orderId = "test1"; //TODO: generate a random or sequential number everytime
             const orderAmount = total;
-            const customerID = user.emaiId;
+            const customerId = user.emaiId;
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
-            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerID, customerName, customerNumber);
+            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
             console.log(generate_order);
             const cashfree = load({
                 mode:"production"
