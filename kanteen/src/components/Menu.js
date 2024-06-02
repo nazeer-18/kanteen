@@ -33,6 +33,7 @@ export default function Menu() {
     }, [userId])
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
+    const [displayedItems, setDisplayedItems] = useState([]);
     const [isInitiated, setIsInitiated] = useState(false);
     const [message, setMessage] = useState('');
     const [displayMessage, setDisplayMessage] = useState(false);
@@ -47,6 +48,7 @@ export default function Menu() {
         stationery: false,
         beverages: false
     });
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -55,6 +57,7 @@ export default function Menu() {
                 setItems(res.data);
                 if (!isInitiated) {
                     setFilteredItems(res.data);
+                    setDisplayedItems(res.data);
                     setIsInitiated(true);
                 }
             } catch (err) {
@@ -68,14 +71,25 @@ export default function Menu() {
         return () => clearInterval(interval);
     }, [isInitiated]);
 
+    useEffect(() => {
+        applySearchFilter();
+    }, [filteredItems, searchTerm]);
+
     const searchHandler = (e) => {
-        const str = e.target.value.toLowerCase();
-        const filtered = items.filter((item) => item.name.toLowerCase().includes(str));
-        setFilteredItems(filtered);
+        setSearchTerm(e.target.value.toLowerCase());
+    };
+
+    const applySearchFilter = () => {
+        if (searchTerm) {
+            const filtered = filteredItems.filter((item) => item.name.toLowerCase().includes(searchTerm));
+            setDisplayedItems(filtered);
+        } else {
+            setDisplayedItems(filteredItems);
+        }
     };
 
     const handleTypeChange = (type) => {
-        setSelectedType(type);
+        setSelectedType(prevType => prevType === type ? '' : type);
     };
 
     const handleCategoryChange = (category) => {
@@ -113,6 +127,7 @@ export default function Menu() {
             beverages: false
         });
         setFilteredItems(items);
+        setSearchTerm('');
     };
 
     const navigate = useNavigate();
@@ -127,7 +142,7 @@ export default function Menu() {
     return (
         <div>
             <div className="orderpage-nav">
-                <div className="orderpage-filter" title="apply filters" onClick={toggleDropdown}>
+                <div className="orderpage-filter" title="apply filters" onClick={toggleDropdown} >
                     <span className="orderpage-cart-nav-label" style={{ color: "black" }}>FILTERS</span>
                     <FontAwesomeIcon icon={faFilter} onClick={toggleDropdown} style={{ cursor: "pointer" }} />
                 </div>
@@ -235,6 +250,7 @@ export default function Menu() {
                 <div className="orderpage-search">
                     <input
                         type="text"
+                        value={searchTerm}
                         onChange={searchHandler}
                         placeholder='Search any item here..'
                     />
@@ -260,10 +276,10 @@ export default function Menu() {
                         {message}
                     </div>
                 )}
-                {filteredItems.length === 0 ? (
+                {displayedItems.length === 0 ? (
                     <h1 style={{ margin: "auto" }}>No items found</h1>
                 ) : (
-                    filteredItems.map((item) => (
+                    displayedItems.map((item) => (
                         <MenuItem key={item._id} item={item} setDisplayMessage={setDisplayMessage} setMessage={setMessage} />
                     ))
                 )}

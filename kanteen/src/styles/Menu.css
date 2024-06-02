@@ -31,6 +31,7 @@ body {
 
 .dropdown-content {
     padding-left: 8px;
+    right: 0;
 }
 
 .dropdown-content label {
