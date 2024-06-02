@@ -38,6 +38,21 @@ export default function Cart() {
         return () => clearInterval(interval);
     }, [userId])
 
+    const handleCheckout = async () =>{
+        try{
+            const orderId = "test1"; //TODO: generate a random or sequential number everytime
+            const orderAmount = total;
+            const customerID = user.emaiId;
+            const customerName=user.name;
+            const customerNumber=user.mobileNumber;
+            const generate_order = await userService.paymentRequest(orderId,orderAmount,customerID,customerName,customerNumber);
+            console.log(generate_order);
+        }catch(err){
+            console.log(err);
+        }
+        setTimeout(()=>{
+        },1800);
+    }
 
     return (
         <div className="cart-container">
@@ -84,9 +99,7 @@ export default function Cart() {
                 </div>
             </div>
             <div className="cart-footer">
-                <button className="cart-footer-button" onClick={() => {
-                    navigate('/checkout');
-                }}>
+                <button className="cart-footer-button" onClick={handleCheckout}>
                     Proceed to order
                 </button>
             </div>
