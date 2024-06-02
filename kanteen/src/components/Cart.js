@@ -53,11 +53,7 @@ export default function Cart() {
             });
             let checkoutOptions = {
                 paymentSessionId: generate_order.payment_session_id,
-                redirectTarget: document.getElementById("cf_checkout"),
-                appearance: {
-                    width: "425px",
-                    height: "700px",
-                },
+                redirectTarget: "_blank",
             };
             cashfree.checkout(checkoutOptions).then((result) => {
                 if (result.error) {
