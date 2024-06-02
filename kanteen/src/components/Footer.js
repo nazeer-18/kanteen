@@ -19,7 +19,6 @@ export default function OrderHistory() {
                 >
                     <span>Terms & conditions</span>
                 </Link>
-                |
                 <Link
                     className="footer-link"
                     exact="true"
@@ -27,7 +26,6 @@ export default function OrderHistory() {
                 >
                     <span>Contact Us</span>
                 </Link>
-                |
                 <Link
                     className="footer-link"
                     exact="true"
@@ -35,7 +33,6 @@ export default function OrderHistory() {
                 >
                     <span>Privacy Policy</span>
                 </Link>
-                |
                 <Link
                     className="footer-link"
                     exact="true"

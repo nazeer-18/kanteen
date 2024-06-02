@@ -37,7 +37,7 @@
     text-decoration:none;
 }
 
-.tac-backBtn button{
+.tac-backBtn{
     background-color: #bf0c45e6;
     color: #fff; 
     padding: 15px 30px; 
@@ -54,4 +54,4 @@
     .tac-scrollable {
         height: 600px;
     }
-  }
+}

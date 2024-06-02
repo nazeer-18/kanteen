@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
-import '../styles/TermsAndConditions.css'; 
+import '../styles/TermsAndConditions.css';
 
 export default function OrderHistory() {
+    const navigate = useNavigate();
+    const handleBack = () => {
+        navigate(-1);
+    }
     const termsAndConditions = `
         These Terms and Conditions, along with privacy policy or other terms (“Terms”) constitute a binding agreement by and between DADI JAI CHIRANJEEVA, ( “Website Owner” or “we” or “us” or “our”) and you (“you” or “your”) and relate to your use of our website, goods (as applicable) or services (as applicable) (collectively, “Services”).
 
@@ -40,22 +44,17 @@ export default function OrderHistory() {
         ◦ All concerns or communications relating to these Terms must be communicated to us using the contact information provided on this website.
 
     `;
-    
+
     return (
         <div>
             <h className="tac-title">Terms & Conditions</h>
-        <div className="tac-scrollable">
-            {termsAndConditions.split('\n').map((line, index) => (
-                <p key={index}>{line}<br></br></p>
-            ))}
-        </div>
-        <p className="tac-update-text">Last updated on 31-05-2024 15:10:43</p>
-        <Link
-                exact="true" to="/login"
-                className="tac-backBtn">
-                <button>Back</button>
-                
-            </Link><br></br>
+            <div className="tac-scrollable">
+                {termsAndConditions.split('\n').map((line, index) => (
+                    <p key={index}>{line}<br></br></p>
+                ))}
+            </div>
+            <p className="tac-update-text">Last updated on 31-05-2024 15:10:43</p>
+            <button className="tac-backBtn" onClick={handleBack}>Back</button>
         </div>
     );
 }

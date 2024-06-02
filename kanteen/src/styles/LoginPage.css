@@ -4,7 +4,6 @@ body{
   background-color: #e5e5e5;
 }
 .login-homepage {
-  height: 95vh;
   margin: 0px auto;
 }
 
@@ -13,7 +12,6 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  height:90vh;
   max-width: 85%;
   margin: 0px auto;
 }

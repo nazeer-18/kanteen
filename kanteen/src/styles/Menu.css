@@ -134,6 +134,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 7px;
     align-items: center;
     background-color: #dddddd;
