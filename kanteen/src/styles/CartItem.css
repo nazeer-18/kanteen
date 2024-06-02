@@ -1,3 +1,7 @@
+ul li{
+    list-style-type: none;
+}
+
 .cartitem-container{
     display: flex;
     flex-direction: row;
@@ -6,6 +10,14 @@
     padding: 5px;
     margin-bottom:13px;
     text-align: center;
+}
+
+.updating-cart{
+    background-color: #dfdfdfa8;
+}
+
+.cartitem-container:hover{
+    background-color: #dfdfdfa8;
 }
 
 .cartitem-image{
@@ -30,7 +42,7 @@
 
 .cartitem-details-right{
     margin:auto 0px;
-    width: 50px;
+    min-width: 50px;
 }
 
 .cartitem-name{
@@ -43,18 +55,71 @@
     flex-wrap: wrap;
     padding: 2px 8px;
     margin: 2px;
-    align-items: baseline;
+    align-items: start;
     justify-content: center;
 }
 
-.cartitem-remove{
+.cartitem-quantity 
+input[type="number"]::-webkit-inner-spin-button,
+.cartitem-quantity input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#cart-qty{
+    width:35px;
+    height:23px;
+    padding-left: 4px;
+    font-size: 14px;
+    background-color: #7b6d6d29;
+    border-radius: 7px;
+    cursor: pointer;
+}   
+
+.qty-drop-down-container{
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 2px 10px;
+    border-radius: 7px;
+    background-color: #7b6d6d29;
+    color:#0F1111;
+    width: 70px;
+    height: 30px;
+    text-align: left;
+    position: relative;
+    align-items: center;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.drop-down-qty-list{
+    background-color: white;
+    position: absolute;
+    border:1px solid grey;
+    border-radius:12px;
+    top:0px;
+    left:0px;
+    min-width:89px;
+    padding: 8px 0px;
+    height:auto;
+    overflow-y: auto;
+    z-index: 5;
+}
+
+.drop-down-qty-list ul li{
+    padding: 2px 12px 1px 13px;
+}
+
+.kanteen-btn-container{
     text-align: center;
     width: 100px;
     margin: 5px;
     padding: 3px;
 }
 
-.cartitem-remove button{
+.kanteen-btn-container button{
     background-color: #bf0c45;
     color: white;
     border: none;
@@ -63,4 +128,28 @@
     font-family: 'petrona';
     font-weight: bold;
     cursor: pointer;
+}
+
+.cartitem-input-qty input[type="number"] :active{
+    box-shadow: 0 0 0 3px #c8f3fa,0 1px 2px rgba(15,17,17,.15) inset!important;
+    color:red !important;
+    background-color: green!important;
+    font-size: 20px!important;
+}
+
+@media (max-width:410px){
+    #cart-qty{
+        margin-bottom: 7px;
+    }
+    .cartitem-membership{
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media (min-width:510px){
+    .cartitem-remove{
+        margin: 0;
+        padding: 0;
+    }
 }

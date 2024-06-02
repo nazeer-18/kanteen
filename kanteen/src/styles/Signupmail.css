@@ -1,7 +1,5 @@
-body{
-  margin: 0px;
-  padding: 0px;
-  background-color: #e5e5e5;
+a{
+  text-decoration: none;
 }
 
 .text-amrita{
@@ -12,29 +10,26 @@ body{
   margin: 0px 2px;
 }
 
-.signupmail-container{
-  height:95vh;
-  display: flex;
-  align-items: stretch;
-}
-
-.signupmail-image-container,.signupmail-form-container{
-  flex:1;
-  display: flex;
-  align-items: center;
+.signupmail-container{ 
+  display: flex; 
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .signupmail-image-container { 
-    background-color: white;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:45vw;
+    object-fit: contain;
 }
-  
-.signupmail-image-container img {
-    max-width: 100%;    
-    max-height: 80%; 
-}
-  
+
 .signupmail-form-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -45,12 +40,8 @@ body{
     box-shadow: 0 2px 4px rgba(0,0,0,0.login-1);
     padding: 20px;
     margin: 5px;
-    min-height: 200px;
-    max-height: 450px;
-    min-width: 550px;
-    max-width: fit-content;
-    overflow-y: auto;
 }
+
 .signupmail-signup-txt{
     text-align: center;
     font-weight: bold;
@@ -138,33 +129,5 @@ body{
   font-size: large;
   width: 94%;
   padding: 2px;
-  margin: 0px auto;
-}
-
-@media (min-width:900px) and (max-width:950px){
-  .signupmail-image-container{
-      width:40%;
-      padding: 0px;
-      margin: 0px;
-      border-radius: 0%;
-  }
-  .signupmail-form-container{
-      width:40%;
-      padding: 0px;
-      margin: 0px;
-  }
-  .signupmail-form{
-      min-width: 420px;
-      padding: 0;
-      margin: 0;
-  }
-}
-
-  @media (max-width:900px){
-  .signupmail-image-container{
-      display: none;
-  }
-  .signupmail-container{
-      max-width: 100%;
-  }
+  margin: 10px auto;
 }

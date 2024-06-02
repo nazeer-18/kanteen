@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Signupmail.css';
 import signupImg from '../images/signup.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -169,13 +169,17 @@ export default function SignupMail() {
                             <span>
                                 I agree to the
                             </span>
-                            <span className="text-amrita">
-                                Terms and conditions
-                            </span>
+                            <Link exact="true" to="/termsandconditions">
+                                <span className="text-amrita">
+                                    Terms and conditions
+                                </span>
+                            </Link>
                             and
-                            <span className="text-amrita">
-                                Privacy Policy.
-                            </span>
+                            <Link exact="true" to="/privacypolicy">
+                                <span className="text-amrita">
+                                    Privacy Policy.
+                                </span>
+                            </Link>
                         </label>
                     </div>
                     <div className="signupmail-verifyBtn">

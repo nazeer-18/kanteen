@@ -6,6 +6,7 @@ import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import {load} from '@cashfreepayments/cashfree-js';
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Cart() {
         if (userId === 'na') {
             navigate('/login');
         }
-    }, [userId])
+    }, [userId, navigate])
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -36,8 +37,50 @@ export default function Cart() {
             fetchItems();
         }, 2000);
         return () => clearInterval(interval);
-    }, [])
+    }, [userId])
 
+    const handleCheckout = async () => {
+        try {
+            const orderId = "test1"; //TODO: generate a random or sequential number everytime
+            const orderAmount = total;
+            const customerId = user.emailId;
+            const customerName = user.name;
+            const customerNumber = user.mobileNumber;
+            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
+            console.log(generate_order);
+            const cashfree = load({
+                mode:"production"
+            })
+            let checkoutOptions = {
+                paymentSessionId: generate_order.payment_session_id,
+                redirectTarget: "_blank",
+            };
+            cashfree.checkout(checkoutOptions).then((result) => {
+                if (result.error) {
+                    console.log("There is some payment error, Check for Payment Status");
+                    console.log(result.error);
+                }
+                if (result.redirect) {
+                    // This will be true when the payment redirection page couldnt be opened in the same window
+                    // This is an exceptional case only when the page is opened inside an inAppBrowser
+                    // In this case the customer will be redirected to return url once payment is completed
+                    console.log("Payment will be redirected");
+                }
+                if (result.paymentDetails) {
+                    // This will be called whenever the payment is completed irrespective of transaction status
+                    console.log("Payment has been completed, Check for Payment Status");
+                    console.log(result.paymentDetails.paymentMessage);
+                }
+                //TODO: This just returns the payment status , 
+                //      upon status we should update order history and 
+                //      clear the cart on a successful payment.
+            });
+        } catch (err) {
+            console.log(err);
+        }
+        setTimeout(() => {
+        }, 1800);
+    }
 
     return (
         <div className="cart-container">
@@ -49,7 +92,7 @@ export default function Cart() {
 
                             <div className="cart-heading-desc">
                                 <h1>
-                                    <span title="view menu" className="cart-arrow" onClick={()=>{
+                                    <span title="view menu" className="cart-arrow" onClick={() => {
                                         navigate('/menu');
                                     }}>
                                         &#x2190;
@@ -84,9 +127,7 @@ export default function Cart() {
                 </div>
             </div>
             <div className="cart-footer">
-                <button className="cart-footer-button" onClick={() => {
-                    navigate('/checkout');
-                }}>
+                <button className="cart-footer-button" onClick={handleCheckout}>
                     Proceed to order
                 </button>
             </div>
