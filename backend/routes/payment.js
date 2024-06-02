@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 paymentRouter.post('/checkout',async(req,res)=>{
     try {
-        const url = 'https://sandbox.cashfree.com/pg/orders';
+        const url = 'https://api.cashfree.com/pg/orders';
         const options = {
         method: 'POST',
         headers: {
