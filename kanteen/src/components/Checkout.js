@@ -11,11 +11,11 @@ export default function Checkout({ route, navigate }) {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("sid", location.state.session_id);
+        console.log("sid", session_id);
         console.log("ustr", upiStr);
-        const getPayment = await userService.getPayment(location.state.session_id, upiStr);
-        console.log(getPayment);
-        window.open(getPayment, '_blank', 'noopener,noreferrer');
+      
+        const getPayment = await userService.getPayment(session_id, upiStr);
+        window.open(getPayment, '_self', 'noopener,noreferrer');
         //TODO: redirect user after payment
     }
 
