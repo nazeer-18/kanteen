@@ -62,6 +62,48 @@
     border-radius: 4px;
     font-size: 16px;
 }
+.image-fetcher-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .image-frame {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    /* background-image: url('https://via.placeholder.com/300?text=Mask+Image'); Your static mask image */
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  .masked-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;/* Your static mask image */
+    mask-size: cover;
+  }
+  
+  .floating-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #bf0c46;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .floating-button:hover {
+    background-color: #a30b3c;
+  }
+  
 
 .checkout-proceed-button {
     background-color: #bf0c46;
