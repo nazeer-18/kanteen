@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import userService from '../services/userService';
+import '../styles/Checkout.css';
 
 export default function Checkout({ route, navigate }) {
     const location = useLocation();
     const [upiStr, setUpiStr] = useState('')
-
+    const session_id= location.state.session_id;
+    const [selectedOption, setSelectedOption] = useState('upi');
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("sid", location.state.session_id);
         console.log("ustr", upiStr);
         const getPayment = await userService.getPayment(location.state.session_id, upiStr);
         console.log(getPayment);
-        // window.open(getPayment, '_blank', 'noopener,noreferrer');
+        window.open(getPayment, '_blank', 'noopener,noreferrer');
         //TODO: redirect user after payment
     }
 
