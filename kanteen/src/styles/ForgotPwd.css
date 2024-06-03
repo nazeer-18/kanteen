@@ -1,42 +1,41 @@
-body{
-    background-color: #e5e5e5;
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: 'petrona';
+.back-btn-container{
+    margin: 15px auto 6px 23px;
 }
+
+.back-btn{
+    font-size: 30px;
+    font-family: 'petrona';
+    text-decoration: none;
+    color:black;
+    font-weight: 600;
+    padding: 7px;
+}
+
 .forgotpwd{
     display: flex;
     flex-wrap: wrap;
     justify-content:center;
     align-items: center;
-    height:90vh;
-    margin:0px auto;
+    margin-bottom: 20px;
 }
-.forgotpwd .forgotpwd-forgot-container{
-    width:40%;
-    height: 85vh;
-    padding: 20px;
-    margin: 15px 0px;
-    margin-left: 25px;
+
+.forgotpwd-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33vw;
+}
+
+.forgotpwd-image-container img{
+    min-width: 320px;
+}
+
+.forgotpwd-forgot-container{
+    padding: 10px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.forgotpwd-forgot-group{
-    margin: 0px auto;
-    padding: 50px;
-    box-sizing: border-box;
-}
-.forgotpwd-back{
-    margin-bottom: 15px;
-    font-size: 20px;
-}
-.forgotpwd-back-lnk{
-    font-family: 'petrona';
-    text-decoration: none;
-    color:black;
-    font-weight: bold;
 }
 
 .forgotpwd-forgot-txt{
@@ -48,94 +47,55 @@ body{
 
 .forgotpwd-suggest{
     color:#4f4c4c;
-    margin-bottom: 15px;
     font-size: 18px;
+    margin-bottom: 9px;
+    max-width: 75%;
 }
 
 .forgotpwd-email-group{
     margin: 0px auto;
-    padding: 5px;
+    padding: 5px; 
+    text-align: center;
     position: relative;
 }
-.forgotpwd-email{
-    margin: 10px;
-    padding: 10px;
-    box-sizing: border-box;
 
-}
-.forgotpwd-email-group input[type="email"]{
-    width: 90%;
+.forgotpwd-email-group input{
+    width: 80%;
     padding: 15px;
-    /* margin-bottom: 20px; */
     border-radius: 5px;
     border: 1px solid #bf0c45;
     font-family: 'petrona';
     font-size: 18px;
+    margin:10px 5px;
 }
+
 .validateicon{
-    
     position: absolute;
-    top: 14px;
-    right: 25px;
+    top: 30%;
+    right: 70px;
     font-size: 35px;
     font-weight: 900;
     cursor: pointer;
 }
+
 .forgotpwd-btn-container{
-    width:70%;
-    padding: 8px 16px;
-    margin: 0px auto;
-    margin-top: 15px;
-    margin-left: 40px;
-    background-color: #bf0c45;
-    cursor: pointer;
     text-align: center;
+    margin: 7px 5px;
+    padding: 3px 8px;
+}
+
+.forgotpwd-btn-container button{
+    width: 70%;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 500;
     border-radius: 25px;
-}
-
-.forgotpwd-btn{
-    width: 85%;
-    padding: 8px 16px;
-    margin: 0px auto;
-    background-color: #bf0c45;
-    font-family: 'petrona';
-    cursor: pointer;
-    text-align: center;
-    color: white;
-    font-size:18px;
-    border: none;
-}
-
-.forgotpwd-btn button{
     border: none;
     background-color: #bf0c45;
     color: white;
-    font-size: 18px;
-    font-family: 'petrona';
     cursor: pointer;
-    padding: 10px;
 }
 
-.forgotpwd .forgotpwd-image-container{
-    flex:1;      
-    display: flex;    
-    justify-content: center; 
-    align-items: center; 
-    padding: 20px; 
-    margin: auto;  
-    max-width: 45%;      
-    height: 520px;       
-    background-color: white;
-    box-sizing: border-box;
-    border-radius: 75px;
-}
-
-.forgotpwd-image-container img{
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-}
 .forgotpwd-email-check-alert{
     color: rgb(255 0 0);
     font-size: larger;
@@ -143,74 +103,34 @@ body{
     background-color: #d4d9dcb5;
     border-radius: 37px;
     padding: 10px;
-    margin-top:8px;
+    margin:auto 5px;
     text-align: center;
-    
-}
-@media (max-width:1350px){
-    .forgotpwd-forgot-group {
-        padding: 20px;
-    }
-    .forgotpwd .forgotpwd-image-container{
-        padding: 10px;
-        width: 35%;
-    }
 }
 
-@media (max-width:1080px){
-    .forgotpwd .forgotpwd-forgot-container {
-        width: 50%;
+@media(max-width:740px){
+    .forgotpwd-suggest{
+        max-width: 100% !important;
     }
-    .forgotpwd .forgotpwd-image-container{
-        width: 30%;
-        margin: 0px;
-        padding: 5px;
-    }
-}   
-
-@media (max-width:870px){
-    .forgotpwd .forgotpwd-forgot-container {
-        width: 60%;
-    }
-    .forgotpwd .forgotpwd-image-container{
-        width: 30%;
-        margin: 0px;
-        padding: 5px;
+    .forgotpwd-image-container{
+        width:85vw;
     }
 }
 
-@media (max-width:720px){
-    .forgotpwd .forgotpwd-forgot-container{
-        margin: 0px;
-    }
-    .forgotpwd-forgot-txt{
-        font-size: 30px;
-    }
-}
-
-@media (max-width:640px){
-    .forgotpwd .forgotpwd-image-container{
+@media(max-width:600px){
+    .validateicon{
         display: none;
     }
-    .forgotpwd .forgotpwd-forgot-container{
+}
+
+@media(max-width:400px){
+    .forgotpwd-forgot-container{
+        margin: 2px 5px!important;
+        padding: 2px;
+    }
+    .forgotpwd-email-group input[type="email"]{
+        width: 90%;
+    }
+    .forgotpwd-btn-container button{
         width: 100%;
-    }
-}
-
-@media (max-width:430px){
-    .forgotpwd-forgot-txt{
-        font-size: 25px;
-    }
-}
-
-@media (max-width:370px){
-    .forgotpwd-forgot-txt{
-        font-size: 20px;
-    }
-}
-
-@media (max-width:320px){
-    .forgotpwd-forgot-txt{
-        font-size: 18px;
     }
 }

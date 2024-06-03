@@ -95,4 +95,7 @@
 
 .show-nav{
     display: block;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
 }
