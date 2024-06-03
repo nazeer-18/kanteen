@@ -1,10 +1,10 @@
-import React , { useState, useEffect } from 'react';
-import {useLocation} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import userService from '../services/userService';
 import '../styles/Checkout.css';
 import staticQR from '../images/staticQR.jpg';
 
-export default function Checkout({route,navigate}) {
+export default function Checkout({ route, navigate }) {
     const location = useLocation();
     const [upiStr, setUpiStr] = useState('');
     const session_id= location.state.session_id;

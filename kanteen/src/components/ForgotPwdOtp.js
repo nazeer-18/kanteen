@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/ForgotOtp.css';
-import forgotImg from '../images/ForgotOtp.svg';
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
+import otpImage from '../images/OtpImage.svg';
 
 export default function ForgotPwd() {
     const { user } = useUser();
@@ -70,24 +70,27 @@ export default function ForgotPwd() {
         }
     }
     return (
-        <div className='forgot-otp-homepage'>
+        <div>
+            <div className="back-btn-container">
+                <Link
+                    exact="true" to="/forgotpwd"
+                    className="back-btn">
+                    &lt;  Back
+                </Link>
+            </div>
             <div className="forgot-otp-container">
+                <div className="forgot-otp-image-container">
+                    <img
+                        src={otpImage}
+                        alt="otp" />
+                </div>
                 <div className="forgot-otp-form-container">
-                    <div className="forgot-otp-back-container">
-                        <Link
-                            exact="true" to="/forgotpwd"
-                            className="forgot-otp-backBtn">
-                            <span>
-                                &lt;
-                            </span>
-                            Back
-                        </Link>
-                    </div>
+
                     <div className="forgot-otp-form">
                         <div className='forgot-otpvertxt'>Verify OTP</div>
                         <p
                             className='forgot-otpauthtxt'>
-                            An authentication code has been sent to your email.
+                            An authentication code has been sent to your email. {user.emailId}
                         </p>
 
                         <form className="forgot-otp-form" onSubmit={handleSubmit}   >
@@ -129,12 +132,6 @@ export default function ForgotPwd() {
                             </div>
                         </form>
                     </div>
-                </div>
-                <div className="forgot-otp-image-container">
-                    <img
-                        src={forgotImg}
-                        alt="otp"
-                        width="600px" />
                 </div>
             </div>
         </div>
