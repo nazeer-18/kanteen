@@ -15,8 +15,7 @@ export default function Checkout({route,navigate}) {
         console.log("ustr",upiStr);
 
         const getPayment = await userService.getPayment(session_id,upiStr);
-        console.log(getPayment);
-        window.open(getPayment, '_blank', 'noopener,noreferrer');
+        window.open(getPayment.data, '_self', 'noopener,noreferrer');
         //TODO: redirect user after payment
     }
 
