@@ -16,6 +16,7 @@ import ContactUs from './components/ContactUs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CancellationAndRefund from './components/CancellationAndRefund';
 import Footer from './components/Footer';
+import Checkout from './components/Checkout';
 
 import { UserProvider } from './contexts/userContext';
 import Editprofile from './components/Editprofile';
@@ -41,6 +42,7 @@ export default function App() {
                     <Route path='/contactus' element={<ContactUs />}></Route>
                     <Route path='/privacypolicy' element={<PrivacyPolicy />}></Route>
                     <Route path='/cancellationandrefund' element={<CancellationAndRefund />}></Route>
+                    <Route path='/checkout' element={<Checkout />}></Route>
                 </Routes>
                 <Footer />
             </UserProvider>

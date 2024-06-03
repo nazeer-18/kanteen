@@ -51,6 +51,10 @@ class userService {
     paymentRequest(orderId,orderAmount,customerId,customerName,customerNumber){
         return axios.post(serverUrl + '/api/payment/checkout', { orderId, orderAmount, customerId, customerName, customerNumber })
     }
+    //get upi adress and send collect request
+    getPayment(sessionID){
+        return axios.post(serverUrl + '/api/payment/upicollectreq', { sessionID })
+    }
 }
 //eslint-disable-next-line
 export default new userService();

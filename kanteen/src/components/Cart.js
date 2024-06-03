@@ -6,7 +6,6 @@ import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
-import {load} from '@cashfreepayments/cashfree-js';
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -41,40 +40,24 @@ export default function Cart() {
 
     const handleCheckout = async () => {
         try {
-            const orderId = "test1"; //TODO: generate a random or sequential number everytime
+            const orderId = user.name+Math.floor(Math.random()* (100001)); //TODO: generate a sequential number everytime as randoms cant be unique.
+            console.log(orderId)
             const orderAmount = total;
-            const customerId = user.emailId;
+            const customerId = user.mobileNumber;
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
-            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
-            console.log(generate_order);
-            const cashfree = load({
-                mode:"production"
-            })
-            let checkoutOptions = {
-                paymentSessionId: generate_order.payment_session_id,
-                redirectTarget: "_blank",
-            };
-            cashfree.checkout(checkoutOptions).then((result) => {
-                if (result.error) {
-                    console.log("There is some payment error, Check for Payment Status");
-                    console.log(result.error);
-                }
-                if (result.redirect) {
-                    // This will be true when the payment redirection page couldnt be opened in the same window
-                    // This is an exceptional case only when the page is opened inside an inAppBrowser
-                    // In this case the customer will be redirected to return url once payment is completed
-                    console.log("Payment will be redirected");
-                }
-                if (result.paymentDetails) {
-                    // This will be called whenever the payment is completed irrespective of transaction status
-                    console.log("Payment has been completed, Check for Payment Status");
-                    console.log(result.paymentDetails.paymentMessage);
-                }
-                //TODO: This just returns the payment status , 
-                //      upon status we should update order history and 
-                //      clear the cart on a successful payment.
-            });
+            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);            
+
+            if (generate_order.data.payment_session_id != null) {
+                setTimeout(() => {
+                    console.log(generate_order);
+                    navigate('/checkout',{state:{'session_id':generate_order.data.payment_session_id}}
+                        )
+                }, 200);
+            }
+            else {
+                console.log(generate_order);
+            }
         } catch (err) {
             console.log(err);
         }
