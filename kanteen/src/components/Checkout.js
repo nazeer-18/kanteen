@@ -16,8 +16,7 @@ export default function Checkout({ route, navigate }) {
         console.log("ustr",upiStr);
         const getPayment = await userService.getPayment(session_id,upiStr,selectedOption);
         // console.log(getPayment.data.url);
-        console.log(Object.getOwnPropertyNames(getPayment));
-        window.open(getPayment.data.data.url, '_self', 'noopener,noreferrer');
+        window.open(getPayment.data, '_self', 'noopener,noreferrer');
         //TODO: redirect user after payment
     };
     const handleUpiIdChange = (e) => {
