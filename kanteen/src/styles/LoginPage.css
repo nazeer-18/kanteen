@@ -1,4 +1,4 @@
-.login-login-container{
+.login-homepage{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,9 +9,13 @@
   background-color: #e5e5e5;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width:45vw;
+  align-items: center; 
   object-fit: contain;
+  min-width:36vw;
+}
+
+.login-image-container img{
+  min-width:320px;
 }
 
 .login-login-container .login-login-form{
@@ -25,6 +29,10 @@
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.login-1);
   margin: 5px;
+}
+
+.login-login-container{
+  min-width: 33vw;
 }
 
 .login-logintxt{
@@ -46,7 +54,8 @@
 }
 
 .login-form-group{
-  width: 100%;
+  width: 90%;
+  margin: 0px auto;
   font-size: large;
   position: relative;
 }
@@ -87,7 +96,9 @@
   padding: 8px;
   background-color: #d4d9dcb5;
   border-radius: 37px;
-  margin-bottom: 10px;
+  margin: 10px;
+  word-wrap: break-word;
+  max-width: 290px;
 }
 
 .login-memory{
@@ -98,6 +109,7 @@
   font-size: large;
   box-sizing: border-box;
   padding:0px 15px;
+  min-width: 360px;
 }
 
 .login-rememberMe label{
@@ -153,10 +165,34 @@
     flex-direction: column;
     padding: 0px!important;
     margin: 0px!important;
-    min-width:310px;
+    min-width:350px;
+    width:50vw;
   }
   .login-form,.login-login-form,.login-memory{
     padding: 0px!important;
     margin: 0px!important;
+  }
+  .login-form-group input{
+    padding: 2px;
+    width: 90px;
+  }
+}
+
+@media(max-width:400px){
+  .login-memory{
+    min-width: 0px;
+    padding: 3px!important;
+    box-sizing: border-box;
+  }
+  .login-login{
+    margin: 2px;
+    padding: 4px;
+  }
+}
+
+@media(max-width:600px){
+  .login-response{
+    max-width: 100%;
+    
   }
 }

@@ -21,9 +21,14 @@ a{
     background-color: #e5e5e5;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width:45vw;
+    align-items: center; 
     object-fit: contain;
+    min-width:36vw;
+}
+  
+.signupmail-image-container img{
+  min-width:320px;
+
 }
 
 .signupmail-form-container{
@@ -103,7 +108,7 @@ a{
     color: rgb(255 0 0);
     font-size: larger;
     font-weight: 600;
-    padding: 8px;
+    padding: 4px;
     background-color: #d4d9dcb5;
     border-radius: 37px;
     text-align: center;
@@ -116,6 +121,7 @@ a{
   margin: 18px auto;
   text-align: center;
 }
+
 .VerifyBtn{
     width: 90%;
     padding: 10px 20px;
@@ -131,6 +137,15 @@ a{
   width: 94%;
   padding: 2px;
   margin: 10px auto;
+}
+
+@media(max-width:900px){
+  .signupmail-mail-response{
+    max-width: 100% !important;;
+  }
+  .signupmail-terms{
+    margin: 10px 5px; 
+  }
 }
 
 @media(max-width:450px){

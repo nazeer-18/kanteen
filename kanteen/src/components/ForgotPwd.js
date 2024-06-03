@@ -59,15 +59,18 @@ export default function ForgotPwd() {
         }
     }
     return (
-        <div className="forgotpwd">
-            <div className="forgotpwd-forgot-container">
-                <div className="forgotpwd-forgot-group">
-                    <div className="forgotpwd-back">
-                        <Link
-                            className="forgotpwd-back-lnk" exact="true" to="/">
-                            &lt; &nbsp;Back to login
-                        </Link>
-                    </div>
+        <div>
+            <div className="back-btn-container">
+                <Link
+                    className="back-btn" exact="true" to="/login">
+                    &lt; &nbsp;Back to login
+                </Link>
+            </div>
+            <div className="forgotpwd">
+                <div className="forgotpwd-image-container">
+                    <img src={forgotImg} alt="forgot" />
+                </div>
+                <div className="forgotpwd-forgot-container">
                     <div className="forgotpwd-forgot-txt">
                         Forgot your password?
                     </div>
@@ -86,6 +89,7 @@ export default function ForgotPwd() {
                                 value={email}
                                 id="email"
                                 style={{ outline: "none" }}
+
                                 className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
                                 placeholder="Enter your email address"
                                 required />
@@ -121,6 +125,7 @@ export default function ForgotPwd() {
                             <button
                                 className="forgotpwd-btn"
                                 value="submit"
+                                disabled={!emailValid}
                                 onSubmit={handleSubmit}
                                 type="submit">
                                 Submit
@@ -128,9 +133,6 @@ export default function ForgotPwd() {
                         </div>
                     </form>
                 </div>
-            </div>
-            <div className="forgotpwd-image-container">
-                <img src={forgotImg} alt="forgot" />
             </div>
         </div>
     )

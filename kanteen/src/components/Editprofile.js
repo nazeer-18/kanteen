@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Editprofile.css';
-import loginImg from '../images/Login-amico.svg';
+import loginImg from '../images/LoginImage.svg';
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';

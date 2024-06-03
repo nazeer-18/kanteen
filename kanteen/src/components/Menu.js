@@ -11,11 +11,11 @@ export default function Menu() {
     const { user } = useUser();
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
-    // useEffect(() => {
-    //     if (userId === 'na') {
-    //         navigate('/login');
-    //     }
-    // }, [userId])
+    useEffect(() => {
+        if (userId === 'na') {
+            navigate('/login');
+        }
+    }, [userId])
     useEffect(() => {
         const fetchItems = async () => {
             try {

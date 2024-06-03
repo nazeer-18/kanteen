@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/LoginPage.css';
-import loginImg from '../images/Login-amico.svg';
+import '../styles/LoginPage.css'; 
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
+import LoginImage from '../images/LoginImage.svg';
 
 export default function LoginPage() {
     const { setUser } = useUser();
@@ -62,13 +62,13 @@ export default function LoginPage() {
     };
     return (
         <div className='login-homepage'>
+            <div className="login-image-container">
+                <img
+                    // src={loginImg}
+                    src={LoginImage}
+                    alt="login"/>
+            </div>
             <div className="login-login-container">
-                <div className="login-image-container">
-                    <img
-                        src={loginImg}
-                        alt="login"
-                        width="600px" />
-                </div>
                 <div className="login-login-form">
                     <div className='login-logintxt'>
                         LOGIN
