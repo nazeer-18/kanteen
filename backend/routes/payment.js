@@ -1,10 +1,12 @@
 const express = require('express')
 const paymentRouter = express.Router();
 const fetch = require('node-fetch');
+const Gateway = require('cashfree-pg');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
-        const url = 'https://api.cashfree.com/pg/orders';
+        const url = 'https://api.cashfree.com/pg/orders'; //TODO: Migrate to Test Envi.
+
         const options = {
             method: 'POST',
             headers: {
@@ -35,5 +37,29 @@ paymentRouter.post('/checkout', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+paymentRouter.post('/upicollectreq',async(req,res)=>{
+    Gateway.Cashfree.XEnvironment = Gateway.Cashfree.Environment.PRODUCTION; //TODO: Migrate to Test envi.
+    const orderPayRequest = {
+                "payment_session_id": req.body.session_id,
+                "payment_method": {
+                    "upi": {
+                        "channel": "collect",
+                        "upi_id": req.body.upiID,
+                        "upi_redirect_url": true,
+                        "upi_expiry_minutes": 5
+                    }
+                  }
+              }
+        Gateway.Cashfree.PGPayOrder("2022-09-01", orderPayRequest).then((response) => {
+        console.log('Transaction Initiated successfully:', response.data);
+        return res.status(200).send(response.data.data.url);
+    })
+
+    .catch((error) => {
+        console.error('Error creating transaction:', error);
+        return res.status(500).send("check log :)");
+    });
+})
 
 module.exports = paymentRouter;
