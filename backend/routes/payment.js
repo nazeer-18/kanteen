@@ -5,7 +5,7 @@ const Gateway = require('cashfree-pg');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
-        const url = 'https://api.cashfree.com/pg/orders'; //TODO: Migrate to Test Envi.
+        const url = 'https://sandbox.cashfree.com/pg/orders'; //TODO: Migrate to Prod. Envi.
 
         const options = {
             method: 'POST',
@@ -39,7 +39,7 @@ paymentRouter.post('/checkout', async (req, res) => {
 });
 
 paymentRouter.post('/upicollectreq',async(req,res)=>{
-    Gateway.Cashfree.XEnvironment = Gateway.Cashfree.Environment.PRODUCTION; //TODO: Migrate to Test envi.
+    Gateway.Cashfree.XEnvironment = Gateway.Cashfree.Environment.SANDBOX; //TODO: Migrate to Prod. envi.
     const orderPayRequest = {
                 "payment_session_id": req.body.session_id,
                 "payment_method": {
