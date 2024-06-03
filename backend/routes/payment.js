@@ -50,7 +50,8 @@ paymentRouter.post('/upicollectreq',async(req,res)=>{
                         "upi_expiry_minutes": 5
                     }
                   },
-                "return_url":"https://kanteen-ase.netlify.app/orderhistory" //TODO: change it to ordsrs/{orderID}
+                "return_url":"https://kanteen-ase.netlify.app/orderhistory", //TODO: change it to ordsrs/{orderID}
+                "notify_url":"https://webhook.site/4353153b-36e4-49a6-8858-fc4fea8a71a7" //TEST
               }
         Gateway.Cashfree.PGPayOrder("2022-09-01", orderPayRequest).then((response) => {
         console.log('Transaction Initiated successfully:', response.data);
