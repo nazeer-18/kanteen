@@ -112,7 +112,7 @@ export default function LoginPage() {
                             </div>
                         </div>
                         {clicked &&
-                            <div className="login-response">
+                            <div className="login-response response">
                                 <span
                                     style={{ color: success ? "#139a72" : "#ba1717" }}>
                                     {message}

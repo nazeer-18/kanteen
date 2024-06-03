@@ -113,6 +113,11 @@
     border-radius: 30px;
   }
 
+  .reset-response{
+    word-wrap: break-word;
+    max-width: 290px;
+  }
+  
   @media(max-width:400px){
     .reset-pwdvertxt{
       font-size: 36px;

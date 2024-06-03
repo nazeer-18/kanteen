@@ -6,6 +6,8 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import userService from '../services/userService';
+import createAccountImage from '../images/createAccountImage.svg'
+
 
 export default function SignUpAcnt(props) {
     const { user, setUser } = useUser();
@@ -128,221 +130,228 @@ export default function SignUpAcnt(props) {
         }
     }
     return (
-        <div className="signupacnt">
-            <div className="signupacnt-signuptxt">Sign up</div>
-            <form className="signupacnt-signup-form" onSubmit={handleSubmit}>
+        <div className="signupacnt-container">
 
-                <div className="signupacnt-form-group" onClick={handleEmailClick}>
-                    <label
-                        htmlFor="userEmail">
-                    </label>
-                    <input
-                        type="text"
-                        name="userEmail"
-                        id="userEmail"
-                        value={user.emailId}
-                        disabled
-                        required />
-                </div>
-                {
-                    <div className="signupanct-hidden-texts">
-                        <div className="signupacnt-check-text">
-                            {emailDisabled}
-                        </div>
+            <div className="signupacnt-img-container">
+                <img src={createAccountImage} alt="create account" className="signupacnt-img" />
+            </div>
+            <div className="signupacnt">
+
+                <div className="signupacnt-signuptxt">Sign up</div>
+                <form className="signupacnt-signup-form" onSubmit={handleSubmit}>
+
+                    <div className="signupacnt-form-group" onClick={handleEmailClick}>
+                        <label
+                            htmlFor="userEmail">
+                        </label>
+                        <input
+                            type="text"
+                            name="userEmail"
+                            id="userEmail"
+                            value={user.emailId}
+                            disabled
+                            required />
                     </div>
-                }
-                <div className="signupacnt-form-group">
-                    <label
-                        htmlFor="username">
-                    </label>
-                    <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        placeholder="Enter your username"
-                        value={data.usrname}
-                        onChange={handleUserName}
-                        required />
                     {
-                        validUserName === 0 &&
                         <div className="signupanct-hidden-texts">
                             <div className="signupacnt-check-text">
-                                <span style={{ color: "red" }} >✖ </span> Username should contain atleast 3 Characters
-                            </div>
-                        </div>
-                    }{
-                        validUserName === 2 &&
-                        <div className="signupanct-hidden-texts">
-                            <div className="signupacnt-check-text">
-                                <span style={{ color: "red" }} >✖ </span>  Only aplhabets, numbers, _ , @ are allowed
+                                {emailDisabled}
                             </div>
                         </div>
                     }
-                </div>
-                <div className="signupacnt-form-group">
-                    <label
-                        htmlFor="mobile">
-                    </label>
-                    <input
-                        type="tel"
-                        name="mobile"
-                        id="mobile"
-                        placeholder={`Enter your mobile number`}
-                        value={data.mobile}
-                        onChange={
-                            (e) => {
-                                setData({ ...data, mobile: e.target.value });
-                                handleMobileChange(e.target.value)
-                            }
+                    <div className="signupacnt-form-group">
+                        <label
+                            htmlFor="username">
+                        </label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            placeholder="Enter your username"
+                            value={data.usrname}
+                            onChange={handleUserName}
+                            required />
+                        {
+                            validUserName === 0 &&
+                            <div className="signupanct-hidden-texts">
+                                <div className="signupacnt-check-text">
+                                    <span style={{ color: "red" }} >✖ </span> Username should contain atleast 3 Characters
+                                </div>
+                            </div>
+                        }{
+                            validUserName === 2 &&
+                            <div className="signupanct-hidden-texts">
+                                <div className="signupacnt-check-text">
+                                    <span style={{ color: "red" }} >✖ </span>  Only aplhabets, numbers, _ , @ are allowed
+                                </div>
+                            </div>
                         }
-                        required />
-                </div>
-
-                {data.mobile.length > 0 && !mobileValid &&
-                    <div className="signupanct-hidden-texts">
-                        <div className="signupacnt-check-text">
-                            <span style={{ color: "red" }} >✖ </span> Enter a valid mobile number
-                        </div>
                     </div>
-                }
-
-                <div className="signupacnt-form-group">
-                    <label
-                        htmlFor="pwd">
-                    </label>
-                    <div className='signupact-pwd-group'>
+                    <div className="signupacnt-form-group">
+                        <label
+                            htmlFor="mobile">
+                        </label>
                         <input
-                            type={showPwd ? "text" : "password"}
-                            name="password"
-                            id="password"
-                            style={{
-                                outline: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
-                                border: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
-                            }}
-                            placeholder="Enter your password"
-                            value={data.pwd}
-                            onChange={(e) => {
-                                setData({ ...data, pwd: e.target.value });
-                                handlePasswordChange(e.target.value)
-                            }
+                            type="tel"
+                            name="mobile"
+                            id="mobile"
+                            placeholder={`Enter your mobile number`}
+                            value={data.mobile}
+                            onChange={
+                                (e) => {
+                                    setData({ ...data, mobile: e.target.value });
+                                    handleMobileChange(e.target.value)
+                                }
                             }
                             required />
-                        <span
-                            className="eyedisplay"
-                            onClick={() => setShowPwd((prev) => !prev)}>
-                            {showPwd
-                                ? (<FaRegEyeSlash title="hide" />)
-                                : (<FaEye title="show" />)
-                            }
-                        </span>
                     </div>
-                </div>
-                {data.pwd.length > 0 && !pwdValid &&
-                    <div className="signupanct-hidden-texts signupacnt-pwd-check">
-                        <div className="signupacnt-check-text">
-                            Password must contain atleast:
-                        </div>
-                        <div className="signupacnt-pwd-check-list">
-                            <ul>
-                                {
-                                    !pwdCheck.pwdLength && !pwdCheck.pwdLength &&
-                                    <li>
-                                        <span style={{ color: "red" }} >✖ </span>
-                                        <span>8 characters</span>
-                                    </li>
-                                }
-                                {
-                                    !pwdCheck.pwdUppercase && !pwdCheck.pwdUppercase &&
-                                    <li>
-                                        <span style={{ color: "red" }} >✖ </span>
-                                        <span>1 uppercase letter</span>
-                                    </li>
-                                }
-                                {
-                                    !pwdCheck.pwdLowercase && !pwdCheck.pwdLowercase &&
-                                    <li>
-                                        <span style={{ color: "red" }} >✖ </span>
-                                        <span>1 lowercase letter</span>
-                                    </li>
-                                }
-                                {
-                                    !pwdCheck.pwdNumber && !pwdCheck.pwdNumber &&
-                                    <li>
-                                        <span style={{ color: "red" }} >✖ </span>
-                                        <span>1 number</span>
-                                    </li>
-                                }{
-                                    !pwdCheck.pwdSpecialChar && !pwdCheck.pwdSpecialChar &&
-                                    <li>
-                                        <span style={{ color: "red" }} >✖ </span>
-                                        <span>1 special character</span>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                }
 
-                <div className="signupacnt-form-group">
-                    <label
-                        htmlFor="cpwd">
-                    </label>
-                    <div className='signupact-pwd-group'>
-                        <input
-                            type={cnfPwd ? "text" : "password"}
-                            name="cpwd"
-                            id="cpwd"
-                            placeholder="Confirm your password"
-                            value={data.cnfPwd}
-                            disabled={!pwdValid}
-                            style={{
-                                outline: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
-                                border: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
-                            }}
-                            onChange={(e) => setData({ ...data, cnfPwd: e.target.value })}
-                            required />
-                        <span
-                            className="eyedisplay"
-                            onClick={() => setCnfPwd((prev) => !prev)}>
-                            {cnfPwd
-                                ? (<FaRegEyeSlash title="hide" />)
-                                : (<FaEye title="show" />)
-                            }
-                        </span>
-                    </div>
-                </div>
-                <div className="signupanct-hidden-texts">
-                    {pwdValid && data.pwd !== data.cnfPwd && data.cnfPwd.length > 0 &&
-                        <div className="signupacnt-check-text">
-                            <span style={{ color: "red" }} >✖ </span> Passwords do not match
+                    {data.mobile.length > 0 && !mobileValid &&
+                        <div className="signupanct-hidden-texts">
+                            <div className="signupacnt-check-text">
+                                <span style={{ color: "red" }} >✖ </span> Enter a valid mobile number
+                            </div>
                         </div>
                     }
-                </div>
+
+                    <div className="signupacnt-form-group">
+                        <label
+                            htmlFor="pwd">
+                        </label>
+                        <div className='signupact-pwd-group'>
+                            <input
+                                type={showPwd ? "text" : "password"}
+                                name="password"
+                                id="password"
+                                style={{
+                                    outline: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                    border: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
+                                }}
+                                placeholder="Enter your password"
+                                value={data.pwd}
+                                onChange={(e) => {
+                                    setData({ ...data, pwd: e.target.value });
+                                    handlePasswordChange(e.target.value)
+                                }
+                                }
+                                required />
+                            <span
+                                className="eyedisplay"
+                                onClick={() => setShowPwd((prev) => !prev)}>
+                                {showPwd
+                                    ? (<FaRegEyeSlash title="hide" />)
+                                    : (<FaEye title="show" />)
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    {data.pwd.length > 0 && !pwdValid &&
+                        <div className="signupanct-hidden-texts signupacnt-pwd-check">
+                            <div className="signupacnt-check-text">
+                                Password must contain atleast:
+                            </div>
+                            <div className="signupacnt-pwd-check-list">
+                                <ul>
+                                    {
+                                        !pwdCheck.pwdLength && !pwdCheck.pwdLength &&
+                                        <li>
+                                            <span style={{ color: "red" }} >✖ </span>
+                                            <span>8 characters</span>
+                                        </li>
+                                    }
+                                    {
+                                        !pwdCheck.pwdUppercase && !pwdCheck.pwdUppercase &&
+                                        <li>
+                                            <span style={{ color: "red" }} >✖ </span>
+                                            <span>1 uppercase letter</span>
+                                        </li>
+                                    }
+                                    {
+                                        !pwdCheck.pwdLowercase && !pwdCheck.pwdLowercase &&
+                                        <li>
+                                            <span style={{ color: "red" }} >✖ </span>
+                                            <span>1 lowercase letter</span>
+                                        </li>
+                                    }
+                                    {
+                                        !pwdCheck.pwdNumber && !pwdCheck.pwdNumber &&
+                                        <li>
+                                            <span style={{ color: "red" }} >✖ </span>
+                                            <span>1 number</span>
+                                        </li>
+                                    }{
+                                        !pwdCheck.pwdSpecialChar && !pwdCheck.pwdSpecialChar &&
+                                        <li>
+                                            <span style={{ color: "red" }} >✖ </span>
+                                            <span>1 special character</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                    <div className="signupacnt-form-group">
+                        <label
+                            htmlFor="cpwd">
+                        </label>
+                        <div className='signupact-pwd-group'>
+                            <input
+                                type={cnfPwd ? "text" : "password"}
+                                name="cpwd"
+                                id="cpwd"
+                                placeholder="Confirm your password"
+                                value={data.cnfPwd}
+                                disabled={!pwdValid}
+                                style={{
+                                    outline: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                    border: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
+                                }}
+                                onChange={(e) => setData({ ...data, cnfPwd: e.target.value })}
+                                required />
+                            <span
+                                className="eyedisplay"
+                                onClick={() => setCnfPwd((prev) => !prev)}>
+                                {cnfPwd
+                                    ? (<FaRegEyeSlash title="hide" />)
+                                    : (<FaEye title="show" />)
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div className="signupanct-hidden-texts">
+                        {pwdValid && data.pwd !== data.cnfPwd && data.cnfPwd.length > 0 &&
+                            <div className="signupacnt-check-text">
+                                <span style={{ color: "red" }} >✖ </span> Passwords do not match
+                            </div>
+                        }
+                    </div>
 
 
-                <div className="signupacnt-createAcnt">
-                    <button
-                        type="submit"
-                        value="submit"
-                        onSubmit={handleSubmit}
-                        className='signupacnt-createAcntBtn'>
-                        Create Account
-                    </button>
-                </div>
-                <div className="signupanct-hidden-texts Error-message">
-                    {validAll}
-                </div>
+                    <div className="signupacnt-createAcnt">
+                        <button
+                            type="submit"
+                            value="submit"
+                            onSubmit={handleSubmit}
+                            className='signupacnt-createAcntBtn'>
+                            Create Account
+                        </button>
+                    </div>
+                    <div className="signupanct-hidden-texts Error-message">
+                        {validAll}
+                    </div>
 
-            </form>
-            <div className="memoryb">
-                Already have an account ?
-                <Link
-                    exact="true" to="/"
-                    className="signupacnt-loginBtn">
-                    <span style={{ margin: "2px", }}>
-                        Login
-                    </span>
-                </Link>
+                </form>
+                <div className="memoryb">
+                    Already have an account ?
+                    <Link
+                        exact="true" to="/"
+                        className="signupacnt-loginBtn">
+                        <span style={{ margin: "2px", }}>
+                            Login
+                        </span>
+                    </Link>
+                </div>
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import logo from '../images/logo.jpg';
 import '../styles/Navbar.css';
+import HomeIcon from '../images/HomeIcon.svg';
 
 export default function Navbar() {
     const { user, logout } = useUser();
@@ -44,6 +45,11 @@ export default function Navbar() {
                     <div className="sidenav-logo">
                         <img src={logo} alt="Logo" />
                     </div>
+                    <h2>
+                        <text-amrita>
+                            Kanteen
+                        </text-amrita>
+                    </h2>
                     <div className="close-sidenav">
                         <button onClick={handleResponsiveness} aria-label="Close" type="button" className="close-button Overlay-closeButton">
                             <svg fill="#bf0c46" aria-hidden="true" height="20" viewBox="0 0 16 16" width="20" className="octicon octicon-x">
@@ -55,7 +61,13 @@ export default function Navbar() {
                 <hr />
                 <div className="sidenav-content">
                     <div className="sidenav-link">
-                        <Link onClick={handleResponsiveness} to="/"><div> Home </div></Link>
+                        <Link onClick={handleResponsiveness} to="/">
+                            <div>
+                                <div className="sidenav-img-container">
+                                    <img src={HomeIcon} /> Home
+                                </div>
+                            </div>
+                        </Link>
                         <Link onClick={handleResponsiveness} to="/menu"><div> Order </div></Link>
                         <Link onClick={handleResponsiveness} to="/orderhistory"><div> Order History </div></Link>
                         <Link onClick={handleResponsiveness} to="/transaction"><div> Transaction </div></Link>
@@ -71,24 +83,28 @@ export default function Navbar() {
                         </svg>
                     </button>
                 </div>
-                <div className="app-name">ASE CANTEEN</div>
-                <div className='wish'>AUM NAMAHSHIVAYA</div>
+                <div className="app-name">
+                    <Link exact="true" to="/">
+                        ASE CANTEEN
+                    </Link>
+                </div>
+                <div className="wish"></div> {/*made sidenav responsive using this so dont remove it*/}
                 <div className="profile-icon responsive-nav" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
                     <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M25.8334 10.8333C25.8334 14.055 23.2217 16.6667 20 16.6667C16.7784 16.6667 14.1667 14.055 14.1667 10.8333C14.1667 7.61167 16.7784 5 20 5C23.2217 5 25.8334 7.61167 25.8334 10.8333Z" stroke="white" strokeWidth="1.5" />
                         <path d="M9.04028 29.1497C9.61161 25.1912 12.6762 21.9565 16.665 21.6659C18.944 21.4998 21.064 21.4996 23.3386 21.665C27.3259 21.9549 30.3882 25.1895 30.9593 29.1463L31.0704 29.9159C31.3996 32.1964 29.8153 34.3249 27.5243 34.5706C22.1475 35.1472 17.8702 35.1405 12.4854 34.5661C10.1908 34.3214 8.60131 32.191 8.93097 29.907L9.04028 29.1497Z" stroke="white" strokeWidth="1.5" />
                     </svg>
-                    
+
                 </div>
                 {isOpen && (
-                        <div className="dropdown-content">
-                            <h3>{user.name}</h3>
-                            <div className='dropdown-edit'>
-                                <Link to="/Editprofile" style={{textDecoration:'none'}}>Edit Profile</Link>
-                            </div>
-                            <button onClick={handleLogout}>Logout</button>
+                    <div className="dropdown-content">
+                        <h3>{user.name}</h3>
+                        <div className='dropdown-edit'>
+                            <Link to="/Editprofile" style={{ textDecoration: 'none' }}>Edit Profile</Link>
                         </div>
-                    )}
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                )}
             </div>
         </div>
     );

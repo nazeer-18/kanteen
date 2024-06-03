@@ -110,7 +110,7 @@ export default function SignupMail() {
                 <div className="signupmail-image-container">
                     <img
                         src={mail}
-                        alt="signup Image" />
+                        alt="signup" />
                 </div>
                 <div className="signupmail-form-container">
                     <div className='signupmail-signup-txt'>SIGNUP</div>

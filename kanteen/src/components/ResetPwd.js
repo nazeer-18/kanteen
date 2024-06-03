@@ -223,7 +223,7 @@ export default function ResetPwd() {
                             </div>
                         </form>
                         {clicked &&
-                            <div className="login-response">
+                            <div className="reset-response response">
                                 <span
                                     style={{ color: success ? "#139a72" : "#ba1717" }}>
                                     {message}
