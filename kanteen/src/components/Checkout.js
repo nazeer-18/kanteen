@@ -2,27 +2,39 @@ import React , { useState, useEffect } from 'react';
 import {useLocation} from 'react-router-dom';
 import userService from '../services/userService';
 import '../styles/Checkout.css';
+import staticQR from '../images/staticQR.jpg';
 
 export default function Checkout({route,navigate}) {
     const location = useLocation();
-    const [upiStr, setUpiStr] = useState('')
+    const [upiStr, setUpiStr] = useState('');
     const session_id= location.state.session_id;
     const [selectedOption, setSelectedOption] = useState('upi');
-    
-    const handleSubmit = async (e) => {
+
+    const handleCollectRequest = async (e) => {
         e.preventDefault();        
         console.log("sid",session_id);
         console.log("ustr",upiStr);
-
-        const getPayment = await userService.getPayment(session_id,upiStr);
-        window.open(getPayment.data, '_self', 'noopener,noreferrer');
+        const getPayment = await userService.getPayment(session_id,upiStr,selectedOption);
+        // console.log(getPayment.data.url);
+        console.log(Object.getOwnPropertyNames(getPayment));
+        window.open(getPayment.data.data.url, '_self', 'noopener,noreferrer');
         //TODO: redirect user after payment
-    }
-
+    };
     const handleUpiIdChange = (e) => {
         const { value } = e.target;
         setUpiStr(value);
-    }
+    };
+
+    const [imageUrl, setImageUrl] = useState(staticQR);
+    const [buttonVisible, setButtonVisible] = useState(true);
+    
+
+    const handleQRGen = async () => {
+        const newImageUrl = await userService.getPayment(session_id,"x",selectedOption);
+        console.log(newImageUrl.data);
+        setImageUrl(newImageUrl.data.payload.qrcode);
+        setButtonVisible(false);
+    };
 
     const renderContent = () => {
         switch (selectedOption) {
@@ -41,7 +53,7 @@ export default function Checkout({route,navigate}) {
                                 required />
                         <button 
                             className="checkout-proceed-button"
-                            onClick={handleSubmit}>
+                            onClick={handleCollectRequest}>
                             Proceed
                         </button>
                     </div>
@@ -50,7 +62,16 @@ export default function Checkout({route,navigate}) {
                 return (
                     <div className="payment-collect-box">
                         <h2>UPI QR Code</h2>
-                        <img src="path_to_qr_code_image" alt="QR Code" className="payment-qr-code" />
+                        <div className="image-fetcher-container">
+                            <div className="image-frame">
+                                <img src={imageUrl} alt="Fetched" className="masked-image" />
+                                {buttonVisible && (
+                                <button className="floating-button" onClick={handleQRGen}>
+                                    Get Image {/*TODO: Make button floating at center and add mask*/}
+                                </button> 
+                                )}
+                            </div>
+                        </div>
                         <button className="checkout-proceed-button">Proceed</button>
                     </div>
                 );
