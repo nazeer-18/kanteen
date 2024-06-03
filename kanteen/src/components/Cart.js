@@ -40,9 +40,10 @@ export default function Cart() {
 
     const handleCheckout = async () => {
         try {
-            const orderId = "test1"; //TODO: generate a random or sequential number everytime
+            const orderId = user.name+Math.floor(Math.random()* (100001)); //TODO: generate a sequential number everytime as randoms cant be unique.
+            console.log(orderId)
             const orderAmount = total;
-            const customerId = user.emailId;
+            const customerId = user.mobileNumber;
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
             const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);            
