@@ -47,6 +47,14 @@ class userService {
     updateQty(userId, itemId, quantity) {
         return axios.post(serverUrl + '/api/cart/update', { userId, itemId, quantity })
     }
+    //proceed to checkout once user clicks on checout in cart page
+    paymentRequest(orderId,orderAmount,customerId,customerName,customerNumber){
+        return axios.post(serverUrl + '/api/payment/checkout', { orderId, orderAmount, customerId, customerName, customerNumber })
+    }
+    //get upi adress and send collect request
+    getPayment(sessionID, upiID,paymentMethod){
+        return axios.post(serverUrl + '/api/payment/upicollectreq', { sessionID, upiID ,paymentMethod})
+    }
 }
 //eslint-disable-next-line
 export default new userService();

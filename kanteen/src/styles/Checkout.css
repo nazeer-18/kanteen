@@ -1,0 +1,154 @@
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 70vh;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+}
+
+.payment-options-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    padding: 30px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    height: 60%;
+    width: 25%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.payment-option-button {
+    background-color: #bf0c46;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    margin: 15px 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.payment-option-button:hover {
+    background-color: #a00a3b;
+}
+
+.payment-collect-container {
+    width: 60%;
+    padding: 20px;
+    /* background-color: #ffffff;
+    margin: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.payment-collect-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upi-input-field {
+    padding: 10px;
+    margin: 10px 0;
+    width: 60%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.image-fetcher-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .image-frame {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    /* background-image: url('https://via.placeholder.com/300?text=Mask+Image'); Your static mask image */
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  .masked-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;/* Your static mask image */
+    mask-size: cover;
+  }
+  
+  .floating-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #bf0c46;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .floating-button:hover {
+    background-color: #a30b3c;
+  }
+  
+
+.checkout-proceed-button {
+    background-color: #bf0c46;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.checkout-proceed-button:hover {
+    background-color: #a00a3b;
+}
+
+.payment-qr-code {
+    width: 200px;
+    height: 200px;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+        flex-direction: row;
+    }
+
+    .payment-options-container {
+        width: auto;
+        flex-direction: column;
+        justify-content: space-around;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .payment-option-button {
+        width: auto;
+    }
+    .payment-qr-code {
+        width: auto;
+        height: auto;
+        margin: 10px 0;
+    }
+
+    .payment-collect-container {
+        width: 100%;
+        padding: 10px;
+    }
+}

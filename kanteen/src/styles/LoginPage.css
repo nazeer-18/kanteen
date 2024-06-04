@@ -1,51 +1,28 @@
-body{
-  margin: 0px;
-  padding: 0px;
-  background-color: #e5e5e5;
-}
-.login-homepage {
-  height: 95vh;
-  margin: 0px auto;
-}
-
-.login-login-container{
+.login-homepage{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: stretch;
-  height:90vh;
-  max-width: 85%;
-  margin: 0px auto;
-}
-.login-image-container {
-  flex:1;      
-  display: flex;    
-  justify-content: center; 
-  align-items: center; 
-  padding: 20px; 
-  margin: auto;  
-  max-width: 80%;      
-  height: 520px;       
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 75px;
-  margin-right: 2vw;
+  align-items: center;
 }
 
-.login-image-container img {
-  width: auto;
-  max-width: 100%;    
-  max-height: 100%;  
-  object-fit: contain; 
+.login-image-container {
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  object-fit: contain;
+  min-width:36vw;
+}
+
+.login-image-container img{
+  min-width:320px;
 }
 
 .login-login-container .login-login-form{
   padding: 10px;
   border-radius: 10px;
-  width: 60%;
   font-family: 'petrona';
   display: flex;
-  flex: 1;
   align-items: center;
   flex-direction: column;
   padding: 20px;
@@ -53,6 +30,11 @@ body{
   box-shadow: 0 2px 4px rgba(0,0,0,0.login-1);
   margin: 5px;
 }
+
+.login-login-container{
+  min-width: 33vw;
+}
+
 .login-logintxt{
   text-align: center;
   margin-bottom: 10px;
@@ -61,6 +43,7 @@ body{
   font-family: 'petrona';
   font-size: 25px;
 }
+
 .login-form{
   width: 100%;
   max-width: 600px;
@@ -69,8 +52,10 @@ body{
   padding: 20px;
   box-sizing: border-box;
 }
+
 .login-form-group{
-  width: 100%;
+  width: 90%;
+  margin: 0px auto;
   font-size: large;
   position: relative;
 }
@@ -90,6 +75,7 @@ body{
 .login-second-input input[type="text"],.login-second-input input[type="password"]{
   margin-bottom:7px;
 }
+
 .eye-display{
   margin: 0px;
   padding: 10px;
@@ -97,19 +83,20 @@ body{
   right: 5px;
   top: 5px;
 }
+
 .login-pwd-group{
   display: flex;
   margin-bottom: 5px;
 }
 
-.login-response{
+.response{
   color: rgb(255 0 0);
   font-size: larger;
   font-weight: 600;
   padding: 8px;
   background-color: #d4d9dcb5;
   border-radius: 37px;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 
 .login-memory{
@@ -120,6 +107,7 @@ body{
   font-size: large;
   box-sizing: border-box;
   padding:0px 15px;
+  min-width: 360px;
 }
 
 .login-rememberMe label{
@@ -155,6 +143,7 @@ body{
   font-size:18px;
   border-radius: 30px;
 }
+
 .login-signupBtn{
   color: #bf0c45;
   font-family: 'petrona';
@@ -163,44 +152,45 @@ body{
   text-decoration: none;
   margin-left: 5px;
 }
+
 .login-signup{
   font-size: large;
+  margin-bottom: 20px;
 }
 
-@media (max-width:1080px){
+@media (max-width:1020px){
   .login-login-container{
-    max-width: 100%;
-  }
-  .login-image-container{
-    max-width:40%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0%;
-  }
-}
-
-@media (max-width:768px){
-  .login-form{
-    padding: 0px;
-    margin: 0px;
-  }
-}
-
-@media (max-width:670px){
-  .login-image-container{
-    display: none;
-  }
-  .login-login-container{
-    max-width: 100%;
-  }
-}
-
-@media (max-width:400px){
-  .login-memory{
     flex-direction: column;
-    text-align: center;
+    padding: 0px!important;
+    margin: 0px!important;
+    min-width:350px;
+    width:50vw;
   }
-  .login-rememberMe{
-    margin-bottom: 10px;
+  .login-form,.login-login-form,.login-memory{
+    padding: 0px!important;
+    margin: 0px!important;
+  }
+  .login-form-group input{
+    padding: 2px;
+    width: 90px;
+  }
+}
+
+@media(max-width:400px){
+  .login-memory{
+    min-width: 0px;
+    padding: 3px!important;
+    box-sizing: border-box;
+  }
+  .login-login{
+    margin: 2px;
+    padding: 4px;
+  }
+}
+
+@media(max-width:600px){
+  .response{
+    max-width: 100%;
+    
   }
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/Signupmail.css';
-import signupImg from '../images/signup.svg';
+import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import userService from '../services/userService';
 import { useUser } from '../contexts/userContext';
+import '../styles/Signupmail.css';
+import mail from '../images/MailSent.svg';
 
 export default function SignupMail() {
     const wsServerUrl = process.env.REACT_APP_WEB_SOCKET_SERVER_URL || 'kanteen-server.onrender.com';
@@ -99,95 +99,106 @@ export default function SignupMail() {
     }
 
     return (
-        <div className="signupmail-container">
-            <div className="signupmail-image-container">
-                <img
-                    src={signupImg}
-                    alt="login"
-                    width="600px" />
+        <div>
+            <div className="back-btn-container">
+                <Link
+                    className="back-btn" exact="true" to="/login">
+                    &lt; &nbsp;Back to login
+                </Link>
             </div>
-            <div className="signupmail-form-container">
-                <div className='signupmail-signup-txt'>SIGNUP</div>
-                <form className="signupmail-form" onSubmit={handleSubmit}>
-                    <div className="signupmail-form-group">
-                        <label
-                            htmlFor="email">
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={handleEmailChange}
-                            value={email}
-                            id="email"
-                            style={{ outline: "none" }}
-                            className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
-                            placeholder="Enter your email address"
-                            required />
-                        {
-                            emailValid &&
-                            <FontAwesomeIcon className="validate-icon" icon={faCircleCheck} beat style={{ color: "#139a72", }} />
-                        }
-                        {
-                            !emailValid && email.length > 0 &&
-                            <FontAwesomeIcon
-                                className="validate-icon"
-                                icon={faCircleXmark}
-                                shake
-                                onClick={() => SetEmail('')}
-                                style={{ color: "#ba1717", }}
-                            />
-                        }
-                    </div>
-                    {
-                        !emailValid && email.length > 0 && !usedEmail &&
-                        <div className="signupmail-email-check-alert">
-                            !! Enter a valid Amrita email address
-                        </div>
-                    }
-                    {
-                        !emailValid && email.length > 0 && usedEmail &&
-                        <div className="signupmail-email-check-alert">
-                            !! This Amrita email address is already used
-                        </div>
-                    }
-                    {clicked &&
-                        <div className="signupmail-mail-response">
-                            <span
-                                style={{ color: success ? "#139a72" : "#ba1717" }}>
-                                {message}
-                            </span>
-                        </div>
-                    }
-                    <div className="signupmail-terms">
-                        <label>
+            <div className="signupmail-container">
+                <div className="signupmail-image-container">
+                    <img
+                        src={mail}
+                        alt="signup" />
+                </div>
+                <div className="signupmail-form-container">
+                    <div className='signupmail-signup-txt'>SIGNUP</div>
+                    <form className="signupmail-form" onSubmit={handleSubmit}>
+                        <div className="signupmail-form-group">
+                            <label
+                                htmlFor="email">
+                            </label>
                             <input
-                                type="checkbox"
-                                checked={checked}
-                                onChange={() => SetChecked(!checked)}
-                                required
-                                title={checked ? "unMark" : "Mark"} />
-                            <span>
-                                I agree to the
-                            </span>
-                            <span className="text-amrita">
-                                Terms and conditions
-                            </span>
-                            and
-                            <span className="text-amrita">
-                                Privacy Policy.
-                            </span>
-                        </label>
-                    </div>
-                    <div className="signupmail-verifyBtn">
-                        <button
-                            type="submit"
-                            disabled={!emailValid && email.length !== 0}
-                            style={{ backgroundColor: !emailValid && email.length !== 0 ? '#BF0C4569' : '#bf0c45' }}
-                            className='VerifyBtn' >
-                            Verify
-                        </button>
-                    </div>
-                </form>
+                                type="email"
+                                name="email"
+                                onChange={handleEmailChange}
+                                value={email}
+                                id="email"
+                                style={{ outline: "none" }}
+                                className={emailValid ? "valid-border" : email.length > 0 ? "invalid-border" : ""}
+                                placeholder="Enter your email address"
+                                required />
+                            {
+                                emailValid &&
+                                <FontAwesomeIcon className="validate-icon" icon={faCircleCheck} beat style={{ color: "#139a72", }} />
+                            }
+                            {
+                                !emailValid && email.length > 0 &&
+                                <FontAwesomeIcon
+                                    className="validate-icon"
+                                    icon={faCircleXmark}
+                                    shake
+                                    onClick={() => SetEmail('')}
+                                    style={{ color: "#ba1717", }}
+                                />
+                            }
+                        </div>
+                        {
+                            !emailValid && email.length > 0 && !usedEmail &&
+                            <div className="signupmail-email-check-alert">
+                                !! Enter a valid Amrita email address
+                            </div>
+                        }
+                        {
+                            !emailValid && email.length > 0 && usedEmail &&
+                            <div className="signupmail-email-check-alert">
+                                !! This Amrita email address is already used
+                            </div>
+                        }
+                        {clicked &&
+                            <div className="signupmail-mail-response">
+                                <div
+                                    style={{ color: success ? "#139a72" : "#ba1717" }}>
+                                    {message}
+                                </div>
+                            </div>
+                        }
+                        <div className="signupmail-terms">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={checked}
+                                    onChange={() => SetChecked(!checked)}
+                                    required
+                                    title={checked ? "unMark" : "Mark"} />
+                                <span>
+                                    I agree to the
+                                </span>
+                                <Link exact="true" to="/termsandconditions">
+                                    <span className="text-amrita">
+                                        Terms and conditions
+                                    </span>
+                                </Link>
+                                and
+                                <Link exact="true" to="/privacypolicy">
+                                    <span className="text-amrita">
+                                        Privacy Policy.
+                                    </span>
+                                </Link>
+                            </label>
+                        </div>
+                        <div className="signupmail-verifyBtn">
+                            <button
+                                type="submit"
+                                disabled={!emailValid && email.length !== 0}
+                                style={{ backgroundColor: !emailValid && email.length !== 0 ? '#BF0C4569' : '#bf0c45' }}
+                                className='VerifyBtn' >
+                                Verify
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/ResetPwd.css';
-import resetImg from '../images/forgotpwd.svg';
+import resetImg from '../images/ResetPassword.svg';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import userService from '../services/userService';
@@ -10,11 +10,11 @@ import { useUser } from '../contexts/userContext';
 export default function ResetPwd() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
-    useEffect(()=>{
-        if(user.emailId === 'na' || user.emailId === undefined || user.emailId === null){
+    useEffect(() => {
+        if (user.emailId === 'na' || user.emailId === undefined || user.emailId === null) {
             navigate('/forgotpwd');
         }
-    },[navigate,user.emailId])
+    }, [navigate, user.emailId])
 
     const [showPwd, setShowPwd] = useState(false);
     const [showCnfPwd, setShowCnfPwd] = useState(false);
@@ -87,6 +87,11 @@ export default function ResetPwd() {
     }
     return (
         <div className='reset-pwd-homepage'>
+            <div className="reset-pwd-image-container">
+                <img
+                    src={resetImg}
+                    alt="otp" />
+            </div>
             <div className="reset-pwd-container">
                 <div className="reset-pwd-form-container">
 
@@ -110,8 +115,8 @@ export default function ResetPwd() {
                                         name="reset-pwd" id="reset-pwd"
                                         value={data.pwd}
                                         style={{
-                                            outline: data.pwd.length!==0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
-                                            border: data.pwd.length!==0? pwdValid===false?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                            outline: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                            border: data.pwd.length !== 0 ? pwdValid === false ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
                                         }}
                                         onChange={handlePasswordChange}
                                         placeholder="Enter new password"
@@ -183,8 +188,8 @@ export default function ResetPwd() {
                                         value={data.cnfPwd}
                                         disabled={!pwdValid}
                                         style={{
-                                            outline: data.cnfPwd.length!==0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45" ,
-                                            border: data.cnfPwd.length!==0? data.pwd!==data.cnfPwd?"2px solid red":"2px solid #0cbf60": "1px solid #bf0c45"                            
+                                            outline: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45",
+                                            border: data.cnfPwd.length !== 0 ? data.pwd !== data.cnfPwd ? "2px solid red" : "2px solid #0cbf60" : "1px solid #bf0c45"
                                         }}
                                         onChange={(e) => setData(
                                             { ...data, cnfPwd: e.target.value },
@@ -218,7 +223,7 @@ export default function ResetPwd() {
                             </div>
                         </form>
                         {clicked &&
-                            <div className="login-response">
+                            <div className="reset-response response">
                                 <span
                                     style={{ color: success ? "#139a72" : "#ba1717" }}>
                                     {message}
@@ -226,11 +231,6 @@ export default function ResetPwd() {
                             </div>
                         }
                     </div>
-                </div>
-                <div className="reset-pwd-image-container">
-                    <img
-                        src={resetImg}
-                        alt="otp" />
                 </div>
             </div>
         </div>

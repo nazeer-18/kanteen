@@ -16,7 +16,7 @@ export default function Cart() {
         if (userId === 'na') {
             navigate('/login');
         }
-    }, [userId,navigate])
+    }, [userId, navigate])
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -38,6 +38,32 @@ export default function Cart() {
         return () => clearInterval(interval);
     }, [userId])
 
+    const handleCheckout = async () => {
+        try {
+            const orderId = user.name+Math.floor(Math.random()* (100001)); //TODO: generate a sequential number everytime as randoms cant be unique.
+            console.log(orderId)
+            const orderAmount = total;
+            const customerId = user.mobileNumber;
+            const customerName = user.name;
+            const customerNumber = user.mobileNumber;
+            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);            
+
+            if (generate_order.data.payment_session_id != null) {
+                setTimeout(() => {
+                    console.log(generate_order);
+                    navigate('/checkout',{state:{'session_id':generate_order.data.payment_session_id}}
+                        )
+                }, 200);
+            }
+            else {
+                console.log(generate_order);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        setTimeout(() => {
+        }, 1800);
+    }
 
     return (
         <div className="cart-container">
@@ -84,9 +110,7 @@ export default function Cart() {
                 </div>
             </div>
             <div className="cart-footer">
-                <button className="cart-footer-button" onClick={() => {
-                    navigate('/checkout');
-                }}>
+                <button className="cart-footer-button" onClick={handleCheckout}>
                     Proceed to order
                 </button>
             </div>

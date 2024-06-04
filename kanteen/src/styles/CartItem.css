@@ -12,6 +12,14 @@ ul li{
     text-align: center;
 }
 
+.updating-cart{
+    background-color: #dfdfdfa8;
+}
+
+.cartitem-container:hover{
+    background-color: #dfdfdfa8;
+}
+
 .cartitem-image{
     display: flex;
     justify-content: center;

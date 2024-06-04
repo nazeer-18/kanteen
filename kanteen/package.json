@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.4",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
@@ -15,6 +16,7 @@
     "dotenv": "^16.4.5",
     "install": "^0.13.0",
     "os-browserify": "^0.3.0",
+    "path": "^0.12.7",
     "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.0",
@@ -51,5 +53,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/plugin-transform-react-jsx": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@babel/preset-react": "^7.24.6",
+    "@svgr/webpack": "^8.1.0",
+    "babel-loader": "^9.1.3"
   }
 }

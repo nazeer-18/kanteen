@@ -11,7 +11,15 @@ import HomePage from './components/HomePage';
 import Menu from './components/Menu';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
+import TermsAndConditions from './components/TermsAndConditions';
+import ContactUs from './components/ContactUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import CancellationAndRefund from './components/CancellationAndRefund';
+import Footer from './components/Footer';
+import Checkout from './components/Checkout';
+
 import { UserProvider } from './contexts/userContext';
+import Editprofile from './components/Editprofile';
 
 export default function App() {
     return (
@@ -29,7 +37,14 @@ export default function App() {
                     <Route path='/menu' element={<Menu />}></Route>
                     <Route path='/orderhistory' element={<OrderHistory />}></Route>
                     <Route path='/cart' element={<Cart />}></Route>
+                    <Route path='/Editprofile' element={<Editprofile />}></Route>
+                    <Route path='/termsandconditions' element={<TermsAndConditions />}></Route>
+                    <Route path='/contactus' element={<ContactUs />}></Route>
+                    <Route path='/privacypolicy' element={<PrivacyPolicy />}></Route>
+                    <Route path='/cancellationandrefund' element={<CancellationAndRefund />}></Route>
+                    <Route path='/checkout' element={<Checkout />}></Route>
                 </Routes>
+                <Footer />
             </UserProvider>
         </BrowserRouter>
 
