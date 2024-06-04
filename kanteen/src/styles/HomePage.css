@@ -70,3 +70,22 @@ text-amrita {
     background-color: #bf0c45;
     color: white;
 }
+
+.homepage-marquee{
+    display: grid; 
+    gap:10px 10px; 
+    grid:repeat(1,150px)  /auto-flow 100px;
+    margin: 10px  auto;
+    background-color: green;
+    width:fit-content;
+    max-width: 85vw;
+    overflow: hidden;
+    padding: 20px;
+    align-items: center;
+}
+
+.marquee-item{ 
+    width:100px;
+    height:100px;
+    background-color: red; 
+}

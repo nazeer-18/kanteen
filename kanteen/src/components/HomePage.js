@@ -54,6 +54,22 @@ export default function HomePage() {
                     </button>
                 </Link>
             </div>
+            <div className="homepage-marquee">
+                <span className="marquee-item">first one </span>
+                <span className="marquee-item">second one </span>
+                <span className="marquee-item">third one </span>
+                <span className="marquee-item">fourth one </span>
+                <span className="marquee-item">fifth one </span>
+                <span className="marquee-item">sixth one </span>
+                <span className="marquee-item">seventh one </span>
+                <span className="marquee-item">eighth one </span>
+                <span className="marquee-item">ninth one </span>
+                <span className="marquee-item">tenth one </span>
+                <span className="marquee-item">seventh one </span>
+                <span className="marquee-item">eighth one </span>
+                <span className="marquee-item">ninth one </span>
+                <span className="marquee-item">tenth one </span>
+            </div>
         </div>
     )
 }

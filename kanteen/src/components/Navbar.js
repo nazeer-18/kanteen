@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import logo from '../images/logo.jpg';
 import '../styles/Navbar.css';
-import HomeIcon from '../images/HomeIcon.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines } from '@fortawesome/free-solid-svg-icons';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { user, logout } = useUser();
@@ -62,16 +66,38 @@ export default function Navbar() {
                 <div className="sidenav-content">
                     <div className="sidenav-link">
                         <Link onClick={handleResponsiveness} to="/">
-                            <div>
-                                <div className="sidenav-img-container">
-                                    <img src={HomeIcon} /> Home
+                            <div className="side-nav-item-container">
+                                <FontAwesomeIcon icon={faHouse} />
+                                <div className="side-nav-item-desc">
+                                    Home
                                 </div>
                             </div>
                         </Link>
-                        <Link onClick={handleResponsiveness} to="/menu"><div> Order </div></Link>
-                        <Link onClick={handleResponsiveness} to="/orderhistory"><div> Order History </div></Link>
-                        <Link onClick={handleResponsiveness} to="/transaction"><div> Transaction </div></Link>
-                        <Link onClick={handleResponsiveness} to="/editprofile"><div> Edit Profile </div></Link>
+                        <Link onClick={handleResponsiveness} to="/menu">
+                            <div className="side-nav-item-container">
+                                <FontAwesomeIcon icon={faNewspaper} />
+                                <div className="side-nav-item-desc">
+                                    Order Now
+                                </div>
+
+                            </div>
+                        </Link>
+                        <Link onClick={handleResponsiveness} to="/orderhistory">
+                            <div className="side-nav-item-container">
+                                <FontAwesomeIcon icon={faFileLines} />
+                                <div className="side-nav-item-desc">
+                                    Order History
+                                </div>
+                            </div>
+                        </Link>
+                        <Link onClick={handleResponsiveness} to="/transaction">
+                            <div className="side-nav-item-container">
+                                <FontAwesomeIcon icon={faWallet} />
+                                <div className="side-nav-item-desc">
+                                    Transaction History
+                                </div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>
