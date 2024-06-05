@@ -86,7 +86,7 @@ export default function Navbar() {
                             <div className="side-nav-item-container">
                                 <FontAwesomeIcon icon={faFileLines} />
                                 <div className="side-nav-item-desc">
-                                    Order History
+                                    My Orders
                                 </div>
                             </div>
                         </Link>
@@ -94,7 +94,7 @@ export default function Navbar() {
                             <div className="side-nav-item-container">
                                 <FontAwesomeIcon icon={faWallet} />
                                 <div className="side-nav-item-desc">
-                                    Transaction History
+                                    My Transactions
                                 </div>
                             </div>
                         </Link>

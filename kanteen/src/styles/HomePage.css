@@ -21,6 +21,7 @@ text-amrita {
     color: #6c757d;
     font-weight: bold;
 }
+
 .homepage-container{
     display: flex;
     flex-direction: row;
@@ -37,9 +38,19 @@ text-amrita {
     margin: 5px;
 }
 
+.homepage-functions{ 
+    margin: 5px;
+    padding: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 25px;
+}
+
 .homepage-alerts{
-    padding: 10px;
-    margin-left: 5%;
+    padding: 5px;
+    border:1px solid red;
+    min-width:33vw;
 }
 
 .homepage-alerts-list{
@@ -51,24 +62,87 @@ text-amrita {
     font-weight: 600;
 }
 
-.homepage-buttons{
+.homepage-buttons-group{
     margin: 10px;
     padding: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
 }
 
-.homepage-buttons button{
-    padding: 10px;
-    font-size: 18px;
+.homepage-button-container{
+    width:323px;
+    height:60px;
+    margin: 8px;
+    box-sizing: border-box; 
+}
+
+.homepage-button{  
+    width:100%; 
+    height:100%;
+    box-sizing: border-box;
+    position: relative; 
+    background-color: #fff;
+    color: #bf0c45; 
+    text-align: center;
+    font-size: 18px; 
+    padding: 9px 40px 9px 0px;
+    transition: all 0.4s ease-in-out;
     font-family: 'petrona';
-    font-weight: 600;
-    border-radius: 5px;
-    border: none;
+    font-weight: 600; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-name{ 
+    position: relative;
+    z-index: 500;
+}
+
+.btn-icon{
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    float: right;
+    right:0px;
+    top:0px;
     background-color: #bf0c45;
-    color: white;
+    transition: all 0.4s ease-in-out;
+    color:white;
+}
+
+.btn-icon svg{
+    position: absolute;
+    top: 17px;
+    right:27px;
+}
+
+.btn-icon::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 60px solid #fcfcfc;
+    border-right: 40px solid transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    box-sizing: border-box;
+    transition:all 0.4s ease-in-out;
+}
+
+.homepage-button:hover{ 
+    color: #fff !important;  
+}
+
+.homepage-button:hover .btn-icon{
+    width:100%; 
+}
+
+.homepage-button:hover .btn-icon::after{
+    border-top: 0px; 
 }
 
 .homepage-marquee{
