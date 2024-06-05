@@ -5,7 +5,7 @@ const Gateway = require('cashfree-pg');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
-        const url = 'https://sandbox.cashfree.com/pg/orders'; //TODO: Migrate to Prod. Envi.
+        const url = 'https://api.cashfree.com/pg/orders'; //TODO: Migrate to Test Envi.
 
         const options = {
             method: 'POST',
@@ -37,37 +37,5 @@ paymentRouter.post('/checkout', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-
-paymentRouter.post('/upicollectreq',async(req,res)=>{
-    Gateway.Cashfree.XEnvironment = Gateway.Cashfree.Environment.SANDBOX; //TODO: Migrate to Prod. envi.
-    const orderPayRequest = {
-                "payment_session_id": req.body.sessionID,
-                "payment_method": req.body.paymentMethod=='upi'?{
-                    "upi": {
-                        "channel": "collect",
-                        "upi_id": req.body.upiID,
-                        "upi_redirect_url": true,
-                        "upi_expiry_minutes": 5
-                    }
-                  }:req.body.paymentMethod=='upiqr'?{
-                    "upi": {
-                        "channel": "qrcode",
-                        upi_expiry_minutes: 5
-                    }
-                  }:{},
-                "return_url":"https://kanteen-ase.netlify.app/orderhistory", //TODO: change it to ordsrs/{orderID}
-                "notify_url":"https://webhook.site/4353153b-36e4-49a6-8858-fc4fea8a71a7" //TEST
-              }
-        Gateway.Cashfree.PGPayOrder("2022-09-01", orderPayRequest).then((response) => {
-        console.log('Transaction Initiated successfully:', response.data);
-        // return res.status(200).send(response.data.data.url);
-        return res.status(200).send(response.data);
-    })
-
-    .catch((error) => {
-        console.error('Error creating transaction:', error);
-        return res.status(500).send("check log :)");
-    });
-})
 
 module.exports = paymentRouter;
