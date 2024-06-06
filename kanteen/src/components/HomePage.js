@@ -3,6 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import '../styles/HomePage.css';
 import foodImg from '../images/food-girl.svg';
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 
 export default function HomePage() {
     const { user } = useUser();
@@ -37,22 +40,32 @@ export default function HomePage() {
                     <img src={foodImg} style={{ width: "250px", height: "250px" }} />
                 </div>
             </div>
-            <div className="homepage-alerts">
-                <h2>Alerts</h2> <br />
-                <div className="homepage-alerts-list">
-                    <p> &gt; Specials</p> <br />
-                    <p> &gt; Status</p> <br />
+            <div className="homepage-functions">
+                <div className="homepage-alerts">
+                    <h2>Alerts</h2> <br />
+                    <div className="homepage-alerts-list">
+                        <p> &gt; Specials</p> <br />
+                        <p> &gt; Status</p> <br />
+                    </div>
                 </div>
-            </div>
-            <div className="homepage-buttons">
-                <Link exact="true" to="/menu">
-                    <button>Order Now </button>
-                </Link>
-                <Link exact="true" to="/orderhistory">
-                    <button>
-                        Order History
-                    </button>
-                </Link>
+                <div className="homepage-buttons-group">
+                    <div className="homepage-button-container">
+                        <Link className='homepage-button' exact="true" to="/menu">
+                            <span className="btn-name">ORDER NOW </span>
+                            <div className="btn-icon">
+                                <FontAwesomeIcon icon={faNewspaper} />
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="homepage-button-container">
+                        <Link className='homepage-button' exact="true" to="/order">
+                            <span className="btn-name">MY ORDERS </span>
+                            <div className="btn-icon">
+                                <FontAwesomeIcon icon={faFileLines} />
+                            </div>
+                        </Link>
+                    </div>
+                </div>
             </div>
             <div className="homepage-marquee">
                 <span className="marquee-item">first one </span>

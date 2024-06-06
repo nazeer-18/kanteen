@@ -13,7 +13,7 @@ export default function Cart() {
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-    
+
     useEffect(() => {
         const initCashfree = () => {
             window.CFSDK = window.Cashfree({
@@ -68,7 +68,7 @@ export default function Cart() {
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
             const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
-
+            console.log(generate_order);
             if (generate_order.data.payment_session_id != null) {
                 console.log('Payment session ID:', generate_order.data.payment_session_id);
                 // Proceed with Cashfree checkout
@@ -79,66 +79,66 @@ export default function Cart() {
                 } else {
                     console.log("Cashfree SDK not initialized.");
                 }
-        }
+            }
             else {
-        console.log("Payment session ID not generated");
+                console.log("Payment session ID not generated");
+            }
+        } catch (err) {
+            console.log("error during checkout", err);
+        }
+        setTimeout(() => {
+        }, 1800);
     }
-} catch (err) {
-    console.log("error during checkout",err);
-}
-setTimeout(() => {
-}, 1800);
-    }
 
-return (
-    <div className="cart-container">
-        <div className="cart-content">
-            {
-                <div>
+    return (
+        <div className="cart-container">
+            <div className="cart-content">
+                {
+                    <div>
 
-                    <div className="cart-heading">
+                        <div className="cart-heading">
 
-                        <div className="cart-heading-desc">
-                            <h1>
-                                <span title="view menu" className="cart-arrow" onClick={() => {
-                                    navigate('/menu');
-                                }}>
-                                    &#x2190;
-                                </span>
-                                Your cart {cartItems.length === 0 ? 'is empty' : ''}
-                            </h1>
+                            <div className="cart-heading-desc">
+                                <h1>
+                                    <span title="view menu" className="cart-arrow" onClick={() => {
+                                        navigate('/menu');
+                                    }}>
+                                        &#x2190;
+                                    </span>
+                                    Your cart {cartItems.length === 0 ? 'is empty' : ''}
+                                </h1>
+                            </div>
+
+                            <div className="cart-heading-price">
+                                price
+                            </div>
+
                         </div>
 
-                        <div className="cart-heading-price">
-                            price
-                        </div>
+                        {cartItems.map((item) => {
+                            return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
+                        })}
 
                     </div>
-
-                    {cartItems.map((item) => {
-                        return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
-                    })}
-
-                </div>
-            }
-            <div className="cart-total">
-                Subtotal ({totalItems} items):
-                {
-                    total > 0 &&
-                    <span>
-                        <FontAwesomeIcon icon={faIndianRupeeSign} />
-                        <span>
-                            {total}
-                        </span>
-                    </span>
                 }
+                <div className="cart-total">
+                    Subtotal ({totalItems} items):
+                    {
+                        total > 0 &&
+                        <span>
+                            <FontAwesomeIcon icon={faIndianRupeeSign} />
+                            <span>
+                                {total}
+                            </span>
+                        </span>
+                    }
+                </div>
+            </div>
+            <div className="cart-footer">
+                <button className="cart-footer-button" onClick={handleCheckout}>
+                    Proceed to order
+                </button>
             </div>
         </div>
-        <div className="cart-footer">
-            <button className="cart-footer-button" onClick={handleCheckout}>
-                Proceed to order
-            </button>
-        </div>
-    </div>
-)
+    )
 }

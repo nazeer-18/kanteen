@@ -5,7 +5,8 @@ const Gateway = require('cashfree-pg');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
-        const url = 'https://api.cashfree.com/pg/orders'; //TODO: Migrate to Test Envi.
+        //const url = 'https://api.cashfree.com/pg/orders'; //for production
+        const url = 'https://sandbox.cashfree.com/pg/orders' //for testing
 
         const options = {
             method: 'POST',
