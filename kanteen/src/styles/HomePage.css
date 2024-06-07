@@ -44,6 +44,7 @@ text-amrita {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     margin-left: 25px;
 }
 
@@ -143,23 +144,4 @@ text-amrita {
 
 .homepage-button:hover .btn-icon::after{
     border-top: 0px; 
-}
-
-.homepage-marquee{
-    display: grid; 
-    gap:10px 10px; 
-    grid:repeat(1,150px)  /auto-flow 100px;
-    margin: 10px  auto;
-    background-color: green;
-    width:fit-content;
-    max-width: 85vw;
-    overflow: hidden;
-    padding: 20px;
-    align-items: center;
-}
-
-.marquee-item{ 
-    width:100px;
-    height:100px;
-    background-color: red; 
 }

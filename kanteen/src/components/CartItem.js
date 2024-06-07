@@ -30,7 +30,7 @@ export default function CartItem(props) {
 
     const updateQty = async (q) => {
         const new_qty = q === 'undefined' ? qty : q;
-        if(new_qty === quantity){
+        if (new_qty === quantity) {
             return;
         }
         setUpdatingItem(true);
@@ -103,7 +103,7 @@ export default function CartItem(props) {
 
     return (
         <div>
-            <div className={updatingItem?"updating-cart":""} >
+            <div className={updatingItem ? "updating-cart" : ""} >
                 <div className="cartitem-container">
                     <div className="cartitem-image">
                         <img src={item.image} alt="food" style={{ width: "100px", height: "100px" }} />

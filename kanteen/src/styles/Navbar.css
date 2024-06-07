@@ -65,7 +65,7 @@ a{
     background-color:#e7e7e7;
     z-index: 5;
     border-radius:0px 25px 25px 0px; 
-    transition: left 0.7s ease-in-out;
+    transition: left 0.5s ease-in-out;
 }
 
 .sidenav-heading{
@@ -126,5 +126,5 @@ a{
     padding: 10px 0px;
     padding-right: 15px;
     box-sizing: border-box;
-    transition: left 0.7s ease-in-out
+    transition: left 0.5s ease-in-out
 }

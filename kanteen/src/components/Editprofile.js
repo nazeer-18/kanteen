@@ -72,10 +72,10 @@ export default function EditProfilePage() {
                 value={user.name}
               />
             </div>
-            
-            
-            
-            
+
+
+
+
           </form>
         </div>
       </div>

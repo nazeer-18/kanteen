@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import '../styles/HomePage.css';
@@ -18,7 +18,7 @@ export default function HomePage() {
                 navigate('/login');
             }, 2000);
         }
-    }, [user.emailId])
+    }, [user.emailId,navigate])
     return (
         <div>
             <div className="homepage-container">
@@ -37,7 +37,7 @@ export default function HomePage() {
                     </text-grey>
                 </div>
                 <div className="foodpage-image">
-                    <img src={foodImg} style={{ width: "250px", height: "250px" }} />
+                    <img src={foodImg} alt="food img" style={{ width: "250px", height: "250px" }} />
                 </div>
             </div>
             <div className="homepage-functions">
@@ -58,7 +58,7 @@ export default function HomePage() {
                         </Link>
                     </div>
                     <div className="homepage-button-container">
-                        <Link className='homepage-button' exact="true" to="/order">
+                        <Link className='homepage-button' exact="true" to="/orderhistory">
                             <span className="btn-name">MY ORDERS </span>
                             <div className="btn-icon">
                                 <FontAwesomeIcon icon={faFileLines} />
@@ -66,22 +66,6 @@ export default function HomePage() {
                         </Link>
                     </div>
                 </div>
-            </div>
-            <div className="homepage-marquee">
-                <span className="marquee-item">first one </span>
-                <span className="marquee-item">second one </span>
-                <span className="marquee-item">third one </span>
-                <span className="marquee-item">fourth one </span>
-                <span className="marquee-item">fifth one </span>
-                <span className="marquee-item">sixth one </span>
-                <span className="marquee-item">seventh one </span>
-                <span className="marquee-item">eighth one </span>
-                <span className="marquee-item">ninth one </span>
-                <span className="marquee-item">tenth one </span>
-                <span className="marquee-item">seventh one </span>
-                <span className="marquee-item">eighth one </span>
-                <span className="marquee-item">ninth one </span>
-                <span className="marquee-item">tenth one </span>
             </div>
         </div>
     )
