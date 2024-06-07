@@ -5,7 +5,7 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import createAccountImage from '../images/createAccountImage.svg'
 
 
@@ -101,7 +101,7 @@ export default function SignUpAcnt(props) {
             user.mobileNumber = data.mobile;
             user.name = data.usrname;
             try {
-                const response = await userService.register(user.emailId, data.usrname, data.mobile, data.pwd);
+                const response = await authService.register(user.emailId, data.usrname, data.mobile, data.pwd);
                 if (response.status === 201) {
                     setValidAll('Account Created Successfully');
                     setUser({

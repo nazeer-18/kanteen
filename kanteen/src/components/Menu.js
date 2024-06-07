@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faFilter, faMagnifyingGlass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Menu.css';
 import MenuItem from './MenuItem';
-import userService from '../services/userService';
+import itemService from '../services/itemService'; 
 import { useUser } from '../contexts/userContext';
 
 export default function Menu() {
@@ -19,7 +19,7 @@ export default function Menu() {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const res = await userService.fetchCartItems(userId);
+                const res = await itemService.fetchCartItems(userId);
                 setTotalItems(res.data.cart.totalItems);
             } catch (err) {
                 console.error('Error fetching items', err);
@@ -53,7 +53,7 @@ export default function Menu() {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const res = await userService.getMenuItems();
+                const res = await itemService.getMenuItems();
                 setItems(res.data);
                 if (!isInitiated) {
                     setFilteredItems(res.data);

@@ -4,7 +4,7 @@ import '../styles/Editprofile.css';
 import loginImg from '../images/LoginImage.svg';
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 
 export default function EditProfilePage() {

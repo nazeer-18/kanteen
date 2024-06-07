@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css';
-import userService from '../services/userService';
+import paymentService from '../services/paymentService';
+import itemService from '../services/itemService';
 import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,7 +44,7 @@ export default function Cart() {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const res = await userService.fetchCartItems(userId);
+                const res = await itemService.fetchCartItems(userId);
                 const items = res.data.cart.items;
                 setTotal(res.data.cart.total);
                 setTotalItems(res.data.cart.totalItems);
@@ -67,7 +68,7 @@ export default function Cart() {
             const customerId = user.mobileNumber;
             const customerName = user.name;
             const customerNumber = user.mobileNumber;
-            const generate_order = await userService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
+            const generate_order = await paymentService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
             console.log(generate_order);
             if (generate_order.data.payment_session_id != null) {
                 console.log('Payment session ID:', generate_order.data.payment_session_id);

@@ -4,7 +4,7 @@ import '../styles/ResetPwd.css';
 import resetImg from '../images/ResetPassword.svg';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 
 export default function ResetPwd() {
@@ -60,7 +60,7 @@ export default function ResetPwd() {
             return;
         }
         try {
-            const response = await userService.updatePassword(user.emailId, data.pwd);
+            const response = await authService.updatePassword(user.emailId, data.pwd);
             setMessage(response.data.message);
             setSuccess(response.data.success);
             setTimeout(() => {

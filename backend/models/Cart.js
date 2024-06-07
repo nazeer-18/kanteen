@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema; 
+const Schema = mongoose.Schema;
 
 const cartSchema = new Schema({
     userId: {
@@ -10,7 +10,7 @@ const cartSchema = new Schema({
     items: [{
         item: {
             type: Schema.Types.ObjectId,
-            ref: 'Menu',
+            ref: 'Item',
         },
         quantity: {
             type: Number,
@@ -32,7 +32,7 @@ const cartSchema = new Schema({
 })
 
 cartSchema.methods.calculateTotal = async function () {
-    let total = 0,totalItems = 0;
+    let total = 0, totalItems = 0;
     const Menu = require('./Menu');
     for (const it of this.items) {
         const menuItem = await Menu.findById(it.item);

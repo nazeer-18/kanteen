@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 
 export default function ForgotPwd() {
@@ -33,7 +33,7 @@ export default function ForgotPwd() {
             return;
         }
         try {
-            const response = await userService.verifyForgotMail(email);
+            const response = await authService.verifyForgotMail(email);
             setMessage(response.data.message);
             setSuccess(response.data.success);
             const otp = response.data.otp;
