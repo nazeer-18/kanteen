@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/CartItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { useUser } from '../contexts/userContext';
-import userService from '../services/userService';
+import { useUser } from '../contexts/userContext'; 
+import itemService from '../services/itemService';
 
 export default function CartItem(props) {
     const dropdownRef = useRef(null);
@@ -20,7 +20,7 @@ export default function CartItem(props) {
     const removeItem = async () => {
         setUpdatingItem(true);
         try {
-            const res = await userService.removeFromCart(userId, item._id);
+            const res = await itemService.removeFromCart(userId, item._id);
             console.log(res.data);
         } catch (err) {
             console.error('Error removing item', err);
@@ -30,7 +30,7 @@ export default function CartItem(props) {
 
     const updateQty = async (q) => {
         const new_qty = q === 'undefined' ? qty : q;
-        if(new_qty === quantity){
+        if (new_qty === quantity) {
             return;
         }
         setUpdatingItem(true);
@@ -39,7 +39,7 @@ export default function CartItem(props) {
             return;
         }
         try {
-            const res = await userService.updateQty(userId, item._id, new_qty);
+            const res = await itemService.updateQty(userId, item._id, new_qty);
             if (res.data.success) {
                 setQty(new_qty);
             } else {
@@ -103,7 +103,7 @@ export default function CartItem(props) {
 
     return (
         <div>
-            <div className={updatingItem?"updating-cart":""} >
+            <div className={updatingItem ? "updating-cart" : ""} >
                 <div className="cartitem-container">
                     <div className="cartitem-image">
                         <img src={item.image} alt="food" style={{ width: "100px", height: "100px" }} />

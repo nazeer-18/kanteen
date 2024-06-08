@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Menu = require('./Menu');
-const User = require('./User');
 
 const cartSchema = new Schema({
     userId: {
         type: String,
-        ref: User,
+        ref: 'User',
         unique: true
     },
     items: [{
         item: {
             type: Schema.Types.ObjectId,
-            ref: Menu
+            ref: 'Item',
         },
         quantity: {
             type: Number,
@@ -34,7 +32,8 @@ const cartSchema = new Schema({
 })
 
 cartSchema.methods.calculateTotal = async function () {
-    let total = 0,totalItems = 0;
+    let total = 0, totalItems = 0;
+    const Menu = require('./Menu');
     for (const it of this.items) {
         const menuItem = await Menu.findById(it.item);
         total += menuItem.price * it.quantity;

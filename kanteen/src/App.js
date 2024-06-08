@@ -16,9 +16,9 @@ import ContactUs from './components/ContactUs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CancellationAndRefund from './components/CancellationAndRefund';
 import Footer from './components/Footer'; 
+import Editprofile from './components/Editprofile';
 
 import { UserProvider } from './contexts/userContext';
-import Editprofile from './components/Editprofile';
 
 export default function App() {
     return (

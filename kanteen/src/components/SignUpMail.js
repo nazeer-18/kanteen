@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 import '../styles/Signupmail.css';
 import mail from '../images/MailSent.svg';
@@ -72,7 +72,7 @@ export default function SignupMail() {
         e.preventDefault();
         setClicked(true);
         try {
-            const response = await userService.checkMail(email.toLowerCase());
+            const response = await authService.checkMail(email.toLowerCase());
             setMessage(response.data.message);
             setSuccess(response.data.success);
             await new Promise(resolve => setTimeout(resolve, 2500));

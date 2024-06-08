@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/LoginPage.css'; 
+import '../styles/LoginPage.css';
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 import LoginImage from '../images/LoginImage.svg';
 
@@ -26,7 +26,7 @@ export default function LoginPage() {
         e.preventDefault();
         setClicked(true);
         try {
-            const response = await userService.login(data.userName.toLowerCase(), data.pwd);
+            const response = await authService.login(data.userName.toLowerCase(), data.pwd);
             setMessage(response.data.message)
             setSuccess(response.data.success)
             if (response.data.success) {
@@ -66,7 +66,7 @@ export default function LoginPage() {
                 <img
                     // src={loginImg}
                     src={LoginImage}
-                    alt="login"/>
+                    alt="login" />
             </div>
             <div className="login-login-container">
                 <div className="login-login-form">

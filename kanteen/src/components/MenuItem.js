@@ -5,7 +5,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import vegIcon from '../images/veg-icon.png';
 import nonVegIcon from '../images/non-veg-icon.png';
-import userService from '../services/userService';
+import itemService from '../services/itemService';
 import { useUser } from '../contexts/userContext';
 
 export default function MenuItem(props) {
@@ -22,7 +22,7 @@ export default function MenuItem(props) {
             const itemId = item._id;
             const userId = user.emailId;
             const quantity = 1;
-            const response = await userService.addToCart(userId,itemId,quantity);
+            const response = await itemService.addToCart(userId,itemId,quantity);
             setDisplayMessage(true);
             setMessage("Item added");
         }catch(err){

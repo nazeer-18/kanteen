@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/ForgotOtp.css';
 import { Link } from 'react-router-dom';
-import userService from '../services/userService';
+import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 import otpImage from '../images/OtpImage.svg';
 
@@ -27,7 +27,7 @@ export default function ForgotPwd() {
 
         e.preventDefault();
         try {
-            const response = await userService.resendotpmail(state.email);
+            const response = await authService.resendotpmail(state.email);
             setMessage(response.data.message);
             setSuccess(response.data.success);
             const otp = response.data.otp;

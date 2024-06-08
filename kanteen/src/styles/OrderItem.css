@@ -1,0 +1,25 @@
+.order-item-container{ 
+    background-color: #dad2d2;
+    padding: 7px 17px;
+    margin: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-column: 3 /span 3;
+    gap:10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-details-btn{
+    width:85%;
+    text-align: center;
+}
+
+.order-details-btn button{
+    padding: 8px 16px;
+    width:90%;
+    background-color: #bf0c45;
+    color: white;
+    border: none;
+}
