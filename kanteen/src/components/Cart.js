@@ -7,6 +7,7 @@ import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import buyImage from '../images/cart-proceed.svg';
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -92,53 +93,63 @@ export default function Cart() {
     }
 
     return (
-        <div className="cart-container">
-            <div className="cart-content">
-                {
-                    <div>
+        <div className="cart-page">
+            <div className="cart-img">
+                <img src={buyImage} alt="buy" />
+            </div>
+            <div className="cart-container">
+                <div className="cart-content">
+                    {
+                        <div>
 
-                        <div className="cart-heading">
+                            <div className="cart-heading">
 
-                            <div className="cart-heading-desc">
-                                <h1>
+                                <div className="cart-heading-desc">
                                     <span title="view menu" className="cart-arrow" onClick={() => {
-                                        navigate('/menu');
+                                        navigate(-1);
                                     }}>
-                                        &#x2190;
+                                        &lt;
                                     </span>
+                                </div>
+                                <span className="cart-heading-txt">
                                     Your cart {cartItems.length === 0 ? 'is empty' : ''}
-                                </h1>
+                                </span>
+                                {
+                                    cartItems.length > 0 &&
+                                    <div className="cart-heading-price">
+                                        price
+                                    </div>
+                                }
+
                             </div>
 
-                            <div className="cart-heading-price">
-                                price
-                            </div>
+                            {cartItems.map((item) => {
+                                return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
+                            })}
 
                         </div>
-
-                        {cartItems.map((item) => {
-                            return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
-                        })}
-
+                    }
+                    <div className="cart-total">
+                        Subtotal ({totalItems} items):
+                        {
+                            total > 0 &&
+                            <span>
+                                <FontAwesomeIcon icon={faIndianRupeeSign} />
+                                <span>
+                                    {total}
+                                </span>
+                            </span>
+                        }
+                    </div>
+                </div>
+                {
+                    cartItems.length > 0 &&
+                    <div className="cart-footer">
+                        <button className="cart-footer-button" onClick={handleCheckout}>
+                            Proceed to order
+                        </button>
                     </div>
                 }
-                <div className="cart-total">
-                    Subtotal ({totalItems} items):
-                    {
-                        total > 0 &&
-                        <span>
-                            <FontAwesomeIcon icon={faIndianRupeeSign} />
-                            <span>
-                                {total}
-                            </span>
-                        </span>
-                    }
-                </div>
-            </div>
-            <div className="cart-footer">
-                <button className="cart-footer-button" onClick={handleCheckout}>
-                    Proceed to order
-                </button>
             </div>
         </div>
     )

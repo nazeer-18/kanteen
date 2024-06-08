@@ -57,7 +57,7 @@ const OrderSchema = new Schema({
 OrderSchema.methods.expireOrder = async function () {
 
     //CHANGING ORDER STATUS BASED ON TIME AND PAYMENT STATUS  
-    if (Date.now() - this.date > 2 * 60 * 1000  && this.paymentStatus === 'unpaid') {
+    if (Date.now() - this.date > 7 * 60 * 1000  && this.paymentStatus === 'unpaid') {
         this.orderStatus = 'cancelled';
         this.desc = 'Order Expired due to inactivity for 7 minutes.';
         await this.save();

@@ -1,25 +1,113 @@
-.order-item-container{ 
-    background-color: #dad2d2;
-    padding: 7px 17px;
-    margin: 14px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-column: 3 /span 3;
-    gap:10px;
+.order-item-content{
+    margin: 15px 5px;
+    padding: 5px;
+    border:2px solid grey;
+    border-radius:14px;
+}
+
+.order-item-content hr{
+    width:100%;
+    height:1px;
+    margin:0px;
+    padding: 0px;
+    background-color: grey;
+}
+
+.order-item{
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.order-details-btn{
-    width:85%;
+.order-details{
+    padding: 3px;
+}
+
+.order-details div{
+    margin: 2px;
+    padding: 2px;
+}
+
+.ordered-date{
+    color: #19191C;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif; 
+}
+
+.order-id{
+    color:#828487;
+    font-weight: 400;
+    font-size: 15px;
+    padding-left: 2px;
+    font-family: 'Poppins', sans-serif; 
+}
+
+.order-status{
+    position: relative;
+    background-color: #d8efd8;
+    font-weight: 600;
+    padding: 5px 10px;
+    font-size: 16px;
     text-align: center;
+    border-radius: 20px;
+    color: #2dc92d;
+    font-family: 'Poppins', sans-serif;
 }
 
-.order-details-btn button{
+.order-explore-button button{
+    margin: 5px;
+    cursor: pointer;
     padding: 8px 16px;
-    width:90%;
+    border-radius: 20px;
     background-color: #bf0c45;
-    color: white;
+    color:white;
     border: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.order-explore-button button:hover{
+    background-color: #962b3f;
+}
+
+.payment-details{
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    padding: 2px;
+}
+
+.order-payment-status{
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #828487;
+    padding: 2px;
+    margin: 2px;
+}
+
+.order-payment-status div{
+    margin: 2px;
+    padding: 2px;
+}
+
+.payment-details svg{
+    color:#bf0c45;
+    margin-right: 4px;
+}
+
+.order-item-total{
+    color: #19191C;
+    font-size:14px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    padding: 2px;
+    margin: 2px;
+}
+
+.txt-black{
+    color: #19191C;
+    font-weight: 600;
+    font-size:15px;
 }
