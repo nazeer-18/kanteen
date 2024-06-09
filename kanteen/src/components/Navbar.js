@@ -4,10 +4,7 @@ import { useUser } from '../contexts/userContext';
 import logo from '../images/logo.jpg';
 import '../styles/Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faFileLines } from '@fortawesome/free-solid-svg-icons';
-import { faWallet } from '@fortawesome/free-solid-svg-icons';
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { user, logout } = useUser();
@@ -70,6 +67,14 @@ export default function Navbar() {
                                 <FontAwesomeIcon icon={faHouse} />
                                 <div className="side-nav-item-desc">
                                     Home
+                                </div>
+                            </div>
+                        </Link>
+                        <Link onClick={handleResponsiveness} to="/cart">
+                            <div className="side-nav-item-container">
+                                <FontAwesomeIcon icon={faCartShopping} />
+                                <div className="side-nav-item-desc">
+                                    Cart
                                 </div>
                             </div>
                         </Link>
