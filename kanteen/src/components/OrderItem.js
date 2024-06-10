@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faWallet, faIndianRupee} from '@fortawesome/free-solid-svg-icons'
 
 export default function OrderItem(prop) {
-    const { date, orderStatus, paymentMode, paymentStatus, total } = prop;
+    const { date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
     return (
         <div className="order-item-container">
             <div className="order-item-content">
@@ -19,7 +19,7 @@ export default function OrderItem(prop) {
                             Ordered on : { date }
                         </div>
                         <div className="order-id"> 
-                            <strong>Order ID</strong> : #1234567890123456 {/*TODO*/}
+                            <strong>Order ID</strong> : #{ orderId }
                         </div>
                     </div>
                     <div className="order-explore">

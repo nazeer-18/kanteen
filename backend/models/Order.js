@@ -8,6 +8,10 @@ const OrderSchema = new Schema({
         ref: 'User',
         required: true
     },
+    orderId: {
+        type: String,
+        required:true
+    },
     orderStatus: {
         type: String, // pending, processing ,completed, cancelled
         required: true,

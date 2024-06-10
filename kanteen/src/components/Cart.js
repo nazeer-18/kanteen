@@ -60,6 +60,7 @@ export default function Cart() {
                         state:{
                             'session_id':generate_order.data.payment_session_id,
                             'userId':userId,
+                            'orderId':orderId,
                             'products':cartItems,
                             'total':orderAmount
                         }}

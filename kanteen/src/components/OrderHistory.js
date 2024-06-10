@@ -64,6 +64,7 @@ export default function OrderHistory() {
                                 return <OrderItem 
                                             key={item._id} 
                                             date={item.date} 
+                                            orderId={ item.orderId }
                                             orderStatus={item.orderStatus} 
                                             paymentMode={item.paymentMode} 
                                             paymentStatus={ item.paymentStatus }

@@ -6,6 +6,7 @@ orderRouter.post('/create', async (req, res) => {
     try {
         const order = new Order({
             userId: req.body.userId,
+            orderId:req.body.orderId,
             products: req.body.products,
             total: req.body.total,
             paymentMode:req.body.mode

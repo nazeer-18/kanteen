@@ -58,7 +58,7 @@ export default function Checkout({ route }) {
 
     const addOrderIntoHistory = async () => {
         try{
-            const response = await orderService.addOrder(location.state.userId,location.state.products,location.state.total,selectedOption);
+            const response = await orderService.addOrder(location.state.userId,location.state.orderId,location.state.products,location.state.total,selectedOption);
             if (response.status === 201) {
                 console.log('Order Created Successfully');
             } else {
