@@ -34,7 +34,7 @@ export default function Checkout({ route, navigate }) {
                 if (isScriptLoaded) {
                     window.CFSDK.checkout({
                         paymentSessionId: session_id,
-                        returnUrl:"https://kanteen-ase.netlify.app/orderhistory", //TODO: fix order history navigation / redirect to order details
+                        // returnUrl:"https://kanteen-ase.netlify.app/orderhistory", //TODO: fix order history navigation / redirect to order details
                         redirectTarget:"_self",
                         // notifyUrl:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
                     });

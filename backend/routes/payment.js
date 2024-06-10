@@ -28,7 +28,7 @@ paymentRouter.post('/checkout', async (req, res) => {
                 order_currency: 'INR',
                 order_meta:{
                     return_url:"https://kanteen-ase.netlify.app/orderhistory",
-                    // notify_url:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
+                    notify_url:"https://kanteen-server.onrender.com/api/payment/handlestatus",
                 }
             })
         };
@@ -42,5 +42,16 @@ paymentRouter.post('/checkout', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+paymentRouter.post('/handlestatus',async(req,res)=>{
+    try{
+        console.log("Webhook called");
+        console.log(req);
+        res.status(200).send("succesfully received and updated payment status");
+    }catch(err){
+        console.log(err);
+        res.status(200).send("catched an error");
+    }
+})
 
 module.exports = paymentRouter;
