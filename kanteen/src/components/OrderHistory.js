@@ -31,10 +31,16 @@ export default function OrderHistory() {
                     </div>
 
                 </div>
-                <div>
+                <div className="order-history-body">
                     {
                         orders.length > 0 ? (
-                            <div>
+                            <div >
+                                <OrderItem />
+                                <OrderItem />
+                                <OrderItem />
+                                <OrderItem />
+                                <OrderItem />
+                                <OrderItem />
                                 <OrderItem />
                                 <OrderItem />
                             </div>
