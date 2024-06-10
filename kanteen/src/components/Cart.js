@@ -56,7 +56,13 @@ export default function Cart() {
                 console.log('Payment session ID:', generate_order.data.payment_session_id);
                 setTimeout(() => {
                     console.log(generate_order);
-                    navigate('/checkout',{state:{'session_id':generate_order.data.payment_session_id}}
+                    navigate('/checkout',{
+                        state:{
+                            'session_id':generate_order.data.payment_session_id,
+                            'userId':userId,
+                            'products':cartItems,
+                            'total':orderAmount
+                        }}
                         )
                 }, 200);
             }

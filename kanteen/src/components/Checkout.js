@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import userService from '../services/paymentService';
 import '../styles/Checkout.css';
+import orderService from '../services/orderService';
+import { useNavigate } from 'react-router-dom';
 
-export default function Checkout({ route, navigate }) {
+export default function Checkout({ route }) {
     const location = useLocation();
+    const navigate = useNavigate();
     const session_id= location.state.session_id;
     // const session_id="session_8zuYU6eTUXL49zUJwMskqx8jLDssXID396k-Le2VyZOC7785xj06GmhlrmzA-OI3ImkLqBb6v753YVxSCRot5resFskcEhSev7-ijPYn5rVH";
     const [selectedOption, setSelectedOption] = useState('cash');
@@ -29,23 +32,48 @@ export default function Checkout({ route, navigate }) {
     }, []);
 
     const handleGatewayGen = async () => {
-        console.log('Payment session ID:', session_id);
-                // Proceed with Cashfree checkout
-                if (isScriptLoaded) {
-                    window.CFSDK.checkout({
-                        paymentSessionId: session_id,
-                        // returnUrl:"https://kanteen-ase.netlify.app/orderhistory", //TODO: fix order history navigation / redirect to order details
-                        redirectTarget:"_self",
-                        // notifyUrl:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
-                    });
-                } else {
-                    console.log("Cashfree SDK not initialized.");
-                }
+        try {
+            console.log('Payment session ID:', session_id);
+            addOrderIntoHistory();
+            // Proceed with Cashfree checkout
+            if (isScriptLoaded) {
+                window.CFSDK.checkout({
+                    paymentSessionId: session_id,
+                    // returnUrl:"https://kanteen-ase.netlify.app/orderhistory", //TODO: fix order history navigation / redirect to order details
+                    redirectTarget:"_parent",
+                    // notifyUrl:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
+                });
+            } else {
+                console.log("Cashfree SDK not initialized.");
+            }
+        } catch (err) {
+            console.log('Internal Server Error');
+        }
     };
+
+    const handleCashOption = async() => {
+        addOrderIntoHistory();
+        navigate('/orderhistory');
+    }
+
+    const addOrderIntoHistory = async () => {
+        try{
+            const response = await orderService.addOrder(location.state.userId,location.state.products,location.state.total,selectedOption);
+            if (response.status === 201) {
+                console.log('Order Created Successfully');
+            } else {
+                if (response.message) {
+                    console.log(response.message);
+                }
+            }
+        } catch (err) {
+            console.log('Internal Server Error');
+        }
+    }
 
     const renderContent = () => {
         switch (selectedOption) {
-            case 'gateway':
+            case 'online':
                 return (
                     <div className="payment-collect-box">
                         <h2>Online Payment</h2>
@@ -73,7 +101,12 @@ export default function Checkout({ route, navigate }) {
                             <li>If the payment gets failed, items will be released for others</li>
                             <li>No transaction fee is applicable</li>
                         </ul>
-                        <button className="checkout-proceed-button">Proceed</button>
+                        <button 
+                            className="checkout-proceed-button"
+                            onClick={()=>{handleCashOption();}}
+                            >
+                            Proceed
+                        </button>
                     </div>
                 );
             default:
@@ -86,7 +119,7 @@ export default function Checkout({ route, navigate }) {
             <div className="checkout-container">
             <div className="payment-options-container">
                 <button 
-                    onClick={() => {setSelectedOption('gateway');}} 
+                    onClick={() => {setSelectedOption('online');}} 
                     className="payment-option-button"
                     style={{backgroundColor: selectedOption==="upi"?"#6E0A28":""}}>
                     Online

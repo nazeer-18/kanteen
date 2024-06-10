@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
     //use objects id as unique identifier for each order
     user: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true
     },
@@ -36,7 +36,7 @@ const OrderSchema = new Schema({
     },
     products: [
         {
-            product: {
+            item: {
                 type: Schema.Types.ObjectId, //take name and price from Menu
                 ref: 'Menu',
                 required: true

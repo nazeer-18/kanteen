@@ -7,7 +7,8 @@ orderRouter.post('/create', async (req, res) => {
         const order = new Order({
             user: req.body.userId,
             products: req.body.products,
-            total: req.body.total
+            total: req.body.total,
+            paymentMode:req.body.mode
         });
         await order.save();
         return res.status(201).send(order);
