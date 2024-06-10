@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
     //use objects id as unique identifier for each order
-    user: {
+    userId: {
         type: String,
         ref: 'User',
         required: true

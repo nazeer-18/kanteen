@@ -1,14 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUser } from '../contexts/userContext';
 import OrderItem from './OrderItem'
 import ordersImg from '../images/order-history.svg'
 import '../styles/OrderHistory.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import orderService from '../services/orderService';
 
 export default function OrderHistory() {
     const navigate = useNavigate()
-    const [orders, setOrders] = useState(["hello", "world "])
+    const { user } = useUser();
+    const userId = user.emailId;
+    const [orders, setOrders] = useState([])
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const res = await orderService.fetchOrders(userId);
+                const orders = res.data.orders;
+                const sortedOrders = orders.slice().sort((a, b) => {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    return dateB - dateA;
+                });
+                setOrders(sortedOrders);
+            } catch (err) {
+                console.error('Error fetching orders', err);
+            }
+        }
+        fetchOrders();
+        const interval = setInterval(() => {
+            fetchOrders();
+        }, 20000);
+        return () => clearInterval(interval);
+    }, [userId])
     return (
         <div className="order-history-page">
             <div className="order-history-img">
@@ -35,14 +60,16 @@ export default function OrderHistory() {
                     {
                         orders.length > 0 ? (
                             <div >
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
-                                <OrderItem />
+                                {orders.map((item) => {
+                                return <OrderItem 
+                                            key={item._id} 
+                                            date={item.date} 
+                                            orderStatus={item.orderStatus} 
+                                            paymentMode={item.paymentMode} 
+                                            paymentStatus={ item.paymentStatus }
+                                            total={ item.total }
+                                        />
+                            })}
                             </div>
                         ) : (
                             <div>

@@ -5,7 +5,7 @@ const orderRouter = express.Router();
 orderRouter.post('/create', async (req, res) => {
     try {
         const order = new Order({
-            user: req.body.userId,
+            userId: req.body.userId,
             products: req.body.products,
             total: req.body.total,
             paymentMode:req.body.mode
@@ -17,5 +17,16 @@ orderRouter.post('/create', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+orderRouter.post('/fetchOrders', async (req,res) => {
+    try {
+        const userId = req.body.userId;
+        const orders = await Order.find({ userId: userId });
+        res.status(200).json({ message: "Orders fetched successfully", orders: orders });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
 
 module.exports = orderRouter;
