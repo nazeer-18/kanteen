@@ -14,25 +14,6 @@ export default function Cart() {
     const { user } = useUser();
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
-    const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-
-    useEffect(() => {
-        const initCashfree = () => {
-            window.CFSDK = window.Cashfree({
-                mode: "sandbox", // sandbox or production
-            });
-            setIsScriptLoaded(true);
-        };
-
-        const checkScriptLoaded = () => {
-            if (window.Cashfree) {
-                initCashfree();
-            } else {
-                console.log("Cashfree script not loaded");
-            }
-        };
-        checkScriptLoaded();
-    }, []);
 
     useEffect(() => {
         if (userId === 'na') {
@@ -73,14 +54,11 @@ export default function Cart() {
             console.log(generate_order);
             if (generate_order.data.payment_session_id != null) {
                 console.log('Payment session ID:', generate_order.data.payment_session_id);
-                // Proceed with Cashfree checkout
-                if (isScriptLoaded) {
-                    window.CFSDK.checkout({
-                        paymentSessionId: generate_order.data.payment_session_id
-                    });
-                } else {
-                    console.log("Cashfree SDK not initialized.");
-                }
+                setTimeout(() => {
+                    console.log(generate_order);
+                    navigate('/checkout',{state:{'session_id':generate_order.data.payment_session_id}}
+                        )
+                }, 200);
             }
             else {
                 console.log("Payment session ID not generated");

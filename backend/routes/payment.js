@@ -25,7 +25,11 @@ paymentRouter.post('/checkout', async (req, res) => {
                 },
                 order_id: req.body.orderId,
                 order_amount: req.body.orderAmount,
-                order_currency: 'INR'
+                order_currency: 'INR',
+                order_meta:{
+                    return_url:"https://kanteen-ase.netlify.app/orderhistory",
+                    // notify_url:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
+                }
             })
         };
         fetch(url, options)
