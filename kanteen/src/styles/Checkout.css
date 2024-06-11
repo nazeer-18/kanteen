@@ -53,6 +53,12 @@
     justify-content: center;
     align-items: center;
 }
+.ins-list {
+    margin-left: 20px;
+}
+.ins-list li{
+    list-style-type: disc;
+}
 
 .upi-input-field {
     padding: 10px;
