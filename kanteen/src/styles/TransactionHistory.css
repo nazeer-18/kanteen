@@ -1,0 +1,90 @@
+.transaction-page{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    padding: 7px;
+}
+
+.transaction-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30vw;
+    margin: 4px 10px;
+    padding: 5px;
+}
+
+.transaction-img img{
+    min-width: 330px; 
+}
+
+.transaction-content{
+    background-color: white;
+    width:33vw;
+    min-width:460px;
+    padding: 5px 8px;
+    margin: 4px 10px;
+}
+
+.transaction-history-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.your-transactions{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.transaction-history-filters{
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.transaction-history-filters svg{
+    color:#bf0c45;
+}
+
+.transaction-table{
+    width: 100%;
+    margin: 10px 0;
+    background-color: green;
+}
+
+.transaction-table table{
+    border: 1px solid black;
+    background-color: #e9e9e9; 
+}
+
+.transaction-table td{
+    border: 1px solid black;
+    padding: 5px;
+    margin: 3px; 
+}
+
+@media(max-width:800px){
+    .transaction-page{
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        margin:10px 2px;
+    }
+
+    .transaction-content{
+        width: 80vw;
+    }
+}
+
+@media(max-width:560px){
+    .transaction-history-filters span{
+        display: none;
+    }
+    .transaction-content{
+        min-width: 340px;
+        box-sizing: border-box;
+        margin: 4px 0;
+    }
+}
