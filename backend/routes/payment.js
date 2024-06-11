@@ -1,7 +1,7 @@
 const express = require('express')
 const paymentRouter = express.Router();
 const fetch = require('node-fetch');
-const Gateway = require('cashfree-pg');
+const Order = require('../models/Order');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
@@ -25,7 +25,11 @@ paymentRouter.post('/checkout', async (req, res) => {
                 },
                 order_id: req.body.orderId,
                 order_amount: req.body.orderAmount,
-                order_currency: 'INR'
+                order_currency: 'INR',
+                order_meta:{
+                    return_url:"https://kanteen-ase.netlify.app/orderhistory",
+                    notify_url:"https://kanteen-server.onrender.com/api/payment/handlestatus",
+                }
             })
         };
         fetch(url, options)
@@ -38,5 +42,32 @@ paymentRouter.post('/checkout', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+paymentRouter.post('/handlestatus',async(req,res)=>{
+    try{
+        console.log("Webhook called");
+        const payment_status=req.body.data.payment.payment_status;
+        const order_id= req.body.data.order.order_id;
+        console.log("ps:"+payment_status);
+        console.log("oid"+order_id);
+        const order = await Order.findOne({ orderId: order_id }); 
+        if(payment_status=="SUCCESS"){
+            order.paymentStatus="paid";
+            order.orderStatus = 'processing';
+            order.desc='payment received';
+        }
+        else if(payment_status=="FAILED"){
+            order.paymentStatus="failed";
+            order.orderStatus = 'cancelled';
+            order.desc='online payment failed';
+        }
+        await order.save();
+        // console.log(req);
+        res.status(200).send("succesfully received and updated payment status");
+    }catch(err){
+        console.log(err);
+        res.status(200).send("catched an error");
+    }
+})
 
 module.exports = paymentRouter;

@@ -35,6 +35,11 @@
     align-items: center;
 }
 
+.order-history-body{
+    max-height: 600px;
+    overflow-y: auto; 
+}
+
 .order-history-filters{
     font-weight: bold;
     font-size: 1.25em;

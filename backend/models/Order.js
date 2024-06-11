@@ -3,10 +3,14 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
     //use objects id as unique identifier for each order
-    user: {
-        type: Schema.Types.ObjectId,
+    userId: {
+        type: String,
         ref: 'User',
         required: true
+    },
+    orderId: {
+        type: String,
+        required:true
     },
     orderStatus: {
         type: String, // pending, processing ,completed, cancelled
@@ -27,7 +31,7 @@ const OrderSchema = new Schema({
     },
     //whenever a transaction gets added for this order id automatically it updates the payment status and transaction id
     paymentStatus: {
-        type: String, // paid, unpaid 
+        type: String, // paid, unpaid ,failed
         default: 'unpaid'
     },
     transactionId: {
@@ -36,7 +40,7 @@ const OrderSchema = new Schema({
     },
     products: [
         {
-            product: {
+            item: {
                 type: Schema.Types.ObjectId, //take name and price from Menu
                 ref: 'Menu',
                 required: true
@@ -59,6 +63,7 @@ OrderSchema.methods.expireOrder = async function () {
     //CHANGING ORDER STATUS BASED ON TIME AND PAYMENT STATUS  
     if (Date.now() - this.date > 7 * 60 * 1000  && this.paymentStatus === 'unpaid') {
         this.orderStatus = 'cancelled';
+        this.paymentStatus='failed';
         this.desc = 'Order Expired due to inactivity for 7 minutes.';
         await this.save();
     }

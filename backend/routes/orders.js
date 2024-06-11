@@ -5,9 +5,11 @@ const orderRouter = express.Router();
 orderRouter.post('/create', async (req, res) => {
     try {
         const order = new Order({
-            user: req.body.userId,
+            userId: req.body.userId,
+            orderId:req.body.orderId,
             products: req.body.products,
-            total: req.body.total
+            total: req.body.total,
+            paymentMode:req.body.mode
         });
         await order.save();
         return res.status(201).send(order);
@@ -17,13 +19,12 @@ orderRouter.post('/create', async (req, res) => {
     }
 });
 
-orderRouter.post('/get',async (req,res)=>{
-    try{
+orderRouter.post('/fetchOrders', async (req,res) => {
+    try {
         const userId = req.body.userId;
-        const orders = await Order.find({user:userId});
-        sortOrders = orders.sort((a,b)=>b.date-a.date);
-        return orders.length === 0 ? res.status(404).send("No orders found") : res.status(200).send(orders);
-    }catch(err){
+        const orders = await Order.find({ userId: userId });
+        res.status(200).json({ message: "Orders fetched successfully", orders: orders });
+    } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
