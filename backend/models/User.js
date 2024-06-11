@@ -20,6 +20,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        default: 'user' //user,cashier,server,admin
+    },
     Date: {
         type: Date,
         default: Date.now

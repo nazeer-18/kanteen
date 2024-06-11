@@ -18,6 +18,7 @@ import CancellationAndRefund from './components/CancellationAndRefund';
 import Footer from './components/Footer'; 
 import Editprofile from './components/Editprofile';
 import Checkout from './components/Checkout';
+import TransactionHistory from './components/TransactionHistory';
 
 import { UserProvider } from './contexts/userContext';
 
@@ -36,6 +37,7 @@ export default function App() {
                     <Route path='/signupacnt' element={<SignUpAcnt />}></Route>
                     <Route path='/menu' element={<Menu />}></Route>
                     <Route path='/orderhistory' element={<OrderHistory />}></Route>
+                    <Route path='/transaction' element={<TransactionHistory />}></Route>
                     <Route path='/cart' element={<Cart />}></Route>
                     <Route path='/Editprofile' element={<Editprofile />}></Route>
                     <Route path='/termsandconditions' element={<TermsAndConditions />}></Route>

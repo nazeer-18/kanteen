@@ -67,3 +67,18 @@
         margin: 10px;
     }
 }
+
+@media(max-width:600px){
+    .order-history-content{
+        min-width: 340px;
+        box-sizing: border-box;
+        width: 90vw;
+    } 
+}
+
+
+@media(max-width:400px){
+    .order-history-filters span{
+        display: none;
+    }
+}

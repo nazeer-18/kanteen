@@ -111,3 +111,24 @@
     font-weight: 600;
     font-size:15px;
 }
+
+.order-item-details-third{
+    display: none;
+}
+
+.hidden-hr{
+    display: none;
+}
+
+@media(max-width:600px){
+    .order-explore, .order-item-total{
+        display: none;
+    }
+    .order-item-details-third{
+        display: flex;
+        padding: 3px 1px;
+    }
+    .hidden-hr{
+        display: block;
+    }
+}

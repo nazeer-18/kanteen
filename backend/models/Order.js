@@ -31,7 +31,7 @@ const OrderSchema = new Schema({
     },
     //whenever a transaction gets added for this order id automatically it updates the payment status and transaction id
     paymentStatus: {
-        type: String, // paid, unpaid 
+        type: String, // paid, unpaid ,failed
         default: 'unpaid'
     },
     transactionId: {
@@ -63,6 +63,7 @@ OrderSchema.methods.expireOrder = async function () {
     //CHANGING ORDER STATUS BASED ON TIME AND PAYMENT STATUS  
     if (Date.now() - this.date > 7 * 60 * 1000  && this.paymentStatus === 'unpaid') {
         this.orderStatus = 'cancelled';
+        this.paymentStatus='failed';
         this.desc = 'Order Expired due to inactivity for 7 minutes.';
         await this.save();
     }

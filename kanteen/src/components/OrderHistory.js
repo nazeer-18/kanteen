@@ -52,7 +52,7 @@ export default function OrderHistory() {
                         Your Orders
                     </h1>
                     <div className="order-history-filters">
-                        Filters <FontAwesomeIcon icon={faFilter} />
+                        <span>Filters</span> <FontAwesomeIcon icon={faFilter} />
                     </div>
 
                 </div>
@@ -77,7 +77,7 @@ export default function OrderHistory() {
                                 <p className="empty-orders">No Orders Found</p>
                             </div>
                         )
-                    } 
+                    }
                 </div>
             </div>
         </div>
