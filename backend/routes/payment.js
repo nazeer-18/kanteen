@@ -51,19 +51,25 @@ paymentRouter.post('/handlestatus',async(req,res)=>{
         console.log("ps:"+payment_status);
         console.log("oid"+order_id);
         const order = await Order.findOne({ orderId: order_id }); 
-        if(payment_status=="SUCCESS"){
-            order.paymentStatus="paid";
-            order.orderStatus = 'processing';
-            order.desc='payment received';
+        if(order){
+            if(payment_status=="SUCCESS"){
+                order.paymentStatus="paid";
+                order.orderStatus = 'processing';
+                order.desc='payment received';
+            }
+            else if(payment_status=="FAILED"){
+                order.paymentStatus="failed";
+                order.orderStatus = 'cancelled';
+                order.desc='online payment failed';
+            }
+            await order.save();
+            res.status(200).send("succesfully received and updated payment status");
         }
-        else if(payment_status=="FAILED"){
-            order.paymentStatus="failed";
-            order.orderStatus = 'cancelled';
-            order.desc='online payment failed';
+        else{
+            console.log("no orders found with id:"+order_id);
+            res.status(200).send("Issue with the orderId");
         }
-        await order.save();
         // console.log(req);
-        res.status(200).send("succesfully received and updated payment status");
     }catch(err){
         console.log(err);
         res.status(200).send("catched an error");
