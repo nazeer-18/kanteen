@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../contexts/userContext';
 import OrderItem from './OrderItem'
@@ -13,6 +13,13 @@ export default function OrderHistory() {
     const { user } = useUser();
     const userId = user.emailId;
     const [orders, setOrders] = useState([])
+    useEffect(() => {
+        if (userId.name === 'na') {
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500)
+        }
+    },[]);
     useEffect(() => {
         const fetchOrders = async () => {
             try {
@@ -34,6 +41,18 @@ export default function OrderHistory() {
         }, 20000);
         return () => clearInterval(interval);
     }, [userId])
+    const toLocaleDateString = (date) => {
+        return new Date(date).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            //12 hour format
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        });
+    }
     return (
         <div className="order-history-page">
             <div className="order-history-img">
@@ -61,16 +80,16 @@ export default function OrderHistory() {
                         orders.length > 0 ? (
                             <div >
                                 {orders.map((item) => {
-                                return <OrderItem 
-                                            key={item._id} 
-                                            date={item.date} 
-                                            orderId={ item.orderId }
-                                            orderStatus={item.orderStatus} 
-                                            paymentMode={item.paymentMode} 
-                                            paymentStatus={ item.paymentStatus }
-                                            total={ item.total }
-                                        />
-                            })}
+                                    return <OrderItem
+                                        key={item._id}
+                                        date={toLocaleDateString(item.date)}
+                                        orderId={item.orderId}
+                                        orderStatus={item.orderStatus}
+                                        paymentMode={item.paymentMode}
+                                        paymentStatus={item.paymentStatus}
+                                        total={item.total}
+                                    />
+                                })}
                             </div>
                         ) : (
                             <div>

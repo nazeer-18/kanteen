@@ -35,8 +35,8 @@
     align-items: center;
 }
 
-.order-history-body{
-    max-height: 600px;
+.order-history-body{ 
+    max-height: 480px;
     overflow-y: auto; 
 }
 

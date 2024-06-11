@@ -34,7 +34,7 @@ export default function Checkout({ route }) {
     const handleGatewayGen = async () => {
         try {
             console.log('Payment session ID:', session_id);
-            addOrderIntoHistory();
+            await addOrderIntoHistory();
             // Proceed with Cashfree checkout
             if (isScriptLoaded) {
                 window.CFSDK.checkout({
@@ -52,7 +52,7 @@ export default function Checkout({ route }) {
     };
 
     const handleCashOption = async() => {
-        addOrderIntoHistory();
+        await addOrderIntoHistory();
         navigate('/orderhistory');
     }
 
