@@ -10,8 +10,7 @@ import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 export default function HomePage() {
     const { user } = useUser();
     const isAdmin = user.role === 'admin';
-    console.log(isAdmin)
-    console.log(user)
+    const isUser = user.role === 'user';
     const [message, setMessage] = React.useState('');
     const navigate = useNavigate();
     useEffect(() => {
@@ -44,37 +43,86 @@ export default function HomePage() {
                 </div>
             </div>
             <div className="homepage-functions">
-                <div className="homepage-alerts">
-                    <h2>Alerts</h2> <br />
-                    <div className="homepage-alerts-list">
-                        <p> &gt; Specials</p> <br />
-                        <p> &gt; Status</p> <br />
+                {
+                    isUser &&
+                    <div className="homepage-buttons-group">
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/menu">
+                                <span className="btn-name">ORDER NOW </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faNewspaper} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">MY ORDERS </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                </div>
-                <div className="homepage-buttons-group">
-                    <div className="homepage-button-container">
-                        <Link className='homepage-button' exact="true" to="/menu">
-                            <span className="btn-name">ORDER NOW </span>
-                            <div className="btn-icon">
-                                <FontAwesomeIcon icon={faNewspaper} />
-                            </div>
-                        </Link>
+                }
+                {
+                    isAdmin &&
+                    <div className="homepage-buttons-group">
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/menu">
+                                <span className="btn-name">ORDER NOW </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faNewspaper} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">ORDERS </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">Approove  Payments </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">Add item </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">Modify Item </span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="homepage-button-container">
+                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                                <span className="btn-name">Payments</span>
+                                <div className="btn-icon">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                    {
-                        isAdmin ?
-                            <div>
-                                im admin
-                            </div>
-                            :
-                            <div className="homepage-button-container">
-                                <Link className='homepage-button' exact="true" to="/orderhistory">
-                                    <span className="btn-name">MY ORDERS </span>
-                                    <div className="btn-icon">
-                                        <FontAwesomeIcon icon={faFileLines} />
-                                    </div>
-                                </Link>
-                            </div>
-                    }
+                }
+            </div>
+            <div className="homepage-alerts">
+                <h2>Alerts</h2> <br />
+                <div className="homepage-alerts-list">
+                    <p> &gt; Specials</p> <br />
+                    <p> &gt; Status</p> <br />
                 </div>
             </div>
         </div>
