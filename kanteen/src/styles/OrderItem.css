@@ -44,15 +44,32 @@
 }
 
 .order-status{
-    position: relative;
-    background-color: #d8efd8;
+    position: relative; 
     font-weight: 600;
     padding: 5px 10px;
     font-size: 16px;
     text-align: center;
-    border-radius: 20px;
-    color: #2dc92d;
+    border-radius: 20px; 
     font-family: 'Poppins', sans-serif;
+}
+
+.order-status.completed {
+    background-color: green;
+    color: white;
+}
+.order-status.cancelled {
+    background-color: #ed2525;
+    color: white;
+}
+
+.order-status.processing {
+    background-color: #00b1eb;
+    color: white;
+}
+
+.order-status.pending {
+    background-color: #e4e424;
+    color: black;
 }
 
 .order-explore-button button{
@@ -120,6 +137,10 @@
     display: none;
 }
 
+.apply-break{
+    display: none;
+}
+
 @media(max-width:600px){
     .order-explore, .order-item-total{
         display: none;
@@ -129,6 +150,12 @@
         padding: 3px 1px;
     }
     .hidden-hr{
+        display: block;
+    }
+}
+
+@media(max-width:420px){
+    .apply-break{
         display: block;
     }
 }

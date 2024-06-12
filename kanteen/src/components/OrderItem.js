@@ -1,22 +1,34 @@
 import React from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWallet, faRupee, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
+import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
 
 export default function OrderItem(prop) {
     const { date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
+    const getStatusClass = () => {
+        switch (orderStatus) {
+            case 'completed':
+                return 'completed';
+            case 'cancelled':
+                return 'cancelled';
+            case 'processing':
+                return 'processing';
+            case 'pending':
+                return 'pending';
+            default:
+                return '';
+        }
+    };
     return (
         <div className="order-item-container">
             <div className="order-item-content">
-                <div className="order-status">
-                    {/*status can be pending, processing, completed, cancelled
-                            yet to  add bg and fg green for  completed,  red  for  cancelled , light blue for processing and yellow for pending*/}
+                <div className={`order-status ${getStatusClass()}`}>
                     {orderStatus}
                 </div>
                 <div className="order-item-details-first order-item">
                     <div className="order-details">
                         <div className="ordered-date">
-                            Ordered on : {date}
+                            Ordered on: <br className="apply-break" /> {date}
                         </div>
                         <div className="order-id">
                             <strong>Order ID</strong> : #{orderId}
@@ -44,6 +56,19 @@ export default function OrderItem(prop) {
                         </div>
                     </div>
                     <div className="order-item-total">
+                        Total : <FontAwesomeIcon icon={faIndianRupee} /> <span className="txt-black">{total}</span>
+                    </div>
+                </div>
+                <hr className="hidden-hr" />
+                <div className="order-item-details-third order-item">
+                    <div className="order-explore-hidden">
+                        <div className="order-explore-button">
+                            <button>
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div className="order-item-total-hidden">
                         Total : <FontAwesomeIcon icon={faIndianRupee} /> <span className="txt-black">{total}</span>
                     </div>
                 </div>

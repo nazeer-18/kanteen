@@ -1,12 +1,41 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/TransactionHistory.css'
 import TransactionSvg from '../images/transactions.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import transactionService from '../services/transactionService';
+import { useUser } from '../contexts/userContext';
 
 export default function TransactionHistory() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { user } = useUser();
+    const [transactions, setTransactions] = useState([]);
+    useEffect(() => {
+        const getTransactions = async () => {
+            const response = await transactionService.getTransactions(user.emailId);
+            const sortedTransactions = response.data.sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+            })
+            setTransactions(sortedTransactions);
+        }
+        getTransactions();
+    }, [])
+    const changeToLocalDate = (date) => {
+        return new Date(date).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric', 
+        })
+    }
+    const changeToLocalTime = (date) => {
+        return new Date(date).toLocaleTimeString('en-GB', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        });
+    }
     return (
         <div className="transaction-page">
             <div className="transaction-img">
@@ -27,33 +56,35 @@ export default function TransactionHistory() {
                     <div className="transaction-history-filters">
                         <span>Filters</span> <FontAwesomeIcon icon={faFilter} />
                     </div>
-                </div> 
+                </div>
                 <div className="transaction-table">
                     <table>
                         <thead>
-
-                        <tr>
-                            <td>Date</td>
-                            <td>Time</td>
-                            <td>Amount</td>
-                            <td>OrderId</td>
-                            <td>Transaction Id</td>
-                        </tr>
+                            <tr>
+                                <th>Time</th>
+                                <th>Amount</th>
+                                <th>Mode</th>
+                                <th>Status</th>
+                                <th>Order Info</th>
+                            </tr>
                         </thead>
-                        <tr>
-                            <td>12/12/2021</td>
-                            <td>12:00</td>
-                            <td>₹ 200</td>
-                            <td>123456</td>
-                            <td>123456</td>
-                        </tr>
-                        <tr>
-                            <td>12/12/2021</td>
-                            <td>12:00</td>
-                            <td>₹ 200</td>
-                            <td>123456</td>
-                            <td>123456</td>
-                        </tr>
+                        <tbody>
+                            {transactions.map((transaction) => {
+                                return (
+                                    <tr key={transaction._id}>
+                                        <td>{changeToLocalDate(transaction.date)}<br />{changeToLocalTime(transaction.date)} <br />  </td>
+                                        <td>₹ {transaction.amount}</td>
+                                        <td>{transaction.mode}</td>
+                                        <td>{transaction.status}</td>
+                                        <td>
+                                            <Link to={`/vieworder?id=${transaction.orderId}`}>
+                                                <button>View order</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
                     </table>
                 </div>
             </div>
