@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TransactionSchema = new Schema({
     userId:{
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true
     },
@@ -24,6 +24,12 @@ const TransactionSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },amount:{
+        type: Number, 
+        default : 0
+    },mode:{
+        type: String, 
+        default : 'cash'
     }
 });
 
@@ -32,6 +38,8 @@ TransactionSchema.methods.updateOrderStatus = async function () {
     const Order = require('./Order');
     const order = await Order.findById(this.orderId);
     if(order){
+        this.amount = order.total;
+        this.mode = order.paymentMode;
         if(this.status === 'failed'){
             order.orderStatus = 'cancelled';
             order.desc = 'Payment Failed';
@@ -42,7 +50,11 @@ TransactionSchema.methods.updateOrderStatus = async function () {
             order.paymentStatus = 'paid';
         }
         await order.save();
+        await this.save();  
     }
 }
+
+
+
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

@@ -19,6 +19,7 @@ import Footer from './components/Footer';
 import Editprofile from './components/Editprofile';
 import Checkout from './components/Checkout';
 import TransactionHistory from './components/TransactionHistory';
+import ViewOrder from './components/ViewOrder';
 
 import { UserProvider } from './contexts/userContext';
 
@@ -45,6 +46,7 @@ export default function App() {
                     <Route path='/privacypolicy' element={<PrivacyPolicy />}></Route>
                     <Route path='/cancellationandrefund' element={<CancellationAndRefund />}></Route> 
                     <Route path='/checkout' element={<Checkout />}></Route> 
+                    <Route path='/vieworder' element={<ViewOrder />}></Route>
                 </Routes>
                 <Footer />
             </UserProvider>

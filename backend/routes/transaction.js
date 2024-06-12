@@ -16,4 +16,16 @@ transactionRouter.post('/create', async (req, res) => {
     }
 });
 
+transactionRouter.post('/fetch', async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const Transaction = require('../models/Transaction');
+        const transactions = await Transaction.find({ userId: userId });
+        res.status(200).send(transactions);
+    } catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+});
+
 module.exports = transactionRouter;
