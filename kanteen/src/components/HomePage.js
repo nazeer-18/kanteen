@@ -76,7 +76,7 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <div className="homepage-button-container">
-                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                            <Link className='homepage-button' exact="true" to="/adminorderhistory">
                                 <span className="btn-name">ORDERS </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
@@ -84,15 +84,15 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <div className="homepage-button-container">
-                            <Link className='homepage-button' exact="true" to="/orderhistory">
-                                <span className="btn-name">Approove  Payments </span>
+                            <Link className='homepage-button' exact="true" to="/approvecash">
+                                <span className="btn-name">Approve  Payments </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
                                 </div>
                             </Link>
                         </div>
                         <div className="homepage-button-container">
-                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                            <Link className='homepage-button' exact="true" to="/additem">
                                 <span className="btn-name">Add item </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
@@ -100,7 +100,7 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <div className="homepage-button-container">
-                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                            <Link className='homepage-button' exact="true" to="/modifyitem">
                                 <span className="btn-name">Modify Item </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
@@ -108,7 +108,7 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <div className="homepage-button-container">
-                            <Link className='homepage-button' exact="true" to="/orderhistory">
+                            <Link className='homepage-button' exact="true" to="/admintransaction">
                                 <span className="btn-name">Payments</span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import userService from '../services/paymentService';
+import { useLocation } from 'react-router-dom'; 
 import '../styles/Checkout.css';
 import orderService from '../services/orderService';
+import paymentService from '../services/paymentService';
 import { useNavigate } from 'react-router-dom';
+import {useUser} from '../contexts/userContext';
 
-export default function Checkout({ route }) {
+export default function Checkout() {
+    const {user} = useUser(); 
     const location = useLocation();
     const navigate = useNavigate();
-    const session_id= location.state.session_id;
+    const [sessionId, setSessionId] = useState('');
+    const [orderId, setOrderId] = useState('');
     // const session_id="session_8zuYU6eTUXL49zUJwMskqx8jLDssXID396k-Le2VyZOC7785xj06GmhlrmzA-OI3ImkLqBb6v753YVxSCRot5resFskcEhSev7-ijPYn5rVH";
     const [selectedOption, setSelectedOption] = useState('cash');
     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -33,12 +36,15 @@ export default function Checkout({ route }) {
 
     const handleGatewayGen = async () => {
         try {
-            console.log('Payment session ID:', session_id);
             await addOrderIntoHistory();
+            const alphanumericId = user.emailId.replace(/[^a-zA-Z0-9]/g, '');
+            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber);
+            setSessionId(response.data.payment_session_id);
+            console.log('Payment session ID:', sessionId);
             // Proceed with Cashfree checkout
             if (isScriptLoaded) {
                 window.CFSDK.checkout({
-                    paymentSessionId: session_id,
+                    paymentSessionId: sessionId,
                     // returnUrl:"https://kanteen-ase.netlify.app/orderhistory", //TODO: fix order history navigation / redirect to order details
                     redirectTarget:"_self",
                     // notifyUrl:"https://webhook.site/c8dc726a-4c5f-4866-bd7c-968d31dd70c1"
@@ -58,7 +64,8 @@ export default function Checkout({ route }) {
 
     const addOrderIntoHistory = async () => {
         try{
-            const response = await orderService.addOrder(location.state.userId,location.state.orderId,location.state.products,location.state.total,selectedOption);
+            const response = await orderService.addOrder(user.emailId,location.state.products,location.state.total,selectedOption);
+            setOrderId(response.data._id);
             if (response.status === 201) {
                 console.log('Order Created Successfully');
             } else {

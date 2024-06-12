@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Cart.css';
-import paymentService from '../services/paymentService';
+import '../styles/Cart.css'; 
 import itemService from '../services/itemService';
 import { useUser } from '../contexts/userContext'
 import CartItem from './CartItem';
@@ -44,40 +43,13 @@ export default function Cart() {
 
     const handleCheckout = async () => {
         try {
-            const orderId = user.name + Math.floor(Math.random() * (100001)); //TODO: generate a sequential number everytime as randoms cant be unique.
-            console.log(orderId)
-            const orderAmount = total;
-            const customerId = user.mobileNumber;
-            const customerName = user.name;
-            const customerNumber = user.mobileNumber;
-            const generate_order = await paymentService.paymentRequest(orderId, orderAmount, customerId, customerName, customerNumber);
-            console.log(generate_order);
-            if (generate_order.data.payment_session_id != null) {
-                console.log('Payment session ID:', generate_order.data.payment_session_id);
-                setTimeout(() => {
-                    console.log(generate_order);
-                    navigate('/checkout', {
-                        state: {
-                            'session_id': generate_order.data.payment_session_id,
-                            'userId': userId,
-                            'orderId': orderId,
-                            'products': cartItems,
-                            'total': orderAmount
-                        }
-                    }
-                    )
-                }, 200);
-            }
-            else {
-                console.log("Payment session ID not generated");
-            }
+            setTimeout(() => {
+                navigate('/checkout', { state: { products: cartItems, total: total } });
+            }, 2000);
         } catch (err) {
-            console.log("error during checkout", err);
+            console.error('Error in checkout', err);
         }
-        setTimeout(() => {
-        }, 1800);
     }
-
     return (
         <div className="cart-page">
             <div className="cart-img">
@@ -87,9 +59,7 @@ export default function Cart() {
                 <div className="cart-content">
                     {
                         <div>
-
                             <div className="cart-heading">
-
                                 <div className="cart-heading-desc">
                                     <span title="view menu" className="cart-arrow" onClick={() => {
                                         navigate(-1);
@@ -106,13 +76,10 @@ export default function Cart() {
                                         price
                                     </div>
                                 }
-
                             </div>
-
                             {cartItems.map((item) => {
                                 return <CartItem key={item._id} item={item.item} quantity={item.quantity} />
                             })}
-
                         </div>
                     }
                     <div className="cart-total">
@@ -131,7 +98,10 @@ export default function Cart() {
                 {
                     cartItems.length > 0 &&
                     <div className="cart-footer">
-                        <button className="cart-footer-button" onClick={handleCheckout}>
+                        <button
+                            className="cart-footer-button"
+                            disabled={total === 0}
+                            onClick={handleCheckout}>
                             Proceed to order
                         </button>
                     </div>

@@ -20,6 +20,7 @@ import Editprofile from './components/Editprofile';
 import Checkout from './components/Checkout';
 import TransactionHistory from './components/TransactionHistory';
 import ViewOrder from './components/ViewOrder';
+import ApproveCash from './components/ApproveCash';
 
 import { UserProvider } from './contexts/userContext';
 
@@ -47,6 +48,10 @@ export default function App() {
                     <Route path='/cancellationandrefund' element={<CancellationAndRefund />}></Route> 
                     <Route path='/checkout' element={<Checkout />}></Route> 
                     <Route path='/vieworder' element={<ViewOrder />}></Route>
+                    {
+                        //admin routes
+                        <Route path='/approvecash' element={<ApproveCash />}></Route>
+                    }
                 </Routes>
                 <Footer />
             </UserProvider>

@@ -50,7 +50,8 @@ text-amrita {
 
 .homepage-alerts{
     padding: 5px; 
-    min-width:50vw;
+    width:80vw; 
+    margin: 0px auto;
 }
 
 .homepage-alerts-list{
@@ -59,6 +60,7 @@ text-amrita {
     font-size: 18px;
     font-family: 'petrona';
     padding: 10px;
+    margin: 5px;
     font-weight: 600;
 }
 
@@ -73,7 +75,7 @@ text-amrita {
 }
 
 .homepage-button-container{
-    width:323px;
+    width:340px;
     height:60px;
     margin: 8px;
     box-sizing: border-box; 
@@ -146,8 +148,18 @@ text-amrita {
 }
 
 
-@media(max-width:840px){
+@media(max-width:880px){
     .homepage-buttons-group{
         justify-content: center;
     }
+}
+
+@media(max-width:500px){ 
+    .btn-icon{
+        width:65px;
+    }
+    .btn-icon svg{
+        top: 20px;
+        right: 10px;
+    } 
 }
