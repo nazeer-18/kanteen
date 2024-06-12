@@ -66,12 +66,7 @@ OrderSchema.methods.expireOrder = async function () {
         this.paymentStatus='failed';
         this.desc = 'Order Expired due to inactivity for 7 minutes.';
         await this.save();
-    }
-}
-
-OrderSchema.methods.processOrder = async function () {
-    //process the order if payment is done
-    if (this.paymentStatus === 'paid') {
+    }else if(this.paymentStatus === 'paid'){
         this.orderStatus = 'processing';
         this.desc = 'Order is being processed.';
         await this.save();
@@ -87,14 +82,12 @@ async function checkAndExpireOrders() {
     try {
         const Order = require('./Order');
         const pendingOrders = await Order.find({
-            orderStatus: { $in: ['pending', 'processing', 'completed'] },
+            orderStatus: { $in: ['pending', 'completed'] },
             desc: { $ne: 'Order is completed.' }
         });        
         for (let order of pendingOrders) {
             if (order.orderStatus === 'pending')
                 await order.expireOrder();
-            else if (order.orderStatus === 'processing')
-                await order.processOrder();
             else if (order.orderStatus === 'completed')
                 await order.completeOrder();
         }

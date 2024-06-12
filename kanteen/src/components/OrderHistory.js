@@ -14,12 +14,12 @@ export default function OrderHistory() {
     const userId = user.emailId;
     const [orders, setOrders] = useState([])
     useEffect(() => {
-        if (userId.name === 'na') {
+        if (userId.emailId === 'na') {
             setTimeout(() => {
                 navigate('/login');
             }, 1500)
         }
-    },[]);
+    },[userId.emailId,navigate]);
     useEffect(() => {
         const fetchOrders = async () => {
             try {

@@ -9,6 +9,9 @@ import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 
 export default function HomePage() {
     const { user } = useUser();
+    const isAdmin = user.role === 'admin';
+    console.log(isAdmin)
+    console.log(user)
     const [message, setMessage] = React.useState('');
     const navigate = useNavigate();
     useEffect(() => {
@@ -18,7 +21,7 @@ export default function HomePage() {
                 navigate('/login');
             }, 2000);
         }
-    }, [user.emailId,navigate])
+    }, [user.emailId, navigate])
     return (
         <div>
             <div className="homepage-container">
@@ -57,14 +60,21 @@ export default function HomePage() {
                             </div>
                         </Link>
                     </div>
-                    <div className="homepage-button-container">
-                        <Link className='homepage-button' exact="true" to="/orderhistory">
-                            <span className="btn-name">MY ORDERS </span>
-                            <div className="btn-icon">
-                                <FontAwesomeIcon icon={faFileLines} />
+                    {
+                        isAdmin ?
+                            <div>
+                                im admin
                             </div>
-                        </Link>
-                    </div>
+                            :
+                            <div className="homepage-button-container">
+                                <Link className='homepage-button' exact="true" to="/orderhistory">
+                                    <span className="btn-name">MY ORDERS </span>
+                                    <div className="btn-icon">
+                                        <FontAwesomeIcon icon={faFileLines} />
+                                    </div>
+                                </Link>
+                            </div>
+                    }
                 </div>
             </div>
         </div>

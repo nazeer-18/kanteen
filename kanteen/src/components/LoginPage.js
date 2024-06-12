@@ -35,7 +35,8 @@ export default function LoginPage() {
                     emailId: response.data.details.emailId,
                     mobileNumber: response.data.details.mobileNumber,
                     name: response.data.details.name,
-                    password: data.pwd
+                    password: data.pwd,
+                    role: response.data.details.role
                 });
                 setTimeout(() => {
                     navigate('/')
