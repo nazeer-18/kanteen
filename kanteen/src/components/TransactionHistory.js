@@ -27,33 +27,34 @@ export default function TransactionHistory() {
                     <div className="transaction-history-filters">
                         <span>Filters</span> <FontAwesomeIcon icon={faFilter} />
                     </div>
-                </div> 
+                </div>
                 <div className="transaction-table">
                     <table>
                         <thead>
-
-                        <tr>
-                            <td>Date</td>
-                            <td>Time</td>
-                            <td>Amount</td>
-                            <td>OrderId</td>
-                            <td>Transaction Id</td>
-                        </tr>
+                            <tr>
+                                <th>Time</th> 
+                                <th>Amount</th>
+                                <th>Mode</th>
+                                <th>Status</th>
+                                <th>Order Info</th> 
+                            </tr>
                         </thead>
-                        <tr>
-                            <td>12/12/2021</td>
-                            <td>12:00</td>
-                            <td>₹ 200</td>
-                            <td>123456</td>
-                            <td>123456</td>
-                        </tr>
-                        <tr>
-                            <td>12/12/2021</td>
-                            <td>12:00</td>
-                            <td>₹ 200</td>
-                            <td>123456</td>
-                            <td>123456</td>
-                        </tr>
+                        <tbody> 
+                            <tr>
+                            <td>12/12/2021 <br /> 12:00 </td>
+                                <td>₹ 200</td>
+                                <td>Cash</td>
+                                <td>Completed</td>
+                                <td><button>View order</button></td> 
+                            </tr>
+                            <tr>
+                                <td>12/12/2021 <br /> 12:00 </td> 
+                                <td>₹ 200</td>
+                                <td>Card</td>
+                                <td>Completed</td>
+                                <td><button>View order</button></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
