@@ -1,5 +1,8 @@
 import React,{useState,useEffect} from 'react'
+import cashier from '../images/cashier.svg'
 import orderService from '../services/orderService';
+import ApproveItem from './ApproveItem';
+import '../styles/ApproveCash.css'
 
 export default function ApproveCash() {
     const [pendingOrders,setPendingOrders] = useState([]);
@@ -11,18 +14,20 @@ export default function ApproveCash() {
         getpendingOrders();
     });
     return (
-        <div>
-            <h1>Approve Cash</h1>
-            {pendingOrders.map((order)=>{
-                return(
-                    <div>
-                        <h2>{order.orderId}</h2>
-                        <h3>{order.userId}</h3>
-                        <h4>{order.total}</h4>
-                        <h4>{order.date+5*60*1000-Date().now}</h4>
-                    </div>
-                )
-            })}
+        <div className='approvecash-page'>
+            <div className="approvecash-img">
+                <img src={cashier} alt="cashier"/>
+            </div>
+            <div className="approvecash-pending-orders">
+                <ApproveItem/>
+                {
+                    pendingOrders.map(order=>{
+                        return(
+                            <ApproveItem orderId={order._id} userId={order.userId} total={order.total} expiry={order.date+5*60*1000-Date().now}/>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

@@ -85,7 +85,7 @@ export default function HomePage() {
                         </div>
                         <div className="homepage-button-container">
                             <Link className='homepage-button' exact="true" to="/approvecash">
-                                <span className="btn-name">Approve  Payments </span>
+                                <span className="btn-name">APPROVE PAYMENTS </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
                                 </div>
@@ -93,7 +93,7 @@ export default function HomePage() {
                         </div>
                         <div className="homepage-button-container">
                             <Link className='homepage-button' exact="true" to="/additem">
-                                <span className="btn-name">Add item </span>
+                                <span className="btn-name">ADD ITEM </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
                                 </div>
@@ -101,7 +101,7 @@ export default function HomePage() {
                         </div>
                         <div className="homepage-button-container">
                             <Link className='homepage-button' exact="true" to="/modifyitem">
-                                <span className="btn-name">Modify Item </span>
+                                <span className="btn-name">MODIFY ITEM </span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
                                 </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
                         </div>
                         <div className="homepage-button-container">
                             <Link className='homepage-button' exact="true" to="/admintransaction">
-                                <span className="btn-name">Payments</span>
+                                <span className="btn-name">PAYMENTS</span>
                                 <div className="btn-icon">
                                     <FontAwesomeIcon icon={faFileLines} />
                                 </div>

@@ -31,13 +31,13 @@ export default function OrderItem(prop) {
                             Ordered on: <br className="apply-break" /> {date}
                         </div>
                         <div className="order-id">
-                            <strong>Order ID</strong> : #{orderId}
+                            <strong>Order ID</strong>:#{orderId}
                         </div>
                     </div>
                     <div className="order-explore">
                         <div className="order-explore-button">
                             <button>
-                                View Details
+                                View Order
                             </button>
                         </div>
                     </div>

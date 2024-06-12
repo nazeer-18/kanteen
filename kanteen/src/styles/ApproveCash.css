@@ -1,0 +1,18 @@
+.approvecash-page{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.approvecash-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+}
+
+.approvecash-img{
+    min-width: 320px;
+}
