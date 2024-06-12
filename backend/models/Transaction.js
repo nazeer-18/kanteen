@@ -54,7 +54,4 @@ TransactionSchema.methods.updateOrderStatus = async function () {
     }
 }
 
-
-
-
 module.exports = mongoose.model('Transaction', TransactionSchema);

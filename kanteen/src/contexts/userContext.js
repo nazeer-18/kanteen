@@ -5,7 +5,8 @@ export function UserProvider({ children }) {
         emailId: 'na',
         name:'na',
         mobileNumber: 'na',
-        password: 'na'
+        password: 'na',
+        role:'na',
     });
     return (
         <UserContext.Provider value={{ user, setUser }}>
