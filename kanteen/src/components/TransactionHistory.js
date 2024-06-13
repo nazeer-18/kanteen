@@ -77,7 +77,7 @@ export default function TransactionHistory() {
                                         <td>{transaction.mode}</td>
                                         <td>{transaction.status}</td>
                                         <td>
-                                            <Link to={`/vieworder?id=${transaction.orderId}`}>
+                                            <Link to={`/vieworder?id=${transaction._id}`}>
                                                 <button>View order</button>
                                             </Link>
                                         </td>

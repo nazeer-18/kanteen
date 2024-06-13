@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
 
 export default function OrderItem(prop) {
-    const { date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
+    const {key, date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
     const getStatusClass = () => {
         switch (orderStatus) {
             case 'completed':
