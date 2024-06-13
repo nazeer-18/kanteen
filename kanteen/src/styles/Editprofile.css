@@ -1,50 +1,23 @@
-body {
-  margin: 0px;
-  padding: 0px;
-  background-color: #e5e5e5;
-}
-
-.editprofile-homepage {
-  height: 90vh;
-  margin: 0px auto;
-}
-
 .editprofile-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: stretch;
-  height: 90vh;
-  max-width: 85%;
-  margin: 0px auto;
+  align-items: center;
 }
 
 .editprofile-image-container {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  margin: auto;
-  max-width: 80%;
-  height: 520px;
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 75px;
-  margin-right: 2vw;
-}
-
-.editprofile-image-container img {
-  width: auto;
-  max-width: 100%;
-  max-height: 100%;
+  background-color: #e5e5e5;
+  width: 45vw;
   object-fit: contain;
 }
 
-.editprofile-form-container {
+.editprofile-form-container .editprofile-container {
   padding: 10px;
   border-radius: 10px;
-  width: 60%;
+  width: 80%;
   font-family: 'petrona';
   display: flex;
   flex: 1;
@@ -52,7 +25,7 @@ body {
   flex-direction: column;
   padding: 20px;
   justify-content: center;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   margin: 5px;
 }
 
@@ -83,7 +56,7 @@ body {
 .editprofile-form-group label {
   font-size: large;
   font-family: 'petrona';
-  width: 140px; /* Adjust this value as needed */
+  width: 165px; 
   margin-right: 10px;
   text-align: left;
 }
@@ -98,42 +71,66 @@ body {
   box-sizing: border-box;
 }
 
+.editprofile-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.editprofile-button {
+  width: 70%;
+  margin: 10px;
+  padding: 10px 20px;
+  font-family: 'petrona';
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+}
 
-@media (max-width: 1080px) {
+.editprofile-hidden-texts {
+  color: rgb(255 0 0);
+  
+  font-size: large;
+  margin-bottom: auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: 'petrona';
+  margin-top: -8px;
+  text-align: center;
+}
+
+.editprofile-check-text {
+  font-size: 15px;
+  font-family: 'petrona';
+  color: rgb(255 0 0);
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+
+@media (max-width: 1020px) {
   .editprofile-container {
-    max-width: 100%;
-  }
-  .editprofile-image-container {
-    max-width: 40%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0%;
-  }
-}
-
-@media (max-width: 768px) {
-  .editprofile-form {
-    padding: 0px;
-    margin: 0px;
-  }
-}
-
-@media (max-width: 670px) {
-  .editprofile-image-container {
-    display: none;
-  }
-  .editprofile-container {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 400px) {
-  .editprofile-memory {
     flex-direction: column;
-    text-align: center;
+    padding: 0px!important;
+    margin: 0px!important;
+    min-width: 310px;
   }
-  .editprofile-rememberMe {
-    margin-bottom: 10px;
+  .editprofile-form {
+    padding: 0px!important;
+    margin: 0px!important;
   }
+}
+
+.editprofile-message {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.editprofile-message.success {
+  color: green;
+}
+
+.editprofile-message.error {
+  color: red;
 }
