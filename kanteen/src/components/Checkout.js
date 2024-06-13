@@ -9,8 +9,7 @@ import {useUser} from '../contexts/userContext';
 export default function Checkout() {
     const {user} = useUser(); 
     const location = useLocation();
-    const navigate = useNavigate();
-    const [sessionId, setSessionId] = useState('');
+    const navigate = useNavigate(); 
     const [orderId, setOrderId] = useState('');
     // const session_id="session_8zuYU6eTUXL49zUJwMskqx8jLDssXID396k-Le2VyZOC7785xj06GmhlrmzA-OI3ImkLqBb6v753YVxSCRot5resFskcEhSev7-ijPYn5rVH";
     const [selectedOption, setSelectedOption] = useState('cash');
@@ -38,8 +37,8 @@ export default function Checkout() {
         try {
             await addOrderIntoHistory();
             const alphanumericId = user.emailId.replace(/[^a-zA-Z0-9]/g, '');
-            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber);
-            setSessionId(response.data.payment_session_id);
+            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber); 
+            const sessionId = (response.data.payment_session_id);
             console.log('Payment session ID:', sessionId);
             // Proceed with Cashfree checkout
             if (isScriptLoaded) {
