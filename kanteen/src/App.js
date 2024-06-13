@@ -21,8 +21,8 @@ import Checkout from './components/Checkout';
 import TransactionHistory from './components/TransactionHistory';
 import ViewOrder from './components/ViewOrder';
 import ApproveCash from './components/ApproveCash';
-
 import { UserProvider } from './contexts/userContext';
+import UpdatePassword from './components/UpdatePassword';
 
 export default function App() {
     return (
@@ -52,6 +52,7 @@ export default function App() {
                         //admin routes
                         <Route path='/approvecash' element={<ApproveCash />}></Route>
                     }
+                    <Route path='/updatepassword' element={<UpdatePassword />}></Route> 
                 </Routes>
                 <Footer />
             </UserProvider>

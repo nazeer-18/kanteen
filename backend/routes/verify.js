@@ -93,4 +93,21 @@ verifyUser.post('/resend-mail', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+verifyUser.put('/update', async (req, res) => {
+    try {
+        let { emailId, name, mobileNumber } = req.body;
+        console.log(emailId, name, mobileNumber);
+        emailId = emailId.toLowerCase();
+        const user = await User.findOneAndUpdate({
+            emailId: emailId
+        }, {
+            name: name,
+            mobileNumber: mobileNumber
+        });
+        res.status(200).send({ message: "Profile Updated Successfully", success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 module.exports = verifyUser;
