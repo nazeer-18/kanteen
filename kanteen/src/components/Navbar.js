@@ -128,13 +128,16 @@ export default function Navbar() {
 
                 </div>
                 {isOpen && (
-                    <div className="dropdown-content">
-                        <h3>{user.name}</h3>
-                        <div className='dropdown-edit'>
-                            <Link to="/Editprofile" style={{ textDecoration: 'none' }}>Edit Profile</Link>
+                        <div className="dropdown-content" onClick={toggleDropdown}>
+                            <h3>HEY {user.name}!</h3>
+                            <div className='dropdown-edit' >
+                                <Link to="/Editprofile" style={{textDecoration:'none'}}>Edit Profile</Link>
+                            </div>
+                            <div className='dropdown-edit' >
+                                <Link to="/UpdatePassword" style={{textDecoration:'none'}}>Update Password</Link>
+                            </div>
+                            <button onClick={handleLogout}>Logout</button>
                         </div>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
                 )}
             </div>
         </div>
