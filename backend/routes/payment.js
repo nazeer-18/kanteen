@@ -2,12 +2,16 @@ const express = require('express')
 const paymentRouter = express.Router();
 const fetch = require('node-fetch');
 const Order = require('../models/Order');
+const Gateway = require('cashfree-pg');
 
 paymentRouter.post('/checkout', async (req, res) => {
     try {
         //const url = 'https://api.cashfree.com/pg/orders'; //for production
         const url = 'https://sandbox.cashfree.com/pg/orders' //for testing
-
+        const userId=req.body.customerId;
+        const orderId=req.body.orderId;
+        const returnUrl="https://kanteen-ase.netlify.app/AddonlineTransaction?oid="+orderId+"?uid="+userId;
+        console.log(returnUrl);
         const options = {
             method: 'POST',
             headers: {
@@ -19,16 +23,15 @@ paymentRouter.post('/checkout', async (req, res) => {
             },
             body: JSON.stringify({
                 customer_details: {
-                    customer_id: req.body.customerId,
+                    customer_id: userId,
                     customer_phone: req.body.customerNumber,
                     customer_name: req.body.customerName
                 },
-                order_id: req.body.orderId,
+                order_id: orderId,
                 order_amount: req.body.orderAmount,
                 order_currency: 'INR',
                 order_meta:{
-                    return_url:"https://kanteen-ase.netlify.app/orderhistory",
-                    notify_url:"https://kanteen-server.onrender.com/api/payment/handlestatus",
+                    return_url:returnUrl,
                 }
             })
         };
@@ -40,6 +43,34 @@ paymentRouter.post('/checkout', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
+    }
+});
+
+paymentRouter.post('/status',async(req,res)=>{
+    try{
+    Gateway.Cashfree.XEnvironment=Gateway.Cashfree.Environment.SANDBOX;
+    Gateway.Cashfree.XClientId=process.env.PAYMENT_X_CLIENT_ID;
+    Gateway.Cashfree.XClientSecret=process.env.PAYMENT_X_SECRET_ID;
+    Gateway.Cashfree.PGOrderFetchPayments("2022-09-01", req.body.orderId).then((response) => {
+        console.log('Payments fetched successfully:', response.data);
+        const payments=response.data;
+        for (let i = 0; i < payments.length; i++) {
+            const payment = payments[i];
+            console.log(payment.payment_status);
+            if (payment.payment_status === 'SUCCESS') {
+                return res.status(200).send({status:"success",data:response.data.data})
+            } else {
+                console.log("Payment ID:", payment.cf_payment_id, "was not successful.");
+            }
+        }
+
+        return res.status(200).send({status:"failed",data:response.data.data})
+    })
+    .catch((error) => {
+        console.error('Error fetching payment details', error.response);
+    });}
+    catch(e){
+        return res.status(404).send("error");
     }
 });
 
