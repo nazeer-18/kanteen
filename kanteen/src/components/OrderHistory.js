@@ -40,7 +40,7 @@ export default function OrderHistory() {
             fetchOrders();
         }, 20000);
         return () => clearInterval(interval);
-    }, [userId])
+    }, [])
     const toLocaleDateString = (date) => {
         return new Date(date).toLocaleDateString('en-GB', {
             day: 'numeric',
@@ -83,7 +83,7 @@ export default function OrderHistory() {
                                     return <OrderItem
                                         key={item._id}
                                         date={toLocaleDateString(item.date)}
-                                        orderId={item.orderId}
+                                        orderId={item._id}
                                         orderStatus={item.orderStatus}
                                         paymentMode={item.paymentMode}
                                         paymentStatus={item.paymentStatus}

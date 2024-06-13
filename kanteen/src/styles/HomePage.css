@@ -49,9 +49,9 @@ text-amrita {
 }
 
 .homepage-alerts{
-    padding: 5px;
-    border:1px solid red;
-    min-width:33vw;
+    padding: 5px; 
+    width:80vw; 
+    margin: 0px auto;
 }
 
 .homepage-alerts-list{
@@ -60,6 +60,7 @@ text-amrita {
     font-size: 18px;
     font-family: 'petrona';
     padding: 10px;
+    margin: 5px;
     font-weight: 600;
 }
 
@@ -67,14 +68,14 @@ text-amrita {
     margin: 10px;
     padding: 10px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
     flex-wrap: wrap;
+    width:80vw;
 }
 
 .homepage-button-container{
-    width:323px;
+    width:340px;
     height:60px;
     margin: 8px;
     box-sizing: border-box; 
@@ -104,7 +105,7 @@ text-amrita {
 }
 
 .btn-icon{
-    width: 100px;
+    width: 90px;
     height: 100%;
     position: absolute;
     float: right;
@@ -144,4 +145,21 @@ text-amrita {
 
 .homepage-button:hover .btn-icon::after{
     border-top: 0px; 
+}
+
+
+@media(max-width:880px){
+    .homepage-buttons-group{
+        justify-content: center;
+    }
+}
+
+@media(max-width:500px){ 
+    .btn-icon{
+        width:65px;
+    }
+    .btn-icon svg{
+        top: 20px;
+        right: 10px;
+    } 
 }
