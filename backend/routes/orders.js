@@ -19,6 +19,17 @@ orderRouter.post('/create', async (req, res) => {
     }
 });
 
+orderRouter.post('/fetchOrder', async (req,res) => {
+    try {
+        const orderId = req.body.orderId;
+        const orderData = await Order.findOne({ orderId: orderId });
+        res.status(200).json({ message: "Order fetched successfully", data: orderData });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
 orderRouter.post('/fetchOrders', async (req,res) => {
     try {
         const userId = req.body.userId;
