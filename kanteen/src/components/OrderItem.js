@@ -2,9 +2,10 @@ import React from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function OrderItem(prop) {
-    const {key, date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
+    const { date, orderId, orderStatus, paymentMode, paymentStatus, total, oid } = prop;
     const getStatusClass = () => {
         switch (orderStatus) {
             case 'completed':
@@ -19,6 +20,10 @@ export default function OrderItem(prop) {
                 return '';
         }
     };
+    const navigate=useNavigate();
+    const handleViewClick=()=>{
+        navigate(`/viewOrder?id=${oid}`);
+    }
     return (
         <div className="order-item-container">
             <div className="order-item-content">
@@ -63,6 +68,7 @@ export default function OrderItem(prop) {
                 <div className="order-item-details-third order-item">
                     <div className="order-explore-hidden">
                         <div className="order-explore-button">
+                            <Link to='/viewOrder?id=${oid}'>jknkj</Link>
                             <button>
                                 View Details
                             </button>

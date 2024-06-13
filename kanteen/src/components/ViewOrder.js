@@ -6,7 +6,7 @@ export default function ViewOrder() {
     const fetchOrderData= async () => {
         try {
             const orderData=await orderService.fetchOrder(orderId);
-            console.log(orderData.data.data)
+            console.log(orderData.data)
             return orderData
         } catch (err) {
             console.error('Error fetching OrderData', err);
