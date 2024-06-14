@@ -15,7 +15,7 @@ itemRouter.get('/fetchall', async (req, res) => {
     }
 });
 
-itemRouter.get('/fetchone', async (req,res)=>{
+itemRouter.post('/fetchone', async (req,res)=>{
     try{
         const data = await Item.findById(new ObjectId(req.body.itemId));
         const {name, price, image} = data;
