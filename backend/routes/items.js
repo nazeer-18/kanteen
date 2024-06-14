@@ -1,7 +1,8 @@
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
 const itemRouter = express.Router();
 const Item = require('../models/Menu')
-
+const ObjectId = mongoose.Types.ObjectId;
 //Get all items from menu
 itemRouter.get('/fetchall', async (req, res) => {
     try {
@@ -11,6 +12,16 @@ itemRouter.get('/fetchall', async (req, res) => {
     catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error")
+    }
+});
+
+itemRouter.get('/fetchone', async (req,res)=>{
+    try{
+        const data = await Item.findById(new ObjectId(req.body.itemId));
+        const {name, price, image} = data;
+        return res.status(200).json({"price":price, "name":name, "image":image})
+    } catch(e) {
+        return res.status(500).send("fetch failed, CHECK ITEM_ID")
     }
 })
 
