@@ -10,7 +10,7 @@ export default function Checkout() {
     const {user} = useUser(); 
     const location = useLocation();
     const navigate = useNavigate(); 
-    const [orderId, setOrderId] = useState('');
+    let orderId='x';
     // const session_id="session_8zuYU6eTUXL49zUJwMskqx8jLDssXID396k-Le2VyZOC7785xj06GmhlrmzA-OI3ImkLqBb6v753YVxSCRot5resFskcEhSev7-ijPYn5rVH";
     const [selectedOption, setSelectedOption] = useState('cash');
     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -64,7 +64,7 @@ export default function Checkout() {
     const addOrderIntoHistory = async () => {
         try{
             const response = await orderService.addOrder(user.emailId,location.state.products,location.state.total,selectedOption);
-            setOrderId(response.data._id);
+            orderId=response.data._id;
             if (response.status === 201) {
                 console.log('Order Created Successfully');
             } else {
