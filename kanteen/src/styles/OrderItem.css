@@ -19,11 +19,11 @@
     justify-content: space-between;
 }
 
-.order-details{
+.order-item-order-details{
     padding: 3px;
 }
 
-.order-details div{
+.order-item-order-details div{
     margin: 2px;
     padding: 2px;
 }
@@ -33,6 +33,11 @@
     font-size: 15px;
     font-weight: 600;
     font-family: 'Poppins', sans-serif; 
+}
+
+.ordered-date svg{
+    color:#bf0c45;
+    margin-right: 4px;
 }
 
 .order-id{
