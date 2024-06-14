@@ -27,6 +27,9 @@ class authService {
     resendotpmail(emailId) {
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
     }
+    updateUser(emailId, name, mobileNumber) {
+        return axios.put(serverUrl + '/api/verify/update', { emailId, name, mobileNumber })
+    }
 }
 
 //eslint-disable-next-line
