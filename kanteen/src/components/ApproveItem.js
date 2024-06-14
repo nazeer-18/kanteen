@@ -23,20 +23,20 @@ export default function ApproveItem(props) {
     return (
         <div className="approveitem-page">
             <div className="approve-item-order-expiry">
-                {expiry} 04:00
+                {expiry}
             </div>
             <div className="approve-item-order-details">
                 <div className="approve-item-order-id">
-                    ID: {orderId} 123457894544
+                    ID: {orderId}
                 </div>
                 <div className="approve-item-user-id">
-                    User: {userId} ch.en.u4cse21161@ch.students.amrita.edu
+                    User: {userId}
                 </div>
             </div>
             <hr />
             <div className="approve-item-order-others">
                 <div className="approve-item-order-total">
-                    Total: <FontAwesomeIcon icon={faIndianRupee} />  <span>{total}2000</span>
+                    Total: <FontAwesomeIcon icon={faIndianRupee} />  <span>{total}</span>
                 </div>
                 <div className="approve-item-order-explore">
                     <button onClick={viewOrder}>
