@@ -80,14 +80,16 @@ export default function OrderHistory() {
                         orders.length > 0 ? (
                             <div >
                                 {orders.map((item) => {
+                                    const oid=item._id;
                                     return <OrderItem
-                                        key={item._id}
+                                        key={oid}
                                         date={toLocaleDateString(item.date)}
                                         orderId={item._id}
                                         orderStatus={item.orderStatus}
                                         paymentMode={item.paymentMode}
                                         paymentStatus={item.paymentStatus}
                                         total={item.total}
+                                        odid={oid}
                                     />
                                 })}
                             </div>

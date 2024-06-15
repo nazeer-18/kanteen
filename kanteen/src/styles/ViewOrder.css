@@ -1,0 +1,45 @@
+.order-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.order-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-details {
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+}
+
+.order-details h2 {
+    color: #333;
+}
+
+.order-details p, .order-details ul {
+    margin: 10px 0;
+    color: #666;
+}
+
+.order-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-details li {
+    margin-bottom: 5px;
+}
+
+.order-details p:last-child {
+    margin-top: 20px;
+}
+
+.order-details h3 {
+    margin-top: 20px;
+    color: #333;
+}

@@ -2,9 +2,11 @@ import React from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
+import {faCalendarDays} from '@fortawesome/free-solid-svg-icons';
+import { Link, useNavigate } from 'react-router-dom'; 
 
 export default function OrderItem(prop) {
-    const { date, orderId, orderStatus, paymentMode, paymentStatus, total } = prop;
+    const { date, orderId, orderStatus, paymentMode, paymentStatus, total, oid } = prop;
     const getStatusClass = () => {
         switch (orderStatus) {
             case 'completed':
@@ -19,6 +21,10 @@ export default function OrderItem(prop) {
                 return '';
         }
     };
+    const navigate=useNavigate();
+    const handleViewClick=()=>{
+        navigate(`/viewOrder?id=${oid}`);
+    }
     return (
         <div className="order-item-container">
             <div className="order-item-content">
@@ -26,12 +32,12 @@ export default function OrderItem(prop) {
                     {orderStatus}
                 </div>
                 <div className="order-item-details-first order-item">
-                    <div className="order-details">
+                    <div className="order-item-order-details">
                         <div className="ordered-date">
-                            Ordered on: <br className="apply-break" /> {date}
+                            <FontAwesomeIcon icon={faCalendarDays}/> <br className="apply-break" /> {date}
                         </div>
                         <div className="order-id">
-                            <strong>Order ID</strong>:#{orderId}
+                            <strong>ID</strong>:#{orderId}
                         </div>
                     </div>
                     <div className="order-explore">
@@ -63,6 +69,7 @@ export default function OrderItem(prop) {
                 <div className="order-item-details-third order-item">
                     <div className="order-explore-hidden">
                         <div className="order-explore-button">
+                            <Link to='/viewOrder?id=${oid}'>jknkj</Link>
                             <button>
                                 View Details
                             </button>
