@@ -45,11 +45,7 @@ export default function ViewOrder() {
             }
         }
         fetchOrderData();
-        const interval = setInterval(() => {
-            fetchOrderData();
-        }, 2000);
-        return () => clearInterval(interval);
-    })
+    },[])
     return (
         <div className="order-container">
             <div className="order-header">
@@ -67,7 +63,7 @@ export default function ViewOrder() {
                     <li>Item 3 - $5.99</li>
                 </ul>
                 {orderedItems.map((item) => {
-                    console.log()
+                    console.log("call");
                     return <ViewOrderItem key={item._id} item={item.item} quantity={item.quantity} />
                 })}
                 <p>Total: { total }</p>
