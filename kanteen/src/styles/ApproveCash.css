@@ -3,16 +3,57 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 10px; 
 }
 
 .approvecash-img{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40vw;
+    width: 30vw;
 }
 
 .approvecash-img{
     min-width: 320px;
+}
+
+.pending-order-history-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #bf0c45;
+    padding: 5px 0px;
+    border-radius: 14px;
+}
+
+.approvecash-pending-orders{ 
+    background-color: white;
+    border-radius: 14px;
+    padding: 5px 8px;
+}
+
+.pending-orders-container{
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.pending-order-history-filters{
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.pending-order-history-filters svg{
+    color:#bf0c45;
+}
+
+@media(min-width:920px){
+    .approvecash-page{
+        justify-content: space-around;
+    }
+}
+
+@media(max-width:400px){
+    .pending-order-history-filters span{
+        display: none;
+    }
 }
