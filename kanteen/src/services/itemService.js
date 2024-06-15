@@ -14,6 +14,10 @@ class itemService {
     fetchCartItems(userId) {
         return axios.post(serverUrl + '/api/cart/fetchall', { userId })
     }
+    //get a single item data
+    fetchItemData(itemId){
+        return axios.post(serverUrl + '/api/items/fetchone', { itemId })
+    }
     //remove an item from cart
     removeFromCart(userId, itemId) {
         return axios.post(serverUrl + '/api/cart/remove', { userId, itemId })
