@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/UpdatePassword.css';
-import loginImg from '../images/LoginImage.svg';
+import resetImg from '../images/updatepassword.svg';
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
@@ -28,7 +28,14 @@ export default function UpdatePasswordPage() {
     pwdSpecialChar: false
   });
   let navigate = useNavigate();
-
+  const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
+    useEffect(() => {
+        if (!emailIdValid) {
+          setTimeout(() => {
+            navigate('/login');
+          }, 1000);
+        }
+    }, [emailIdValid, navigate])
   useEffect(() => {
     if (pwdCheck.pwdLength && pwdCheck.pwdUppercase && pwdCheck.pwdLowercase && pwdCheck.pwdNumber && pwdCheck.pwdSpecialChar) {
       setPwdValid(true);
@@ -63,7 +70,7 @@ export default function UpdatePasswordPage() {
     }
 
     try {
-      const response = await authService.updatePassword(user.emailId, data.newPassword);
+      const response = await authService.updatepassword(user.emailId, data.newPassword,data.currentPassword);
       setMessage(response.data.message);
       setSuccess(response.data.success);
       setTimeout(() => {
@@ -106,7 +113,7 @@ export default function UpdatePasswordPage() {
     <div className="updatepassword-homepage">
       <div className="updatepassword-container">
         <div className="updatepassword-image-container">
-          <img src={loginImg} alt="update password" width="550px" />
+          <img src={resetImg} alt="update password" width="550px" />
         </div>
         <div className="updatepassword-form-container">
           <div className="updatepassword-title">
@@ -231,11 +238,19 @@ export default function UpdatePasswordPage() {
                 type="submit"
                 className="updatepassword-button"
                 onClick={handleupdate}
+                disabled={clicked || !pwdValid || data.newPassword === data.currentPassword || data.newPassword !== data.confirmPassword}
+                style={{cursor: clicked || !pwdValid || data.newPassword === data.currentPassword || data.newPassword !== data.confirmPassword ? "not-allowed" : "pointer" }}
               >
                 Update
               </button>
             </div>
           </form>
+            <div className="reset-response response">
+                <span
+                    style={{ color: success ? "#139a72" : "#ba1717" }}>
+                    {message}
+                </span>
+            </div>
         </div>
       </div>
     </div>

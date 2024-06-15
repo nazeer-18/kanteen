@@ -27,8 +27,13 @@ class authService {
     resendotpmail(emailId) {
         return axios.post(serverUrl + '/api/verify/resend-mail', { emailId })
     }
+    //update user details
     updateUser(emailId, name, mobileNumber) {
         return axios.put(serverUrl + '/api/verify/update', { emailId, name, mobileNumber })
+    }
+    //update password with current password
+    updatepassword(emailId, newPassword, currentPassword) {
+        return axios.put(serverUrl + '/api/verify/updatepassword', { emailId, newPassword, currentPassword })
     }
 }
 
