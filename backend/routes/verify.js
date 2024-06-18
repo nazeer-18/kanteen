@@ -110,4 +110,27 @@ verifyUser.put('/update', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+verifyUser.put('/updatepassword', async (req, res) => {
+    try{
+        let {emailId,password,currentpassword} = req.body;
+        emailId = emailId.toLowerCase();
+        const user = await  User.findOne({emailId:emailId})
+        const isMatch = await bcrypt.compare(currentpassword, user.password);
+        if (!isMatch) {
+            return res.status(401).send({ message: "Invalid Credentials", success: false });
+        }else{
+            const salt = await bcrypt.genSalt(10);
+            const Hashedpassword = await bcrypt.hash(password, salt);
+            const user = await User.findOneAndUpdate({
+                emailId: emailId
+            },{
+                password:Hashedpassword
+            });
+            res.status(200).send({message:"Password Updated Successfully, Please login again with new password..",success:true});
+        }
+    }catch(err){
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 module.exports = verifyUser;

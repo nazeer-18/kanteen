@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Editprofile.css';
-import loginImg from '../images/LoginImage.svg';
+import profileImg from '../images/editprofile.svg';
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import authService from '../services/authService';
@@ -24,7 +24,14 @@ export default function EditProfilePage() {
   });
 
   let navigate = useNavigate();
-
+  const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
+    useEffect(() => {
+        if (!emailIdValid) {
+            setTimeout(() => {
+                navigate('/login');
+            }, 1000);
+        }
+    }, [emailIdValid, navigate])
   useEffect(() => {
     if (user.mobileNumber !== data.mobileNumber || user.name !== data.name) {
       setAllValid(true);
@@ -97,7 +104,7 @@ export default function EditProfilePage() {
       <div className="editprofile-container">
         <div className="editprofile-image-container">
           <img
-            src={loginImg}
+            src={profileImg}
             alt="edit profile"
             width="550px" />
         </div>
@@ -180,7 +187,6 @@ export default function EditProfilePage() {
               type='submit'
               onClick={handleupdate}
               style={{
-                backgroundColor: allValid && validUserName && mobileValid ? "#bf0c45" : "grey",
                 cursor: allValid && validUserName && mobileValid ? "pointer" : "not-allowed"
               }}
               
