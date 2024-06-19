@@ -121,8 +121,8 @@ export default function ViewOrder() {
                         <FontAwesomeIcon
                             icon={
                                 (paymentStatus==="paid")?faCheck:
-                                (paymentStatus==="unpaid")?faXmark:
-                                (paymentStatus==="failed")?faHourglassHalf:
+                                (paymentStatus==="unpaid")?faHourglassHalf:
+                                (paymentStatus==="failed")?faXmark:
                                 ''
                             }
                             style={
