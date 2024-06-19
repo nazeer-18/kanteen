@@ -9,6 +9,9 @@ class paymentService {
     paymentStatus(orderId){
         return axios.post(serverUrl + '/api/payment/status', { orderId })
     }
+    checkUserAuth(orderId, alphanumericId){
+        return axios.post(serverUrl + '/api/orders/validateUserOrder', { orderId, alphanumericId })
+    }
 }
 
 //eslint-disable-next-line

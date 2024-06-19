@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import orderService from '../services/orderService';
+import { useUser } from '../contexts/userContext';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ViewOrder.css';
 import ViewOrderItem from './ViewOrderItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faCheck, faXmark, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
+import paymentService from '../services/paymentService';
 
 export default function ViewOrder() {
     const orderId = new URLSearchParams(window.location.search).get("id");
+    const { user } = useUser();
+    const userId = user.emailId;
+    const alphanumericId = userId.replace(/[^a-zA-Z0-9]/g, '');
+    const navigate=useNavigate();
     const [date,setdate]=useState('');
     const [paymentStatus,setpaymentStatus]=useState('');
     const [paymentMode,setpaymentMode]=useState('');
@@ -49,7 +56,30 @@ export default function ViewOrder() {
             }
         }
         fetchOrderData();
-    },[])
+    },[]);
+
+    const validateUser=async()=>{
+        try{
+            const response=await paymentService.checkUserAuth(orderId,alphanumericId);
+            if(response.data.logout===true){
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+            }
+        }catch(err){
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        validateUser();
+        if (user.emailId === 'na') {
+            // alert('Please login to continue');
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+        }
+    }, [user.emailId, navigate])
     return (
         <div className="order-full-container">
             <div className="order-container">
