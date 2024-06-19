@@ -4,6 +4,10 @@ const fetch = require('node-fetch');
 const Order = require('../models/Order');
 const Gateway = require('cashfree-pg');
 
+Gateway.Cashfree.XEnvironment=Gateway.Cashfree.Environment.SANDBOX;
+Gateway.Cashfree.XClientId=process.env.PAYMENT_X_CLIENT_ID;
+Gateway.Cashfree.XClientSecret=process.env.PAYMENT_X_SECRET_ID;
+
 paymentRouter.post('/checkout', async (req, res) => {
     try {
         //const url = 'https://api.cashfree.com/pg/orders'; //for production
@@ -48,9 +52,6 @@ paymentRouter.post('/checkout', async (req, res) => {
 
 paymentRouter.post('/status',async(req,res)=>{
     try{
-    Gateway.Cashfree.XEnvironment=Gateway.Cashfree.Environment.SANDBOX;
-    Gateway.Cashfree.XClientId=process.env.PAYMENT_X_CLIENT_ID;
-    Gateway.Cashfree.XClientSecret=process.env.PAYMENT_X_SECRET_ID;
     Gateway.Cashfree.PGOrderFetchPayments("2022-09-01", req.body.orderId).then((response) => {
         console.log('Payments fetched successfully:', response.data);
         const payments=response.data;
@@ -64,7 +65,7 @@ paymentRouter.post('/status',async(req,res)=>{
             }
         }
 
-        return res.status(200).send({status:"failed",data:response.data.data})
+        return res.status(200).send({status:"failed",data:response.data})
     })
     .catch((error) => {
         console.error('Error fetching payment details', error.response);
@@ -105,6 +106,28 @@ paymentRouter.post('/handlestatus',async(req,res)=>{
         console.log(err);
         res.status(200).send("catched an error");
     }
-})
+});
+
+paymentRouter.post('/validateUserOrder',async(req,res)=>{
+    try{
+        const orderId=req.body.orderId;
+        const userId=req.body.alphanumericId;
+        Gateway.Cashfree.PGFetchOrder("2022-09-01", orderId).then((response) => {
+            console.log('Order fetched successfully:', response.data);
+            console.log(userId,response.data.customer_details.customer_id);
+            const logout= (userId!=response.data.customer_details.customer_id)?true:false;
+            if(!logout){
+                console.log("user is Invalid");
+            }
+            res.status(200).send({status:"success",data:{logout:logout}});
+        })
+        .catch((error) => {
+            console.error('Error fetching order', error);
+        });
+    } catch(err){
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 module.exports = paymentRouter;
