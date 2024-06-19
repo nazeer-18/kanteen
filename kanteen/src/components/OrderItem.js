@@ -42,9 +42,12 @@ export default function OrderItem(prop) {
                     </div>
                     <div className="order-explore">
                         <div className="order-explore-button">
-                            <button>
+                        <Link to={`/viewOrder?id=${orderId}`}>
+                        <button>
                                 View Order
                             </button>
+                        </Link>
+                            
                         </div>
                     </div>
                 </div>
@@ -69,7 +72,6 @@ export default function OrderItem(prop) {
                 <div className="order-item-details-third order-item">
                     <div className="order-explore-hidden">
                         <div className="order-explore-button">
-                            <Link to='/viewOrder?id=${oid}'>jknkj</Link>
                             <button>
                                 View Details
                             </button>
