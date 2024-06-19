@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/CartItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupeeSign, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { useUser } from '../contexts/userContext'; 
+import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import itemService from '../services/itemService';
+import '../styles/ViewOrderItem.css';
 
 export default function CartItem(props) {
     const { item, quantity } = props;
@@ -24,17 +24,25 @@ export default function CartItem(props) {
         }
         fetchItemData();
     },[])
-    console.log(item.name);
     return (
-        <div>
+        <div className='order-item-body'>
             <div className="order-item-data">
                 <div className="order-item-image">
-                <img src={imageUrl} alt="food" style={{ width: "100px", height: "100px" }} />
+                    <img src={imageUrl} alt="food"/>
+                </div>                
+                <div className="order-item-details">   
+                    <span className="order-item-heading">
+                        {name}
+                    </span>      
+                    <div className="order-item-priceNDqty">
+                        <span>Quantity: {qty}</span>
+                        <span>|</span>   
+                        <span>Price: <FontAwesomeIcon icon={faIndianRupeeSign} />{price}</span>
+                    </div>
                 </div>
-                <div className="order-item-details">
-                    <h3>{name}</h3>
-                    <p>Price: <FontAwesomeIcon icon={faIndianRupeeSign} />{price}</p>
-                    <p>Quantity: {qty}</p>
+                <div className="order-item-total">
+                    <span><FontAwesomeIcon icon={faIndianRupeeSign} /></span>
+                    <span>{qty*price}</span>
                 </div>
             </div>
         </div>
