@@ -127,7 +127,7 @@ export default function Checkout() {
                 <button 
                     onClick={() => {setSelectedOption('online');}} 
                     className="payment-option-button"
-                    style={{backgroundColor: selectedOption==="upi"?"#6E0A28":""}}>
+                    style={{backgroundColor: selectedOption==="online"?"#6E0A28":""}}>
                     Online
                 </button>
                 <button 
