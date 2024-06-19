@@ -147,13 +147,13 @@ export default function Menu() {
                     <FontAwesomeIcon icon={faFilter} onClick={toggleDropdown} style={{ cursor: "pointer" }} />
                 </div>
                 {isOpen && (
-                    <div className="dropdown-menu">
-                        <div className="dropdown-type">
-                            <div className="dropdown-item">TYPE</div>
-                            <div className="dropdown-close" onClick={() => setIsOpen(false)}>
+                    <div className="filter-dropdown-menu">
+                        <div className="filter-dropdown-type">
+                            <div className="filter-dropdown-item">TYPE</div>
+                            <div className="filter-dropdown-close" onClick={() => setIsOpen(false)}>
                                 <FontAwesomeIcon icon={faTimes} />
                             </div>
-                            <div className="dropdown-content">
+                            <div className="filter-dropdown-content">
                                 <label>
                                     <input 
                                         type="checkbox" 
@@ -180,9 +180,9 @@ export default function Menu() {
                                 </label>
                             </div>
                         </div>
-                        <div className="dropdown-category">
-                            <div className="dropdown-item">CATEGORY</div>
-                            <div className="dropdown-content">
+                        <div className="filter-dropdown-category">
+                            <div className="filter-dropdown-item">CATEGORY</div>
+                            <div className="filter-dropdown-content">
                                 <label>
                                     <input 
                                         type="checkbox" 
@@ -241,7 +241,7 @@ export default function Menu() {
                                 </label>
                             </div>
                         </div>
-                        <div className="dropdown-actions">
+                        <div className="filter-dropdown-actions">
                             <button onClick={clearFilters}>CLEAR</button>
                             <button onClick={applyFilters}>APPLY</button>
                         </div>

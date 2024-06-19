@@ -33,6 +33,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 4px solid #bf0c45;
+    border-radius: 14px;
 }
 
 .order-history-body{ 

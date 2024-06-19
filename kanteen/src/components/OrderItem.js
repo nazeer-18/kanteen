@@ -2,7 +2,8 @@ import React from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
-import { Link, useNavigate } from 'react-router-dom';
+import {faCalendarDays} from '@fortawesome/free-solid-svg-icons';
+import { Link, useNavigate } from 'react-router-dom'; 
 
 export default function OrderItem(prop) {
     const { date, orderId, orderStatus, paymentMode, paymentStatus, total, oid } = prop;
@@ -31,12 +32,12 @@ export default function OrderItem(prop) {
                     {orderStatus}
                 </div>
                 <div className="order-item-details-first order-item">
-                    <div className="order-details">
+                    <div className="order-item-order-details">
                         <div className="ordered-date">
-                            Ordered on: <br className="apply-break" /> {date}
+                            <FontAwesomeIcon icon={faCalendarDays}/> <br className="apply-break" /> {date}
                         </div>
                         <div className="order-id">
-                            <strong>Order ID</strong>:#{orderId}
+                            <strong>ID</strong>:#{orderId}
                         </div>
                     </div>
                     <div className="order-explore">
