@@ -4,14 +4,14 @@ import { useUser } from '../contexts/userContext';
 import logo from '../images/logo.jpg';
 import '../styles/Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper, faUnlockKeyhole, faAddressCard} from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { user, logout } = useUser();
     const [responsiveNav, setResponsiveNav] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         if (user.emailId && user.emailId !== 'na' && !responsiveNav) {
             const hidden = document.querySelector('.wish');
@@ -35,7 +35,6 @@ export default function Navbar() {
     };
 
     const handleLogout = () => {
-        logout();
         navigate('/');
     };
 
@@ -129,11 +128,13 @@ export default function Navbar() {
                 </div>
                 {isOpen && (
                         <div className="dropdown-content" onClick={toggleDropdown}>
-                            <h3>HEY {user.name}!</h3>
+                            <h3>Hey {user.name}!</h3>
                             <div className='dropdown-edit' >
+                                <FontAwesomeIcon icon={faAddressCard} />
                                 <Link to="/Editprofile" style={{textDecoration:'none'}}>Edit Profile</Link>
                             </div>
                             <div className='dropdown-edit' >
+                                <FontAwesomeIcon icon={faUnlockKeyhole} />
                                 <Link to="/UpdatePassword" style={{textDecoration:'none'}}>Update Password</Link>
                             </div>
                             <button onClick={handleLogout}>Logout</button>
