@@ -1,5 +1,5 @@
 import axios from 'axios';
-const serverUrl =  'https://kanteen-server.onrender.com';
+const serverUrl =  'https://kanteen-server.onrender.com' || 'http://localhost:8080';
 
 class paymentService {
     //proceed to checkout once user clicks on checout in cart page
