@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faFilter, faMagnifyingGlass, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faFilter, faMagnifyingGlass, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Menu.css';
 import MenuItem from './MenuItem';
-import itemService from '../services/itemService'; 
+import itemService from '../services/itemService';
 import { useUser } from '../contexts/userContext';
 
 export default function Menu() {
     const { user, checkLocalData } = useUser();
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
-    
+    const [filterCount, setFilterCount] = useState(0);
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (userId === 'na' && !checkLocalData())
             navigate('/login');
@@ -25,13 +27,12 @@ export default function Menu() {
             } catch (err) {
                 console.error('Error fetching items', err);
             }
-        }
+        };
         fetchItems();
-        const interval = setInterval(() => {
-            fetchItems();
-        }, 2000);
+        const interval = setInterval(fetchItems, 2000);
         return () => clearInterval(interval);
-    }, [userId])
+    }, [userId]);
+
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [displayedItems, setDisplayedItems] = useState([]);
@@ -40,6 +41,7 @@ export default function Menu() {
     const [displayMessage, setDisplayMessage] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedType, setSelectedType] = useState('');
+    const filterRef = useRef(null);
     const [selectedCategories, setSelectedCategories] = useState({
         starters: false,
         maincourse: false,
@@ -50,6 +52,7 @@ export default function Menu() {
         beverages: false
     });
     const [searchTerm, setSearchTerm] = useState('');
+    const [availableOnly, setAvailableOnly] = useState(false);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -66,15 +69,36 @@ export default function Menu() {
             }
         };
         fetchItems();
-        const interval = setInterval(() => {
-            fetchItems();
-        }, 2000);
+        const interval = setInterval(fetchItems, 2000);
         return () => clearInterval(interval);
     }, [isInitiated]);
 
     useEffect(() => {
         applySearchFilter();
     }, [filteredItems, searchTerm]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (filterRef.current && !filterRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    useEffect(() => {
+        const countSelectedFilters = () => {
+            const typeCount = selectedType ? 1 : 0;
+            const categoryCount = Object.values(selectedCategories).filter(Boolean).length;
+            setFilterCount(typeCount + categoryCount + (availableOnly ? 1 : 0));
+        };
+        countSelectedFilters();
+    }, [selectedType, selectedCategories, availableOnly]);
+
+    useEffect(() => {
+        applyFilters();
+    }, [selectedType, selectedCategories, availableOnly]);
 
     const searchHandler = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
@@ -100,6 +124,10 @@ export default function Menu() {
         }));
     };
 
+    const handleAvailableItemsChange = () => {
+        setAvailableOnly(prevAvailableOnly => !prevAvailableOnly);
+    };
+
     const applyFilters = () => {
         let filtered = items;
 
@@ -112,8 +140,11 @@ export default function Menu() {
             filtered = filtered.filter((item) => activeCategories.includes(item.category.toLowerCase()));
         }
 
+        if (availableOnly) {
+            filtered = filtered.filter((item) => item.quantity > 0);
+        }
+
         setFilteredItems(filtered);
-        setIsOpen(false);
     };
 
     const clearFilters = () => {
@@ -127,11 +158,11 @@ export default function Menu() {
             stationery: false,
             beverages: false
         });
+        setAvailableOnly(false);
         setFilteredItems(items);
         setSearchTerm('');
     };
 
-    const navigate = useNavigate();
     const viewCart = () => {
         navigate('/cart');
     };
@@ -145,10 +176,16 @@ export default function Menu() {
             <div className="orderpage-nav">
                 <div className="orderpage-filter" title="apply filters" onClick={toggleDropdown} >
                     <span className="orderpage-cart-nav-label" style={{ color: "black" }}>FILTERS</span>
-                    <FontAwesomeIcon icon={faFilter} onClick={toggleDropdown} style={{ cursor: "pointer" }} />
+                    <span className="filter-holder">
+                        {
+                            filterCount > 0 &&
+                            <span className="filter-items-cnt">{filterCount}</span>
+                        }
+                        <FontAwesomeIcon icon={faFilter} style={{ cursor: "pointer" }} />
+                    </span>
                 </div>
                 {isOpen && (
-                    <div className="filter-dropdown-menu">
+                    <div ref={filterRef} className="filter-dropdown-menu">
                         <div className="filter-dropdown-type">
                             <div className="filter-dropdown-item">TYPE</div>
                             <div className="filter-dropdown-close" onClick={() => setIsOpen(false)}>
@@ -241,10 +278,18 @@ export default function Menu() {
                                     BEVERAGES
                                 </label>
                             </div>
+                            <label className='filter-dropdown-item'>
+                                <a
+                                    style={{ cursor: "pointer" }}
+                                    onClick={handleAvailableItemsChange}
+                                >AVAILABLE</a>
+                               
+                            </label>
+                            
+                                <FontAwesomeIcon icon={availableOnly ? faCheck:'' } style={{color:'green'}}/>
                         </div>
                         <div className="filter-dropdown-actions">
                             <button onClick={clearFilters}>CLEAR</button>
-                            <button onClick={applyFilters}>APPLY</button>
                         </div>
                     </div>
                 )}

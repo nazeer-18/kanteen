@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
 import logo from '../images/logo.jpg';
 import '../styles/Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper, faUnlockKeyhole, faAddressCard} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper, faUnlockKeyhole, faAddressCard, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { user, setUser } = useUser();
     const [responsiveNav, setResponsiveNav] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const sidenavRef = useRef(null);
+    const dropdownRef = useRef(null);
+    const profileIconRef = useRef(null);  // Add ref for profile icon
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         if (user.emailId && user.emailId !== 'na' && !responsiveNav) {
             const hidden = document.querySelector('.wish');
@@ -31,18 +34,36 @@ export default function Navbar() {
     };
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(prevState => !prevState);
     };
 
     const handleLogout = () => {
         setUser({});
         localStorage.clear();
         navigate('/login');
+
     };
+
+    const handleClickOutside = (event) => {
+        if (sidenavRef.current && !sidenavRef.current.contains(event.target)) {
+            const sidenav = document.querySelector('.sidenav');
+            sidenav.classList.remove('show-nav');
+        }
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !profileIconRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div>
-            <div className="sidenav">
+            <div ref={sidenavRef} className="sidenav">
                 <div className="sidenav-heading">
                     <div className="sidenav-logo">
                         <img src={logo} alt="Logo" />
@@ -121,7 +142,7 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div className="wish"></div> {/*made sidenav responsive using this so dont remove it*/}
-                <div className="profile-icon responsive-nav" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
+                <div ref={profileIconRef} className="profile-icon responsive-nav" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
                     <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M25.8334 10.8333C25.8334 14.055 23.2217 16.6667 20 16.6667C16.7784 16.6667 14.1667 14.055 14.1667 10.8333C14.1667 7.61167 16.7784 5 20 5C23.2217 5 25.8334 7.61167 25.8334 10.8333Z" stroke="white" strokeWidth="1.5" />
                         <path d="M9.04028 29.1497C9.61161 25.1912 12.6762 21.9565 16.665 21.6659C18.944 21.4998 21.064 21.4996 23.3386 21.665C27.3259 21.9549 30.3882 25.1895 30.9593 29.1463L31.0704 29.9159C31.3996 32.1964 29.8153 34.3249 27.5243 34.5706C22.1475 35.1472 17.8702 35.1405 12.4854 34.5661C10.1908 34.3214 8.60131 32.191 8.93097 29.907L9.04028 29.1497Z" stroke="white" strokeWidth="1.5" />
@@ -129,18 +150,29 @@ export default function Navbar() {
 
                 </div>
                 {isOpen && (
-                        <div className="dropdown-content" onClick={toggleDropdown}>
+                    <div ref={dropdownRef} className="dropdown-content" >
+                        <div className="dropdown-link">
                             <h3>Hey {user.name}!</h3>
-                            <div className='dropdown-edit' >
-                                <FontAwesomeIcon icon={faAddressCard} />
-                                <Link to="/Editprofile" style={{textDecoration:'none'}}>Edit Profile</Link>
-                            </div>
-                            <div className='dropdown-edit' >
-                                <FontAwesomeIcon icon={faUnlockKeyhole} />
-                                <Link to="/UpdatePassword" style={{textDecoration:'none'}}>Update Password</Link>
-                            </div>
-                            <button onClick={handleLogout}>Logout</button>
+                            <Link to="/Editprofile">
+                                <div className='dropdown-container' >
+                                    <FontAwesomeIcon icon={faAddressCard} />
+                                    <div className='drop-down-items'>Edit profile</div>
+                                </div>
+                            </Link>
+                            <Link to="/UpdatePassword">
+                                <div className='dropdown-container' >
+                                    <FontAwesomeIcon icon={faUnlockKeyhole} />
+                                    <div className='drop-down-items'>Change Password</div>
+                                </div>
+                            </Link>
                         </div>
+                        <button onClick={handleLogout}>
+                            Logout
+                            <div className='drop-down-logouticon'>
+                                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                            </div>
+                        </button>
+                    </div>
                 )}
             </div>
         </div>
