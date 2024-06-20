@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
 
 export default function ApproveItem(props) {
-    const { orderId, userId, total, expiry } = props;
+    const { orderId, userId, total, date } = props;
+    const expiry = date + 5 * 60 * 1000;
     const navigate = useNavigate();
     const createTransaction = async (status) => {
         try {
@@ -23,7 +24,7 @@ export default function ApproveItem(props) {
     return (
         <div className="approveitem-page">
             <div className="approve-item-order-expiry">
-                {expiry}
+                {date+5*60*1000-Date().now}
             </div>
             <div className="approve-item-order-details">
                 <div className="approve-item-order-id">

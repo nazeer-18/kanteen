@@ -44,7 +44,7 @@ export default function ApproveCash() {
                         pendingOrders.length > 0 ?
                             pendingOrders.map(order => {
                                 return (
-                                    <ApproveItem orderId={order._id} userId={order.userId} total={order.total} expiry={order.date + 5 * 60 * 1000 - Date().now} />
+                                    <ApproveItem orderId={order._id} userId={order.userId} total={order.total} date={order.date} />
                                 )
                             })
                             :
