@@ -37,7 +37,7 @@ export default function Checkout() {
         try {
             await addOrderIntoHistory();
             const alphanumericId = user.emailId.replace(/[^a-zA-Z0-9]/g, '');
-            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber); 
+            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber, user.emailId); 
             const sessionId = (response.data.payment_session_id);
             console.log('Payment session ID:', sessionId);
             // Proceed with Cashfree checkout

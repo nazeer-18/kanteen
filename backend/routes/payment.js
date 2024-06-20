@@ -14,7 +14,7 @@ paymentRouter.post('/checkout', async (req, res) => {
         const url = 'https://sandbox.cashfree.com/pg/orders' //for testing
         const userId=req.body.customerId;
         const orderId=req.body.orderId;
-        const returnUrl="https://kanteen-ase.netlify.app/AddonlineTransaction?oid="+orderId+"?uid="+userId;
+        const returnUrl="https://kanteen-ase.netlify.app/AddonlineTransaction?oid="+orderId+"?eid="+userId;
         console.log(returnUrl);
         const options = {
             method: 'POST',
@@ -29,7 +29,8 @@ paymentRouter.post('/checkout', async (req, res) => {
                 customer_details: {
                     customer_id: userId,
                     customer_phone: req.body.customerNumber,
-                    customer_name: req.body.customerName
+                    customer_name: req.body.customerName,
+                    customer_email: req.body.customerMail
                 },
                 order_id: orderId,
                 order_amount: req.body.orderAmount,
