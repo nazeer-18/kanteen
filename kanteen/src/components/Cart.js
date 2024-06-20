@@ -10,12 +10,12 @@ import buyImage from '../images/cart-proceed.svg';
 
 export default function Cart() {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const { user, checkLocalData } = useUser();
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
-        if (userId === 'na') {
+        if (userId === 'na' && !checkLocalData()) {
             navigate('/login');
         }
     }, [userId, navigate])
@@ -50,6 +50,7 @@ export default function Cart() {
             console.error('Error in checkout', err);
         }
     }
+
     return (
         <div className="cart-page">
             <div className="cart-img">

@@ -3,7 +3,7 @@
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 420px;
+    margin-top: 460px;
     z-index: 1000;
     width: 160px;
     border-radius: 4px;
@@ -25,6 +25,7 @@
 .filter-dropdown-content {
     padding-left: 8px;
     right: 0;
+    margin-bottom: 15px;
 }
 
 .filter-dropdown-content label {
@@ -39,7 +40,7 @@
 
 .filter-dropdown-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 10px;
 }
 .filter-dropdown-close{
@@ -58,10 +59,33 @@
     margin-right: 15px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: large;
+    margin-top: -7px;
+
 }
 
 .filter-dropdown-actions button:hover {
     background-color: #a00c3b;
+}
+.filter-holder {
+    position: relative;
+}
+
+.filter-items-cnt {
+    position: absolute;
+    font-size: 16px;
+    top: -16px;
+    font-weight: bold;
+    color: #bf0c45;
+    padding: 2px 6px;
+}
+.filter-dropdown-item a{
+    color: #bf0c45;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 3px;
+    font-size: larger;
+    padding-right: 5px;
 }
 
 .orderpage-cart{

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/UpdatePassword.css';
-import resetImg from '../images/updatepassword.svg';
+import resetImg from '../images/ResetPassword.svg';
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 
 export default function UpdatePasswordPage() {
-  const { user, setUser } = useUser();
+  const { user, setUser, checkLocalData } = useUser();
   const [showCurrentPwd, setShowCurrentPwd] = useState(false);
   const [showNewPwd, setShowNewPwd] = useState(false);
   const [showConfirmPwd, setShowConfirmPwd] = useState(false);
@@ -27,15 +27,18 @@ export default function UpdatePasswordPage() {
     pwdNumber: false,
     pwdSpecialChar: false
   });
+
   let navigate = useNavigate();
   const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
-    useEffect(() => {
-        if (!emailIdValid) {
-          setTimeout(() => {
-            navigate('/login');
-          }, 1000);
-        }
-    }, [emailIdValid, navigate])
+
+  useEffect(() => {
+      if (user.emailId === 'na' && !checkLocalData()) {
+        setTimeout(() => {
+          navigate('/login');
+        }, 1000);
+      }
+  }, [user.emailId, navigate]);
+    
   useEffect(() => {
     if (pwdCheck.pwdLength && pwdCheck.pwdUppercase && pwdCheck.pwdLowercase && pwdCheck.pwdNumber && pwdCheck.pwdSpecialChar) {
       setPwdValid(true);

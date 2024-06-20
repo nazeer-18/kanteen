@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/userContext';
 import transactionService from '../services/transactionService';
 import '../styles/ApproveItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +22,14 @@ export default function ApproveItem(props) {
     const viewOrder = () => {
         navigate(`/vieworder?id=${orderId}`)
     }
+
+    const { user, checkLocalData } = useUser();
+    
+    useEffect(() => {
+        if (user.emailId === 'na' && !checkLocalData()) {
+            navigate('/login');
+        }
+    }, []);
     return (
         <div className="approveitem-page">
             <div className="approve-item-order-expiry">
