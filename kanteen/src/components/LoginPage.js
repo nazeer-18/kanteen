@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/LoginPage.css';
 import { FaEye } from "react-icons/fa";
@@ -9,7 +9,7 @@ import { useUser } from '../contexts/userContext';
 import LoginImage from '../images/LoginImage.svg';
 
 export default function LoginPage() {
-    const { setUser } = useUser();
+    const { user, setUser, checkLocalData } = useUser();
     const [showPwd, setShowPwd] = useState(false);
     const [checked, SetChecked] = useState(false);
     const [data, setData] = useState({
@@ -30,6 +30,11 @@ export default function LoginPage() {
             setMessage(response.data.message)
             setSuccess(response.data.success)
             if (response.data.success) {
+                const saveData = response.data.details;
+                saveData.password = data.pwd;
+                localStorage.setItem('user', [JSON.stringify(saveData)]);
+                console.log(response.data)
+                console.log("yyy",localStorage.getItem("user"));
                 setLoginValid(true);
                 setUser({
                     emailId: response.data.details.emailId,
@@ -61,6 +66,12 @@ export default function LoginPage() {
             }, 2000);
         }
     };
+    useEffect(() => {
+        localStorage.clear();
+        if (user.emailId === 'na') {
+            navigate('/login');
+        }
+    },[])
     return (
         <div className='login-homepage'>
             <div className="login-image-container">

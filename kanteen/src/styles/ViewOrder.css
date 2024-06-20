@@ -1,8 +1,15 @@
+.order-full-container{
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/food.png");
+}
+
 .order-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff; /* White background */
+    width: 65%;
+    height: 450px;
+    overflow-y: scroll;
+    margin: 30px auto;
+    padding: 7px;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
@@ -17,29 +24,104 @@
     padding-top: 20px;
 }
 
-.order-details h2 {
-    color: #333;
+.order-details-dp{
+    padding: 0px 0px 10px 10px;
+}
+.order-status-details{
+    position: relative; 
+    font-weight: 600;
+    padding: 5px 10px;
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    display:flex;
+    justify-content: space-between;
+    flex-direction:row-reverse;
 }
 
-.order-details p, .order-details ul {
-    margin: 10px 0;
-    color: #666;
+.order-status-id{
+    margin-top: 1%;
+    margin-right: 10px;
+    font-size: small;
 }
 
-.order-details ul {
-    list-style-type: none;
-    padding: 0;
+.order-status-id-fp{
+    margin-top: 5%;
+    font-weight: lighter;
+    font-size: xx-small;
 }
 
-.order-details li {
-    margin-bottom: 5px;
+.order-status-id-sp{
+    font-weight: bold;
+    font-size: large;
 }
 
-.order-details p:last-child {
-    margin-top: 20px;
+.order-status-status-val{
+    padding: 3px 5px;
+    border-radius: 20px;
+    color: #fff;
 }
 
-.order-details h3 {
-    margin-top: 20px;
-    color: #333;
+.view-order-total{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* margin-left: 80%;
+    margin-right: auto; */
+    margin: 0 auto 10px 80%;
+    font-family: 'Poppins', sans-serif;
+    border-top: dashed 1px black;
 }
+
+.view-order-total-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.view-order-backBtn-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.view-order-backBtn{
+    background-color: #bf0c45e6;
+    color: #fff; 
+    padding: 15px 30px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+}
+.view-order-total-dot{
+    font-size: large;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@media (max-width:600px){
+    .order-status-id{
+        font-size: xx-small;
+    }
+    .order-container {
+        height: 70%;
+    }
+    .view-order-total{
+        margin-left: 40%;
+        margin-right: 5%;
+        font-size: small;
+    }
+    .order-details p{
+        font-size: small;
+    }
+    .order-status-details{
+        font-size: x-small;
+    }
+    .view-order-total-val{
+        font-size: x-small;
+    }
+}
+

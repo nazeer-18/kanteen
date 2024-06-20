@@ -8,7 +8,7 @@ import authService from '../services/authService';
 import { useUser } from '../contexts/userContext';
 
 export default function EditProfilePage() {
-  const { user, setUser } = useUser();
+  const { user, setUser, checkLocalData } = useUser();
   const [showPwd, setShowPwd] = useState(false);
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState(false);
@@ -24,14 +24,7 @@ export default function EditProfilePage() {
   });
 
   let navigate = useNavigate();
-  const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
-    useEffect(() => {
-        if (!emailIdValid) {
-            setTimeout(() => {
-                navigate('/login');
-            }, 1000);
-        }
-    }, [emailIdValid, navigate])
+
   useEffect(() => {
     if (user.mobileNumber !== data.mobileNumber || user.name !== data.name) {
       setAllValid(true);
@@ -39,6 +32,18 @@ export default function EditProfilePage() {
       setAllValid(false);
     }
   }, [data.mobileNumber, data.name, user.mobileNumber, user.name]);
+
+  useEffect(() => {
+    if(user.emailId === 'na' && !checkLocalData())
+      navigate('/login');
+    else
+      setData({
+        emailId: user.emailId,
+        mobileNumber: user.mobileNumber,
+        name: user.name,
+        password: user.password
+      });
+  }, [user.emailId]);
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +70,7 @@ export default function EditProfilePage() {
     }
     handlechange(e);
   };
+
   const handleupdate = async (e) => {
     e.preventDefault();
     setClicked(true);
@@ -75,6 +81,7 @@ export default function EditProfilePage() {
       }, 2000);
       return;
     }
+
     try {
       if (allValid && validUserName && mobileValid) {
         const updatedUser = {
@@ -97,7 +104,7 @@ export default function EditProfilePage() {
         setMessage("Profile update failed");
       }, 2000);
     }
-  }
+  };
 
   return (
     <div className="editprofile-homepage">

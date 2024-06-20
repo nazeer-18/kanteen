@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {useUser} from '../contexts/userContext';
 
 export default function Checkout() {
-    const {user} = useUser(); 
+    const { user, checkLocalData } = useUser(); 
     const location = useLocation();
     const navigate = useNavigate(); 
     let orderId='x';
@@ -33,11 +33,17 @@ export default function Checkout() {
         checkScriptLoaded();
     }, []);
 
+    useEffect(()=>{
+        if (user.emailId === 'na' && !checkLocalData()) {
+            navigate('/login');
+        }
+    },[]);
+
     const handleGatewayGen = async () => {
         try {
             await addOrderIntoHistory();
             const alphanumericId = user.emailId.replace(/[^a-zA-Z0-9]/g, '');
-            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber); 
+            const response = await paymentService.paymentRequest(orderId, location.state.total, alphanumericId, user.name, user.mobileNumber, user.emailId); 
             const sessionId = (response.data.payment_session_id);
             console.log('Payment session ID:', sessionId);
             // Proceed with Cashfree checkout
@@ -127,7 +133,7 @@ export default function Checkout() {
                 <button 
                     onClick={() => {setSelectedOption('online');}} 
                     className="payment-option-button"
-                    style={{backgroundColor: selectedOption==="upi"?"#6E0A28":""}}>
+                    style={{backgroundColor: selectedOption==="online"?"#6E0A28":""}}>
                     Online
                 </button>
                 <button 
