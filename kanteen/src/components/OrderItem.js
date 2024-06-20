@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
 import {faCalendarDays} from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom'; 
+import { useUser } from '../contexts/userContext';
 
 export default function OrderItem(prop) {
     const { date, orderId, orderStatus, paymentMode, paymentStatus, total, oid } = prop;
@@ -24,7 +25,13 @@ export default function OrderItem(prop) {
     const navigate=useNavigate();
     const handleViewClick=()=>{
         navigate(`/viewOrder?id=${oid}`);
-    }
+    };
+
+    const { user, checkLocalData } = useUser();
+    useEffect(() => {
+        if (user.emailId === 'na' && !checkLocalData())
+            navigate('/login');
+    }, []);
     return (
         <div className="order-item-container">
             <div className="order-item-content">

@@ -10,7 +10,7 @@ import paymentService from '../services/paymentService';
 
 export default function ViewOrder() {
     const orderId = new URLSearchParams(window.location.search).get("id");
-    const { user } = useUser();
+    const { user, checkLocalData } = useUser();
     const userId = user.emailId;
     const alphanumericId = userId.replace(/[^a-zA-Z0-9]/g, '');
     const navigate=useNavigate();
@@ -31,11 +31,12 @@ export default function ViewOrder() {
             minute: 'numeric',
             hour12: true
         });
-    }
+    };
 
     const handleBack = () => {
         window.history.back();
-    }
+    };
+
     useEffect(() => {
         const fetchOrderData= async () => {
             try {
@@ -73,13 +74,13 @@ export default function ViewOrder() {
 
     useEffect(() => {
         validateUser();
-        if (user.emailId === 'na') {
-            // alert('Please login to continue');
+        if (user.emailId === 'na' && !checkLocalData()) {
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
         }
-    }, [user.emailId, navigate])
+    }, [user.emailId, navigate]);
+
     return (
         <div className="order-full-container">
             <div className="order-container">

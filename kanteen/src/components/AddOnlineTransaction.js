@@ -3,10 +3,11 @@ import paymentService from '../services/paymentService';
 import transactionService from '../services/transactionService';
 import { Navigate } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
+import authService from '../services/authService';
 
 export default function AddOnlineTransaction(){
     const navigate=Navigate();
-    const { user } = useUser();
+    const { user, setUser, checkLocalData } = useUser();
     const [transactionCreated,settransactionCreated]=useState('false');
     const orderId = new URLSearchParams(window.location.search).get("oid");
     const emailId = new URLSearchParams(window.location.search).get("eid");
@@ -44,13 +45,9 @@ export default function AddOnlineTransaction(){
     },[transactionCreated])
 
     useEffect(() => {
-        validateUser();
-        if (user.emailId === 'na') {
-            // alert('Please login to continue');
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
-        }
+        if(user.emailId ==='na' && !checkLocalData())
+            navigate('/login');
+        validateUser();        
         createTransaction();
     },[]);
     return(

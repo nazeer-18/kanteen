@@ -10,37 +10,42 @@ import orderService from '../services/orderService';
 
 export default function OrderHistory() {
     const navigate = useNavigate()
-    const { user } = useUser();
-    const userId = user.emailId;
-    const [orders, setOrders] = useState([])
+    const { user, checkLocalData } = useUser();
+    const [orders, setOrders] = useState([]);
+
+    const fetchOrders = async (userId) => {
+        try {
+            const res = await orderService.fetchOrders(userId);
+            const orders = res.data.orders;
+            const sortedOrders = orders.slice().sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA;
+            });
+            setOrders(sortedOrders);
+        } catch (err) {
+            console.error('Error fetching orders', err);
+        }
+    };
+
     useEffect(() => {
-        if (userId.emailId === 'na') {
+        if (user.emailId === 'na' && !checkLocalData()) {
             setTimeout(() => {
                 navigate('/login');
             }, 1500)
         }
-    },[userId.emailId,navigate]);
+        else 
+            fetchOrders(user.emailId);
+    },[user.emailId,navigate]);
+
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const res = await orderService.fetchOrders(userId);
-                const orders = res.data.orders;
-                const sortedOrders = orders.slice().sort((a, b) => {
-                    const dateA = new Date(a.date);
-                    const dateB = new Date(b.date);
-                    return dateB - dateA;
-                });
-                setOrders(sortedOrders);
-            } catch (err) {
-                console.error('Error fetching orders', err);
-            }
-        }
-        fetchOrders();
+        fetchOrders(user.emailId);
         const interval = setInterval(() => {
             fetchOrders();
         }, 20000);
         return () => clearInterval(interval);
-    }, [])
+    }, []);
+
     const toLocaleDateString = (date) => {
         return new Date(date).toLocaleDateString('en-GB', {
             day: 'numeric',
@@ -52,7 +57,8 @@ export default function OrderHistory() {
             second: 'numeric',
             hour12: true
         });
-    }
+    };
+
     return (
         <div className="order-history-page">
             <div className="order-history-img">

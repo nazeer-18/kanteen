@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {useUser} from '../contexts/userContext';
 
 export default function Checkout() {
-    const {user} = useUser(); 
+    const { user, checkLocalData } = useUser(); 
     const location = useLocation();
     const navigate = useNavigate(); 
     let orderId='x';
@@ -32,6 +32,12 @@ export default function Checkout() {
         };
         checkScriptLoaded();
     }, []);
+
+    useEffect(()=>{
+        if (user.emailId === 'na' && !checkLocalData()) {
+            navigate('/login');
+        }
+    },[]);
 
     const handleGatewayGen = async () => {
         try {
