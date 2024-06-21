@@ -36,6 +36,8 @@ itemRouter.post('/add', async (req, res) => {
         type: req.body.type,
         category: req.body.category
     })
+    console.log("req",req.body)
+    console.log(newItem)
     try {
         const item = await Item.findOne({ id: req.body.id });
         if (item) {
