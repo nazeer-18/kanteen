@@ -1,5 +1,5 @@
 
-.cntnr {
+.AdditemAdmin {
     min-width: 600px; 
     display: flex;
     align-items: center;
@@ -12,24 +12,24 @@
     background-color: #f9f9f9;
   }
 
-  .cntnr form{
+  .AdditemAdmin form{
     align-items:center ;
     justify-content: center;
     min-width: 320px;
   }
-  .cntnr form div {
+  .AdditemAdmin form div {
     margin-bottom: 15px;
   }
   
-  .cntnr form label {
+  .AdditemAdmin form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
   
-  input[type="text"],
-  input[type="number"],
-  select {
+  .AdditemAdmin input[type="text"],
+  .AdditemAdmin input[type="number"],
+  .AdditemAdmin select {
     width: 100%;
     padding: 8px;
     margin: 4px 0 10px 0;
