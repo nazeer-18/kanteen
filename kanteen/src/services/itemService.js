@@ -1,10 +1,14 @@
 import axios from 'axios';
-const serverUrl =  'https://kanteen-server.onrender.com' || 'http://localhost:8080';
+const serverUrl = 'http://localhost:8080' || 'https://kanteen-server.onrender.com';
 
 class itemService {
     //get all items in the menu
     getMenuItems() {
         return axios.get(serverUrl + '/api/items/fetchall')
+        
+    }
+    addToMenu(id,name,price,quantity,image,type,category){
+        return axios.post(serverUrl + '/api/items/add',{id,name,price,quantity,image,type,category})
     }
     //add an item to cart
     addToCart(userId, itemId, quantity) {

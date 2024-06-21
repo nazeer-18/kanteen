@@ -24,6 +24,7 @@ import ApproveCash from './components/ApproveCash';
 import { UserProvider } from './contexts/userContext';
 import UpdatePassword from './components/UpdatePassword';
 import AddOnlineTransaction from './components/AddOnlineTransaction';
+import AdditemAdmin from './components/AdditemAdmin';
 export default function App() {
     return (
         <BrowserRouter>
@@ -50,10 +51,11 @@ export default function App() {
                     <Route path='/vieworder' element={<ViewOrder />}></Route>
                     <Route path='/updatepassword' element={<UpdatePassword />}></Route> 
                     <Route path='/AddOnlineTransaction' element={<AddOnlineTransaction />}></Route>
-                    {
+                    
                         //admin routes
                         <Route path='/approvecash' element={<ApproveCash />}></Route>
-                    }
+                        <Route path='/additem' element={<AdditemAdmin />}></Route>
+                    
                 </Routes>
                 <Footer />
             </UserProvider>
