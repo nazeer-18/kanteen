@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../contexts/userContext';
+import authService from '../services/authService';
 import '../styles/HomePage.css';
 import foodImg from '../images/food-girl.svg';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
@@ -8,19 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 
 export default function HomePage() {
-    const { user } = useUser();
+    const { user, setUser, checkLocalData } = useUser();
     const isAdmin = user.role === 'admin';
     const isUser = user.role === 'user';
     const [message, setMessage] = React.useState('');
     const navigate = useNavigate();
+
     useEffect(() => {
-        if (user.emailId === 'na') {
-            setMessage('Please login to continue');
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
-        }
-    }, [user.emailId, navigate])
+       if( user.emailId === 'na' && !checkLocalData())
+            navigate('/login');
+    }, [user.emailId])
     return (
         <div>
             <div className="homepage-container">

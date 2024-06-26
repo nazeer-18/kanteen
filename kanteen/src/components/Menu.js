@@ -8,16 +8,15 @@ import itemService from '../services/itemService';
 import { useUser } from '../contexts/userContext';
 
 export default function Menu() {
-    const { user } = useUser();
+    const { user, checkLocalData } = useUser();
     const userId = user.emailId;
     const [totalItems, setTotalItems] = useState(0);
     const [filterCount, setFilterCount] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userId === 'na') {
+        if (userId === 'na' && !checkLocalData())
             navigate('/login');
-        }
     }, [userId]);
 
     useEffect(() => {

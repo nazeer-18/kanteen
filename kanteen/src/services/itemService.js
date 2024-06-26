@@ -5,6 +5,10 @@ class itemService {
     //get all items in the menu
     getMenuItems() {
         return axios.get(serverUrl + '/api/items/fetchall')
+        
+    }
+    addToMenu(id,name,price,quantity,image,type,category){
+        return axios.post(serverUrl + '/api/items/add',{id,name,price,quantity,image,type,category})
     }
     //add an item to cart
     addToCart(userId, itemId, quantity) {

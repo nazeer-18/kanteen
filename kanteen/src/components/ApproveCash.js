@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/userContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import cashier from '../images/cashier.svg'
@@ -10,6 +11,7 @@ import '../styles/ApproveCash.css'
 export default function ApproveCash() {
     const navigate = useNavigate();
     const [pendingOrders, setPendingOrders] = useState([]);
+
     useEffect(() => {
         const getpendingOrders = async () => {
             const response = await orderService.fetchPendingOrders();
@@ -18,6 +20,13 @@ export default function ApproveCash() {
         getpendingOrders();
     });
 
+    const { user, checkLocalData } = useUser();
+
+    useEffect(() => {
+        if (user.emailId === 'na' && !checkLocalData()) {
+            navigate('/login');
+        }
+    }, []);
     return (
         <div className='approvecash-page'>
             <div className="approvecash-img">

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCartShopping, faFileLines, faWallet, faNewspaper, faUnlockKeyhole, faAddressCard, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-    const { user, logout } = useUser();
+    const { user, setUser } = useUser();
     const [responsiveNav, setResponsiveNav] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const sidenavRef = useRef(null);
@@ -38,8 +38,10 @@ export default function Navbar() {
     };
 
     const handleLogout = () => {
-        logout();
-        navigate('/');
+        setUser({});
+        localStorage.clear();
+        navigate('/login');
+
     };
 
     const handleClickOutside = (event) => {

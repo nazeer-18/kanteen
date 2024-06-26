@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import paymentService from '../services/paymentService';
 import transactionService from '../services/transactionService';
 import { Navigate } from 'react-router-dom';
+import { useUser } from '../contexts/userContext';
+import authService from '../services/authService';
 
 export default function AddOnlineTransaction(){
     const navigate=Navigate();
+    const { user, setUser, checkLocalData } = useUser();
     const [transactionCreated,settransactionCreated]=useState('false');
     const orderId = new URLSearchParams(window.location.search).get("oid");
-    const userId = new URLSearchParams(window.location.search).get("uid");
+    const emailId = new URLSearchParams(window.location.search).get("eid");
     const getPaymentStatus=async(id) =>{
         return await paymentService.paymentStatus(id);
     }
@@ -15,18 +18,38 @@ export default function AddOnlineTransaction(){
     console.log(response.data.status);
     const createTransaction = async () => {
         try {
-            const response = await transactionService.createTransaction(userId, orderId, "online", response.data.status);
+            const response = await transactionService.createTransaction(emailId, orderId, "online", response.data.status);
             console.log(response.status);
-            return 1;
+            settransactionCreated(true);
         }
         catch (err) {
             console.error(err);
         }
     }
-    if(createTransaction===1) settransactionCreated(true);
+    const validateUser=async()=>{
+        try{
+            // const alphanumericId = emailId.replace(/[^a-zA-Z0-9]/g, '');
+            const response=await paymentService.checkUserAuth(orderId,emailId);
+            if(response.data.logout===true){
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+            }
+        }catch(err){
+            console.error(err);
+        }
+    };
+
     useEffect(()=>{
         if(transactionCreated) navigate(`/vieworder?id=${orderId}`);
-    })
+    },[transactionCreated])
+
+    useEffect(() => {
+        if(user.emailId ==='na' && !checkLocalData())
+            navigate('/login');
+        validateUser();        
+        createTransaction();
+    },[]);
     return(
         <p>redirecting</p>
     )

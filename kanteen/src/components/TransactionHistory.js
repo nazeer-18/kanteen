@@ -9,25 +9,36 @@ import { useUser } from '../contexts/userContext';
 
 export default function TransactionHistory() {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const { user, checkLocalData } = useUser();
     const [transactions, setTransactions] = useState([]);
+
+    const getTransactions = async (emailId) => {
+        const response = await transactionService.getTransactions(emailId);
+        const sortedTransactions = response.data.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        })
+        setTransactions(sortedTransactions);
+    };
+
     useEffect(() => {
-        const getTransactions = async () => {
-            const response = await transactionService.getTransactions(user.emailId);
-            const sortedTransactions = response.data.sort((a, b) => {
-                return new Date(b.date) - new Date(a.date);
-            })
-            setTransactions(sortedTransactions);
-        }
-        getTransactions();
-    }, [])
+        getTransactions(user.emailId);
+    },[user.emailId]);
+
+    useEffect(() => {
+        if (user.emailId === 'na' && !checkLocalData()) 
+            navigate('/login');
+        else 
+            getTransactions(user.emailId);
+    },[user.emailId]);
+
     const changeToLocalDate = (date) => {
         return new Date(date).toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'short',
             year: 'numeric', 
         })
-    }
+    };
+
     const changeToLocalTime = (date) => {
         return new Date(date).toLocaleTimeString('en-GB', {
             hour: 'numeric',
@@ -35,7 +46,8 @@ export default function TransactionHistory() {
             second: 'numeric',
             hour12: true
         });
-    }
+    };
+
     return (
         <div className="transaction-page">
             <div className="transaction-img">

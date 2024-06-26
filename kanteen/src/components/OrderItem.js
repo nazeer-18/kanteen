@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/OrderItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faIndianRupee } from '@fortawesome/free-solid-svg-icons'
 import {faCalendarDays} from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom'; 
+import { useUser } from '../contexts/userContext';
 
 export default function OrderItem(prop) {
     const { date, orderId, orderStatus, paymentMode, paymentStatus, total, oid } = prop;
@@ -24,7 +25,13 @@ export default function OrderItem(prop) {
     const navigate=useNavigate();
     const handleViewClick=()=>{
         navigate(`/viewOrder?id=${oid}`);
-    }
+    };
+
+    const { user, checkLocalData } = useUser();
+    useEffect(() => {
+        if (user.emailId === 'na' && !checkLocalData())
+            navigate('/login');
+    }, []);
     return (
         <div className="order-item-container">
             <div className="order-item-content">
@@ -42,9 +49,12 @@ export default function OrderItem(prop) {
                     </div>
                     <div className="order-explore">
                         <div className="order-explore-button">
-                            <button>
+                        <Link to={`/viewOrder?id=${orderId}`}>
+                        <button>
                                 View Order
                             </button>
+                        </Link>
+                            
                         </div>
                     </div>
                 </div>
@@ -69,7 +79,6 @@ export default function OrderItem(prop) {
                 <div className="order-item-details-third order-item">
                     <div className="order-explore-hidden">
                         <div className="order-explore-button">
-                            <Link to='/viewOrder?id=${oid}'>jknkj</Link>
                             <button>
                                 View Details
                             </button>
