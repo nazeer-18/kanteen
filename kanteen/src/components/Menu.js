@@ -168,25 +168,22 @@ export default function Menu() {
         navigate('/cart');
     };
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
     return (
         <div>
             <div className="orderpage-nav">
-                <div className="orderpage-filter" title="apply filters" onClick={toggleDropdown} >
+                <div ref={filterRef} className="orderpage-filter" title="apply filters" onClick={()=>setIsOpen(!isOpen)} >
                     <span className="orderpage-cart-nav-label" style={{ color: "black" }}>FILTERS</span>
                     <span className="filter-holder">
-                        {
+                        {   
                             filterCount > 0 &&
                             <span className="filter-items-cnt">{filterCount}</span>
                         }
                         <FontAwesomeIcon icon={faFilter} style={{ cursor: "pointer" }} />
                     </span>
                 </div>
-                {isOpen && (
-                    <div ref={filterRef} className="filter-dropdown-menu">
+
+                {(
+                    <div className={`filter-dropdown-menu ${isOpen ? 'filter-open' : ''}`}>
                         <div className="filter-dropdown-type">
                             <div className="filter-dropdown-item">TYPE</div>
                             <div className="filter-dropdown-close" onClick={() => setIsOpen(false)}>
@@ -194,27 +191,27 @@ export default function Menu() {
                             </div>
                             <div className="filter-dropdown-content">
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedType === 'VEG'} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedType === 'VEG'}
                                         onChange={() => handleTypeChange('VEG')}
-                                    /> 
+                                    />
                                     VEG
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedType === 'NON-VEG'} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedType === 'NON-VEG'}
                                         onChange={() => handleTypeChange('NON-VEG')}
-                                    /> 
+                                    />
                                     NON-VEG
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedType === 'OTHERS'} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedType === 'OTHERS'}
                                         onChange={() => handleTypeChange('OTHERS')}
-                                    /> 
+                                    />
                                     OTHERS
                                 </label>
                             </div>
@@ -223,59 +220,59 @@ export default function Menu() {
                             <div className="filter-dropdown-item">CATEGORY</div>
                             <div className="filter-dropdown-content">
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.starters} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.starters}
                                         onChange={() => handleCategoryChange('starters')}
-                                    /> 
+                                    />
                                     STARTERS
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.maincourse} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.maincourse}
                                         onChange={() => handleCategoryChange('maincourse')}
-                                    /> 
+                                    />
                                     MAIN COURSE
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.desserts} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.desserts}
                                         onChange={() => handleCategoryChange('desserts')}
-                                    /> 
+                                    />
                                     DESSERTS
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.snackitems} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.snackitems}
                                         onChange={() => handleCategoryChange('snackitems')}
-                                    /> 
+                                    />
                                     SNACK ITEMS
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.tiffin} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.tiffin}
                                         onChange={() => handleCategoryChange('tiffin')}
-                                    /> 
+                                    />
                                     BREAKFAST
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.stationery} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.stationery}
                                         onChange={() => handleCategoryChange('stationery')}
-                                    /> 
+                                    />
                                     STATIONERY
                                 </label>
                                 <label>
-                                    <input 
-                                        type="checkbox" 
-                                        checked={selectedCategories.beverages} 
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.beverages}
                                         onChange={() => handleCategoryChange('beverages')}
-                                    /> 
+                                    />
                                     BEVERAGES
                                 </label>
                             </div>
@@ -284,10 +281,10 @@ export default function Menu() {
                                     style={{ cursor: "pointer" }}
                                     onClick={handleAvailableItemsChange}
                                 >AVAILABLE</a>
-                               
+
                             </label>
-                            
-                                <FontAwesomeIcon icon={availableOnly ? faCheck:'' } style={{color:'green'}}/>
+
+                            <FontAwesomeIcon icon={availableOnly ? faCheck : ''} style={{ color: 'green' }} />
                         </div>
                         <div className="filter-dropdown-actions">
                             <button onClick={clearFilters}>CLEAR</button>
@@ -306,7 +303,7 @@ export default function Menu() {
                     </span>
                 </div>
                 <div className="orderpage-cart" title="View items in cart" onClick={viewCart}>
-                    <span className="orderpage-cart-nav-label" style={{ color: "black" }}>CART</span> 
+                    <span className="orderpage-cart-nav-label" style={{ color: "black" }}>CART</span>
                     <span className="cart-holder">
                         {
                             totalItems > 0 &&

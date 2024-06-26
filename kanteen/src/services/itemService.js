@@ -1,5 +1,5 @@
 import axios from 'axios';
-const serverUrl =  'https://kanteen-server.onrender.com' || 'http://localhost:8080';
+const serverUrl = 'https://kanteen-server.onrender.com';
 
 class itemService {
     //get all items in the menu
