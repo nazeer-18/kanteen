@@ -134,7 +134,7 @@ a{
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
     margin-top: 10px;
     padding: 10px;
     font-family: 'poppins';
@@ -142,9 +142,8 @@ a{
     font-weight: 550;
     color: #bf0c45;
     text-align: center;
-    border: 1px solid #bf0c45;
-    right: 20px;
-    margin-top: 14%;
+    right: 0px;
+    margin-top:235px;
 }
 .dropdown-link {
     display: flex;
