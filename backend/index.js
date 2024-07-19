@@ -98,4 +98,4 @@ app.use('/api/orders', orderRouter)
 const transactionRouter = require('./routes/transaction')
 app.use('/api/transaction', transactionRouter)
 
-module.exports = { userConnections }
+// module.exports = { userConnections } //just removed to deploy on vercel if some mail related issues arrises try to uncomment this
