@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverUrl = 'https://kanteen-server.onrender.com';
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 class authService {
     //whether a email is already registered or not
