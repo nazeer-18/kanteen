@@ -15,7 +15,7 @@ export default function Menu() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userId === 'na' && !checkLocalData())
+        if(!checkLocalData())
             navigate('/login');
     }, [userId]);
 

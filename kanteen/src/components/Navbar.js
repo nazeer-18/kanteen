@@ -38,10 +38,7 @@ export default function Navbar() {
     };
 
     const handleLogout = () => {
-        setUser({});
-        localStorage.clear();
         navigate('/login');
-
     };
 
     const handleClickOutside = (event) => {

@@ -29,7 +29,7 @@ export default function OrderItem(prop) {
 
     const { user, checkLocalData } = useUser();
     useEffect(() => {
-        if (user.emailId === 'na' && !checkLocalData())
+        if (!checkLocalData())
             navigate('/login');
     }, []);
     return (

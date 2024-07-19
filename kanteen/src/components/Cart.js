@@ -15,7 +15,7 @@ export default function Cart() {
     const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
-        if (userId === 'na' && !checkLocalData()) {
+        if (!checkLocalData()) {
             navigate('/login');
         }
     }, [userId, navigate])

@@ -34,7 +34,7 @@ export default function Checkout() {
     }, []);
 
     useEffect(()=>{
-        if (user.emailId === 'na' && !checkLocalData()) {
+        if (!checkLocalData()) {
             navigate('/login');
         }
     },[]);

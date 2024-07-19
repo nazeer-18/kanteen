@@ -13,6 +13,16 @@ export function UserProvider({ children }) {
     const checkLocalData = async () => {
         const loggedInUser = localStorage.getItem("user");
         console.log("fsd",loggedInUser);
+        if(!loggedInUser) {
+            setUser({
+                emailId: 'na',
+                name:'na',
+                mobileNumber: 'na',
+                password: 'na',
+                role:'na',
+            });
+            return 0;
+        }
         
         if (user.emailId==='na' && loggedInUser) {
             console.log("xxx",loggedInUser);

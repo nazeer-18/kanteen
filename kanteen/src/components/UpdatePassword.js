@@ -32,7 +32,7 @@ export default function UpdatePasswordPage() {
   const emailIdValid = !(user.emailId === 'na' || user.emailId === null || user.emailId === undefined);
 
   useEffect(() => {
-      if (user.emailId === 'na' && !checkLocalData()) {
+      if (!checkLocalData()) {
         setTimeout(() => {
           navigate('/login');
         }, 1000);

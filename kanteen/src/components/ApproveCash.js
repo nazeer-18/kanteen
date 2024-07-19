@@ -13,6 +13,12 @@ export default function ApproveCash() {
     const [pendingOrders, setPendingOrders] = useState([]);
 
     useEffect(() => {
+        if (!checkLocalData()) {
+            navigate('/login');
+        }
+    }, []);
+
+    useEffect(() => {
         const getpendingOrders = async () => {
             const response = await orderService.fetchPendingOrders();
             setPendingOrders(response.data.orders);
@@ -22,11 +28,6 @@ export default function ApproveCash() {
 
     const { user, checkLocalData } = useUser();
 
-    useEffect(() => {
-        if (user.emailId === 'na' && !checkLocalData()) {
-            navigate('/login');
-        }
-    }, []);
     return (
         <div className='approvecash-page'>
             <div className="approvecash-img">

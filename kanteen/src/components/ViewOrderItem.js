@@ -15,7 +15,7 @@ export default function CartItem(props) {
     useEffect(()=>{
         const fetchItemData = async () => {
             const data=await itemService.fetchItemData(item);
-            console.log(data);
+            // console.log(data);
             const {name,price,image}=data.data;
             setName(name);
             setPrice(price);

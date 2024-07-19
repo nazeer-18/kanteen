@@ -29,13 +29,12 @@ export default function OrderHistory() {
     };
 
     useEffect(() => {
-        if (user.emailId === 'na' && !checkLocalData()) {
+        if (!checkLocalData()) {
             setTimeout(() => {
                 navigate('/login');
             }, 1500)
         }
-        else 
-            fetchOrders(user.emailId);
+        fetchOrders(user.emailId);
     },[user.emailId,navigate]);
 
     useEffect(() => {
@@ -44,7 +43,7 @@ export default function OrderHistory() {
             fetchOrders();
         }, 20000);
         return () => clearInterval(interval);
-    }, []);
+    },);
 
     const toLocaleDateString = (date) => {
         return new Date(date).toLocaleDateString('en-GB', {

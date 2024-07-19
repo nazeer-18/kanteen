@@ -16,7 +16,7 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-       if( user.emailId === 'na' && !checkLocalData())
+       if(!checkLocalData())
             navigate('/login');
     }, [user.emailId])
     return (

@@ -45,7 +45,7 @@ export default function AddOnlineTransaction(){
     },[transactionCreated])
 
     useEffect(() => {
-        if(user.emailId ==='na' && !checkLocalData())
+        if(!checkLocalData())
             navigate('/login');
         validateUser();        
         createTransaction();
