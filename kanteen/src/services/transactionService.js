@@ -1,5 +1,5 @@
 import axios from 'axios';
-const serverUrl = 'https://kanteen-server.onrender.com';
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 class transactionService {
     getTransactions(userId) {

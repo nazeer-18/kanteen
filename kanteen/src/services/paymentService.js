@@ -1,5 +1,5 @@
 import axios from 'axios';
-const serverUrl =  'https://kanteen-server.onrender.com' || 'http://localhost:8080';
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 class paymentService {
     //proceed to checkout once user clicks on checout in cart page

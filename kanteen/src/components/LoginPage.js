@@ -75,8 +75,7 @@ export default function LoginPage() {
     return (
         <div className='login-homepage'>
             <div className="login-image-container">
-                <img
-                    // src={loginImg}
+                <img 
                     src={LoginImage}
                     alt="login" />
             </div>
@@ -109,7 +108,7 @@ export default function LoginPage() {
                                     name="password"
                                     id="password"
                                     placeholder="Enter your password"
-                                    className="login-second-input"
+                                    className="login-pwd-input"
                                     onChange={(e) => setData({ ...data, pwd: e.target.value })}
                                     value={data.pwd}
                                     required />
