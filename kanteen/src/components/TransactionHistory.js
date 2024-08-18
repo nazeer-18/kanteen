@@ -25,7 +25,7 @@ export default function TransactionHistory() {
     },[user.emailId]);
 
     useEffect(() => {
-        if (user.emailId === 'na' && !checkLocalData()) 
+        if (!checkLocalData()) 
             navigate('/login');
         else 
             getTransactions(user.emailId);

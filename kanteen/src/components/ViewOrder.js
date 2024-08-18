@@ -7,12 +7,12 @@ import ViewOrderItem from './ViewOrderItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faCheck, faXmark, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 import paymentService from '../services/paymentService';
+import transactionService from '../services/transactionService';
 
 export default function ViewOrder() {
     const orderId = new URLSearchParams(window.location.search).get("id");
     const { user, checkLocalData } = useUser();
     const userId = user.emailId;
-    const alphanumericId = userId.replace(/[^a-zA-Z0-9]/g, '');
     const navigate=useNavigate();
     const [date,setdate]=useState('');
     const [paymentStatus,setpaymentStatus]=useState('');
@@ -37,30 +37,32 @@ export default function ViewOrder() {
         window.history.back();
     };
 
-    useEffect(() => {
-        const fetchOrderData= async () => {
-            try {
-                const orderData=await orderService.fetchOrder(orderId);
-                // console.log("func order data:");
-                // console.log(orderData.data.data);
-                const {date, orderStatus, paymentMode, paymentStatus, products, total} =orderData.data.data;
-                
-                setdate(toLocaleDateString(date));
-                setorderStatus(orderStatus);
-                setpaymentMode(paymentMode);
-                setpaymentStatus(paymentStatus);
-                setorderedItems(products);
-                settotal(total);
-                return orderData
-            } catch (err) {
-                console.error('Error fetching OrderData', err);
-            }
+    const fetchOrderData= async () => {
+        try {
+            const orderData=await orderService.fetchOrder(orderId);
+            // console.log("func order data:");
+            // console.log(orderData.data.data);
+            const {date, orderStatus, paymentMode, paymentStatus, products, total} =orderData.data.data;
+            
+            setdate(toLocaleDateString(date));
+            setorderStatus(orderStatus);
+            setpaymentMode(paymentMode);
+            setpaymentStatus(paymentStatus);
+            setorderedItems(products);
+            settotal(total);
+            return orderData
+        } catch (err) {
+            console.error('Error fetching OrderData', err);
         }
+    };
+
+    useEffect(() => {
         fetchOrderData();
     },[]);
 
     const validateUser=async()=>{
         try{
+            const alphanumericId = userId.replace(/[^a-zA-Z0-9]/g, '');
             const response=await paymentService.checkUserAuth(orderId,alphanumericId);
             if(response.data.logout===true){
                 setTimeout(() => {
@@ -72,9 +74,25 @@ export default function ViewOrder() {
         }
     };
 
+    const checkAndUpdateTransaction = async () => {
+        if(orderStatus==="pending" && paymentMode==="online" && paymentStatus==="unpaid"){
+            const response = await paymentService.paymentStatus(orderId);
+            if(response.data.status){
+                const res = await transactionService.createTransaction(user.emailId, orderId, "online", response.data.status);
+                if(res.status===200){
+                    setpaymentStatus(res.data.status);
+                    setorderStatus('processing');
+                    setpaymentMode('online');
+                    fetchOrderData();
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         validateUser();
-        if (user.emailId === 'na' && !checkLocalData()) {
+        checkAndUpdateTransaction();
+        if (!checkLocalData()) {
             setTimeout(() => {
                 navigate('/login');
             }, 2000);

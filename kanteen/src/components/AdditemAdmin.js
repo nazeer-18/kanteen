@@ -1,9 +1,11 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useUser } from '../contexts/userContext';
+import { Navigate } from 'react-router-dom';
 import itemService from '../services/itemService';
- import '../styles/AdditemAdmin.css';
+import '../styles/AdditemAdmin.css';
 
 export default function AddItemAdmin() {
+  const navigate=Navigate();
   const [name, setName] = useState('');
   const [id, setId]=useState('');
   const [quantity, setQuantity] = useState('');
@@ -11,6 +13,7 @@ export default function AddItemAdmin() {
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const { user, checkLocalData } = useUser();
 
   const categories = ['beverages', 'starters', 'main course', 'desserts', 'stationery', 'snacks', 'tiffin'];
 
@@ -24,6 +27,11 @@ export default function AddItemAdmin() {
       console.log(err);
     }
   };
+  useEffect(() => {
+    if (!checkLocalData()) {
+        navigate('/login');
+    }
+}, []);
 
   return (
     

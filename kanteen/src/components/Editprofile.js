@@ -34,7 +34,7 @@ export default function EditProfilePage() {
   }, [data.mobileNumber, data.name, user.mobileNumber, user.name]);
 
   useEffect(() => {
-    if(user.emailId === 'na' && !checkLocalData())
+    if(!checkLocalData())
       navigate('/login');
     else
       setData({

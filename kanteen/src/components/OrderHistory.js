@@ -29,6 +29,23 @@ export default function OrderHistory() {
     });
 
     useEffect(() => {
+
+        if (!checkLocalData()) {
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500)
+        }
+        fetchOrders(user.emailId);
+    },[user.emailId,navigate]);
+
+    useEffect(() => {
+        fetchOrders(user.emailId);
+        const interval = setInterval(() => {
+            fetchOrders();
+        }, 20000);
+        return () => clearInterval(interval);
+    },);
+
         const fetchOrders = async () => {
             try {
                 const res = await orderService.fetchOrders(userId);
@@ -47,6 +64,7 @@ export default function OrderHistory() {
         const interval = setInterval(fetchOrders, 2000);
         return () => clearInterval(interval);
     }, [userId]);
+
 
     const toLocaleDateString = (date) => {
         return new Date(date).toLocaleDateString('en-GB', {

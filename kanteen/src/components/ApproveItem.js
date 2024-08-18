@@ -26,7 +26,7 @@ export default function ApproveItem(props) {
     const { user, checkLocalData } = useUser();
     
     useEffect(() => {
-        if (user.emailId === 'na' && !checkLocalData()) {
+        if (!checkLocalData()) {
             navigate('/login');
         }
     }, []);
