@@ -16,8 +16,9 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-       if(!checkLocalData())
-            navigate('/login');
+        if (!checkLocalData()){
+            navigate('/login'); 
+        }
     }, [user.emailId])
     return (
         <div>

@@ -11,11 +11,11 @@ const userConnections = require('./utils');
 const { URL } = require('url');
 
 const app = express();
-const allowedOrigins = ['http://localhost:3000','https://kanteen-ase.netlify.app']
+const allowedOrigins = ['http://localhost:3000', 'https://kanteen-ase.netlify.app']
 app.use(cors())
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    if(allowedOrigins.includes(origin)){
+    if (allowedOrigins.includes(origin)) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -41,7 +41,7 @@ wss.on('connection', (ws, req) => {
     const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://';
     const host = req.headers.host;
     const fullUrl = new URL(req.url, protocol + host);
-    const emailId = decodeURIComponent(fullUrl.searchParams.get('emailId'));
+    const emailId = decodeURIComponent(fullUrl.searchParams.get('emailId')); 
     const token = jwt.sign({ emailId: emailId }, process.env.VERIFICATION_SECRET, { expiresIn: '1h' });
     sendVerificationMail(emailId, token);
     ws.send(JSON.stringify({ message: "Verification mail sent successfully", success: true }));
@@ -57,7 +57,7 @@ wss.on('error', (err) => {
     console.error('WebSocket server error:', err);
 });
 
-server.on('upgrade', (req, socket, head) => {
+server.on('upgrade', (req, socket, head) => { 
     wss.handleUpgrade(req, socket, head, (ws) => {
         wss.emit('connection', ws, req);
     });
@@ -75,6 +75,10 @@ connectDB().then(() => {
 }).catch(err => {
     console.log(err)
     console.error("DB connection failed")
+})
+
+app.get('/',(req,res)=>{
+    return res.status(302).json({"message":"Server Found"});
 })
 
 const authRouter = require('./routes/auth')
@@ -97,5 +101,3 @@ app.use('/api/orders', orderRouter)
 
 const transactionRouter = require('./routes/transaction')
 app.use('/api/transaction', transactionRouter)
-
-// module.exports = { userConnections } //just removed to deploy on vercel if some mail related issues arrises try to uncomment this

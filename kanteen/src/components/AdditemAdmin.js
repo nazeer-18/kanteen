@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../contexts/userContext';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import itemService from '../services/itemService';
 import '../styles/AdditemAdmin.css';
 
 export default function AddItemAdmin() {
-  const navigate=Navigate();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [id, setId]=useState('');
+  const [id, setId] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [type, setType]=useState('');
+  const [type, setType] = useState('');
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
@@ -17,30 +17,27 @@ export default function AddItemAdmin() {
 
   const categories = ['beverages', 'starters', 'main course', 'desserts', 'stationery', 'snacks', 'tiffin'];
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const response = await itemService.addToMenu(id,name,price,quantity,image,type,category);
+    try {
+      const response = await itemService.addToMenu(id, name, price, quantity, image, type, category);
       console.log(response.data)
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
     if (!checkLocalData()) {
-        navigate('/login');
+      navigate('/login');
     }
-}, []);
+  }, []);
 
   return (
-    
-    <div className='AdditemAdmin'>
 
-        
-      
+    <div className='AdditemAdmin'>
       <form onSubmit={handleSubmit}>
-      <div>
+        <div>
           <label>Id:</label>
           <input
             type="text"
@@ -74,9 +71,9 @@ export default function AddItemAdmin() {
             value={type}
             onChange={(e) => setType(e.target.value)}
             required
-            
+
           ><option value="" disabled>Select Type</option>
-          
+
             <option value='veg'>veg</option>
             <option value='non-veg'>non-veg</option>
             <option value='others'>others</option>
@@ -103,19 +100,19 @@ export default function AddItemAdmin() {
         <div>
           <label>Category :</label>
           <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            >
-              <option value="" disabled>Select a category</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="" disabled>Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
         </div>
         <button className='AdditemAdmin-button' type="submit">Add item</button>
       </form>
     </div>
-    
+
   );
 }

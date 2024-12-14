@@ -21,7 +21,7 @@ export function UserProvider({ children }) {
                 password: 'na',
                 role:'na',
             });
-            return 0;
+            return false;
         }
         
         if (user.emailId==='na' && loggedInUser) {

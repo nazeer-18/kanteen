@@ -10,7 +10,7 @@ import orderService from '../services/orderService';
 
 export default function OrderHistory() {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const { user,checkLocalData } = useUser();
     const userId = user.emailId;
     const [orders, setOrders] = useState([]);
     const [filteredOrders, setFilteredOrders] = useState([]);
@@ -28,24 +28,15 @@ export default function OrderHistory() {
         }
     });
 
-    useEffect(() => {
-
+    useEffect(() => { 
         if (!checkLocalData()) {
             setTimeout(() => {
                 navigate('/login');
             }, 1500)
-        }
-        fetchOrders(user.emailId);
+        } 
     },[user.emailId,navigate]);
 
     useEffect(() => {
-        fetchOrders(user.emailId);
-        const interval = setInterval(() => {
-            fetchOrders();
-        }, 20000);
-        return () => clearInterval(interval);
-    },);
-
         const fetchOrders = async () => {
             try {
                 const res = await orderService.fetchOrders(userId);
