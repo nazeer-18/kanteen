@@ -38,6 +38,7 @@ export default function Navbar() {
     };
 
     const handleLogout = () => {
+        toggleDropdown();
         navigate('/login');
     };
 
@@ -149,23 +150,23 @@ export default function Navbar() {
                 {isOpen && (
                     <div ref={dropdownRef} className="dropdown-content" >
                         <div className="dropdown-link">
-                            <h3>Hey {user.name}!</h3>
+                            <h3>Hey {user.name}!</h3> 
                             <Link to="/Editprofile">
-                                <div className='dropdown-container' >
+                                <div className='dropdown-container' onClick={toggleDropdown}>
                                     <FontAwesomeIcon icon={faAddressCard} />
                                     <div className='drop-down-items'>Edit profile</div>
                                 </div>
                             </Link>
                             <Link to="/UpdatePassword">
-                                <div className='dropdown-container' >
+                                <div className='dropdown-container' onClick={toggleDropdown}>
                                     <FontAwesomeIcon icon={faUnlockKeyhole} />
                                     <div className='drop-down-items'>Change Password</div>
                                 </div>
                             </Link>
                         </div>
-                        <button onClick={handleLogout}>
+                        <button onClick={handleLogout} >
                             Logout
-                            <div className='drop-down-logouticon'>
+                            <div className='drop-down-logouticon' >
                                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
                             </div>
                         </button>

@@ -25,6 +25,7 @@ import { UserProvider } from './contexts/userContext';
 import UpdatePassword from './components/UpdatePassword';
 import AddOnlineTransaction from './components/AddOnlineTransaction';
 import AdditemAdmin from './components/AdditemAdmin';
+import ModifyItem from './components/ModifyItem';
 export default function App() {
     return (
         <BrowserRouter>
@@ -55,7 +56,7 @@ export default function App() {
                         //admin routes
                         <Route path='/approvecash' element={<ApproveCash />}></Route>
                         <Route path='/additem' element={<AdditemAdmin />}></Route>
-                    
+                        <Route path='/modifyitem' element={<ModifyItem />}></Route>
                 </Routes>
                 <Footer />
             </UserProvider>

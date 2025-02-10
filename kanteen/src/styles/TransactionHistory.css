@@ -82,7 +82,138 @@
     text-align: center; 
     min-width: 120px;
 }
+.transaction-history-filters {
+    font-weight: bold;
+    font-size: 1.25em;
+}
 
+.transaction-history-filters svg {
+    color:#bf0c45;
+}
+
+.transaction-filter-container {
+    position: fixed;
+    width: 27%;
+    max-height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px; 
+    box-sizing: border-box; 
+    z-index: 1000; 
+}
+
+.transaction-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bf0c45;
+    font-family: 'petrona';
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.transaction-filter-item {
+    display: flex;
+    color: #bf0c45;
+    margin: 10px;
+    font-family: 'petrona';
+    font-size: larger;
+    font-weight: bold;
+    padding: 5px 10px; 
+}
+
+.close-filterpopup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #bf0c45;
+    cursor: pointer;
+}
+
+.transaction-filter-content-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: -15px;
+}
+
+.transaction-filter-content {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 10px; 
+    font-family: 'petrona';
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 7px; 
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+    ;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.transaction-filter-content:hover,
+.transaction-filter-content.selected{
+    background-color: #bf0c45;
+    color: white;
+}
+
+.transaction-filter-calender {
+    margin-left: 7%;
+}
+
+.transaction-filter-date {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px;
+    font-family: 'petrona';
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+.transaction-filter-date-separator {
+    display: inline-block;
+    margin: 5px;
+    font-family: 'petrona';
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.transaction-filter-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.transaction-filter-actions button {
+    padding: 7px 15px;
+    background-color: #bf0c45;
+    color: white;
+    border: none;
+    margin-right: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: large;
+}
+
+.transaction-filter-table {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
 td button{
     width:100px;
     background-color: #bf0c45;
