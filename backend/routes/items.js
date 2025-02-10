@@ -24,32 +24,45 @@ itemRouter.post('/fetchone', async (req,res)=>{
     }
 })
 
-//Add an item to menu => admin functionality
 itemRouter.post('/add', async (req, res) => {
+    const { id, name, price, quantity, image, type, category } = req.body;
+    console.log("req", req.body);
+    // Preprocess the name: convert to lowercase and remove spaces
+    const processedName = name.toLowerCase().replace(/\s+/g, '');
+
     const newItem = new Item({
-        id: req.body.id,
-        name: req.body.name,
-        price: req.body.price,
-        quantity: req.body.quantity,
-        image: req.body.image,
-        type: req.body.type,
-        category: req.body.category
-    })
-    console.log("req",req.body)
-    console.log(newItem)
+        id,
+        name,
+        price,
+        quantity,
+        image,
+        type,
+        category,
+    });
+
+    console.log("req", req.body);
+    console.log(newItem);
+
     try {
-        const item = await Item.findOne({ id: req.body.id });
-        if (item) {
-            res.status(400).json({ msg: "Item already exists", success: false })
+        // Fetch all items from the database
+        const existingItems = await Item.find({});
+
+        // Check if any existing item's name matches the processed name (case-insensitive and space-insensitive)
+        const isDuplicate = existingItems.some((item) => {
+            const existingProcessedName = item.name.toLowerCase().replace(/\s+/g, '');
+            return existingProcessedName === processedName;
+        });
+        if (isDuplicate) {
+            return res.status(400).json({ msg: "Item already exists", success: false });
         }
+
         await newItem.save();
-        res.status(200).json({ msg: "Item added successfully", success: true })
-    }
-    catch (err) {
+        res.status(200).json({ msg: "Item added successfully", success: true });
+    } catch (err) {
         console.error(err);
-        res.status(500).send("Internal Server Error")
+        res.status(500).send("Internal Server Error");
     }
-})
+});
 
 //Modify an item in menu => admin functionality
 itemRouter.post('/modify', async (req, res) => {
@@ -66,6 +79,22 @@ itemRouter.post('/modify', async (req, res) => {
         item.category = req.body.category;
         await item.save();
         res.status(200).json({ msg: "Item modified successfully", success: true })
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error")
+    }
+})
+
+//Remove an item from menu => admin functionality
+itemRouter.post('/remove', async (req, res) => {
+    try {
+        const item = await Item.findOne({ id: req.body.id });
+        if (!item) {
+            res.status(400).json({ msg: "Item not found", success: false })
+        }
+        await item.deleteOne({ id: req.body.id });
+        res.status(200).json({ msg: "Item removed successfully", success: true })
     }
     catch (err) {
         console.error(err);

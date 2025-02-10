@@ -19,24 +19,37 @@ export default function AddItemAdmin() {
 
   const categories = ['beverages', 'starters', 'main course', 'desserts', 'stationery', 'snacks', 'tiffin'];
 
-  useEffect(() => {
-    itemService.getMenuItems()
-      .then((res) => {
-        setTotalItems(res.data.length);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  // Fetch items and calculate the new ID
+  const fetchItemsAndCalculateId = async () => {
+    try {
+      const res = await itemService.getMenuItems();
+      const items = res.data;
+      setTotalItems(items.length);
 
+      if (items.length > 0) {
+        // Sort items by ID in descending order
+        const sortedItems = items.sort((a, b) => b.id - a.id);
+        const lastItemId = sortedItems[0].id; 
+        setId(lastItemId + 1); 
+      } else {
+        setId(101);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
     if (!checkLocalData()) {
       navigate('/login');
     }
 
+    fetchItemsAndCalculateId();
+  }, [navigate, checkLocalData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const id=totalItems+101;
       const response = await itemService.addToMenu(id, name, price, quantity, image, type, category);
       console.log(response.data);
       alert('Item added successfully!');
@@ -46,17 +59,13 @@ export default function AddItemAdmin() {
       setImage('');
       setPrice('');
       setCategory('');
+
+      await fetchItemsAndCalculateId();
     } catch (err) {
       console.log(err);
       alert('Failed to add item. Please try again.');
     }
   };
-
-  useEffect(() => {
-    if (!checkLocalData()) {
-      navigate('/login');
-    }
-  }, []);
 
   return (
     <div className='add-item-page'>
@@ -65,17 +74,17 @@ export default function AddItemAdmin() {
       </div>
       <div className="add-item-content">
         <div className="add-item-heading">
-        <div className="back-btn">
-              <span title="Go back" className="cart-arrow" onClick={() => navigate(-1)}>
-                  &lt;
-              </span>
+          <div className="back-btn">
+            <span title="Go back" className="cart-arrow" onClick={() => navigate(-1)}>
+              &lt;
+            </span>
           </div>
           <h1>Add New Item</h1>
         </div>
         <form onSubmit={handleSubmit} className="add-item-body">
           <div className="form-group">
             <label>Id:</label>
-            <input type="text" value={totalItems+101} disabled/>
+            <input type="text" className="item-name-disabled" value={id} disabled />
           </div>
           <div className="form-group">
             <label>Item Name:</label>

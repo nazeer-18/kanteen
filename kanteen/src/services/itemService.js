@@ -1,5 +1,5 @@
 import axios from 'axios';
-const serverUrl = 'http://localhost:8080';
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 
 class itemService {
@@ -34,6 +34,10 @@ class itemService {
     //modify an item in menu
     ModifyItem(id,name,price,quantity,image,type,category){
         return axios.post(serverUrl + '/api/items/modify',{id,name,price,quantity,image,type,category})
+    }
+    //remove an item from menu
+    deleteItem(id){
+        return axios.post(serverUrl + '/api/items/remove',{id}) 
     }
 }
 
