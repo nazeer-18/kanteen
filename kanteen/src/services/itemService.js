@@ -1,12 +1,12 @@
 import axios from 'axios';
-const serverUrl = process.env.REACT_APP_SERVER_URL;
+const serverUrl = 'http://localhost:8080';
 
 
 class itemService {
     //get all items in the menu
     getMenuItems() {
         return axios.get(serverUrl + '/api/items/fetchall')
-        
+
     }
     addToMenu(id,name,price,quantity,image,type,category){
         return axios.post(serverUrl + '/api/items/add',{id,name,price,quantity,image,type,category})
@@ -30,6 +30,10 @@ class itemService {
     //update quantity of an item in cart
     updateQty(userId, itemId, quantity) {
         return axios.post(serverUrl + '/api/cart/update', { userId, itemId, quantity })
+    }
+    //modify an item in menu
+    ModifyItem(id,name,price,quantity,image,type,category){
+        return axios.post(serverUrl + '/api/items/modify',{id,name,price,quantity,image,type,category})
     }
 }
 

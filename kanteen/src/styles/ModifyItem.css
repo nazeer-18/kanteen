@@ -1,0 +1,125 @@
+.modifyitem-page{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 5px;
+}
+.modifyitem-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 4px 10px;
+    min-width: 280px;
+    width: 33vw;
+}
+.modifyitem-img img{
+    min-width: 320px;
+    min-height: 320px;
+}
+.modifyitem-content{
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    min-width: 500px;
+    width: 33vw;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 480px;
+}
+.modifyitem-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #bf0c45;
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+.modifyitem-heading h1{
+    margin-right: 30%;
+    color: #bf0c45;
+    font-size: 2em;
+}
+.modifyitem-searchbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.modifyitem-searchbar input[type="text"]{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;  
+    flex:3;    
+}
+.modifyitem-searchbar button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #bf0c45;
+    color: white;
+    cursor: pointer;
+    font-size: 14px; 
+    flex:0.4;   
+}
+.modifyitem-body {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.modifyitem-body .form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.modifyitem-body label {
+  flex: 1;
+  font-weight: bold;
+  color: #333;
+}
+
+.modifyitem-body input[type="text"],
+.modifyitem-body input[type="number"],
+.modifyitem-body select {
+  flex: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.modifyitem-body input[type="text"]:focus,
+.modifyitem-body input[type="number"]:focus,
+.modifyitem-body select:focus {
+  border-color: #bf0c45;
+  box-shadow: 0 0 8px rgba(191, 12, 69, 0.2);
+  outline: none;
+}
+
+
+.modifyitem-button {
+  width: 100%;
+  background-color: #bf0c45;
+  color: white;
+  padding: 12px;
+  margin-top: 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modifyitem-button:hover {
+  background-color: #9c0a3a;
+}
